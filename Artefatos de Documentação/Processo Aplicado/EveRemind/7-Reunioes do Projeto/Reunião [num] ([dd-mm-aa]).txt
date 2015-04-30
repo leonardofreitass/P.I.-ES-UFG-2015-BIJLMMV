@@ -1,0 +1,3 @@
+O título deste documento representa o modelo de nomeação padrão dos artefatos de reunião. Exemplo:
+
+"Reunião 1 (30/04/15)"
