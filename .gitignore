@@ -1,1 +1,6 @@
-﻿Artefatos de Código Fonte/EveRemind/target/
+﻿# Microsoft Office .gitignore
+
+*.tmp
+~$*.doc*
+~$*.xls*
+*.xlk
