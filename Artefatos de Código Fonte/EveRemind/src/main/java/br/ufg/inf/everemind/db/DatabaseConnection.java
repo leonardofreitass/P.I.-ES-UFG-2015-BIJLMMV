@@ -27,6 +27,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -58,10 +60,16 @@ public class DatabaseConnection {
         return database;
     }
 
-    public static synchronized MongoDatabase create() throws UnknownHostException{
-        if (connection.equals("heroku"))
-            return herokuConnection();
-        
-        return localConnection();
+    public static synchronized MongoDatabase create(){
+        try{
+            if (connection.equals("heroku"))
+                return herokuConnection();
+
+            return localConnection();
+        }
+        catch (UnknownHostException e){
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);
+            return null;
+        }
     }
 }
