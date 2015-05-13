@@ -4,3 +4,4 @@
 ~$*.doc*
 ~$*.xls*
 *.xlk
+/Artefatos de Código Fonte/EveRemind/target/
