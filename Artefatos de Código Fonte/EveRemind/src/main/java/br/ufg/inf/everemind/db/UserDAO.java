@@ -40,12 +40,12 @@ public class UserDAO {
     private final MongoDatabase mongoDatabase;
     private final MongoCollection<Document> collection;
 
-    private UserDAO() throws UnknownHostException {
+    private UserDAO(){
         this.mongoDatabase = DatabaseConnection.create();
         this.collection = this.mongoDatabase.getCollection("users");
     }
 
-    public static synchronized UserDAO getInstance() throws UnknownHostException {
+    public static synchronized UserDAO getInstance(){
         if (instance == null) {
             instance = new UserDAO();
         }
@@ -53,11 +53,13 @@ public class UserDAO {
     }
 
     public void save(User user) {
-        Document userDB = new Document("fullName", user.getFullName())
-                .append("email", user.getEmail())
-                .append("secondaryEmail", user.getSecondaryEmail())
-                .append("hash", user.getHash());
-        this.collection.insertOne(userDB);
+        if (this.hasEmailRegistered(user.getEmail())){
+            Document userDB = new Document("fullName", user.getFullName())
+                    .append("email", user.getEmail())
+                    .append("secondaryEmail", user.getSecondaryEmail())
+                    .append("hash", user.getHash());
+            this.collection.insertOne(userDB);
+        }
     }
 
     public boolean authenticate(String email, String hash) {
@@ -73,7 +75,6 @@ public class UserDAO {
         if (search == null) {
             return null;
         }
-
         return new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
     }
 
@@ -114,5 +115,11 @@ public class UserDAO {
         Document query = new Document("email", email);
         Document hashDB = new Document("hash", hash);
         collection.updateOne(query, new Document("$set", hashDB));
+    }
+    
+    public boolean hasEmailRegistered(String email){
+        Document query = new Document("email", email);
+        Document search = collection.find(query).first();
+        return search != null;
     }
 }

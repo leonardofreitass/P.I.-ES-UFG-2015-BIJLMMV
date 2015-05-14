@@ -23,7 +23,7 @@
  */
 package br.ufg.inf.everemind.servlets;
 
-import br.ufg.everemind.util.Hash;
+import br.ufg.inf.everemind.util.Hash;
 import br.ufg.inf.everemind.db.UserDAO;
 import br.ufg.inf.everemind.entity.User;
 import java.io.IOException;

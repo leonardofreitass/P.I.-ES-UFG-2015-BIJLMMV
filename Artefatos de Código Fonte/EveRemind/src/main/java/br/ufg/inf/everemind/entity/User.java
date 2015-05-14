@@ -35,8 +35,6 @@ public class User {
     private String secondaryEmail;
     private String hash;
 
-    public User() {}
-
     public User(String fullName, String email, String secondaryEmail) {
         this.fullName = fullName;
         this.email = email;
