@@ -22,32 +22,31 @@
  * THE SOFTWARE.
  */
 
+/* global angular, pageID, pagesConfig */
 
-/* global angular */
-
-angular.module('everemindApp', ['pascalprecht.translate', 'ngStorage']);
-
-toastr.options = {
-    "closeButton": false,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": true,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-};
-
-var pagesConfig = {
-    index: {
-        ctrl: "ngIndexCtrl",
-        access: "public"
-    }
-};
+angular.module('everemindApp').directive('bodyCtrl', ['$compile', function ($compile) {  
+    return {
+        restrict: 'A',
+        terminal: true,
+        priority: 100000,
+        link: function (scope, elem) {
+            elem.removeAttr('body-ctrl');
+            if (pagesConfig[pageID].ctrl)
+                elem.attr('ng-controller', pagesConfig[pageID].ctrl);
+            $compile(elem)(scope);
+        }
+    };
+}]).
+directive('dynamicCtrl', ['$compile', '$parse', function ($compile, $parse) {
+    return {
+        restrict: 'A',
+        terminal: true,
+        priority: 100000,
+        link: function (scope, elem) {
+            var name = $parse(elem.attr('dynamic-ctrl'))(scope);
+            elem.removeAttr('dynamic-ctrl');
+            elem.attr('ng-controller', name);
+            $compile(elem)(scope);
+        }
+    };
+}]);

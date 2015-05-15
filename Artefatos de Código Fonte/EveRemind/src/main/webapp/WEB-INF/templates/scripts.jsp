@@ -9,4 +9,12 @@
 <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/angular/angular.min.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/angular-storage/ngStorage.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/angular-translate/angular-translate.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/toastr/toastr.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/app.js"></script>
+<script src="${pageContext.request.contextPath}/js/ngNotifier.js"></script>
+<script src="${pageContext.request.contextPath}/js/translations/ptBRTranslation.js"></script>
+<script src="${pageContext.request.contextPath}/js/translations/enUSTranslation.js"></script>
+<script src="${pageContext.request.contextPath}/js/ngCtrlDirectives.js"></script>
+<script src="${pageContext.request.contextPath}/js/ngMasterCtrl.js"></script>
+<script src="${pageContext.request.contextPath}/js/ngIndexCtrl.js"></script>

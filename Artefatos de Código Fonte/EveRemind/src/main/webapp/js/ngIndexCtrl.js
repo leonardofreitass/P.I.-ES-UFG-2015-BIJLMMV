@@ -23,31 +23,8 @@
  */
 
 
-/* global angular */
+/* global angular, pageID */
 
-angular.module('everemindApp', ['pascalprecht.translate', 'ngStorage']);
+angular.module('everemindApp').controller('ngIndexCtrl', function ($scope, $location) {
 
-toastr.options = {
-    "closeButton": false,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": true,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-};
-
-var pagesConfig = {
-    index: {
-        ctrl: "ngIndexCtrl",
-        access: "public"
-    }
-};
+});
