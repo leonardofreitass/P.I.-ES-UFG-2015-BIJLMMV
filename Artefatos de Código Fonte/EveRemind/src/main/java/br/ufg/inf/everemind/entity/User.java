@@ -30,6 +30,7 @@ package br.ufg.inf.everemind.entity;
 
 public class User {
 
+    private String _id;
     private String fullName;
     private String email;
     private String secondaryEmail;
@@ -46,6 +47,14 @@ public class User {
         this.email = email;
         this.secondaryEmail = secondaryEmail;
         this.hash = hash;
+    }
+
+    public String getId() {
+        return _id;
+    }
+
+    public void setId(String _id) {
+        this._id = _id;
     }
 
     public String getFullName() {

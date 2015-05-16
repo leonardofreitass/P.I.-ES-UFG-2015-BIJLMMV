@@ -45,9 +45,14 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 
+// Access = ('public' para páginas publicas e 'auth' para páginas que precisam ser autenticadas)
 var pagesConfig = {
     index: {
         ctrl: "ngIndexCtrl",
+        access: "public"
+    },
+    signup: {
+        ctrl: "ngSignupCtrl",
         access: "public"
     }
 };

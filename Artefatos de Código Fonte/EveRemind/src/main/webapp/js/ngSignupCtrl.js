@@ -22,22 +22,9 @@
  * THE SOFTWARE.
  */
 
-/* global angular */
+/* global angular, pagesConfig, pageID */
 
-angular.module('everemindApp').config(['$translateProvider', function ($translateProvider) {
-    $translateProvider.translations('ptBR', {
-        pages: {
-            titles: {
-                index: "Index",
-                signup: "Cadastro"
-            }
-        },
-        general: {
-            notifications: {
-                notAuthorized: "Você não pode acessar esta página!"
-            }
-        }
-    });
+angular.module('everemindApp').controller('ngSignupCtrl', function ($scope, ngNotifier, $localStorage) {
+    
 
-    $translateProvider.preferredLanguage('ptBR');
-}]);
+});

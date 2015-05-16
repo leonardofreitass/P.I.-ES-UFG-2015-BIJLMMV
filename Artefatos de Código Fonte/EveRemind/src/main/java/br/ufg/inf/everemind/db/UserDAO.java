@@ -26,8 +26,8 @@ package br.ufg.inf.everemind.db;
 import br.ufg.inf.everemind.entity.User;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import java.net.UnknownHostException;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -75,7 +75,11 @@ public class UserDAO {
         if (search == null) {
             return null;
         }
-        return new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
+        
+        ObjectId id = (ObjectId) search.get("_id");
+        User user = new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
+        user.setId(id.toString());
+        return user;
     }
 
     public User getBySecondaryEmail(String secondaryEmail) {
@@ -85,7 +89,10 @@ public class UserDAO {
             return null;
         }
 
-        return new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
+        ObjectId id = (ObjectId) search.get("_id");
+        User user = new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
+        user.setId(id.toString());
+        return user;
     }
 
     public User getByFullName(String fullName) {
@@ -95,7 +102,10 @@ public class UserDAO {
             return null;
         }
 
-        return new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
+        ObjectId id = (ObjectId) search.get("_id");
+        User user = new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
+        user.setId(id.toString());
+        return user;
     }
 
     public void delete(String email) {
