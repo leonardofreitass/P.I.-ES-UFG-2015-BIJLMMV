@@ -8,7 +8,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -57,7 +57,7 @@
                         <label for="passwordLogin">Senha</label>
                         <input ng-model="data.password" type="password" class="form-control" id="passwordLogin">
                     </div>
-                    <button type="submit" class="btn btn-success" ng-click="login()">Entrar</button>
+                    <button type="submit" class="btn btn-dark" ng-click="login()">Entrar</button>
                 </form>
             </ul>
         </div><!-- /.navbar-collapse -->

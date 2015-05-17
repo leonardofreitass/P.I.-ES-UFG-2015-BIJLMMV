@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div class="jumbotron">
+                <div class="jumbotron custom-secondary-background-color">
                     <div class="page-header">
                         <h3>Cadastrar-se<br><small>Preencha o formulário abaixo e crie imediatamente uma conta no nosso sistema.<br>É fácil, prático e rápido!</small></h3>
                     </div>
@@ -35,7 +35,7 @@
                             <label>Senha</label>
                             <input ng-model="data.passwordAgain" type="password" class="form-control">
                         </div>
-                        <button class="btn btn-primary" ng-click="signup()">Finalizar Cadastro</button>
+                        <button class="btn btn-warning" ng-click="signup()">Finalizar Cadastro</button>
                     </form>
                 </div>
             </div>

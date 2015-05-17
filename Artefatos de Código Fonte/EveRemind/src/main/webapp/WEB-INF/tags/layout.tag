@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/toastr/toastr.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/site.css">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon">
         <script>var pageID = "${pageID}";</script>
     </head>
     <body>
