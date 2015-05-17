@@ -52,11 +52,11 @@ public class ServletUpdatePassword extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            UserDAO dao = UserDAO.getInstance();
+            UserDAO userDao = UserDAO.getInstance();
             Hash hash = new Hash();
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            dao.updateHash(email, hash.getHash(password));
+            userDao.updateHash(email, hash.getHash(password));
         }
     }
 

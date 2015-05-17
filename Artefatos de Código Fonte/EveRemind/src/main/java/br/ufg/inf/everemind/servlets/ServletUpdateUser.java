@@ -25,7 +25,6 @@ package br.ufg.inf.everemind.servlets;
 
 import br.ufg.inf.everemind.db.UserDAO;
 import br.ufg.inf.everemind.entity.User;
-import br.ufg.inf.everemind.util.Hash;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -53,12 +52,12 @@ public class ServletUpdateUser extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            UserDAO dao = UserDAO.getInstance();
+            UserDAO userDao = UserDAO.getInstance();
             String originalEmail = request.getParameter("originalEmail");
             String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
             String secondaryEmail = request.getParameter("secondaryEmail");
-            dao.updateInfo(originalEmail, new User(fullName, email, secondaryEmail));
+            userDao.updateInfo(originalEmail, new User(fullName, email, secondaryEmail));
             out.flush();
         }
     }

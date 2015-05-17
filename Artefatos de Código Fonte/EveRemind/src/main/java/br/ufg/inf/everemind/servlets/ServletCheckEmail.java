@@ -54,9 +54,9 @@ public class ServletCheckEmail extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String email = request.getParameter("email");
-            UserDAO dao = UserDAO.getInstance();
+            UserDAO userDao = UserDAO.getInstance();
             JSONObject JSON = new JSONObject(); 
-            JSON.put("registered", dao.hasEmailRegistered(email)); 
+            JSON.put("registered", userDao.hasEmailRegistered(email)); 
             out.print(JSON);
             out.flush();
         }

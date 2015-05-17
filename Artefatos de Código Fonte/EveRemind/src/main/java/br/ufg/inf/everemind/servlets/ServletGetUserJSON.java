@@ -25,7 +25,6 @@ package br.ufg.inf.everemind.servlets;
 
 import br.ufg.inf.everemind.db.UserDAO;
 import br.ufg.inf.everemind.entity.User;
-import br.ufg.inf.everemind.util.Hash;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -55,9 +54,8 @@ public class ServletGetUserJSON extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String email = request.getParameter("email");
-            UserDAO dao = UserDAO.getInstance();
-            User user = dao.getByEmail(email);
-            Hash hash = new Hash();
+            UserDAO userDao = UserDAO.getInstance();
+            User user = userDao.getByEmail(email);
             JSONObject JSON = new JSONObject(); 
             JSON.put("_id", user.getId()); 
             JSON.put("fullName", user.getFullName()); 

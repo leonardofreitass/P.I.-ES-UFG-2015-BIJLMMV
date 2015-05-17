@@ -55,10 +55,10 @@ public class ServletLogin extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            UserDAO dao = UserDAO.getInstance();
+            UserDAO userDao = UserDAO.getInstance();
             Hash hash = new Hash();
             JSONObject JSON = new JSONObject(); 
-            JSON.put("auth", dao.authenticate(email, hash.getHash(password))); 
+            JSON.put("auth", userDao.authenticate(email, hash.getHash(password))); 
             out.print(JSON);
             out.flush();
         }

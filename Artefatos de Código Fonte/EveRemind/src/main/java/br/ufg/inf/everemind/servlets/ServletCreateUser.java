@@ -54,13 +54,13 @@ public class ServletCreateUser extends HttpServlet {
 
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            UserDAO dao = UserDAO.getInstance();
+            UserDAO userDao = UserDAO.getInstance();
             Hash hash = new Hash();
             String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
             String secondaryEmail = request.getParameter("secondaryEmail");
             String password = request.getParameter("password");
-            dao.save(new User(fullName, email, secondaryEmail, hash.getHash(password)));
+            userDao.save(new User(fullName, email, secondaryEmail, hash.getHash(password)));
             out.flush();
         }
     }
