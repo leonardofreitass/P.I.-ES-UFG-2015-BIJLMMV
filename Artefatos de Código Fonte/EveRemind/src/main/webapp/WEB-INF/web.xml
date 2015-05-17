@@ -4,9 +4,33 @@
         <servlet-name>ServletCreateUser</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletCreateUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCheckEmail</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletCheckEmail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletLogin</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletLogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletGetUserJSON</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletGetUserJSON</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCheckEmail</servlet-name>
+        <url-pattern>/ServletCheckEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletLogin</servlet-name>
+        <url-pattern>/ServletLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletGetUserJSON</servlet-name>
+        <url-pattern>/ServletGetUserJSON</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -18,4 +18,6 @@
 <script src="${pageContext.request.contextPath}/js/ngCtrlDirectives.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngMasterCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngIndexCtrl.js"></script>
+<script src="${pageContext.request.contextPath}/js/ngNavbarCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngSignupCtrl.js"></script>
+<script src="${pageContext.request.contextPath}/js/ngDashboardCtrl.js"></script>

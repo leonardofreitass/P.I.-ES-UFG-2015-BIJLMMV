@@ -7,5 +7,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:layout pageID="index">
-    <center><img src="img/INFHorizontal.jpg" alt="INF Logo"/><br/><br/><br/><h3>Em Breve, {{"EveRemind"}}<sup>TM</sup></h3></center>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-md-offset-1">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                IMAGEM
+            </div>
+            <div class="col-md-5">
+                <div class="page-header">
+                    <h3>Organize seu dia!<br><small>Com o EveRemind, você nunca mais irá esquecer de suas tarefas, diminuindo sua preocupação e aumentando sua produtividade!<br><br>Crie sua conta agora!<br><a type="submit" class="btn btn-primary" href="signup.jsp" role="button">Registre-se</a></small></h3>
+                </div>
+            </div>
+        </div>
+    </div>
 </t:layout>

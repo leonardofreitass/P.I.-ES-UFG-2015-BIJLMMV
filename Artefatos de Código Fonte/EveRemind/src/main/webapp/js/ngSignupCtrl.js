@@ -25,6 +25,47 @@
 /* global angular, pagesConfig, pageID */
 
 angular.module('everemindApp').controller('ngSignupCtrl', function ($scope, ngNotifier, $localStorage) {
+    $scope.$storage = $localStorage;
     
+    $scope.data = {
+        email: "",
+        secondaryEmail: "",
+        password: "",
+        passwordAgain: "",
+        fullName: ""
+    };
 
+    $scope.signup = function () {
+        if ($scope.data.email === "" || $scope.data.secondaryEmail === "" || $scope.data.password === "" || $scope.data.passwordAgain === "" || $scope.data.fullName === "") {
+            ngNotifier.error("signup.errors.blank");
+            return;
+        }
+        if ($scope.data.password !== $scope.data.passwordAgain) {
+            ngNotifier.error("signup.errors.notMatch");
+            return;
+        }
+        $.getJSON("ServletCheckEmail?email=" + $scope.data.email, {}, function (data) {
+            if (data.registered) {
+                ngNotifier.error("signup.errors.registered");
+                return;
+            }
+            createUser();
+        });
+    };
+
+    var createUser = function () {
+        $.ajax({
+            dataType: "text",
+            url: "ServletCreateUser?email=" + $scope.data.email + "&fullName=" + $scope.data.fullName + "&secondaryEmail=" + $scope.data.secondaryEmail + "&password=" + $scope.data.password,
+            success: function(){
+                finishSignup();
+            }
+        });
+    };
+    
+    var finishSignup = function(){
+        $scope.$storage.pendingMessage = {msg: "signup.success", msgType: "notify"};
+        $scope.$storage.$save();
+        window.location.href = "index.jsp";
+    };
 });

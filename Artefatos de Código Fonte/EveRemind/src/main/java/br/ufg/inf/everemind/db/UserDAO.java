@@ -53,7 +53,7 @@ public class UserDAO {
     }
 
     public void save(User user) {
-        if (this.hasEmailRegistered(user.getEmail())){
+        if (!this.hasEmailRegistered(user.getEmail())){
             Document userDB = new Document("fullName", user.getFullName())
                     .append("email", user.getEmail())
                     .append("secondaryEmail", user.getSecondaryEmail())

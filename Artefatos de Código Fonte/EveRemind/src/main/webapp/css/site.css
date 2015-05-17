@@ -26,3 +26,11 @@ THE SOFTWARE.
     Author     : Leonardo
 */
 
+body {
+    padding-top: 60px;
+}
+
+padding-top-right{
+    padding-top: 5px !important;
+    padding-right: 5px !important;
+}

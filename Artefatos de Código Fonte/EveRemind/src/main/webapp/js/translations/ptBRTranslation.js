@@ -29,8 +29,24 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
         pages: {
             titles: {
                 index: "Index",
-                signup: "Cadastro"
+                signup: "Cadastro",
+                dashboard: "Dashboard"
             }
+        },
+        signup: {
+            errors: {
+                blank: "Preencha todos os campos!",
+                notMatch: "As senhas informadas não são iguais!",
+                registered: "O e-mail informado já foi registrado!"
+            },
+            success: "Usuario cadastrado com sucesso!"
+        },
+        navbar: {
+            errors: {
+                auth: "E-mail e senha informados não correspondem!"
+            },
+            logout: "Logout realizado!",
+            login: "Login realizado!"
         },
         general: {
             notifications: {

@@ -51,24 +51,17 @@ public class ServletCreateUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        /* Test persistence and hash functionality.
-        UserDAO udao = UserDAO.getInstance();
-        Hash hash = new Hash();
-        udao.save(new User("Igor", "email1", "email2", hash.getHash("senha")));
-        udao.save(new User("Rogi", "email3", "email4", hash.getHash("SENHA")));
-        udao.save(new User("LOLO", "email5", "email6", hash.getHash("senha")));
-        //*/
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletCreateUser</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletCreateUser at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            UserDAO dao = UserDAO.getInstance();
+            Hash hash = new Hash();
+            String fullName = request.getParameter("fullName");
+            String email = request.getParameter("email");
+            String secondaryEmail = request.getParameter("secondaryEmail");
+            String password = request.getParameter("password");
+            dao.save(new User(fullName, email, secondaryEmail, hash.getHash(password)));
+            out.flush();
         }
     }
 

@@ -25,24 +25,37 @@
 /* global angular, pagesConfig, pageID */
 
 angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNotifier, $localStorage) {
+    $scope.$storage = $localStorage;
+    
     var pendingMessages = function(){
-        if ($localStorage.$default.pendingMessage){
-            var msg = $localStorage.$default.pendingMessage;
+        if ($scope.$storage.pendingMessage){
+            var msg = $scope.$storage.pendingMessage;
             ngNotifier[msg.msgType](msg.msg);
-            $localStorage.$default.pendingMessage = null;
+            $scope.$storage.pendingMessage = null;
         }
     };
     
     var checkAuth = function(){
-        if (pagesConfig[pageID].access === "auth" && !$localStorage.$default.sessionUser){
-            $localStorage.$default.pendingMessage = {msg: "general.notifications.notAuthorized", msgType: "error"};
-            window.location.href = "/";
+        if (pagesConfig[pageID].access === "auth" && !$scope.$storage.sessionUser){
+            $scope.$storage.pendingMessage = {msg: "general.notifications.notAuthorized", msgType: "error"};
+            $scope.$storage.$save();
+            window.location.href = "index.jsp";
+        }
+        if ($scope.$storage.exiting){
+            $scope.$storage.exiting = null;
+            $scope.$storage.sessionUser = null;
+        }
+    };
+    
+    var checkPublic = function(){
+        if (pagesConfig[pageID].access === "public" && $scope.$storage.sessionUser){
+            window.location.href = "dashboard.jsp";
         }
     };
     
     $scope.$watch(
         function() { 
-            return $localStorage.$default.sessionUser; 
+            return $scope.$storage.sessionUser; 
         }, 
         function() {
             checkAuth();
@@ -50,5 +63,7 @@ angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNo
     );
     
     checkAuth();
+    checkPublic();
     pendingMessages();
+   
 });

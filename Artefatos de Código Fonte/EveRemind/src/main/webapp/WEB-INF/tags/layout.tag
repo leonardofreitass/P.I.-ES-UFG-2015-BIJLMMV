@@ -19,7 +19,7 @@
     </head>
     <body>
         <div ng-controller="ngMasterCtrl as mstrCtrl"></div>
-        <div id="page-header">
+        <div id="page-header" ng-controller="ngNavbarCtrl as navCtrl">
             <jsp:include page="/WEB-INF/templates/header.jsp" />
         </div>
         <div id="body" body-ctrl>
