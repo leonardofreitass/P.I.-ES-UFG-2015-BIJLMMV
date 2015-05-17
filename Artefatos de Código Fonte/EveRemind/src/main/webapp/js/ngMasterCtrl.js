@@ -27,6 +27,8 @@
 angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNotifier, $localStorage) {
     $scope.$storage = $localStorage;
     
+    var display = true;
+    
     var pendingMessages = function(){
         if ($scope.$storage.pendingMessage){
             var msg = $scope.$storage.pendingMessage;
@@ -39,6 +41,7 @@ angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNo
         if (pagesConfig[pageID].access === "auth" && !$scope.$storage.sessionUser){
             $scope.$storage.pendingMessage = {msg: "general.notifications.notAuthorized", msgType: "error"};
             $scope.$storage.$save();
+            display = false;
             window.location.href = "index.jsp";
         }
         if ($scope.$storage.exiting){
@@ -49,8 +52,14 @@ angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNo
     
     var checkPublic = function(){
         if (pagesConfig[pageID].access === "public" && $scope.$storage.sessionUser){
+            display = false;
             window.location.href = "dashboard.jsp";
         }
+    };
+    
+    var displayPage = function(){
+        if (display)
+            $("html").removeClass("hidden-html");
     };
     
     $scope.$watch(
@@ -59,11 +68,13 @@ angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNo
         }, 
         function() {
             checkAuth();
+            checkPublic();
         }
     );
     
     checkAuth();
     checkPublic();
+    displayPage();
     pendingMessages();
    
 });

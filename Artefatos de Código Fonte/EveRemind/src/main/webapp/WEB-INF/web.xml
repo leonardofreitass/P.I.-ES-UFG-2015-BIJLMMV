@@ -16,6 +16,14 @@
         <servlet-name>ServletGetUserJSON</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletGetUserJSON</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletUpdateUser</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletUpdateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletUpdatePassword</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletUpdatePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>ServletGetUserJSON</servlet-name>
         <url-pattern>/ServletGetUserJSON</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletUpdateUser</servlet-name>
+        <url-pattern>/ServletUpdateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletUpdatePassword</servlet-name>
+        <url-pattern>/ServletUpdatePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

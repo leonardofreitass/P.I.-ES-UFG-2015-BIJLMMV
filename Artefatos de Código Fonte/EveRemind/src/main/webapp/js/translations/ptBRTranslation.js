@@ -30,7 +30,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             titles: {
                 index: "Index",
                 signup: "Cadastro",
-                dashboard: "Dashboard"
+                dashboard: "Dashboard",
+                account: "Conta"
             }
         },
         signup: {
@@ -47,6 +48,13 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             },
             logout: "Logout realizado!",
             login: "Login realizado!"
+        },
+        account: {
+            success: "Usuario modificado!",
+            passwordSuccess: "Senha modificada!",
+            errors: {
+                auth: "A senha atual está incorreta!"
+            }
         },
         general: {
             notifications: {

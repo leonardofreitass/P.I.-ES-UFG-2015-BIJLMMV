@@ -22,10 +22,14 @@
  * THE SOFTWARE.
  */
 
-/* global angular */
+/* global angular, pageID */
 
 angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNotifier, $localStorage) {
     $scope.$storage = $localStorage;
+    
+    $scope.pageID = pageID;
+    
+    $scope.home = "index.jsp";
     
     $scope.data = {
         email: "",
@@ -37,6 +41,9 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
     $scope.isLogged = function(){
         return $scope.$storage.sessionUser;
     };
+    
+    if ($scope.isLogged())
+        $scope.home = "dashboard.jsp";
     
     $scope.getUserName = function(){
         return $scope.$storage.sessionUser.fullName;

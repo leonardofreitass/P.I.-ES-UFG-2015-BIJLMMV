@@ -218,3 +218,16 @@ fieldset[disabled] .btn-dark.active {
     max-height:80%;
 }
     
+.hidden-html{
+    display: none;
+}
+
+.navbar-logo{
+    max-width: 150px;
+    height: auto;
+}
+
+.brand-top{
+    padding-top: 0px !important;
+    margin-top: -13px !important;
+}

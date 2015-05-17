@@ -8,9 +8,9 @@
 <%@tag description="Overall page layout" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@attribute name="pageID" required="true"%>
-<html ng-app="everemindApp" ng-cloak>
+<html ng-app="everemindApp" ng-cloak class="hidden-html">
     <head>
-        <title>{{"pages.titles.${pageID}" | translate}}</title>
+        <title ng-bind="('pages.titles.${pageID}' | translate) + ' - EveRemind'">EveRemind</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/toastr/toastr.min.css">

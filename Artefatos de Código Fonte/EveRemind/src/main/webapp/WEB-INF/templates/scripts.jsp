@@ -20,4 +20,5 @@
 <script src="${pageContext.request.contextPath}/js/ngIndexCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngNavbarCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngSignupCtrl.js"></script>
+<script src="${pageContext.request.contextPath}/js/ngAccountCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngDashboardCtrl.js"></script>

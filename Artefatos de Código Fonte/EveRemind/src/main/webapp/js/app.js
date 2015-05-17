@@ -58,5 +58,9 @@ var pagesConfig = {
     dashboard: {
         ctrl: "ngDashboardCtrl",
         access: "auth"
+    },
+    account: {
+        ctrl: "ngAccountCtrl",
+        access: "auth"
     }
 };

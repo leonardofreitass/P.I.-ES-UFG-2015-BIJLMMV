@@ -32,7 +32,7 @@
                             <input ng-model="data.password" type="password" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Senha</label>
+                            <label>Repita a Senha</label>
                             <input ng-model="data.passwordAgain" type="password" class="form-control">
                         </div>
                         <button class="btn btn-warning" ng-click="signup()">Finalizar Cadastro</button>
