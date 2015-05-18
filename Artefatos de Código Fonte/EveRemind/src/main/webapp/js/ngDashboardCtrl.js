@@ -101,7 +101,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
     };
     
     var cleanAndAdd = function(){
-        $scope.data.categories.push({name: $scope.data.add.name, color: $scope.data.add.color});
+        $scope.data.categories.push({name: $scope.data.add.name, color: $scope.data.add.color, minimized: true});
         $scope.data.add = {
             name: "",
             color: "#FFFFFF",

@@ -73,7 +73,7 @@ var loadJQuery = function(){
             togglePaletteOnly: true,
             togglePaletteMoreText: 'mais',
             togglePaletteLessText: 'menos',
-            color: 'blanchedalmond',
+            color: '#ffffff',
             palette: [
                 ["#000", "#444", "#666", "#999", "#ccc", "#eee", "#f3f3f3", "#fff"],
                 ["#f00", "#f90", "#ff0", "#0f0", "#0ff", "#00f", "#90f", "#f0f"],

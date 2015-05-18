@@ -247,8 +247,7 @@ fieldset[disabled] .btn-dark.active {
 }
 
 .brand-top{
-    padding-top: 0px !important;
-    margin-top: -13px !important;
+    padding-top: 10px !important;
 }
 
 .dashboard{
@@ -261,27 +260,25 @@ fieldset[disabled] .btn-dark.active {
     display: table-row;
 }
 
-.category-column{
+.dashboard-column{
     display: table-cell;
     height: 100%;
-    width: 50px;
-    border-right: solid #4E4E4E;
     padding: 5px;
+    border-right: solid 2px #4E4E4E;
+}
+
+.category-column{
+    width: 50px;
 }
 
 .new-category-column{
-    display: table-cell;
-    height: 100%;
     width: 260px;
-    border-right: solid #4E4E4E;
-    padding: 5px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 .add-category-column{
-    display: table-cell;
-    height: 100%;
+    border-right: none;
     width: 50px;
     position: relative;
 }
@@ -290,8 +287,18 @@ fieldset[disabled] .btn-dark.active {
     position: absolute;
     top: 50%;
     left: 20px;
+    border-radius: 50%;
+    padding-left: 12px;
+    padding-bottom: 12px;
+    padding-top: 10px;
+    padding-right: 10px;
+    border: solid 1px #808080;
 }
 
 .add-category-button{
     font-size: 30px !important;
+}
+
+.float-right{
+    float: right;
 }

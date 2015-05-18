@@ -62,9 +62,9 @@ public class ServletGetUserCategories extends HttpServlet {
             JSONArray array = new JSONArray(); 
             for (Category category : list){
                 JSONObject categoryJSON = new JSONObject();
-                categoryJSON.put("id", category.getId());
                 categoryJSON.put("name", category.getName());
                 categoryJSON.put("color", category.getColor());
+                categoryJSON.put("minimized", true);
                 array.put(categoryJSON);
             }
             out.print(array);
