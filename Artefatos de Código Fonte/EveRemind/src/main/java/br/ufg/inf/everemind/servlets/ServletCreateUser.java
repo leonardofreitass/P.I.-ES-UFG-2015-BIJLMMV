@@ -50,10 +50,11 @@ public class ServletCreateUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             UserDAO userDao = UserDAO.getInstance();
             Hash hash = new Hash();
             String fullName = request.getParameter("fullName");
@@ -62,6 +63,7 @@ public class ServletCreateUser extends HttpServlet {
             String password = request.getParameter("password");
             userDao.save(new User(fullName, email, secondaryEmail, hash.getHash(password)));
             out.flush();
+            
         }
     }
 

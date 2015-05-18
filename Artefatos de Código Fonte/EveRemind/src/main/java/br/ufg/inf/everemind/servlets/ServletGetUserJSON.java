@@ -50,9 +50,11 @@ public class ServletGetUserJSON extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("application/json");
+        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             String email = request.getParameter("email");
             UserDAO userDao = UserDAO.getInstance();
             User user = userDao.getByEmail(email);
@@ -63,6 +65,7 @@ public class ServletGetUserJSON extends HttpServlet {
             JSON.put("secondaryEmail", user.getSecondaryEmail()); 
             out.print(JSON);
             out.flush();
+            
         }
     }
 

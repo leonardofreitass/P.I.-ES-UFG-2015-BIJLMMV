@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2015 Leonardo.
+ * Copyright 2015 Igor.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,8 @@
  */
 package br.ufg.inf.everemind.servlets;
 
-import br.ufg.inf.everemind.db.UserDAO;
+import br.ufg.inf.everemind.db.CategoryDAO;
+import br.ufg.inf.everemind.entity.Category;
 import br.ufg.inf.everemind.util.Hash;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,9 +35,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Leonardo
+ * @author Igor
  */
-public class ServletUpdatePassword extends HttpServlet {
+public class ServletCreateCategory extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,17 +50,19 @@ public class ServletUpdatePassword extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try (PrintWriter out = response.getWriter()) {
-            
-            UserDAO userDao = UserDAO.getInstance();
+
+            CategoryDAO categoryDao = CategoryDAO.getInstance();
             Hash hash = new Hash();
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            userDao.updateHash(email, hash.getHash(password));
-            
+            String name = request.getParameter("name");
+            String color = request.getParameter("color");
+            String idConta = request.getParameter("idConta");
+            categoryDao.save(new Category(name, color, idConta));
+            out.flush();
+
         }
     }
 

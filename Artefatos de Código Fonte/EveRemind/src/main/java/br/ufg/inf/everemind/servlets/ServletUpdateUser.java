@@ -49,9 +49,11 @@ public class ServletUpdateUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
+        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             UserDAO userDao = UserDAO.getInstance();
             String originalEmail = request.getParameter("originalEmail");
             String fullName = request.getParameter("fullName");
@@ -59,6 +61,7 @@ public class ServletUpdateUser extends HttpServlet {
             String secondaryEmail = request.getParameter("secondaryEmail");
             userDao.updateInfo(originalEmail, new User(fullName, email, secondaryEmail));
             out.flush();
+            
         }
     }
 

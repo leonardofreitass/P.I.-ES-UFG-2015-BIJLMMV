@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2015 Leonardo.
+ * Copyright 2015 Igor.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@
 package br.ufg.inf.everemind.servlets;
 
 import br.ufg.inf.everemind.db.UserDAO;
+import br.ufg.inf.everemind.entity.User;
 import br.ufg.inf.everemind.util.Hash;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,9 +35,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Leonardo
+ * @author Igor
  */
-public class ServletUpdatePassword extends HttpServlet {
+public class ServletDeleteUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,7 +59,8 @@ public class ServletUpdatePassword extends HttpServlet {
             Hash hash = new Hash();
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            userDao.updateHash(email, hash.getHash(password));
+            userDao.delete(email, hash.getHash(password));
+            out.flush();
             
         }
     }

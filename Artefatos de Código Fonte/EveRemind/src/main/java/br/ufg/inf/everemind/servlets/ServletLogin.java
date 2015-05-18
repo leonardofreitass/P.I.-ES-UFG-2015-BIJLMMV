@@ -50,9 +50,11 @@ public class ServletLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("application/json");
+        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             UserDAO userDao = UserDAO.getInstance();
@@ -61,6 +63,7 @@ public class ServletLogin extends HttpServlet {
             JSON.put("auth", userDao.authenticate(email, hash.getHash(password))); 
             out.print(JSON);
             out.flush();
+            
         }
     }
 

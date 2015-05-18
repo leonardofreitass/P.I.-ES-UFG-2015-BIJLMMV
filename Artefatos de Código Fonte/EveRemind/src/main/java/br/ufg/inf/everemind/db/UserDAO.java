@@ -108,8 +108,9 @@ public class UserDAO {
         return user;
     }
 
-    public void delete(String email) {
-        Document query = new Document("email", email);
+    public void delete(String email, String hash) {
+        Document query = new Document("email", email)
+                .append("hash", hash);
         collection.deleteOne(query);
     }
 
