@@ -30,6 +30,7 @@ body {
     padding-top: 51px;
     height: 100%;
     margin: 0;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #body{
@@ -136,6 +137,15 @@ padding-top-right{
     height: 1px;                
     border: 0; 
     border-top: 1px solid #fcd68a;  
+    margin: 1em 0; 
+    padding: 0; 
+}
+
+.custom-black-hr{ 
+    display: block;
+    height: 1px;                
+    border: 0; 
+    border-top: 1px solid black;  
     margin: 1em 0; 
     padding: 0; 
 }
@@ -263,30 +273,70 @@ fieldset[disabled] .btn-dark.active {
 .dashboard-column{
     display: table-cell;
     height: 100%;
-    padding: 5px;
-    border-right: solid 2px #4E4E4E;
+    border-right: solid 1px #4E4E4E;
+}
+
+.not-first-column{
+    border-left: solid 1px #4E4E4E;
 }
 
 .category-column{
-    width: 50px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top: solid 1px #4E4E4E;
+}
+
+.category-title{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 5px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    height: 5%;
+}
+
+.category-column:hover .category-title.minimized-column{
+    background-color: #E67D23;
+    color: white;
+}
+
+.category-title.minimized-column{
+    background-color: #FCD68A;
+    color: black;
+}
+
+.category-title.maximized-column{
+    background-color: #E67D23;
+    color: white;
 }
 
 .new-category-column{
-    width: 260px;
+    padding: 5px;
+    border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    min-width: 200px !important;
+    border-top: solid 1px #4E4E4E;
+    overflow-x: hidden;
+}
+
+.minimized-column{
+    width: 85px !important;
+}
+
+.maximized-column{
+    width: 160px !important;
 }
 
 .add-category-column{
-    border-right: none;
-    width: 50px;
-    position: relative;
+    display: table-cell;
+    padding: 5px;
+    width: 50px !important;
+    vertical-align: middle;
 }
 
 .add-category {
-    position: absolute;
-    top: 50%;
-    left: 20px;
+    margin-left: 10px;
     border-radius: 50%;
     padding-left: 12px;
     padding-bottom: 12px;
@@ -301,4 +351,21 @@ fieldset[disabled] .btn-dark.active {
 
 .float-right{
     float: right;
+}
+
+.bordered-text{
+  text-shadow:
+   -1px -1px 0 #ddd,  
+    1px -1px 0 #ddd,
+   -1px  1px 0 #ddd,
+    1px  1px 0 #ddd;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.full-height{
+    border-top: solid 1px #4E4E4E;
+    height: 95%;
 }

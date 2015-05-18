@@ -56,8 +56,9 @@ public class ServletCreateCategory extends HttpServlet {
             CategoryDAO categoryDao = CategoryDAO.getInstance();
             String name = request.getParameter("name");
             String color = request.getParameter("color");
-            String idConta = request.getParameter("idConta");
-            categoryDao.save(new Category(name, color, idConta));
+            String idUser = request.getParameter("idUser");
+            System.out.println(name + " - " + color + " - " + idUser);
+            categoryDao.save(new Category(name, color, idUser));
             out.flush();
 
         }

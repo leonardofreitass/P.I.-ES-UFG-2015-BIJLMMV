@@ -53,6 +53,9 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             tooltips: {
                 addCategory: "Adicionar categoria"
             },
+            errors: {
+                addCategoryName: "Insira o nome da categoria."
+            },
             addCategory: "Categoria criada!"
         },
         account: {

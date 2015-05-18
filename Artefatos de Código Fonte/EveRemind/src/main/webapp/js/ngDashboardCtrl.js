@@ -31,7 +31,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         adding: false,
         add: {
             name: "",
-            color: "#FFFFFF",
+            color: "rgb(255, 255, 255)",
             style: {
                 'background-color': '#FFFFFF'
             }
@@ -51,7 +51,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             $scope.data.add.style = {'background-color': $scope.data.add.color};
         }
     );
-    
+
     $scope.getUserName = function () {
         return $scope.$storage.sessionUser.fullName;
     };
@@ -59,9 +59,9 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
     $scope.cancelAddCategory = function(){
         $scope.data.add = {
             name: "",
-            color: "#FFFFFF",
+            color: "rgb(255, 255, 255)",
             style: {
-                'background-color': '#FFFFFF'
+                'background-color': 'rgb(255, 255, 255)'
             }
         };
         $scope.data.adding = false;
@@ -73,14 +73,35 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         });
     };
     
+    
+    $scope.$watch(
+        function(scope) { 
+            return scope.$storage.refreshCategories; 
+        }, 
+        function() {
+            if ($scope.$storage.refreshCategories){
+                $scope.$storage.refreshCategories = null;
+                $scope.$storage.$save();
+                $scope.getUserCategories();
+                $scope.$apply();
+            }
+        }
+    );
+    
+    
     $scope.saveAddCategory = function(){
+        if ($scope.data.add.name === ""){
+            ngNotifier.warning("dashboard.errors.addCategoryName");
+            return;
+        }
         $.ajax({
             dataType: "text",
-            url: "ServletCreateCategory?name=" + $scope.data.add.name + "&color=" + $scope.data.add.color + "&idConta=" + $scope.$storage.sessionUser._id,
+            url: "ServletCreateCategory?name=" + $scope.data.add.name + "&color=" + $scope.data.add.color + "&idUser=" + $scope.$storage.sessionUser._id,
             success: function () {
-                cleanAndAdd();
+                $scope.$storage.refreshCategories = true;
+                $scope.$storage.$save();
+                $scope.$apply();
                 $scope.cancelAddCategory();
-                $scope.getUserCategories();
                 ngNotifier.notify("dashboard.addCategory");
             }
         });
@@ -97,19 +118,6 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
     
     var updateCategories = function(data){
         $scope.data.categories = data;
-        $scope.$save;
-    };
-    
-    var cleanAndAdd = function(){
-        $scope.data.categories.push({name: $scope.data.add.name, color: $scope.data.add.color, minimized: true});
-        $scope.data.add = {
-            name: "",
-            color: "#FFFFFF",
-            style: {
-                'background-color': '#FFFFFF'
-            }
-        };
-        $scope.data.adding = false;
         $scope.$apply();
     };
 });

@@ -12,6 +12,7 @@
     <head>
         <title ng-bind="('pages.titles.${pageID}' | translate) + ' - EveRemind'">EveRemind</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/toastr/toastr.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/spectrum/spectrum.css">

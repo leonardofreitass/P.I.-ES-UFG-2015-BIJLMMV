@@ -60,7 +60,7 @@
                         <input ng-model="data.newPassword" type="password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Rapita a Nova Senha</label>
+                        <label>Repita a Nova Senha</label>
                         <input ng-model="data.repeatNewPassword" type="password" class="form-control">
                     </div>
                 </div>
