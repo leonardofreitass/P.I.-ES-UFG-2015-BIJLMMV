@@ -65,6 +65,7 @@ public class ServletGetUserCategories extends HttpServlet {
                 categoryJSON.put("name", category.getName());
                 categoryJSON.put("color", category.getColor());
                 categoryJSON.put("minimized", true);
+                categoryJSON.put("hovering", false);
                 array.put(categoryJSON);
             }
             out.print(array);

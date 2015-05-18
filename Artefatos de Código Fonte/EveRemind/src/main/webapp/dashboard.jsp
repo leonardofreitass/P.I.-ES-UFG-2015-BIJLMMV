@@ -9,14 +9,14 @@
 <t:layout pageID="dashboard">
     <div class="dashboard" ng-init='getUserCategories()'>
         <div class="table-row">
-            <div ng-repeat="category in data.categories" ng-click="category.minimized = !category.minimized" class="dashboard-column category-column not-first-column cursor-pointer" ng-class="{'minimized-column': category.minimized, 'maximized-column': !category.minimized}">
-                <div class="category-title" ng-class="{'minimized-column': category.minimized, 'maximized-column': !category.minimized}">
-                    <label>{{category.name}}</label>
+            <div ng-repeat="category in data.categories" ng-click="clickCategory($index)" ng-mouseenter="enterCategory($index)" ng-mouseleave="leaveCategory($index)" class="dashboard-column category-column cursor-pointer" ng-class="{'minimized-column': !isMaximized($index), 'maximized-column': isMaximized($index)}">
+                <div class="category-title" ng-class="{'minimized-column': !isMaximized($index), 'maximized-column': isMaximized($index)}">
+                    <label class="cursor-pointer">{{category.name}}</label>
                 </div>
                 <div class="full-height" ng-style="createStyle(category.color)"></div>
             </div>
             <div ng-show="!data.adding" class="add-category-column">
-                <div class="close add-category" ng-click="addCategory()" data-toggle="tooltip" data-placement="right" title="{{'dashboard.tooltips.addCategory' | translate}}">
+                <div class="close close-color-override add-category" ng-click="addCategory()" data-toggle="tooltip" data-placement="right" title="{{'dashboard.tooltips.addCategory' | translate}}">
                     <span class="add-category-button glyphicon glyphicon-plus"></span>
                 </div>
             </div>

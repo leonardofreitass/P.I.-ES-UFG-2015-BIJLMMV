@@ -342,7 +342,7 @@ fieldset[disabled] .btn-dark.active {
     padding-bottom: 12px;
     padding-top: 10px;
     padding-right: 10px;
-    border: solid 1px #808080;
+    border: solid 3px #808080;
 }
 
 .add-category-button{
@@ -368,4 +368,14 @@ fieldset[disabled] .btn-dark.active {
 .full-height{
     border-top: solid 1px #4E4E4E;
     height: 95%;
+}
+
+.close-color-override{
+    filter: alpha(opacity=50) !important;
+    opacity: .5 !important;
+}
+
+.close-color-override:hover{
+    filter: alpha(opacity=80);
+    opacity: .8 !important;
 }

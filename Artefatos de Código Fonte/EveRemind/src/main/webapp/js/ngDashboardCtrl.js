@@ -106,6 +106,29 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             }
         });
     };
+    
+    $scope.isMaximized = function(index){
+        if (!$scope.data.categories[index].minimized)
+            return true;
+        
+        if ($scope.data.categories[index].hovering){
+            return true;
+        }
+        
+        return false;
+    };
+    
+    $scope.clickCategory = function(index){
+        $scope.data.categories[index].minimized = !$scope.data.categories[index].minimized;
+    };
+    $scope.enterCategory = function(index){
+        $scope.data.categories[index].hovering = true;
+    };
+    
+    $scope.leaveCategory = function(index){
+        $scope.data.categories[index].hovering = false;
+    };
+    
 
     $scope.addCategory = function () {
         $scope.data.adding = true;
