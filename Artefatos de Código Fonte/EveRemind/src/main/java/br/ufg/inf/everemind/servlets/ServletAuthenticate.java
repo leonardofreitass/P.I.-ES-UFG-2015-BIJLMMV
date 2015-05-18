@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2015 Igor.
+ * Copyright 2015 Leonardo.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,20 +23,21 @@
  */
 package br.ufg.inf.everemind.servlets;
 
-import br.ufg.inf.everemind.db.CategoryDAO;
-import br.ufg.inf.everemind.entity.Category;
+import br.ufg.inf.everemind.db.UserDAO;
+import br.ufg.inf.everemind.util.Hash;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 /**
  *
- * @author Igor
+ * @author Leonardo
  */
-public class ServletCreateCategory extends HttpServlet {
+public class ServletAuthenticate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,17 +50,20 @@ public class ServletCreateCategory extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        response.setContentType("text/html;charset=UTF-8");
-
+        
+        response.setContentType("application/json");
+        
         try (PrintWriter out = response.getWriter()) {
-            CategoryDAO categoryDao = CategoryDAO.getInstance();
-            String name = request.getParameter("name");
-            String color = request.getParameter("color");
-            String idConta = request.getParameter("idConta");
-            categoryDao.save(new Category(name, color, idConta));
+            
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            UserDAO userDao = UserDAO.getInstance();
+            Hash hash = new Hash();
+            JSONObject JSON = new JSONObject(); 
+            JSON.put("auth", userDao.authenticate(email, hash.getHash(password))); 
+            out.print(JSON);
             out.flush();
-
+            
         }
     }
 

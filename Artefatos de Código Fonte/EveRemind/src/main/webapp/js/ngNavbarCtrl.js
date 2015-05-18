@@ -51,7 +51,7 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
     
     $scope.login = function(){
         email = $scope.data.email;
-        $.getJSON("ServletLogin?email=" + $scope.data.email + "&password=" + $scope.data.password, {}, function (data) {
+        $.getJSON("ServletAuthenticate?email=" + $scope.data.email + "&password=" + $scope.data.password, {}, function (data) {
             if (!data.auth) {
                 ngNotifier.error("navbar.errors.auth");
                 return;

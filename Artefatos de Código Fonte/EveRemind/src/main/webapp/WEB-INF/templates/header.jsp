@@ -35,7 +35,7 @@
                         <li><a ng-click="logout()" href="">Sair</a></li>
                     </ul>
                 </li>
-                <form class="navbar-form navbar-righ" ng-if="!isLogged()">
+                <form class="navbar-form" ng-if="!isLogged()">
                     <div class="form-group">
                         <label for="nameLogin">E-mail</label>
                         <input ng-model="data.email" type="email" class="form-control" id="nameLogin">

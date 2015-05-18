@@ -9,8 +9,8 @@
         <servlet-class>br.ufg.inf.everemind.servlets.ServletCheckEmail</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletLogin</servlet-name>
-        <servlet-class>br.ufg.inf.everemind.servlets.ServletLogin</servlet-class>
+        <servlet-name>ServletAuthenticate</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletAuthenticate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServletGetUserJSON</servlet-name>
@@ -32,6 +32,10 @@
         <servlet-name>ServletDeleteUser</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletDeleteUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletGetUserCategories</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletGetUserCategories</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
@@ -41,8 +45,8 @@
         <url-pattern>/ServletCheckEmail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletLogin</servlet-name>
-        <url-pattern>/ServletLogin</url-pattern>
+        <servlet-name>ServletAuthenticate</servlet-name>
+        <url-pattern>/ServletAuthenticate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletGetUserJSON</servlet-name>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ServletDeleteUser</servlet-name>
         <url-pattern>/ServletDeleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletGetUserCategories</servlet-name>
+        <url-pattern>/ServletGetUserCategories</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

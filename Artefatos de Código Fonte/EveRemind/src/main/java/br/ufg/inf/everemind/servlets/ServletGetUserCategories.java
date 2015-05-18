@@ -23,21 +23,23 @@
  */
 package br.ufg.inf.everemind.servlets;
 
-import br.ufg.inf.everemind.db.UserDAO;
-import br.ufg.inf.everemind.util.Hash;
+import br.ufg.inf.everemind.db.CategoryDAO;
+import br.ufg.inf.everemind.entity.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
  *
  * @author Leonardo
  */
-public class ServletLogin extends HttpServlet {
+public class ServletGetUserCategories extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,20 +52,23 @@ public class ServletLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("application/json");
         
         try (PrintWriter out = response.getWriter()) {
             
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            UserDAO userDao = UserDAO.getInstance();
-            Hash hash = new Hash();
-            JSONObject JSON = new JSONObject(); 
-            JSON.put("auth", userDao.authenticate(email, hash.getHash(password))); 
-            out.print(JSON);
+            String idUser = request.getParameter("idUser");
+            CategoryDAO categoryDao = CategoryDAO.getInstance();
+            ArrayList<Category> list = categoryDao.getAll(idUser);
+            JSONArray array = new JSONArray(); 
+            for (Category category : list){
+                JSONObject categoryJSON = new JSONObject();
+                categoryJSON.put("id", category.getId());
+                categoryJSON.put("name", category.getName());
+                categoryJSON.put("color", category.getColor());
+                array.put(categoryJSON);
+            }
+            out.print(array);
             out.flush();
-            
         }
     }
 

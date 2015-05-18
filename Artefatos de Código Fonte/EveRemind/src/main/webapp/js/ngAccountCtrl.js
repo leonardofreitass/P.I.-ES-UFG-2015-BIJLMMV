@@ -38,7 +38,11 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
         currentPassword: "",
         newPassword: "",
         repeatNewPassword: "",
-        fullName: $scope.$storage.sessionUser.fullName
+        fullName: $scope.$storage.sessionUser.fullName,
+        delete: {
+            email: "",
+            password: ""
+        }
     };
 
     $scope.update = function () {
@@ -56,18 +60,47 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
             }
         });
     };
+    
+    $scope.deleteUser = function(){
+        if ($scope.data.delete.email !== email){
+            ngNotifier.error("account.errors.notUser");
+            return;
+        }
+        $.getJSON("ServletAuthenticate?email=" + $scope.data.delete.email + "&password=" + $scope.data.delete.password, {}, function (data) {
+            if (!data.auth) {
+                ngNotifier.error("account.errors.authDelete");
+                return;
+            }
+            excludeAccount();
+        });
+    };
+
 
     $scope.updatePassword = function () {
         if ($scope.data.newPassword !== $scope.data.repeatNewPassword) {
             ngNotifier.error("signup.errors.notMatch");
             return;
         }
-        $.getJSON("ServletLogin?email=" + email + "&password=" + $scope.data.currentPassword, {}, function (data) {
+        $.getJSON("ServletAuthenticate?email=" + email + "&password=" + $scope.data.currentPassword, {}, function (data) {
             if (!data.auth) {
                 ngNotifier.error("account.errors.auth");
                 return;
             }
             setNewPassword();
+        });
+    };
+    
+    var excludeAccount = function(){
+        $.ajax({
+            dataType: "text",
+            url: "ServletDeleteUser?email=" + email,
+            success: function () {
+                $('#modalDelete').modal('hide');
+                $scope.$storage.exiting = true;
+                $scope.$storage.pendingMessage = {msg: "account.delete", msgType: "warning"};
+                $scope.$storage.$save();
+                window.location.href = "index.jsp";
+            }
         });
     };
     

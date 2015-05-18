@@ -27,7 +27,89 @@
 angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, ngNotifier, $localStorage) {
     $scope.$storage = $localStorage;
 
-    $scope.getUserName = function(){
+    $scope.data = {
+        adding: false,
+        add: {
+            name: "",
+            color: "#FFFFFF",
+            style: {
+                'background-color': '#FFFFFF'
+            }
+        },
+        categories: []
+    };
+    
+    $scope.createStyle = function(color){
+        return {'background-color': color};
+    };
+    
+    $scope.$watch(
+        function() { 
+            return $scope.data.add.color; 
+        }, 
+        function() {
+            $scope.data.add.style = {'background-color': $scope.data.add.color};
+        }
+    );
+    
+    $scope.getUserName = function () {
         return $scope.$storage.sessionUser.fullName;
+    };
+    
+    $scope.cancelAddCategory = function(){
+        $scope.data.add = {
+            name: "",
+            color: "#FFFFFF",
+            style: {
+                'background-color': '#FFFFFF'
+            }
+        };
+        $scope.data.adding = false;
+    };
+    
+    $scope.getUserCategories = function(){
+        $.getJSON("ServletGetUserCategories?idUser=" + $scope.$storage.sessionUser._id, {}, function (data) {
+            updateCategories(data);
+        });
+    };
+    
+    $scope.saveAddCategory = function(){
+        $.ajax({
+            dataType: "text",
+            url: "ServletCreateCategory?name=" + $scope.data.add.name + "&color=" + $scope.data.add.color + "&idConta=" + $scope.$storage.sessionUser._id,
+            success: function () {
+                cleanAndAdd();
+                $scope.cancelAddCategory();
+                $scope.getUserCategories();
+                ngNotifier.notify("dashboard.addCategory");
+            }
+        });
+    };
+
+    $scope.addCategory = function () {
+        $scope.data.adding = true;
+        loadJQuery();
+    };
+    
+    $scope.loadJQuery = function(){
+        loadJQuery();
+    };
+    
+    var updateCategories = function(data){
+        $scope.data.categories = data;
+        $scope.$save;
+    };
+    
+    var cleanAndAdd = function(){
+        $scope.data.categories.push({name: $scope.data.add.name, color: $scope.data.add.color});
+        $scope.data.add = {
+            name: "",
+            color: "#FFFFFF",
+            style: {
+                'background-color': '#FFFFFF'
+            }
+        };
+        $scope.data.adding = false;
+        $scope.$apply();
     };
 });

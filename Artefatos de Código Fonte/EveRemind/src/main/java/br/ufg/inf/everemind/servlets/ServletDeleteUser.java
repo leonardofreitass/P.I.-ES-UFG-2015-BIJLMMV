@@ -58,8 +58,7 @@ public class ServletDeleteUser extends HttpServlet {
             UserDAO userDao = UserDAO.getInstance();
             Hash hash = new Hash();
             String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            userDao.delete(email, hash.getHash(password));
+            userDao.delete(email);
             out.flush();
             
         }

@@ -27,7 +27,17 @@ THE SOFTWARE.
 */
 
 body {
-    padding-top: 60px;
+    padding-top: 51px;
+    height: 100%;
+    margin: 0;
+}
+
+#body{
+    height: 100% !important;
+}
+
+html{
+    height: 100%;
 }
 
 padding-top-right{
@@ -119,6 +129,15 @@ padding-top-right{
 
 .white-background-color{
     background-color: #FFFFFF !important;
+}
+
+.custom-primary-hr{ 
+    display: block;
+    height: 1px;                
+    border: 0; 
+    border-top: 1px solid #fcd68a;  
+    margin: 1em 0; 
+    padding: 0; 
 }
 
 .btn-gray { 
@@ -217,7 +236,7 @@ fieldset[disabled] .btn-dark.active {
     max-width:80%; 
     max-height:80%;
 }
-    
+
 .hidden-html{
     display: none;
 }
@@ -230,4 +249,49 @@ fieldset[disabled] .btn-dark.active {
 .brand-top{
     padding-top: 0px !important;
     margin-top: -13px !important;
+}
+
+.dashboard{
+    height: 100%;
+    overflow-x: auto;
+    display: table;
+}
+
+.table-row{
+    display: table-row;
+}
+
+.category-column{
+    display: table-cell;
+    height: 100%;
+    width: 50px;
+    border-right: solid #4E4E4E;
+    padding: 5px;
+}
+
+.new-category-column{
+    display: table-cell;
+    height: 100%;
+    width: 260px;
+    border-right: solid #4E4E4E;
+    padding: 5px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.add-category-column{
+    display: table-cell;
+    height: 100%;
+    width: 50px;
+    position: relative;
+}
+
+.add-category {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+}
+
+.add-category-button{
+    font-size: 30px !important;
 }

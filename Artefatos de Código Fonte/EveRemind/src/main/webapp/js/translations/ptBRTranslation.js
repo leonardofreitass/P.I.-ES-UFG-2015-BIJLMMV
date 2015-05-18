@@ -49,11 +49,20 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             logout: "Logout realizado!",
             login: "Login realizado!"
         },
+        dashboard: {
+            tooltips: {
+                addCategory: "Adicionar categoria"
+            },
+            addCategory: "Categoria criada!"
+        },
         account: {
             success: "Usuario modificado!",
             passwordSuccess: "Senha modificada!",
+            delete: "Sua conta foi excluida.",
             errors: {
-                auth: "A senha atual está incorreta!"
+                auth: "A senha atual está incorreta!",
+                authDelete: "O email e a senha não correspondem!",
+                notUser: "Este não é o seu endereço de email!"
             }
         },
         general: {

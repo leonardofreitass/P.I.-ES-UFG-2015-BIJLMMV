@@ -56,7 +56,8 @@ public class CategoryDAO {
     public void save(Category category) {
         if (!this.categoryNameAlreadyRegistered(category)) {
             Document categoryDB = new Document("name", category.getName())
-                    .append("color", category.getColor());
+                    .append("color", category.getColor())
+                    .append("_idUser", category.getIdUser());
             this.collection.insertOne(categoryDB);
         }
     }
@@ -69,21 +70,21 @@ public class CategoryDAO {
         }
 
         ObjectId id = (ObjectId) search.get("_id");
-        Category category = new Category(search.getString("name"), search.getString("color"), search.getString("idConta"));
+        Category category = new Category(search.getString("name"), search.getString("color"), search.getString("_idUser"));
         category.setId(id.toString());
         return category;
     }
 
-    public ArrayList<Category> getAll(String idConta) {
+    public ArrayList<Category> getAll(String _idUser) {
         ArrayList<Category> categoryList = new ArrayList<>();
-        Document query = new Document("idConta", idConta);
+        Document query = new Document("_idUser", _idUser);
         FindIterable<Document> search = collection.find(query);
         if (search == null) {
             return null;
         }
         for (Document current : search) {
             ObjectId id = (ObjectId) current.get("_id");
-            Category category = new Category(current.getString("name"), current.getString("color"), current.getString("idConta"));
+            Category category = new Category(current.getString("name"), current.getString("color"), current.getString("_idUser"));
             category.setId(id.toString());
             categoryList.add(category);
         }
@@ -103,8 +104,8 @@ public class CategoryDAO {
     }
 
     public boolean categoryNameAlreadyRegistered(Category category) {
-        Document query = new Document("email", category.getName())
-                .append("idConta", category.getIdConta());
+        Document query = new Document("name", category.getName())
+                .append("_idUser", category.getIdUser());
         Document search = collection.find(query).first();
         return search != null;
     }
