@@ -15,12 +15,12 @@
                 </div>
                 <div class="full-height" ng-style="createStyle(category.color)"></div>
             </div>
-            <div ng-if="!data.adding" class="add-category-column">
+            <div ng-show="!data.adding" class="add-category-column">
                 <div class="close add-category" ng-click="addCategory()" data-toggle="tooltip" data-placement="right" title="{{'dashboard.tooltips.addCategory' | translate}}">
                     <span class="add-category-button glyphicon glyphicon-plus"></span>
                 </div>
             </div>
-            <div ng-if="data.adding" ng-init="loadJQuery()" class="dashboard-column new-category-column" ng-style="data.add.style">
+            <div ng-show="data.adding" class="dashboard-column new-category-column" ng-style="data.add.style">
                 <div class="form-group">
                     <label class="bordered-text">Nome da Categoria</label>
                     <input ng-model="data.add.name" type="text" class="form-control">
