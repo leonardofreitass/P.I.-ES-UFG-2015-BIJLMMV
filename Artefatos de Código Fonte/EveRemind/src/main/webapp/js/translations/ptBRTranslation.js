@@ -38,7 +38,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             errors: {
                 blank: "Preencha todos os campos!",
                 notMatch: "As senhas informadas não são iguais!",
-                registered: "O e-mail informado já foi registrado!"
+                registered: "O e-mail informado já foi registrado!",
+                sameEmail: "O e-mail principal e secundário devem ser diferentes."
             },
             success: "Usuario cadastrado com sucesso!"
         },
@@ -54,7 +55,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 addCategory: "Adicionar categoria de atividades"
             },
             errors: {
-                addCategoryName: "Insira o nome da categoria."
+                addCategoryName: "Insira o nome da categoria.",
+                alreadyRegistered: "Uma categoria com este nome já foi cadastrada!"
             },
             addCategory: "Categoria criada!"
         },
@@ -65,7 +67,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             errors: {
                 auth: "A senha atual está incorreta!",
                 authDelete: "O email e a senha não correspondem!",
-                notUser: "Este não é o seu endereço de email!"
+                notUser: "Este não é o seu endereço de email!",
+                samePassword: "A nova senha informada é a mesma que a senha atual."
             }
         },
         general: {

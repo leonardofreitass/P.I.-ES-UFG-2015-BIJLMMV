@@ -90,13 +90,24 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
     
     
     $scope.saveAddCategory = function(){
+        var name = $scope.data.add.name, color = $scope.data.add.color, id = $scope.$storage.sessionUser._id;
         if ($scope.data.add.name === ""){
             ngNotifier.warning("dashboard.errors.addCategoryName");
             return;
         }
+        $.getJSON("ServletCheckCategory?name=" + name + "&idUser=" + id, {}, function (data) {
+            if (data.registered){
+                ngNotifier.warning("dashboard.errors.alreadyRegistered");
+                return;
+            }
+            setNewCategory(name, color, id);
+        });
+    };
+    
+    var setNewCategory = function(name, color, id){
         $.ajax({
             dataType: "text",
-            url: "ServletCreateCategory?name=" + $scope.data.add.name + "&color=" + $scope.data.add.color + "&idUser=" + $scope.$storage.sessionUser._id,
+            url: "ServletCreateCategory?name=" + name + "&color=" + color + "&idUser=" + id,
             success: function () {
                 $scope.$storage.refreshCategories = true;
                 $scope.$storage.$save();

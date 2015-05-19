@@ -81,6 +81,10 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
             ngNotifier.error("signup.errors.notMatch");
             return;
         }
+        if ($scope.data.newPassword === $scope.data.currentPassword) {
+            ngNotifier.error("account.errors.samePassword");
+            return;
+        }
         $.getJSON("ServletAuthenticate?email=" + email + "&password=" + $scope.data.currentPassword, {}, function (data) {
             if (!data.auth) {
                 ngNotifier.error("account.errors.auth");
@@ -110,6 +114,9 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
             url: "ServletUpdatePassword?email=" + email + "&password=" + $scope.data.newPassword,
             success: function () {
                 ngNotifier.notify("account.passwordSuccess");
+                $scope.data.currentPassword = "";
+                $scope.data.newPassword = "";
+                $scope.data.repeatNewPassword = "";
                 $('#modalPassword').modal('hide');
             }
         });

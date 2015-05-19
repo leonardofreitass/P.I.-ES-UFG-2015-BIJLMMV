@@ -36,6 +36,10 @@
         <servlet-name>ServletGetUserCategories</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletGetUserCategories</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCheckCategory</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletCheckCategory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>ServletGetUserCategories</servlet-name>
         <url-pattern>/ServletGetUserCategories</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCheckCategory</servlet-name>
+        <url-pattern>/ServletCheckCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
