@@ -32,12 +32,12 @@ public class Category {
     private String _id;
     private String name;
     private String color;
-    private String idUser;
+    private String _idUser;
 
-    public Category(String name, String color, String idUser) {
+    public Category(String name, String color, String _idUser) {
         this.name = name;
         this.color = color;
-        this.idUser = idUser;
+        this._idUser = _idUser;
     }
 
     public String getId() {
@@ -65,10 +65,10 @@ public class Category {
     }
 
     public String getIdUser() {
-        return this.idUser;
+        return this._idUser;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setIdUser(String _idUser) {
+        this._idUser = _idUser;
     }
 }

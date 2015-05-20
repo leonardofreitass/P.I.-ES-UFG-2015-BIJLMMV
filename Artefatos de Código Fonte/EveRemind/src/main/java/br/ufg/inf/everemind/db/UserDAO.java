@@ -77,8 +77,11 @@ public class UserDAO {
         }
         
         ObjectId id = (ObjectId) search.get("_id");
-        User user = new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
+        User user = new User(search.getString("fullName"),
+                search.getString("email"),
+                search.getString("secondaryEmail"));
         user.setId(id.toString());
+        
         return user;
     }
 
@@ -90,8 +93,11 @@ public class UserDAO {
         }
 
         ObjectId id = (ObjectId) search.get("_id");
-        User user = new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
+        User user = new User(search.getString("fullName"),
+                search.getString("email"),
+                search.getString("secondaryEmail"));
         user.setId(id.toString());
+        
         return user;
     }
 

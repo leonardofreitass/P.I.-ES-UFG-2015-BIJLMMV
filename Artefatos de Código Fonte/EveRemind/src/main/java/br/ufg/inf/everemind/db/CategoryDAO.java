@@ -62,16 +62,19 @@ public class CategoryDAO {
         }
     }
 
-    public Category getOne(String name) {
-        Document query = new Document("name", name);
+    public Category getOne(String _idUser, String name) {
+        Document query = new Document("idUser", _idUser).append("name", name);
         Document search = collection.find(query).first();
         if (search == null) {
             return null;
         }
 
         ObjectId id = (ObjectId) search.get("_id");
-        Category category = new Category(search.getString("name"), search.getString("color"), search.getString("_idUser"));
+        Category category = new Category(search.getString("name"),
+                search.getString("color"),
+                search.getString("_idUser"));
         category.setId(id.toString());
+                
         return category;
     }
 
@@ -84,7 +87,9 @@ public class CategoryDAO {
         }
         for (Document current : search) {
             ObjectId id = (ObjectId) current.get("_id");
-            Category category = new Category(current.getString("name"), current.getString("color"), current.getString("_idUser"));
+            Category category = new Category(current.getString("name"),
+                    current.getString("color"),
+                    current.getString("_idUser"));
             category.setId(id.toString());
             categoryList.add(category);
         }
