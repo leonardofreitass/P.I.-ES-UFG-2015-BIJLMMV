@@ -12,30 +12,30 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="jumbotron custom-secondary-background-color">
                     <div class="page-header">
-                        <h3>Editar informações da conta</h3>
+                        <h3>{{'account.title' | translate}}</h3>
                     </div>
                     <form>
                         <div class="form-group">
-                            <label>Nome Completo</label>
+                            <label>{{'account.fullName' | translate}}</label>
                             <input ng-model="data.fullName" type="text" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
+                            <label>{{'account.email' | translate}}</label>
                             <input ng-model="data.email" type="email" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Email Secundario</label>
+                            <label>{{'account.secondaryEmail' | translate}}</label>
                             <input ng-model="data.secondaryEmail" type="email" class="form-control">
                         </div>
-                        <button class="btn btn-warning" ng-click="update()">Salvar Modificações</button>
+                        <button class="btn btn-warning" ng-click="update()">{{'account.save' | translate}}</button>
                         <hr class="custom-primary-hr">
                         <div class="form-group">
-                            <label>Senha</label>
+                            <label>{{'account.password' | translate}}</label>
                             <input ng-model="data.password" type="password" class="form-control" disabled>
                         </div>
-                        <button class="btn btn-dark" data-toggle="modal" data-target="#modalPassword">Mudar Senha</button>
+                        <button class="btn btn-dark" data-toggle="modal" data-target="#modalPassword">{{'account.changePassword' | translate}}</button>
                         <hr class="custom-primary-hr">
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">Deletar Conta</button>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">{{'account.deleteAccount' | translate}}</button>
                     </form>
                 </div>
             </div>
@@ -48,25 +48,25 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modificar Senha</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{'account.modalPassword.title' | translate}}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Senha Atual</label>
+                        <label>{{'account.modalPassword.currentPassword' | translate}}</label>
                         <input ng-model="data.currentPassword" type="password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Nova Senha</label>
+                        <label>{{'account.modalPassword.newPassword' | translate}}</label>
                         <input ng-model="data.newPassword" type="password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Repita a Nova Senha</label>
+                        <label>{{'account.modalPassword.repeatNewPassword' | translate}}</label>
                         <input ng-model="data.repeatNewPassword" type="password" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-dark" ng-click="updatePassword()">Salvar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'account.cancel' | translate}}</button>
+                    <button type="button" class="btn btn-dark" ng-click="updatePassword()">{{'account.modalPassword.save' | translate}}</button>
                 </div>
             </div>
         </div>
@@ -76,23 +76,23 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Excluir Conta</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{'account.modalDelete.title' | translate}}</h4>
                 </div>
                 <div class="modal-body">
-                    <h4>Ao excluir sua conta, todas as informações vinculadas à ela serão excluidas também. Se deseja continuar, informe seu email e sua senha abaixo.</h4>
+                    <h4>{{'account.modalDelete.text' | translate}}</h4>
                     <br>
                     <div class="form-group">
-                        <label>Email</label>
+                        <label>{{'account.modalDelete.email' | translate}}</label>
                         <input ng-model="data.delete.email" type="email" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Senha</label>
+                        <label>{{'account.modalDelete.password' | translate}}</label>
                         <input ng-model="data.delete.password" type="password" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" ng-click="deleteUser()">Excluir Conta</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'account.cancel' | translate}}</button>
+                    <button type="button" class="btn btn-danger" ng-click="deleteUser()">{{'account.modalDelete.exclude' | translate}}</button>
                 </div>
             </div>
         </div>

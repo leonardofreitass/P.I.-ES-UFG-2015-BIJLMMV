@@ -22,16 +22,16 @@
             </div>
             <div ng-show="data.adding" class="dashboard-column new-category-column" ng-style="data.add.style">
                 <div class="form-group">
-                    <label class="bordered-text">Nome da Categoria</label>
+                    <label class="bordered-text">{{'dashboard.newCategory.name' | translate }}</label>
                     <input ng-model="data.add.name" type="text" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label class="bordered-text">Cor da Categoria</label>
+                    <label class="bordered-text">{{'dashboard.newCategory.color' | translate }}</label>
                     <br>
                     <input class="spectrum-palette" ng-model="data.add.color" type="text" class="form-control">
                 </div>
-                <button type="button" class="btn btn-default" ng-click="cancelAddCategory()">Cancelar</button>
-                <button type="button" class="btn btn-dark float-right" ng-click="saveAddCategory()">Salvar</button>
+                <button type="button" class="btn btn-default" ng-click="cancelAddCategory()">{{'dashboard.newCategory.cancel' | translate }}</button>
+                <button type="button" class="btn btn-dark float-right" ng-click="saveAddCategory()">{{'dashboard.newCategory.save' | translate }}</button>
             </div>
         </div>
     </div>
