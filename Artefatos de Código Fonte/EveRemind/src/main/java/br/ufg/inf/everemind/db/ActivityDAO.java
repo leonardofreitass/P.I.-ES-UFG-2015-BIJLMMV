@@ -29,7 +29,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -64,9 +63,6 @@ public class ActivityDAO {
                 .append("lastNotificationTime", activity.getLastNotificationTime())
                 .append("nextNotificationTime", activity.getNextNotificationTime());
         this.collection.insertOne(activityDB);
-        ObjectId id = (ObjectId) activityDB.get("_id");
-        activity.setId(id.toString());
-        this.fillIdField(id.toString(), activity);
     }
 
     public Activity getOne(String _id) {
@@ -85,7 +81,7 @@ public class ActivityDAO {
                 search.getBoolean("notificationBehaviour", false),
                 search.getString("lastNotificationTime"),
                 search.getString("nextNotificationTime"));
-        activity.setId(search.getString("_id"));
+        activity.setId(search.getObjectId("_id").toString());
 
         return activity;
     }
@@ -107,7 +103,7 @@ public class ActivityDAO {
                     current.getBoolean("notificationBehaviour", false),
                     current.getString("lastNotificationTime"),
                     current.getString("nextNotificationTime"));
-            activity.setId(current.getString("_id"));
+            activity.setId(current.getObjectId("_id").toString());
             activityList.add(activity);
         }
         return activityList;
@@ -131,20 +127,4 @@ public class ActivityDAO {
                 .append("nextNotificationTime", activity.getNextNotificationTime());
         collection.updateOne(query, new Document("$set", activityDB));
     }
-    
-    public void fillIdField(String _id, Activity activity) {
-        Document query = new Document("_id", _id);
-        Document activityDB = new Document("_id", activity.getId())
-                .append("_idCategory", activity.getIdCategory())
-                .append("name", activity.getName())
-                .append("priority", activity.getPriority())
-                .append("date", activity.getDate())
-                .append("hour", activity.getHour())
-                .append("notes", activity.getNotes())
-                .append("notificationBehaviour", activity.getNotificationBehaviour())
-                .append("lastNotificationTime", activity.getLastNotificationTime())
-                .append("nextNotificationTime", activity.getNextNotificationTime());
-        collection.updateOne(query, new Document("$set", activityDB));
-    }
-
 }

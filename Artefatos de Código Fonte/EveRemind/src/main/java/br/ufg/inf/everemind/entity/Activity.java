@@ -27,6 +27,7 @@ package br.ufg.inf.everemind.entity;
  *
  * @author Igor
  */
+
 public class Activity {
 
     private String _id;
@@ -40,28 +41,6 @@ public class Activity {
     private String lastNotificationTime;
     private String nextNotificationTime;
 
-    public Activity(String _id,
-            String _idCategory,
-            String name,
-            int priority,
-            String date,
-            String hour,
-            String notes,
-            boolean notificationBehaviour,
-            String lastNotificationTime,
-            String nextNotificationTime) {
-        this._id = _id;
-        this._idCategory = _idCategory;
-        this.name = name;
-        this.priority = priority;
-        this.date = date;
-        this.hour = hour;
-        this.notes = notes;
-        this.notificationBehaviour = notificationBehaviour;
-        this.lastNotificationTime = lastNotificationTime;
-        this.nextNotificationTime = nextNotificationTime;
-    }
-
     public Activity(String _idCategory,
             String name,
             int priority,
@@ -71,16 +50,15 @@ public class Activity {
             boolean notificationBehaviour,
             String lastNotificationTime,
             String nextNotificationTime) {
-        this("",
-                _idCategory,
-                name,
-                priority,
-                date,
-                hour,
-                notes,
-                notificationBehaviour,
-                lastNotificationTime,
-                nextNotificationTime);
+        this._idCategory = _idCategory;
+        this.name = name;
+        this.priority = priority;
+        this.date = date;
+        this.hour = hour;
+        this.notes = notes;
+        this.notificationBehaviour = notificationBehaviour;
+        this.lastNotificationTime = lastNotificationTime;
+        this.nextNotificationTime = nextNotificationTime;
     }
 
     public String getId() {

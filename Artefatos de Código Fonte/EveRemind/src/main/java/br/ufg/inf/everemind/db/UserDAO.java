@@ -27,7 +27,6 @@ import br.ufg.inf.everemind.entity.User;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -76,11 +75,10 @@ public class UserDAO {
             return null;
         }
         
-        ObjectId id = (ObjectId) search.get("_id");
         User user = new User(search.getString("fullName"),
                 search.getString("email"),
                 search.getString("secondaryEmail"));
-        user.setId(id.toString());
+        user.setId(search.getObjectId("_id").toString());
         
         return user;
     }
@@ -92,11 +90,10 @@ public class UserDAO {
             return null;
         }
 
-        ObjectId id = (ObjectId) search.get("_id");
         User user = new User(search.getString("fullName"),
                 search.getString("email"),
                 search.getString("secondaryEmail"));
-        user.setId(id.toString());
+        user.setId(search.getObjectId("_id").toString());
         
         return user;
     }
@@ -108,9 +105,8 @@ public class UserDAO {
             return null;
         }
 
-        ObjectId id = (ObjectId) search.get("_id");
         User user = new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
-        user.setId(id.toString());
+        user.setId(search.getObjectId("_id").toString());
         return user;
     }
 
