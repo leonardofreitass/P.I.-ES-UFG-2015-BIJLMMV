@@ -17,9 +17,12 @@
 <script src="${pageContext.request.contextPath}/js/translations/ptBRTranslation.js"></script>
 <script src="${pageContext.request.contextPath}/js/translations/enUSTranslation.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngCtrlDirectives.js"></script>
+<script src="${pageContext.request.contextPath}/js/ngHTMLFilter.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngMasterCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngIndexCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngNavbarCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngSignupCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngAccountCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/ngDashboardCtrl.js"></script>
+<script src="${pageContext.request.contextPath}/js/ngPrimaryEmailVerificationCtrl.js"></script>
+<script src="${pageContext.request.contextPath}/js/ngSecondaryEmailVerificationCtrl.js"></script>

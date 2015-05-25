@@ -40,6 +40,18 @@
         <servlet-name>ServletCheckCategory</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletCheckCategory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCheckToken</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletCheckToken</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletVerifyPrimaryEmail</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletVerifyPrimaryEmail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletVerifySecondaryEmail</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletVerifySecondaryEmail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
@@ -79,6 +91,18 @@
     <servlet-mapping>
         <servlet-name>ServletCheckCategory</servlet-name>
         <url-pattern>/ServletCheckCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCheckToken</servlet-name>
+        <url-pattern>/ServletCheckToken</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVerifyPrimaryEmail</servlet-name>
+        <url-pattern>/ServletVerifyPrimaryEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVerifySecondaryEmail</servlet-name>
+        <url-pattern>/ServletVerifySecondaryEmail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

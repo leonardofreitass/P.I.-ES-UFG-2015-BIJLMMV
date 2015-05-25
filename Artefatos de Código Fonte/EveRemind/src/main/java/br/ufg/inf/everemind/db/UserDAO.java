@@ -56,6 +56,8 @@ public class UserDAO {
             Document userDB = new Document("fullName", user.getFullName())
                     .append("email", user.getEmail())
                     .append("secondaryEmail", user.getSecondaryEmail())
+                    .append("primaryEmailVerified", false)
+                    .append("secondaryEmailVerified", false)
                     .append("hash", user.getHash());
             this.collection.insertOne(userDB);
         }
@@ -77,7 +79,9 @@ public class UserDAO {
         
         User user = new User(search.getString("fullName"),
                 search.getString("email"),
-                search.getString("secondaryEmail"));
+                search.getString("secondaryEmail"),
+                search.getBoolean("primaryEmailVerified"),
+                search.getBoolean("secondaryEmailVerified"));
         user.setId(search.getObjectId("_id").toString());
         
         return user;
@@ -92,7 +96,9 @@ public class UserDAO {
 
         User user = new User(search.getString("fullName"),
                 search.getString("email"),
-                search.getString("secondaryEmail"));
+                search.getString("secondaryEmail"),
+                search.getBoolean("primaryEmailVerified"),
+                search.getBoolean("secondaryEmailVerified"));
         user.setId(search.getObjectId("_id").toString());
         
         return user;
@@ -105,7 +111,11 @@ public class UserDAO {
             return null;
         }
 
-        User user = new User(search.getString("fullName"), search.getString("email"), search.getString("secondaryEmail"));
+        User user = new User(search.getString("fullName"), 
+                search.getString("email"), 
+                search.getString("secondaryEmail"),
+                search.getBoolean("primaryEmailVerified"),
+                search.getBoolean("secondaryEmailVerified"));
         user.setId(search.getObjectId("_id").toString());
         return user;
     }
@@ -115,11 +125,16 @@ public class UserDAO {
         collection.deleteOne(query);
     }
 
-    public void updateInfo(String email, User user) {
+    public void updateInfo(String email, User user, boolean changedEmail, boolean changedSecondaryEmail) {
         Document query = new Document("email", email);
         Document userDB = new Document("fullName", user.getFullName())
                 .append("email", user.getEmail())
                 .append("secondaryEmail", user.getSecondaryEmail());
+        if (changedEmail)
+            userDB.append("primaryEmailVerified", false);
+        
+        if (changedSecondaryEmail)
+            userDB.append("secondaryEmailVerified", false);
         collection.updateOne(query, new Document("$set", userDB));
     }
 
@@ -129,8 +144,26 @@ public class UserDAO {
         collection.updateOne(query, new Document("$set", hashDB));
     }
     
+    public void setPrimaryVerified(String email){
+        Document query = new Document("email", email);
+        Document primaryVerifiedDB = new Document("primaryEmailVerified", true);
+        collection.updateOne(query, new Document("$set", primaryVerifiedDB));
+    }
+    
+    public void setSecondaryVerified(String email){
+        Document query = new Document("secondaryEmail", email);
+        Document primaryVerifiedDB = new Document("secondaryEmailVerified", true);
+        collection.updateOne(query, new Document("$set", primaryVerifiedDB));
+    }
+    
     public boolean hasEmailRegistered(String email){
         Document query = new Document("email", email);
+        Document search = collection.find(query).first();
+        return search != null;
+    }
+    
+    public boolean hasSecondaryEmailRegistered(String email){
+        Document query = new Document("secondaryEmail", email);
         Document search = collection.find(query).first();
         return search != null;
     }

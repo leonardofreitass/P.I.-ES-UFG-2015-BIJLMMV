@@ -20,13 +20,15 @@
                             <input ng-model="data.fullName" type="text" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>{{'account.email' | translate}}</label>
+                            <label>{{'account.email' | translate}}<sup>*</sup></label>
                             <input ng-model="data.email" type="email" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>{{'account.secondaryEmail' | translate}}</label>
+                            <label>{{'account.secondaryEmail' | translate}}<sup>*</sup></label>
                             <input ng-model="data.secondaryEmail" type="email" class="form-control">
                         </div>
+                        <small><sup>*</sup>{{'account.confirmEmail' | translate}}</small>
+                        </br></br>
                         <button class="btn btn-warning" ng-click="update()">{{'account.save' | translate}}</button>
                         <hr class="custom-primary-hr">
                         <div class="form-group">

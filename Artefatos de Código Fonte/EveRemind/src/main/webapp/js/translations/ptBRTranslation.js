@@ -31,7 +31,9 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 index: "Index",
                 signup: "Cadastro",
                 dashboard: "Dashboard",
-                account: "Conta"
+                account: "Conta",
+                primaryEmailVerification: "Verificação de Email",
+                secondaryEmailVerification: "Verificação de Email"
             }
         },
         home: {
@@ -46,10 +48,11 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             textB: "É fácil, prático e rápido!",
             fullName: "Nome Completo",
             email: "Email",
-            secondaryEmail: "Email Secundario",
+            secondaryEmail: "Email Secundário",
             password: "Senha",
             repeatPassword: "Repita a Senha",
             finish: "Finalizar Cadastro",
+            confirmEmail: "A confirmação dos e-mails é necessária para aproveitar integralmente as funcionalidades do nosso sistema.",
             errors: {
                 blank: "Preencha todos os campos!",
                 notMatch: "As senhas informadas não são iguais!",
@@ -71,6 +74,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 password: "Senha",
                 login: "Entrar"
             },
+            verifyPrimary: "Você ainda não fez a confirmação de seu e-mail principal. Faça-a para desfruir totalmente de nossos serviços.",
+            verifySecondary: "Você ainda não fez a confirmação de seu e-mail secundario. Faça-a para desfruir totalmente de nossos serviços.",
             logout: "Logout realizado!",
             login: "Login realizado!"
         },
@@ -90,6 +95,21 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             },
             addCategory: "Categoria criada!"
         },
+        verifyEmail: {
+            primary: {
+                title: "Verificar email principal",
+                email: "Email Principal"
+            },
+            secondary: {
+                title: "Verificar email secundario",
+                email: "Email Secundario"
+            },
+            token: "Código de Verificação",
+            verify: "Verificar",
+            empty: "Preencha todos os campos",
+            checkError: "O email/token não existe ou o email já foi verificado.",
+            finishedVerify: "Email verificado com sucesso!"
+        },
         account: {
             success: "Usuario modificado!",
             passwordSuccess: "Senha modificada!",
@@ -97,12 +117,13 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             title: "Editar informações da conta",
             fullName: "Nome Completo",
             email: "Email",
-            secondaryEmail: "mail Secundario",
+            secondaryEmail: "E-mail Secundario",
             password: "Senha",
             save: "Salvar Modificações",
             changePassword: "Mudar Senha",
             deleteAccount: "Deletar Conta",
             cancel: "Cancelar",
+            confirmEmail: "Modificar o e-mail implica em refazer a verificação.",
             modalPassword: {
                 title: "Modificar Senha",
                 currentPassword: "Senha Atual",

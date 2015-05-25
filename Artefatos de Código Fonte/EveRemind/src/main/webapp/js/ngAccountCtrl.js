@@ -29,6 +29,7 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
     $scope.$storage = $localStorage;
 
     var email = $scope.$storage.sessionUser.email;
+    var secondaryEmail = $scope.$storage.sessionUser.secondaryEmail;
     var newEmail = "";
 
     $scope.data = {
@@ -53,7 +54,7 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
         }
         $.ajax({
             dataType: "text",
-            url: "ServletUpdateUser?originalEmail=" + email + "&email=" + $scope.data.email + "&fullName=" + $scope.data.fullName + "&secondaryEmail=" + $scope.data.secondaryEmail,
+            url: "ServletUpdateUser?originalEmail=" + email + "&originalSecondaryEmail=" + secondaryEmail + "&email=" + $scope.data.email + "&fullName=" + $scope.data.fullName + "&secondaryEmail=" + $scope.data.secondaryEmail,
             success: function () {
                 modifyUserSession();
 

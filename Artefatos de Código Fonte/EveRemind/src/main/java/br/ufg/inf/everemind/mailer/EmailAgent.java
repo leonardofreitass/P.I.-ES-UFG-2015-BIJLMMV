@@ -29,8 +29,53 @@ package br.ufg.inf.everemind.mailer;
  */
 public class EmailAgent {
     
-    public static void sendMessage(String receiver, String subject, String content){
-        Mailer mailer = new Mailer(receiver, subject, content);
+    public final String systemName = "eveRemind";
+    public final String emailSignature = "Atenciosamente,</br></br>" + systemName + " Staff.";
+    
+    public void sendMessage(String receiver, String subject, String content){
+        Mailer mailer = new Mailer(
+                receiver, 
+                systemName + " - " + subject, 
+                content + "</br></br>" + emailSignature);
         new Thread(mailer).start();
+    }
+    
+    public void sendWelcome(String receiver, String name){
+        this.sendMessage(
+                receiver, 
+                "Bem Vindo!", 
+                "Seja bem vindo ao eveRemind, " + name + "!</br></br>" +
+                "Para utilizar todas nossas funcionalidades integralmente, verifique o seu email principal e secundário."
+        );
+    }
+    
+    public void sendToken(String receiver, String name, String token, String path){
+        this.sendMessage(
+                receiver, 
+                "Confirmação de e-mail", 
+                "Caro " + name + ",</br>" +
+                "Seu cadastro no " + systemName + " foi efetuado com sucesso, porém, para desfrutar completamente de nossos serviços é preciso confirmar os e-mails fornecidos.</br>" +
+                "Para confirmar este e-mail, clique no link abaixo:</br>" +
+                "<a href='" + path + "#/verification?email=" + receiver + "&token=" + token + "'>Link de Confirmação</a></br></br>" +
+                "Caso não esteja conseguindo acessar o link, faça os seguintes passos:<br><ol>" +
+                "<li>Acesse esta página: <a href='" + path + "'>Link</a></li>" +
+                "<li>Entre com os seguintes dados:</br><ul><li>Email: " + receiver + "</li><li>Código de Verificação: " + token + "</li></ul></li>" + 
+                "</ol>"
+        );
+    }
+    
+    public void resendToken(String receiver, String name, String token, String path){
+        this.sendMessage(
+                receiver, 
+                "Confirmação de e-mail", 
+                "Caro " + name + ",</br>" +
+                "Você modificou seu email no " + systemName + " e é preciso refazer a confirmação.</br>" +
+                "Para confirmar este e-mail, clique no link abaixo:</br>" +
+                "<a href='" + path + "#/verification?email=" + receiver + "&token=" + token + "'>Link de Confirmação</a></br></br>" +
+                "Caso não esteja conseguindo acessar o link, faça os seguintes passos:<br><ol>" +
+                "<li>Acesse esta página: <a href='" + path + "'>Link</a></li>" +
+                "<li>Entre com os seguintes dados:</br><ul><li>Email: " + receiver + "</li><li>Código de Verificação: " + token + "</li></ul></li>" + 
+                "</ol>"
+        );
     }
 }

@@ -62,6 +62,14 @@ var pagesConfig = {
     account: {
         ctrl: "ngAccountCtrl",
         access: "auth"
+    },
+    primaryEmailVerification: {
+        ctrl: "ngPrimaryEmailVerificationCtrl",
+        access: "both"
+    },
+    secondaryEmailVerification: {
+        ctrl: "ngSecondaryEmailVerificationCtrl",
+        access: "both"
     }
 };
 

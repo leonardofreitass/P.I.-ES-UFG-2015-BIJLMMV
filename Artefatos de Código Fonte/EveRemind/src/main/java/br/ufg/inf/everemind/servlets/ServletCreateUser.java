@@ -23,9 +23,12 @@
  */
 package br.ufg.inf.everemind.servlets;
 
+import br.ufg.inf.everemind.db.TokenDAO;
 import br.ufg.inf.everemind.util.Hash;
 import br.ufg.inf.everemind.db.UserDAO;
 import br.ufg.inf.everemind.entity.User;
+import br.ufg.inf.everemind.mailer.EmailAgent;
+import br.ufg.inf.everemind.util.Token;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -56,12 +59,25 @@ public class ServletCreateUser extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             UserDAO userDao = UserDAO.getInstance();
+            TokenDAO tokenDao = TokenDAO.getInstance();
             Hash hash = new Hash();
+            Token token = new Token();
+            EmailAgent ea = new EmailAgent();
+            String url = request.getRequestURL().toString();
+            String path = url.substring(0, url.lastIndexOf("/") + 1);
             String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
             String secondaryEmail = request.getParameter("secondaryEmail");
             String password = request.getParameter("password");
             userDao.save(new User(fullName, email, secondaryEmail, hash.getHash(password)));
+            String primaryToken = token.generate();
+            String secondaryToken = token.generate();
+            tokenDao.bindToken(email, primaryToken);
+            tokenDao.bindToken(secondaryEmail, secondaryToken);
+            ea.sendWelcome(email, fullName);
+            ea.sendToken(email, fullName, primaryToken, path + "primaryEmailVerification.jsp");
+            ea.sendWelcome(secondaryEmail, fullName);
+            ea.sendToken(secondaryEmail, fullName, secondaryToken, path + "secondaryEmailVerification.jsp");
             out.flush();
             
         }

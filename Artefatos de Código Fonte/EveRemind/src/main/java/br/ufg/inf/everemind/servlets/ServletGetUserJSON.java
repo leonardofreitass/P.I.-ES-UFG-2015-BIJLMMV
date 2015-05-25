@@ -63,6 +63,8 @@ public class ServletGetUserJSON extends HttpServlet {
             JSON.put("fullName", user.getFullName()); 
             JSON.put("email", user.getEmail()); 
             JSON.put("secondaryEmail", user.getSecondaryEmail()); 
+            JSON.put("verifiedPrimaryEmail", user.isPrimaryEmailVerified()); 
+            JSON.put("verifiedSecondaryEmail", user.isSecondaryEmailVerified()); 
             out.print(JSON);
             out.flush();
             

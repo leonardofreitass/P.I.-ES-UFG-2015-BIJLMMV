@@ -20,11 +20,11 @@
                             <input ng-model="data.fullName" type="text" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>{{'signup.email' | translate}}</label>
+                            <label>{{'signup.email' | translate}}<sup>*</sup></label>
                             <input ng-model="data.email" type="email" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>{{'signup.secondaryEmail' | translate}}</label>
+                            <label>{{'signup.secondaryEmail' | translate}}<sup>*</sup></label>
                             <input ng-model="data.secondaryEmail" type="email" class="form-control">
                         </div>
                         <div class="form-group">
@@ -35,6 +35,8 @@
                             <label>{{'signup.repeatPassword' | translate}}</label>
                             <input ng-model="data.passwordAgain" type="password" class="form-control">
                         </div>
+                        <small><sup>*</sup>{{'signup.confirmEmail' | translate}}</small>
+                        </br></br>
                         <button class="btn btn-warning" ng-click="signup()">{{'signup.finish' | translate}}</button>
                     </form>
                 </div>

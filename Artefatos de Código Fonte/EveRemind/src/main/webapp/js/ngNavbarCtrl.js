@@ -75,7 +75,12 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
     
     var setUserSession = function(json){
         $scope.$storage.sessionUser = json;
-        $scope.$storage.pendingMessage = {msg: "navbar.login", msgType: "notify"};
+        if (!json.verifiedPrimaryEmail)
+            $scope.$storage.pendingMessage = {msg: "navbar.verifyPrimary", msgType: "warning"};
+        else if (!json.verifiedSecondaryEmail)
+            $scope.$storage.pendingMessage = {msg: "navbar.verifySecondary", msgType: "warning"};
+        else
+            $scope.$storage.pendingMessage = {msg: "navbar.login", msgType: "notify"};
         $scope.$storage.$save();
         window.location.href = "dashboard.jsp";
     };

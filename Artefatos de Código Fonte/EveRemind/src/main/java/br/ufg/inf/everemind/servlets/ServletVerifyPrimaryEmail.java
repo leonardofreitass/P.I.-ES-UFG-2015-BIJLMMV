@@ -26,7 +26,7 @@ package br.ufg.inf.everemind.servlets;
 import br.ufg.inf.everemind.db.TokenDAO;
 import br.ufg.inf.everemind.db.UserDAO;
 import br.ufg.inf.everemind.entity.User;
-import br.ufg.inf.everemind.mailer.EmailAgent;
+import br.ufg.inf.everemind.util.Hash;
 import br.ufg.inf.everemind.util.Token;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,7 +39,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Leonardo
  */
-public class ServletUpdateUser extends HttpServlet {
+public class ServletVerifyPrimaryEmail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,38 +52,16 @@ public class ServletUpdateUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try (PrintWriter out = response.getWriter()) {
             
             UserDAO userDao = UserDAO.getInstance();
             TokenDAO tokenDao = TokenDAO.getInstance();
-            EmailAgent ea = new EmailAgent();
-            Token token = new Token();
-            String url = request.getRequestURL().toString();
-            String path = url.substring(0, url.lastIndexOf("/") + 1);
-            String originalEmail = request.getParameter("originalEmail");
-            String originalSecondaryEmail = request.getParameter("originalSecondaryEmail");
-            String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
-            String secondaryEmail = request.getParameter("secondaryEmail");
-            boolean changedEmail = !email.equals(originalEmail), changedSecondaryEmail = !secondaryEmail.equals(originalSecondaryEmail);
-            if (changedEmail){
-                String tokenPrimary = token.generate();
-                tokenDao.bindToken(email, tokenPrimary);
-                tokenDao.removeBind(originalEmail);
-                ea.resendToken(email, fullName, tokenPrimary, path + "primaryEmailVerification.jsp");
-            }
-            if (changedSecondaryEmail){
-                String tokenSecondary = token.generate();
-                tokenDao.bindToken(secondaryEmail, tokenSecondary);
-                tokenDao.removeBind(originalSecondaryEmail);
-                ea.resendToken(secondaryEmail, fullName, tokenSecondary, path + "secondaryEmailVerification.jsp");
-            }
-            userDao.updateInfo(originalEmail, new User(fullName, email, secondaryEmail), changedEmail, changedSecondaryEmail);
+            userDao.setPrimaryVerified(email);
+            tokenDao.removeBind(email);
             out.flush();
-            
         }
     }
 

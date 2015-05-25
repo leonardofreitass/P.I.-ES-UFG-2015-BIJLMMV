@@ -35,11 +35,21 @@ public class User {
     private String email;
     private String secondaryEmail;
     private String hash;
+    private boolean primaryEmailVerified;
+    private boolean secondaryEmailVerified;
 
     public User(String fullName, String email, String secondaryEmail) {
         this.fullName = fullName;
         this.email = email;
         this.secondaryEmail = secondaryEmail;
+    }
+    
+    public User(String fullName, String email, String secondaryEmail, boolean primaryVerified, boolean secondaryVerified) {
+        this.fullName = fullName;
+        this.email = email;
+        this.secondaryEmail = secondaryEmail;
+        this.primaryEmailVerified = primaryVerified;
+        this.secondaryEmailVerified = secondaryVerified;
     }
 
     public User(String fullName, String email, String secondaryEmail, String hash) {
@@ -88,4 +98,22 @@ public class User {
     public void setHash(String hash) {
         this.hash = hash;
     }
+
+    public boolean isPrimaryEmailVerified() {
+        return primaryEmailVerified;
+    }
+
+    public void setPrimaryEmailVerified(boolean primaryEmailVerified) {
+        this.primaryEmailVerified = primaryEmailVerified;
+    }
+
+    public boolean isSecondaryEmailVerified() {
+        return secondaryEmailVerified;
+    }
+
+    public void setSecondaryEmailVerified(boolean secondaryEmailVerified) {
+        this.secondaryEmailVerified = secondaryEmailVerified;
+    }
+    
+    
 }
