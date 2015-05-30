@@ -93,13 +93,13 @@ public class CategoryDAO {
         return categoryList;
     }
 
-    public void delete(String name) {
-        Document query = new Document("name", name);
+    public void delete(String name, String _idUser) {
+        Document query = new Document("name", name).append("_idUser", _idUser);
         collection.deleteOne(query);
     }
 
     public void updateInfo(String name, Category category) {
-        Document query = new Document("name", name);
+        Document query = new Document("name", name).append("_idUser", category.getIdUser());
         Document categoryDB = new Document("name", category.getName())
                 .append("color", category.getColor());
         collection.updateOne(query, new Document("$set", categoryDB));

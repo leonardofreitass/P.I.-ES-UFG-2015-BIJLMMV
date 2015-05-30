@@ -29,11 +29,21 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
 
     $scope.data = {
         adding: false,
+        editing: -1,
+        deleting: -1,
+        modalData: {},
         add: {
             name: "",
             color: "rgb(255, 255, 255)",
             style: {
                 'background-color': '#FFFFFF'
+            }
+        },
+        edit: {
+            name: "",
+            color: "",
+            style: {
+                'background-color': ""
             }
         },
         categories: []
@@ -43,12 +53,28 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         return {'background-color': color};
     };
     
+    $scope.getCategoryColor = function(index){
+        if ($scope.data.editing !== index)
+            return {'background-color': $scope.data.categories[index].color};
+        else
+            return {'background-color': $scope.data.edit.color};
+    };
+    
     $scope.$watch(
         function() { 
             return $scope.data.add.color; 
         }, 
         function() {
             $scope.data.add.style = {'background-color': $scope.data.add.color};
+        }
+    );
+    
+    $scope.$watch(
+        function() { 
+            return $scope.data.edit.color; 
+        }, 
+        function() {
+            $scope.data.edit.style = {'background-color': $scope.data.edit.color};
         }
     );
 
@@ -118,11 +144,64 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         });
     };
     
+    $scope.editCategory = function(index){
+        var name = $scope.data.edit.name, color = $scope.data.edit.color, id = $scope.$storage.sessionUser._id;
+        if ($scope.data.edit.name === ""){
+            ngNotifier.warning("dashboard.errors.addCategoryName");
+            return;
+        }
+        if ($scope.data.categories[index].name !== name){
+            $.getJSON("ServletCheckCategory?name=" + name + "&idUser=" + id, {}, function (data) {
+                if (data.registered){
+                    ngNotifier.warning("dashboard.errors.alreadyRegistered");
+                    return;
+                }
+                updateCategory(index, name, color, id);
+            });
+        }
+        else{
+            updateCategory(index, name, color, id);
+        }
+    };
+    
+    var updateCategory = function(index, name, color, id){
+        var originalName = $scope.data.categories[index].name;
+        $.ajax({
+            dataType: "text",
+            url: "ServletUpdateCategory?originalName=" + originalName + "&name=" + name + "&color=" + color + "&idUser=" + id,
+            success: function () {
+                $scope.$storage.refreshCategories = true;
+                $scope.$storage.$save();
+                $scope.$apply();
+                ngNotifier.notify("dashboard.editCategoryMsg");
+            }
+        });
+    };
+    
+    $scope.deleteCategory = function(){
+        var name = $scope.data.categories[$scope.data.deleting].name, id = $scope.$storage.sessionUser._id;
+        $.ajax({
+            dataType: "text",
+            url: "ServletDeleteCategory?&name=" + name + "&idUser=" + id,
+            success: function () {
+                $scope.$storage.refreshCategories = true;
+                $scope.$storage.$save();
+                $scope.$apply();
+                $('#modalDelete').modal('hide');
+                ngNotifier.notify("dashboard.deleteCategoryMsg");
+            }
+        });
+    };
+    
     $scope.isMaximized = function(index){
         if (!$scope.data.categories[index].minimized)
             return true;
         
         if ($scope.data.categories[index].hovering){
+            return true;
+        }
+        
+        if ($scope.data.editing === index){
             return true;
         }
         
@@ -140,10 +219,28 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         $scope.data.categories[index].hovering = false;
     };
     
+    $scope.openEditing = function(index){
+        if ($scope.data.editing === index){
+            $scope.data.editing = -1;
+        }
+        else if ($scope.data.editing === -1){
+            $scope.data.editing = index;
+            $scope.data.edit.name = $scope.data.categories[index].name;
+            $scope.data.edit.color = $scope.data.categories[index].color;
+            $("#editColor" + index).spectrum("set", $scope.data.categories[index].color);
+        }
+        else{
+            ngNotifier.error("dashboard.errors.editingCategory");
+        }
+    };
+    
+    $scope.openDeleting = function(index){
+        $scope.data.deleting = index;
+        $scope.data.modalData = {category: $scope.data.categories[index].name}
+    };
 
     $scope.addCategory = function () {
         $scope.data.adding = true;
-        loadJQuery();
     };
     
     $scope.loadJQuery = function(){
@@ -152,6 +249,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
     
     var updateCategories = function(data){
         $scope.data.categories = data;
+        $scope.data.editing = -1;
         $scope.$apply();
     };
 });

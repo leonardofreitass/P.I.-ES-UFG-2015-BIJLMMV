@@ -86,14 +86,29 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 cancel: "Cancelar",
                 save: "Salvar"
             },
+            editCategory: {
+                name: "Novo Nome da Categoria",
+                color: "Nova Cor da Categoria",
+                cancel: "Cancelar",
+                save: "Salvar"
+            },
+            deleteCategory: {
+                cancel: "Cancelar",
+                doDelete: "Excluir",
+                modalTitle: "Excluindo a categoria <strong>{{category}}</strong>",
+                modalText: "Ao excluir a categoria <strong>{{category}}</strong> você excluirá tambem todas as atividades cadastradas nesta categoria, deseja mesmo excluir?"
+            },
             tooltips: {
                 addCategory: "Adicionar categoria de atividades"
             },
             errors: {
                 addCategoryName: "Insira o nome da categoria.",
-                alreadyRegistered: "Uma categoria com este nome já foi cadastrada!"
+                alreadyRegistered: "Uma categoria com este nome já foi cadastrada!",
+                editingCategory: "Termine de editar uma categoria antes de começar a editar outra."
             },
-            addCategory: "Categoria criada!"
+            addCategory: "Categoria criada!",
+            editCategoryMsg: "Categoria editada!",
+            deleteCategoryMsg: "Categoria excluída!"
         },
         verifyEmail: {
             primary: {

@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2015 Igor.
+ * Copyright 2015 Leonardo.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,9 +34,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Igor
+ * @author Leonardo
  */
-public class ServletCreateCategory extends HttpServlet {
+public class ServletUpdateCategory extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,17 +49,15 @@ public class ServletCreateCategory extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
-
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             CategoryDAO categoryDao = CategoryDAO.getInstance();
+            String originalName = request.getParameter("originalName");
             String name = request.getParameter("name");
             String color = request.getParameter("color");
             String idUser = request.getParameter("idUser");
-            categoryDao.save(new Category(name, color, idUser));
-            out.flush();
-
+            categoryDao.updateInfo(originalName, new Category(name, color, idUser));
         }
     }
 
