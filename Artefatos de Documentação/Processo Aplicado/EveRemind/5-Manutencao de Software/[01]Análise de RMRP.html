@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Análise de RMRP</title>
+</head>
+<body>
+<h1>Análise de RMRP - Byte INC.</h1>
+<h7>
+Breno Fernandes Daniel de Carvalho<br />
+Igor Moura Brandão<br />
+Johnnathan Gomes Lima<br />
+Leonardo Freitas dos Santos<br />
+Matheus Henrique Lima<br />
+Moisés Hilário Rodrigues<br />
+Vinicius Carvalho Machado<br />
+</h7>
+
+<h2>Referência à RM/RP</h2>
+<p>
+[01]RMRP - SAR01
+<p>
+
+<h2>Tipo da Modificação</h2>
+<p>
+Perfectiva.
+<p>
+
+<h2>Análise de Impacto</h2>
+<p>
+Um novo requisito funcional será criado e haverá alteração no código-fonte. Essa alteração visa prover a funcionalidade de recuperar senha via e-mail secundário para o usuário.
+<p>
+
+<h3>Impacto aos Usuários</h3>
+<p>
+Mais notificações via e-mail deverão ser enviadas nas ocasiões explicitadas. As funções de notificação e recuperação de senha não funcionarão até que os endereços primário e secundário, respectivamente, sejam verificados.
+<p>
+
+<h3>Implicações/Limitações</h3>
+<p>
+Após a implementação da mudança, o usuário terá mais segurança pois terá a certeza que poderá recuperar a sua senha caso a esqueça. Porém para isso há a limitação que o usuário ao se cadastrar deverá entrar em duas contas de e-mails diferentes para validar a sua conta. 
+<p>
+
+<h2>Estimativa de Esforço</h2>
+<p>
+Uma pessoa daa equipe de desenvolvimento em 3 horas de trabalho.
+<p>
+
+<h2>Estimativa de Benefícios</h2>
+<p>
+O produto terá uma funcionalidade a mais. Fora isso, evitaremos que no futuro pessoas que percam a senha simplesmente criem outra conta, que aumentaria a carga no banco de dados desnecessariamente.
+<p>
+
+<h2>Opções de Implementação</h2>
+<p>
+1- Modificar o existente exigindo um segundo e-mail e enviando o mesmo linnk de confirmação para ambos.<br />
+2- Deixar a opção para o usuário poder escolher se quer ou não a funcionalidade de recuperar senha.<br />
+3- Exigir o segundo e-mail apenas depois do primeiro ter sido validado.
+<p>
+
+<h2>Plano de Prevenção e Mitigação dos Riscos </h2>
+<p>
+Outra funcionalidade não funcionar corretamente após a mudança - Fazer testes novamente para ter certeza do estado do produto.<br />
+Usuário colocar um e-mail qualquer - Só criar a conta mediante connfirmação dupla dos e-mails.
+<p>
+</body>
+</html>
