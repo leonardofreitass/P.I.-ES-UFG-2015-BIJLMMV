@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Análise de RMRP</title>
+</head>
+<body>
+<h1>Análise de RMRP - Byte INC.</h1>
+<h7>
+Breno Fernandes Daniel de Carvalho<br />
+Igor Moura Brandão<br />
+Johnnathan Gomes Lima<br />
+Leonardo Freitas dos Santos<br />
+Matheus Henrique Lima<br />
+Moisés Hilário Rodrigues<br />
+Vinicius Carvalho Machado<br />
+</h7>
+
+<h2>Referência à RM/RP</h2>
+<p>
+[02]RMRP - SAR02
+<p>
+
+<h2>Tipo da Modificação</h2>
+<p>
+Preventiva.
+<p>
+
+<h2>Análise de Impacto</h2>
+<p>
+Um endereço de e-mail assim como a senha da conta podem ser perdidos, por inúmeros motivos. Para isso essa mudança se faz necessária para evitar duplicidade de contas no banco de dados.
+<p>
+
+<h3>Impacto aos Usuários</h3>
+<p>
+Usuário deverá passar por todo o processo de cadastro e verificação de e-mail quando precisar modificar algum e-mail cadastrado na conta.
+<p>
+
+<h3>Implicações/Limitações</h3>
+<p>
+Sempre que o endereço de e-mail primário e/ou secundário for modificado, o sistema enviará uma nova mensagem com uma ligação (link) de verificação para o (s) novo (s) endereço (s) eletrônico (s). Somente quando o (s) link (s) for (em) visitado (s), a (s) funcionalidade (s) associada (s) com a verificação deste (s) poderá (ão) ser utilizada (s).
+<p>
+
+<h2>Estimativa de Esforço</h2>
+<p>
+Uma pessoa daa equipe de desenvolvimento em 3 horas de trabalho.
+<p>
+
+<h2>Estimativa de Benefícios</h2>
+<p>
+O produto ficará mais completo em termos de modificação de conta, pois o usuário terá a liberdade de modificar qualquer campo após a criação da conta.
+<p>
+
+<h2>Opções de Implementação</h2>
+<p>
+1- Modificar a permissão de troca de e-mails.<br />
+2- Permitir a troca de e-mails apenas de tempos em tempos (meses em meses).<br />
+<p>
+
+<h2>Plano de Prevenção e Mitigação dos Riscos </h2>
+<p>
+Mudança de e-mail não muda o login - Observar que ao trocar e-mail primário também deve-se trocar o login do usuário.<br />
+Usuário colocar um e-mail qualquer - Só modificar a conta mediante connfirmação dupla dos e-mails novamente.
+<p>
+</body>
+</html>
