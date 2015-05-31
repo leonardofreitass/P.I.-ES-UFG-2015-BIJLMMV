@@ -45,11 +45,27 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
             password: ""
         }
     };
+    
+    $scope.forms = {
+        
+    };
 
     $scope.update = function () {
         newEmail = $scope.data.email;
         if ($scope.data.email === "" || $scope.data.secondaryEmail === "" || $scope.data.fullName === "") {
-            ngNotifier.error("signup.errors.blank");
+            ngNotifier.error("account.errors.required");
+            return;
+        }
+        if ($scope.forms.accountForm.inputEmail.$error.email){
+            ngNotifier.error("account.errors.notAnEmail");
+            return;
+        }
+        if ($scope.forms.accountForm.inputSecondaryEmail.$error.email){
+            ngNotifier.error("account.errors.notASecondaryEmail");
+            return;
+        }
+        if ($scope.data.email === $scope.data.secondaryEmail){
+            ngNotifier.error("account.errors.sameEmail");
             return;
         }
         $.ajax({

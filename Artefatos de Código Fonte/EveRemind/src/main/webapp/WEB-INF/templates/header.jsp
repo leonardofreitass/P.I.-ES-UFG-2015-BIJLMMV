@@ -35,14 +35,14 @@
                         <li><a ng-click="logout()" href="">{{'navbar.menu.exit' | translate}}</a></li>
                     </ul>
                 </li>
-                <form class="navbar-form" ng-if="!isLogged()">
+                <form name="forms.loginForm" class="navbar-form" ng-if="!isLogged()" novalidate>
                     <div class="form-group">
                         <label for="nameLogin">{{'navbar.menu.email' | translate}}</label>
-                        <input ng-model="data.email" type="email" class="form-control" id="nameLogin">
+                        <input ng-model="data.email" type="email" class="form-control" name="inputLogin" id="nameLogin" required>
                     </div>
                     <div class="form-group">
                         <label for="passwordLogin">{{'navbar.menu.password' | translate}}</label>
-                        <input ng-model="data.password" type="password" class="form-control" id="passwordLogin">
+                        <input ng-model="data.password" type="password" class="form-control" name="inputPassword" id="passwordLogin" required>
                     </div>
                     <button type="submit" class="btn btn-dark" ng-click="login()">{{'navbar.menu.login' | translate}}</button>
                 </form>

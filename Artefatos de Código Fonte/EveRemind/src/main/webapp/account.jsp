@@ -14,18 +14,18 @@
                     <div class="page-header">
                         <h3>{{'account.title' | translate}}</h3>
                     </div>
-                    <form>
+                    <form name="forms.accountForm" novalidate>
                         <div class="form-group">
                             <label>{{'account.fullName' | translate}}</label>
                             <input ng-model="data.fullName" type="text" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>{{'account.email' | translate}}<sup>*</sup></label>
-                            <input ng-model="data.email" type="email" class="form-control">
+                            <input name="inputEmail" ng-model="data.email" type="email" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>{{'account.secondaryEmail' | translate}}<sup>*</sup></label>
-                            <input ng-model="data.secondaryEmail" type="email" class="form-control">
+                            <input name="inputSecondaryEmail" ng-model="data.secondaryEmail" type="email" class="form-control">
                         </div>
                         <small><sup>*</sup>{{'account.confirmEmail' | translate}}</small>
                         </br></br>

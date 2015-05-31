@@ -54,16 +54,22 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             finish: "Finalizar Cadastro",
             confirmEmail: "A confirmação dos e-mails é necessária para aproveitar integralmente as funcionalidades do nosso sistema.",
             errors: {
-                blank: "Preencha todos os campos!",
-                notMatch: "As senhas informadas não são iguais!",
-                registered: "O e-mail informado já foi registrado!",
-                sameEmail: "O e-mail principal e secundário devem ser diferentes."
+                required: "Preencha todos os campos.",
+                notMatch: "A duplicação de senhas não corresponde.",
+                registered: "O e-mail informado já foi registrado.",
+                sameEmail: "O e-mail principal e secundário devem ser diferentes.",
+                passwordLength: "A senha deve possuir entre 6 e 20 caracteres.",
+                notAnEmail: "O e-mail informado náo é válido.",
+                notASecondaryEmail: "O e-mail secundário informado náo é válido."
             },
             success: "Usuario cadastrado com sucesso!"
         },
         navbar: {
             errors: {
-                auth: "E-mail e senha informados não correspondem!"
+                auth: "E-mail e senha informados não correspondem!",
+                requiredEmail: "Informe seu e-mail.",
+                requiredPassword: "Informe sua senha.",
+                notAnEmail: "O e-mail informado náo é válido."
             },
             menu: {
                 colapsedMenu: "Abrir Navegação",
@@ -154,10 +160,14 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 exclude: "Excluir Conta"
             },
             errors: {
+                required: "Preencha todos os campos.",
                 auth: "A senha atual está incorreta!",
                 authDelete: "O email e a senha não correspondem!",
                 notUser: "Este não é o seu endereço de email!",
-                samePassword: "A nova senha informada é a mesma que a senha atual."
+                samePassword: "A nova senha informada é a mesma que a senha atual.",
+                sameEmail: "O e-mail principal e secundário devem ser diferentes.",
+                notAnEmail: "O e-mail informado náo é válido.",
+                notASecondaryEmail: "O e-mail secundário informado náo é válido."
             }
         },
         general: {

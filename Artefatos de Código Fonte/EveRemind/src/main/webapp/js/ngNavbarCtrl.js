@@ -36,6 +36,10 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
         password: ""
     };
     
+    $scope.forms = {
+        
+    };
+    
     var email = "";
     
     $scope.isLogged = function(){
@@ -51,6 +55,18 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
     
     $scope.login = function(){
         email = $scope.data.email;
+        if ($scope.forms.loginForm.inputLogin.$error.required){
+            ngNotifier.error("navbar.errors.requiredEmail");
+            return;
+        }
+        if ($scope.forms.loginForm.inputLogin.$error.email){
+            ngNotifier.error("navbar.errors.notAnEmail");
+            return;
+        }
+        if ($scope.forms.loginForm.inputPassword.$error.required){
+            ngNotifier.error("navbar.errors.requiredPassword");
+            return;
+        }
         $.getJSON("ServletAuthenticate?email=" + $scope.data.email + "&password=" + $scope.data.password, {}, function (data) {
             if (!data.auth) {
                 ngNotifier.error("navbar.errors.auth");

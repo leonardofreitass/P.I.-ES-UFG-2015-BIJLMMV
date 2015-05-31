@@ -34,18 +34,34 @@ angular.module('everemindApp').controller('ngSignupCtrl', function ($scope, ngNo
         passwordAgain: "",
         fullName: ""
     };
+    
+    $scope.forms = {
+        
+    };
 
     $scope.signup = function () {
-        if ($scope.data.email === "" || $scope.data.secondaryEmail === "" || $scope.data.password === "" || $scope.data.passwordAgain === "" || $scope.data.fullName === "") {
-            ngNotifier.error("signup.errors.blank");
+        if ($scope.forms.signupForm.$error.required) {
+            ngNotifier.error("signup.errors.required");
+            return;
+        }
+        if ($scope.forms.signupForm.inputEmail.$error.email){
+            ngNotifier.error("signup.errors.notAnEmail");
+            return;
+        }
+        if ($scope.forms.signupForm.inputSecondaryEmail.$error.email){
+            ngNotifier.error("signup.errors.notASecondaryEmail");
+            return;
+        }
+        if ($scope.data.email === $scope.data.secondaryEmail){
+            ngNotifier.error("signup.errors.sameEmail");
             return;
         }
         if ($scope.data.password !== $scope.data.passwordAgain) {
             ngNotifier.error("signup.errors.notMatch");
             return;
         }
-        if ($scope.data.email === $scope.data.secondaryEmail){
-            ngNotifier.error("signup.errors.sameEmail");
+        if ($scope.forms.signupForm.$error.minlength || $scope.forms.signupForm.$error.maxlength){
+            ngNotifier.error("signup.errors.passwordLength");
             return;
         }
         $.getJSON("ServletCheckEmail?email=" + $scope.data.email, {}, function (data) {
