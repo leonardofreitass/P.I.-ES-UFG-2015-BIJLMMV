@@ -243,10 +243,6 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         $scope.data.adding = true;
     };
     
-    $scope.loadJQuery = function(){
-        loadJQuery();
-    };
-    
     var updateCategories = function(data){
         $scope.data.categories = data;
         $scope.data.editing = -1;

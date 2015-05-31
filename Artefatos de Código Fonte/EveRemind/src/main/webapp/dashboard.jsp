@@ -14,15 +14,15 @@
                     <label class="cursor-pointer">{{category.name}}</label>
                 </div>
                 <div class="full-height" ng-style="getCategoryColor($index)">
-                    <div ng-show="isMaximized($index)" ng-init='loadJQuery()'>
+                    <div ng-show="isMaximized($index)">
                         <div ng-show="data.editing !== $index" class="row">
                             <div class="col-md-6 no-right-padding">
-                                <button type="button" class="btn btn-dark" ng-click="openEditing($index)">
+                                <button bs-dynamic-tooltip="{title: 'dashboard.tooltips.editCategory'}" type="button" class="btn btn-dark full-button" ng-click="openEditing($index)">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
                             </div>
                             <div class="col-md-6 no-left-padding">
-                                <button type="button" class="btn btn-dark" ng-click="openDeleting($index)" data-toggle="modal" data-target="#modalDelete">
+                                <button bs-dynamic-tooltip="{title: 'dashboard.tooltips.deleteCategory'}" type="button" class="btn btn-dark full-button" ng-click="openDeleting($index)" data-toggle="modal" data-target="#modalDelete">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
                             </div>
@@ -35,16 +35,20 @@
                             <div class="form-group">
                                 <label class="bordered-text">{{'dashboard.editCategory.color' | translate }}</label>
                                 <br>
-                                <input ng-attr-id="{{'editColor' + $index}}" class="spectrum-palette" ng-model="data.edit.color" type="text" class="form-control">
+                                <input sp-palette ng-attr-id="{{'editColor' + $index}}" class="spectrum-palette" ng-model="data.edit.color" type="text" class="form-control">
                             </div>
                             <button type="button" class="btn btn-default" ng-click="openEditing($index)">{{'dashboard.editCategory.cancel' | translate }}</button>
                             <button type="button" class="btn btn-dark float-right" ng-click="editCategory($index)">{{'dashboard.editCategory.save' | translate }}</button>
+                        </div>
+                        <br>
+                        <div class="close float-none close-color-override add-activity" ng-click="addCategory()" bs-dynamic-tooltip="{title: 'dashboard.tooltips.addActivity'}">
+                            <span class="add-activity-button glyphicon glyphicon-plus"></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div ng-show="!data.adding" class="add-category-column">
-                <div class="close close-color-override add-category" ng-click="addCategory()" data-toggle="tooltip" data-placement="right" title="{{'dashboard.tooltips.addCategory' | translate}}">
+                <div class="close close-color-override add-category" ng-click="addCategory()" bs-dynamic-tooltip="{title: 'dashboard.tooltips.addCategory', placement: 'right'}">
                     <span class="add-category-button glyphicon glyphicon-plus"></span>
                 </div>
             </div>
@@ -56,7 +60,7 @@
                 <div class="form-group">
                     <label class="bordered-text">{{'dashboard.newCategory.color' | translate }}</label>
                     <br>
-                    <input ng-init="loadJQuery()" class="spectrum-palette" ng-model="data.add.color" type="text" class="form-control">
+                    <input sp-palette class="spectrum-palette" ng-model="data.add.color" type="text" class="form-control">
                 </div>
                 <button type="button" class="btn btn-default" ng-click="cancelAddCategory()">{{'dashboard.newCategory.cancel' | translate }}</button>
                 <button type="button" class="btn btn-dark float-right" ng-click="saveAddCategory()">{{'dashboard.newCategory.save' | translate }}</button>

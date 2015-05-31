@@ -105,7 +105,10 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 modalText: "Ao excluir a categoria <strong>{{category}}</strong> você excluirá tambem todas as atividades cadastradas nesta categoria, deseja mesmo excluir?"
             },
             tooltips: {
-                addCategory: "Adicionar categoria de atividades"
+                addCategory: "Adicionar categoria de atividades",
+                editCategory: "Editar categoria",
+                deleteCategory: "Excluir categoria",
+                addActivity: "Adicionar uma nova atividade"
             },
             errors: {
                 addCategoryName: "Insira o nome da categoria.",

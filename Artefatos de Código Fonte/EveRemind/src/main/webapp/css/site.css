@@ -387,3 +387,31 @@ fieldset[disabled] .btn-dark.active {
 .no-left-padding{
     padding-left: 0px;
 }
+
+.full-button{
+    width: 100%;
+}
+
+.float-none{
+    float: none;
+}
+
+.add-activity {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    padding-left: 11px;
+    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-right: 10px;
+    border: solid 3px #808080;
+    margin-left: 56px;
+}
+
+.add-activitybutton{
+    font-size: 20px !important;
+}
+
+.center{
+    text-align: center;
+}
