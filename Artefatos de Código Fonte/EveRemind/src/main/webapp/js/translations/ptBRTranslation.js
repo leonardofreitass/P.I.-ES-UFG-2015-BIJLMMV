@@ -129,10 +129,10 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 deleteCategory: "Excluir categoria",
                 addActivity: "Adicionar uma nova atividade",
                 priorityHelpTitle: "A escolha de prioridade afeta o comportamento da notificação da seguinte forma:",
-                priorityHelp: "<strong class='span-primary'>Baixa:</strong> E-mail enviado semanalmente, a 1 dia e 1 hora do data/hora<br>" +
-                              "<strong class='span-success'>Média:</strong> E-mail enviado a cada 3 dias, 1 dia, 6 horas e 1 do data/hora.<br>"+
-                              "<strong class='span-warning'>Alta:</strong> E-mail enviado diariamente, a 6 horas, a 3 horas e a 1 hora do data/hora.<br>" +
-                              "<strong class='span-danger'>Crítico:</strong> E-mail enviado a cada 12 horas, a 6, 3 e 1 hora do data/hora."
+                priorityHelp: "<strong class='span-primary'>Baixa:</strong> E-mail enviado semanalmente, a 1 dia e 1 hora da data/hora<br>" +
+                              "<strong class='span-success'>Média:</strong> E-mail enviado a cada 3 dias, 1 dia, 6 horas e 1 da data/hora.<br>"+
+                              "<strong class='span-warning'>Alta:</strong> E-mail enviado diariamente, a 6 horas, a 3 horas e a 1 hora da data/hora.<br>" +
+                              "<strong class='span-danger'>Crítico:</strong> E-mail enviado a cada 12 horas, a 6, 3 e 1 hora da data/hora."
             },
             errors: {
                 addCategoryName: "Insira o nome da categoria.",

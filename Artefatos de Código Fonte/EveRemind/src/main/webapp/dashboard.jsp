@@ -61,11 +61,11 @@
             </div>
             <div ng-show="data.adding" class="dashboard-column new-category-column" ng-style="data.add.style">
                 <div class="form-group">
-                    <label class="bordered-text">{{'dashboard.newCategory.name' | translate }}</label>
+                    <label>{{'dashboard.newCategory.name' | translate }}</label>
                     <input ng-model="data.add.name" type="text" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label class="bordered-text">{{'dashboard.newCategory.color' | translate }}</label>
+                    <label>{{'dashboard.newCategory.color' | translate }}</label>
                     <br>
                     <input sp-palette class="spectrum-palette" ng-model="data.add.color" type="text" class="form-control">
                 </div>
