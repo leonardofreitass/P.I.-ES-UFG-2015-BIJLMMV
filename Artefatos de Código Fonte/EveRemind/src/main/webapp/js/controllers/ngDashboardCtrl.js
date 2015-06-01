@@ -285,6 +285,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
 
     $scope.openAddActivity = function (index) {
         $scope.data.creating = index;
+        cleanModalActivity();
         $scope.data.modalData = {category: $scope.data.categories[index].name};
     };
 
@@ -294,6 +295,54 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
 
     $scope.popover = function (event) {
         event.target.popover('toggle');
+    };
+    
+    $scope.getPriorityColor = function(priority){
+        var priorities = {
+            "0": {border: '1px solid #337AB7', 'border-top': '5px solid #337AB7'},
+            "1": {border: '1px solid #5CB85C', 'border-top': '5px solid #5CB85C'},
+            "2": {border: '1px solid #F0AD4E', 'border-top': '5px solid #F0AD4E'},
+            "3": {border: '1px solid #D9534F', 'border-top': '5px solid #D9534F'}
+        };
+        if (!priorities[priority])
+            return {border: '1px solid black'};
+        
+        return priorities[priority];
+    };
+    
+    var styles = {
+        "0": "btn-primary",
+        "1": "btn-success",
+        "2": "btn-warning",
+        "3": "btn-danger"
+    };
+    
+    $scope.getSelectStyle = function(){
+        
+        return styles[$scope.data.newActivity.priority];
+    };
+    
+    $scope.$watch(
+            function (scope) {
+                return scope.data.newActivity.priority;
+            },
+            function (newValue, oldValue) {
+                if (oldValue != newValue){
+                    for (var i = 0; i <= parseInt(oldValue); i++){
+                        $('.selectpicker').selectpicker('setStyle', styles[i], 'remove');
+                    }
+                    $('.selectpicker').selectpicker('setStyle', $scope.getSelectStyle(), 'add');
+                }
+            }
+    );
+    
+    
+    var cleanModalActivity = function(){
+        $scope.data.newActivity.name = "";
+        $scope.data.newActivity.description = "";
+        $scope.data.newActivity.date = "";
+        $scope.data.newActivity.time = "";
+        $scope.data.newActivity.notification = false;
     };
 
     var updateCategories = function (data) {

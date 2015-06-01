@@ -23,7 +23,9 @@
  */
 package br.ufg.inf.everemind.servlets;
 
+import br.ufg.inf.everemind.db.ActivityDAO;
 import br.ufg.inf.everemind.db.CategoryDAO;
+import br.ufg.inf.everemind.entity.Activity;
 import br.ufg.inf.everemind.entity.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,20 +55,34 @@ public class ServletGetUserCategories extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        
+
         try (PrintWriter out = response.getWriter()) {
-            
+
             String idUser = request.getParameter("idUser");
             CategoryDAO categoryDao = CategoryDAO.getInstance();
+            ActivityDAO activityDao = ActivityDAO.getInstance();
             ArrayList<Category> list = categoryDao.getAll(idUser);
-            JSONArray array = new JSONArray(); 
-            for (Category category : list){
+            JSONArray array = new JSONArray();
+            for (Category category : list) {
+                ArrayList<Activity> listActivities = activityDao.getAllFromCategory(category.getId());
+                JSONArray arrayActivities = new JSONArray();
+                for (Activity activity : listActivities) {
+                    JSONObject activityJSON = new JSONObject();
+                    activityJSON.put("name", activity.getName());
+                    activityJSON.put("description", activity.getNotes());
+                    activityJSON.put("date", activity.getDate());
+                    activityJSON.put("time", activity.getHour());
+                    activityJSON.put("priority", activity.getPriority());
+                    activityJSON.put("notification", activity.getNotificationBehaviour());
+                    arrayActivities.put(activityJSON);
+                }
                 JSONObject categoryJSON = new JSONObject();
                 categoryJSON.put("id", category.getId());
                 categoryJSON.put("name", category.getName());
                 categoryJSON.put("color", category.getColor());
                 categoryJSON.put("minimized", true);
                 categoryJSON.put("hovering", false);
+                categoryJSON.put("activities", arrayActivities);
                 array.put(categoryJSON);
             }
             out.print(array);

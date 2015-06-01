@@ -16,12 +16,17 @@
                 <div class="full-height" ng-style="getCategoryColor($index)">
                     <div ng-show="isMaximized($index)">
                         <div ng-show="data.editing !== $index" class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <button bs-dynamic-tooltip="{title: 'dashboard.tooltips.editCategory'}" type="button" class="btn btn-dark full-button" ng-click="openEditing($index)">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <div class="close float-none close-color-override add-activity" ng-click="openAddActivity($index)" bs-dynamic-tooltip="{title: 'dashboard.tooltips.addActivity'}" data-toggle="modal" data-target="#modalAddActivity">
+                                    <span class="add-activity-button glyphicon glyphicon-plus"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <button bs-dynamic-tooltip="{title: 'dashboard.tooltips.deleteCategory'}" type="button" class="btn btn-dark full-button" ng-click="openDeleting($index)" data-toggle="modal" data-target="#modalDelete">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
@@ -40,11 +45,12 @@
                             <button type="button" class="btn btn-default" ng-click="openEditing($index)">{{'dashboard.editCategory.cancel' | translate }}</button>
                             <button type="button" class="btn btn-dark float-right" ng-click="editCategory($index)">{{'dashboard.editCategory.save' | translate }}</button>
                         </div>
+                        <br> 
+                    </div>
+                    <div class="activity-box" ng-repeat="activity in category.activities"  ng-style="getPriorityColor(activity.priority)">
+                        <span class="activity-name">{{activity.name}}</span>
+                        <div ng-if="isMaximized($parent.$index)" class="activity-date-time"><span class="activity-date">{{activity.date}}</span> <span class="activity-time">{{activity.time}}</span></div>
                         <br>
-                        <div class="close float-none close-color-override add-activity" ng-click="openAddActivity($index)" bs-dynamic-tooltip="{title: 'dashboard.tooltips.addActivity'}" data-toggle="modal" data-target="#modalAddActivity">
-                            <span class="add-activity-button glyphicon glyphicon-plus"></span>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
@@ -116,17 +122,17 @@
                                 <div class="close float-none close-color-override inline-blocker priority-help" ng-click="popover($event)" bs-dynamic-popover="{title: 'dashboard.tooltips.priorityHelpTitle', content: 'dashboard.tooltips.priorityHelp', placement: 'right'}">
                                     <span class="glyphicon glyphicon-question-sign"></span>
                                 </div>
-                                <select class='form-control selectpicker'ng-model="data.newActivity.priority">
-                                    <option value="0">{{'dashboard.addActivity.priorities.low' | translate }}</option>
-                                    <option value="1">{{'dashboard.addActivity.priorities.mid' | translate }}</option>
-                                    <option value="2">{{'dashboard.addActivity.priorities.high' | translate }}</option>
-                                    <option value="3">{{'dashboard.addActivity.priorities.critical' | translate }}</option>
+                                <select class='form-control selectpicker' ng-model="data.newActivity.priority" data-style="{{getSelectStyle()}}">
+                                    <option class="option-primary" value="0">{{'dashboard.addActivity.priorities.low' | translate }}</option>
+                                    <option class="option-success" value="1">{{'dashboard.addActivity.priorities.mid' | translate }}</option>
+                                    <option class="option-warning" value="2">{{'dashboard.addActivity.priorities.high' | translate }}</option>
+                                    <option class="option-danger" value="3">{{'dashboard.addActivity.priorities.critical' | translate }}</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <label>{{'dashboard.addActivity.notify' | translate }}</label>
                                 <br>
-                                <input class='form-control' bs-dynamic-switch="{onText: 'dashboard.addActivity.on', offText: 'dashboard.addActivity.off'}" type='checkbox' ng-model="data.newActivity.notification">
+                                <input class='form-control' bs-dynamic-switch="{onColor: 'info', onText: 'dashboard.addActivity.on', offText: 'dashboard.addActivity.off'}" type='checkbox' ng-model="data.newActivity.notification">
                             </div>
                         </div>
                     </div>

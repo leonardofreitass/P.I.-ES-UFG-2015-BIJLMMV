@@ -321,11 +321,11 @@ fieldset[disabled] .btn-dark.active {
 }
 
 .minimized-column{
-    width: 85px !important;
+    width: 100px !important;
 }
 
 .maximized-column{
-    width: 160px !important;
+    width: 200px !important;
 }
 
 .add-category-column{
@@ -397,20 +397,17 @@ fieldset[disabled] .btn-dark.active {
 }
 
 .add-activity {
-    width: 48px;
-    height: 48px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    padding-left: 11px;
-    padding-bottom: 12px;
-    padding-top: 8px;
-    padding-right: 8px;
+    padding-left: 7px;
     border: solid 3px #808080;
     margin-left: auto;
     margin-right: auto;
 }
 
-.add-activitybutton{
-    font-size: 20px !important;
+.add-activity-button{
+    font-size: 14px !important;
 }
 
 .center{
@@ -441,4 +438,95 @@ td > span > .bootstrap-timepicker-minute{
 
 .popover{
     width: 200px !important;
+}
+
+.activity-box{
+    margin: 3px;
+    border-radius: 3px;
+    padding: 2px;
+    position: relative;
+}
+
+.activity-box:hover{
+    color: white;
+    background-color: #E67D23;
+}
+
+.activity-box:before {
+  content: " ";
+  position: absolute;
+  opacity: 0.2;
+  top: -6px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 1px solid #FFFFFF;
+  border-radius: 3px;
+}
+
+
+.activity-name{
+    font-weight: bold;
+}
+
+.activity-date-time{
+    position: relative;
+}
+
+.activity-date{
+    position: absolute;
+    left: 0px;
+}
+
+.activity-time{
+    position: absolute;
+    right: 0px;
+}
+
+.span-primary{
+    color: #337AB7;
+}
+
+.span-success{
+    color: #5CB85C;
+}
+
+.span-warning{
+    color: #F0AD4E;
+}
+
+.span-danger{
+    color: #D9534F;
+}
+
+.option-primary{
+    background-color: #337AB7;
+}
+
+.option-success{
+    background-color: #5CB85C;
+}
+
+.option-warning{
+    background-color: #F0AD4E;
+}
+
+.option-danger{
+    background-color: #D9534F;
+}
+
+.option-primary:hover, .option-primary:focus{
+    background-color: #286090 !important;
+}
+
+.option-success:hover, .option-success:focus{
+    background-color: #449D44 !important;
+}
+
+.option-warning:hover, .option-warning:focus{
+    background-color: #EC971F !important;
+}
+
+.option-danger:hover, .option-danger:focus{
+    background-color: #C9302C !important;
 }
