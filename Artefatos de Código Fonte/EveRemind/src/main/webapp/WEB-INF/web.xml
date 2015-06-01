@@ -60,6 +60,10 @@
         <servlet-name>ServletDeleteCategory</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletDeleteCategory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCreateActivity</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletCreateActivity</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>ServletDeleteCategory</servlet-name>
         <url-pattern>/ServletDeleteCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCreateActivity</servlet-name>
+        <url-pattern>/ServletCreateActivity</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

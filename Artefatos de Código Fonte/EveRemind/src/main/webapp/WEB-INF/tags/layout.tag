@@ -14,6 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/bootstrap-switch/css/bootstrap-switch.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/bootstrap-select/css/bootstrap-select.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/toastr/toastr.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/spectrum/spectrum.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/site.css">

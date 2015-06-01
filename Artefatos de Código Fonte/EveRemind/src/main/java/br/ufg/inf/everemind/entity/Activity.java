@@ -40,7 +40,7 @@ public class Activity {
     private boolean notificationBehaviour;
     private String lastNotificationTime;
     private String nextNotificationTime;
-
+    
     public Activity(String _idCategory,
             String name,
             int priority,

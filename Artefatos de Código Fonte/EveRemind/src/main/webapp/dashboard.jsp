@@ -16,12 +16,12 @@
                 <div class="full-height" ng-style="getCategoryColor($index)">
                     <div ng-show="isMaximized($index)">
                         <div ng-show="data.editing !== $index" class="row">
-                            <div class="col-md-6 no-right-padding">
+                            <div class="col-md-6">
                                 <button bs-dynamic-tooltip="{title: 'dashboard.tooltips.editCategory'}" type="button" class="btn btn-dark full-button" ng-click="openEditing($index)">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
                             </div>
-                            <div class="col-md-6 no-left-padding">
+                            <div class="col-md-6">
                                 <button bs-dynamic-tooltip="{title: 'dashboard.tooltips.deleteCategory'}" type="button" class="btn btn-dark full-button" ng-click="openDeleting($index)" data-toggle="modal" data-target="#modalDelete">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
@@ -41,9 +41,10 @@
                             <button type="button" class="btn btn-dark float-right" ng-click="editCategory($index)">{{'dashboard.editCategory.save' | translate }}</button>
                         </div>
                         <br>
-                        <div class="close float-none close-color-override add-activity" ng-click="addCategory()" bs-dynamic-tooltip="{title: 'dashboard.tooltips.addActivity'}">
+                        <div class="close float-none close-color-override add-activity" ng-click="openAddActivity($index)" bs-dynamic-tooltip="{title: 'dashboard.tooltips.addActivity'}" data-toggle="modal" data-target="#modalAddActivity">
                             <span class="add-activity-button glyphicon glyphicon-plus"></span>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -67,12 +68,12 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel" ng-bind-html="'dashboard.deleteCategory.modalTitle' | translate:data.modalData | html"></h4>
+                    <h4 class="modal-title" id="modalDeleteLabel" ng-bind-html="'dashboard.deleteCategory.modalTitle' | translate:data.modalData | html"></h4>
                 </div>
                 <div class="modal-body">
                     <h4 ng-bind-html="'dashboard.deleteCategory.modalText' | translate:data.modalData | html"></h4>
@@ -80,6 +81,59 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{'dashboard.deleteCategory.cancel' | translate}}</button>
                     <button type="button" class="btn btn-danger" ng-click="deleteCategory()">{{'dashboard.deleteCategory.doDelete' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalAddActivity" tabindex="-1" role="dialog" aria-labelledby="modalAddActivityLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalAddActivityLabel" ng-bind-html="'dashboard.addActivity.modalTitle' | translate:data.modalData | html"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>{{'dashboard.addActivity.title' | translate }}</label>
+                        <input class='form-control' type='text' ng-model="data.newActivity.name">
+                    </div>
+                    <div class="form-group">
+                        <label>{{'dashboard.addActivity.description' | translate }}</label>
+                        <textarea class='form-control no-resize-textarea' rows="2" type='text' ng-model="data.newActivity.description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>{{'dashboard.addActivity.date' | translate }}</label>
+                                <input bs-datepicker class='form-control' type='text'ng-model="data.newActivity.date">
+                            </div>
+                            <div class="col-md-2">
+                                <label>{{'dashboard.addActivity.time' | translate }}</label>
+                                <input bs-timepicker class='form-control' type='text'ng-model="data.newActivity.time">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="inline-blocker">{{'dashboard.addActivity.priority' | translate }}</label>
+                                <div class="close float-none close-color-override inline-blocker priority-help" ng-click="popover($event)" bs-dynamic-popover="{title: 'dashboard.tooltips.priorityHelpTitle', content: 'dashboard.tooltips.priorityHelp', placement: 'right'}">
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </div>
+                                <select class='form-control selectpicker'ng-model="data.newActivity.priority">
+                                    <option value="0">{{'dashboard.addActivity.priorities.low' | translate }}</option>
+                                    <option value="1">{{'dashboard.addActivity.priorities.mid' | translate }}</option>
+                                    <option value="2">{{'dashboard.addActivity.priorities.high' | translate }}</option>
+                                    <option value="3">{{'dashboard.addActivity.priorities.critical' | translate }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>{{'dashboard.addActivity.notify' | translate }}</label>
+                                <br>
+                                <input class='form-control' bs-dynamic-switch="{onText: 'dashboard.addActivity.on', offText: 'dashboard.addActivity.off'}" type='checkbox' ng-model="data.newActivity.notification">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'dashboard.addActivity.cancel' | translate}}</button>
+                    <button type="button" class="btn btn-dark" ng-click="createActivity()">{{'dashboard.addActivity.create' | translate}}</button>
                 </div>
             </div>
         </div>

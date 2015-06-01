@@ -8,6 +8,11 @@
 <!-- JS APIs -->
 <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/angular/angular.min.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/angular-storage/ngStorage.min.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/angular-translate/angular-translate.min.js"></script>

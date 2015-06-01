@@ -25,7 +25,29 @@
 
 /* global angular */
 
-angular.module('everemindApp').directive('bsDynamicTooltip', function (translateFilter) {
+angular.module('everemindApp').directive('bsDynamicPopover', function(translateFilter, $compile) {
+    return {
+        scope: {
+            config: '=bsDynamicPopover'
+        },
+        link: function (scope, elem) {
+            var placement = scope.config.placement;
+            if(!placement)
+                placement = "bottom";
+            elem.popover({title: translateFilter(scope.config.title), content: translateFilter(scope.config.content), placement: placement, html: true, trigger: "hover"});
+            $compile(elem)(scope);
+        }
+    };
+}).
+directive('popover', function () {
+    return {
+        restrict: 'C',
+        link: function (scope, elem) {
+            window.alert("AE")
+        }
+    };
+}).
+directive('bsDynamicTooltip', function (translateFilter) {
     return {
         scope: {
             config: '=bsDynamicTooltip'
@@ -58,6 +80,64 @@ directive('spPalette', function () {
                     ["#600", "#783f04", "#7f6000", "#274e13", "#0c343d", "#073763", "#20124d", "#4c1130"]
                 ]
             });
+        }
+    };
+}).
+directive('bsDatepicker', function () {
+    return {
+        link: function (scope, elem) {
+            elem.datepicker({
+                startDate: "today",
+                language: "pt-BR",
+                format: "dd/mm/yyyy",
+                toggleActive: true
+            });
+        }
+    };
+}).
+directive('bsTimepicker', function () {
+    return {
+        link: function (scope, elem) {
+            elem.timepicker({
+                minuteStep: 1,
+                appendWidgetTo: '#modalAddActivity',
+                showMeridian: false,
+                defaultTime: false,
+                modalBackdrop: true
+            });
+        }
+    };
+}).
+directive('bsDynamicSwitch', function (translateFilter) {
+    return {
+        scope: {
+            config: '=bsDynamicSwitch'
+        },
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModel) {
+            element.bootstrapSwitch({
+                onColor: scope.config.onColor,
+                offColor: scope.config.offColor,
+                onText: translateFilter(scope.config.onText),
+                offText: translateFilter(scope.config.offText)
+            });
+            
+            element.on('switchChange.bootstrapSwitch', function(event, state) {
+                if (ngModel) {
+                    scope.$apply(function() {
+                        ngModel.$setViewValue(state);
+                    });
+                }
+            });
+
+            scope.$watch(attrs.ngModel, function(newValue, oldValue) {
+                if (newValue) {
+                    element.bootstrapSwitch('state', true, true);
+                } else {
+                    element.bootstrapSwitch('state', false, true);
+                }
+            });
+
         }
     };
 });

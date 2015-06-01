@@ -401,11 +401,12 @@ fieldset[disabled] .btn-dark.active {
     height: 48px;
     border-radius: 50%;
     padding-left: 11px;
-    padding-bottom: 15px;
-    padding-top: 10px;
-    padding-right: 10px;
+    padding-bottom: 12px;
+    padding-top: 8px;
+    padding-right: 8px;
     border: solid 3px #808080;
-    margin-left: 56px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .add-activitybutton{
@@ -414,4 +415,30 @@ fieldset[disabled] .btn-dark.active {
 
 .center{
     text-align: center;
+}
+
+td > span > .bootstrap-timepicker-hour{
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+td > span > .bootstrap-timepicker-minute{
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.no-resize-textarea {
+    resize: none;
+}
+
+.inline-blocker{
+    display: inline-block;
+}
+
+.priority-help{
+    font-size: 14px;
+}
+
+.popover{
+    width: 200px !important;
 }

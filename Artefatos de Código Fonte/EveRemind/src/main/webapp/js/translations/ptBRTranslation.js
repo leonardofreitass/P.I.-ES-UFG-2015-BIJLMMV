@@ -25,7 +25,7 @@
 /* global angular */
 
 angular.module('everemindApp').config(['$translateProvider', function ($translateProvider) {
-    $translateProvider.translations('ptBR', {
+    $translateProvider.translations('pt-BR', {
         pages: {
             titles: {
                 index: "Index",
@@ -104,20 +104,47 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 modalTitle: "Excluindo a categoria <strong>{{category}}</strong>",
                 modalText: "Ao excluir a categoria <strong>{{category}}</strong> você excluirá tambem todas as atividades cadastradas nesta categoria, deseja mesmo excluir?"
             },
+            addActivity: {
+                modalTitle: "Nova atividade na categoria <strong>{{category}}</strong>",
+                title: "Nome",
+                description: "Descrição",
+                priority: "Prioridade",
+                priorities: {
+                    low: "Baixa",
+                    mid: "Média",
+                    high: "Alta",
+                    critical: "Crítico"
+                },
+                date: "Data",
+                time: "Hora",
+                notify: "Notificação por e-mail",
+                on: "Ligado",
+                off: "Desligado",
+                cancel: "Cancelar",
+                create: "Criar"
+            },
             tooltips: {
                 addCategory: "Adicionar categoria de atividades",
                 editCategory: "Editar categoria",
                 deleteCategory: "Excluir categoria",
-                addActivity: "Adicionar uma nova atividade"
+                addActivity: "Adicionar uma nova atividade",
+                priorityHelpTitle: "A escolha de prioridade afeta o comportamento da notificação da seguinte forma:",
+                priorityHelp: "<strong>Baixa:</strong> E-mail enviado semanalmente, a 1 dia e 1 hora do data/hora<br>" +
+                              "<strong>Média:</strong> E-mail enviado a cada 3 dias, 1 dia, 6 horas e 1 do data/hora.<br>"+
+                              "<strong>Alta:</strong> E-mail enviado diariamente, a 6 horas, a 3 horas e a 1 hora do data/hora.<br>" +
+                              "<strong>Crítico:</strong> E-mail enviado a cada 12 horas, a 6, 3 e 1 hora do data/hora."
             },
             errors: {
                 addCategoryName: "Insira o nome da categoria.",
                 alreadyRegistered: "Uma categoria com este nome já foi cadastrada!",
-                editingCategory: "Termine de editar uma categoria antes de começar a editar outra."
+                editingCategory: "Termine de editar uma categoria antes de começar a editar outra.",
+                addActivityInput: "Preencha todos os campos.",
+                addActivityLength: "O nome da atividade é limitado em 80 caracteres."
             },
-            addCategory: "Categoria criada!",
-            editCategoryMsg: "Categoria editada!",
-            deleteCategoryMsg: "Categoria excluída!"
+            addCategory: "Categoria criada.",
+            editCategoryMsg: "Categoria editada.",
+            deleteCategoryMsg: "Categoria excluída.",
+            createdActivity: "Atividade criada."
         },
         verifyEmail: {
             primary: {
@@ -180,5 +207,5 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
         }
     });
 
-    $translateProvider.preferredLanguage('ptBR');
+    $translateProvider.preferredLanguage('pt-BR');
 }]);

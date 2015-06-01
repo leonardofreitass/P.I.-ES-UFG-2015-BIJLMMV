@@ -23,23 +23,20 @@
  */
 package br.ufg.inf.everemind.servlets;
 
-import br.ufg.inf.everemind.db.CategoryDAO;
-import br.ufg.inf.everemind.entity.Category;
+import br.ufg.inf.everemind.db.ActivityDAO;
+import br.ufg.inf.everemind.entity.Activity;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  *
  * @author Leonardo
  */
-public class ServletGetUserCategories extends HttpServlet {
+public class ServletCreateActivity extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,24 +49,18 @@ public class ServletGetUserCategories extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-        
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            String idUser = request.getParameter("idUser");
-            CategoryDAO categoryDao = CategoryDAO.getInstance();
-            ArrayList<Category> list = categoryDao.getAll(idUser);
-            JSONArray array = new JSONArray(); 
-            for (Category category : list){
-                JSONObject categoryJSON = new JSONObject();
-                categoryJSON.put("id", category.getId());
-                categoryJSON.put("name", category.getName());
-                categoryJSON.put("color", category.getColor());
-                categoryJSON.put("minimized", true);
-                categoryJSON.put("hovering", false);
-                array.put(categoryJSON);
-            }
-            out.print(array);
+            /* TODO output your page here. You may use following sample code. */
+            ActivityDAO activityDao = ActivityDAO.getInstance();
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            String date = request.getParameter("date");
+            String time = request.getParameter("time");
+            int priority = Integer.parseInt(request.getParameter("priority"));
+            boolean notification = Boolean.valueOf(request.getParameter("notification"));
+            String idCategory = request.getParameter("idCategory");
+            activityDao.save(new Activity(idCategory, name, priority, date, time, description, notification, "", ""));
             out.flush();
         }
     }

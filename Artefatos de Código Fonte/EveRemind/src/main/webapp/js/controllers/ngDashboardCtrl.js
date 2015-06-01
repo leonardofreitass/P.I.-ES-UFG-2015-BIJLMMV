@@ -31,6 +31,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         adding: false,
         editing: -1,
         deleting: -1,
+        creating: -1,
         modalData: {},
         add: {
             name: "",
@@ -46,43 +47,51 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
                 'background-color': ""
             }
         },
+        newActivity: {
+            name: "",
+            description: "",
+            date: "",
+            time: "",
+            priority: "0",
+            notification: false
+        },
         categories: []
     };
-    
-    $scope.createStyle = function(color){
+
+    $scope.createStyle = function (color) {
         return {'background-color': color};
     };
-    
-    $scope.getCategoryColor = function(index){
+
+    $scope.getCategoryColor = function (index) {
         if ($scope.data.editing !== index)
             return {'background-color': $scope.data.categories[index].color};
         else
             return {'background-color': $scope.data.edit.color};
     };
-    
+
     $scope.$watch(
-        function() { 
-            return $scope.data.add.color; 
-        }, 
-        function() {
-            $scope.data.add.style = {'background-color': $scope.data.add.color};
-        }
+            function () {
+                return $scope.data.add.color;
+            },
+            function () {
+                $scope.data.add.style = {'background-color': $scope.data.add.color};
+            }
     );
-    
+
     $scope.$watch(
-        function() { 
-            return $scope.data.edit.color; 
-        }, 
-        function() {
-            $scope.data.edit.style = {'background-color': $scope.data.edit.color};
-        }
+            function () {
+                return $scope.data.edit.color;
+            },
+            function () {
+                $scope.data.edit.style = {'background-color': $scope.data.edit.color};
+            }
     );
 
     $scope.getUserName = function () {
         return $scope.$storage.sessionUser.fullName;
     };
-    
-    $scope.cancelAddCategory = function(){
+
+    $scope.cancelAddCategory = function () {
         $scope.data.add = {
             name: "",
             color: "rgb(255, 255, 255)",
@@ -92,45 +101,45 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         };
         $scope.data.adding = false;
     };
-    
-    $scope.getUserCategories = function(){
+
+    $scope.getUserCategories = function () {
         $.getJSON("ServletGetUserCategories?idUser=" + $scope.$storage.sessionUser._id, {}, function (data) {
             updateCategories(data);
         });
     };
-    
-    
+
+
     $scope.$watch(
-        function(scope) { 
-            return scope.$storage.refreshCategories; 
-        }, 
-        function() {
-            if ($scope.$storage.refreshCategories){
-                $scope.$storage.refreshCategories = null;
-                $scope.$storage.$save();
-                $scope.getUserCategories();
-                $scope.$apply();
+            function (scope) {
+                return scope.$storage.refreshCategories;
+            },
+            function () {
+                if ($scope.$storage.refreshCategories) {
+                    $scope.$storage.refreshCategories = null;
+                    $scope.$storage.$save();
+                    $scope.getUserCategories();
+                    $scope.$apply();
+                }
             }
-        }
     );
-    
-    
-    $scope.saveAddCategory = function(){
+
+
+    $scope.saveAddCategory = function () {
         var name = $scope.data.add.name, color = $scope.data.add.color, id = $scope.$storage.sessionUser._id;
-        if ($scope.data.add.name === ""){
+        if ($scope.data.add.name === "") {
             ngNotifier.warning("dashboard.errors.addCategoryName");
             return;
         }
         $.getJSON("ServletCheckCategory?name=" + name + "&idUser=" + id, {}, function (data) {
-            if (data.registered){
+            if (data.registered) {
                 ngNotifier.warning("dashboard.errors.alreadyRegistered");
                 return;
             }
             setNewCategory(name, color, id);
         });
     };
-    
-    var setNewCategory = function(name, color, id){
+
+    var setNewCategory = function (name, color, id) {
         $.ajax({
             dataType: "text",
             url: "ServletCreateCategory?name=" + name + "&color=" + color + "&idUser=" + id,
@@ -143,28 +152,28 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             }
         });
     };
-    
-    $scope.editCategory = function(index){
+
+    $scope.editCategory = function (index) {
         var name = $scope.data.edit.name, color = $scope.data.edit.color, id = $scope.$storage.sessionUser._id;
-        if ($scope.data.edit.name === ""){
+        if ($scope.data.edit.name === "") {
             ngNotifier.warning("dashboard.errors.addCategoryName");
             return;
         }
-        if ($scope.data.categories[index].name !== name){
+        if ($scope.data.categories[index].name !== name) {
             $.getJSON("ServletCheckCategory?name=" + name + "&idUser=" + id, {}, function (data) {
-                if (data.registered){
+                if (data.registered) {
                     ngNotifier.warning("dashboard.errors.alreadyRegistered");
                     return;
                 }
                 updateCategory(index, name, color, id);
             });
         }
-        else{
+        else {
             updateCategory(index, name, color, id);
         }
     };
-    
-    var updateCategory = function(index, name, color, id){
+
+    var updateCategory = function (index, name, color, id) {
         var originalName = $scope.data.categories[index].name;
         $.ajax({
             dataType: "text",
@@ -177,8 +186,8 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             }
         });
     };
-    
-    $scope.deleteCategory = function(){
+
+    $scope.deleteCategory = function () {
         var name = $scope.data.categories[$scope.data.deleting].name, id = $scope.$storage.sessionUser._id;
         $.ajax({
             dataType: "text",
@@ -192,58 +201,102 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             }
         });
     };
-    
-    $scope.isMaximized = function(index){
+
+    $scope.createActivity = function () {
+        var name = $scope.data.newActivity.name;
+        var description = $scope.data.newActivity.description;
+        var date = $scope.data.newActivity.date;
+        var time = $scope.data.newActivity.time;
+        var priority = $scope.data.newActivity.priority;
+        var notification = $scope.data.newActivity.notification;
+        var idCategory = $scope.data.categories[$scope.data.creating].id;
+        if (name === "" || description === "" || date === "" || time === "" || priority === "" || notification === "") {
+            ngNotifier.warning("dashboard.errors.addActivityInput");
+            return;
+        }
+        if (name.length > 80) {
+            ngNotifier.warning("dashboard.errors.addActivityLength");
+            return;
+        }
+        $.ajax({
+            dataType: "text",
+            url: "ServletCreateActivity?&name=" + name +
+                    "&description=" + description +
+                    "&date=" + date +
+                    "&time=" + time +
+                    "&priority=" + priority + 
+                    "&notification=" + notification +
+                    "&idCategory=" + idCategory ,
+            success: function () {
+                $scope.$storage.refreshCategories = true;
+                $scope.$storage.$save();
+                $scope.$apply();
+                $('#modalAddActivity').modal('hide');
+                ngNotifier.notify("dashboard.createdActivity");
+            }
+        });
+    };
+
+    $scope.isMaximized = function (index) {
         if (!$scope.data.categories[index].minimized)
             return true;
-        
-        if ($scope.data.categories[index].hovering){
+
+        if ($scope.data.categories[index].hovering) {
             return true;
         }
-        
-        if ($scope.data.editing === index){
+
+        if ($scope.data.editing === index) {
             return true;
         }
-        
+
         return false;
     };
-    
-    $scope.clickCategory = function(index){
+
+    $scope.clickCategory = function (index) {
         $scope.data.categories[index].minimized = !$scope.data.categories[index].minimized;
     };
-    $scope.enterCategory = function(index){
+    $scope.enterCategory = function (index) {
         $scope.data.categories[index].hovering = true;
     };
-    
-    $scope.leaveCategory = function(index){
+
+    $scope.leaveCategory = function (index) {
         $scope.data.categories[index].hovering = false;
     };
-    
-    $scope.openEditing = function(index){
-        if ($scope.data.editing === index){
+
+    $scope.openEditing = function (index) {
+        if ($scope.data.editing === index) {
             $scope.data.editing = -1;
         }
-        else if ($scope.data.editing === -1){
+        else if ($scope.data.editing === -1) {
             $scope.data.editing = index;
             $scope.data.edit.name = $scope.data.categories[index].name;
             $scope.data.edit.color = $scope.data.categories[index].color;
             $("#editColor" + index).spectrum("set", $scope.data.categories[index].color);
         }
-        else{
+        else {
             ngNotifier.error("dashboard.errors.editingCategory");
         }
     };
-    
-    $scope.openDeleting = function(index){
+
+    $scope.openDeleting = function (index) {
         $scope.data.deleting = index;
-        $scope.data.modalData = {category: $scope.data.categories[index].name}
+        $scope.data.modalData = {category: $scope.data.categories[index].name};
+    };
+
+    $scope.openAddActivity = function (index) {
+        $scope.data.creating = index;
+        $scope.data.modalData = {category: $scope.data.categories[index].name};
     };
 
     $scope.addCategory = function () {
         $scope.data.adding = true;
     };
-    
-    var updateCategories = function(data){
+
+    $scope.popover = function (event) {
+        event.target.popover('toggle');
+    };
+
+    var updateCategories = function (data) {
         $scope.data.categories = data;
         $scope.data.editing = -1;
         $scope.$apply();
