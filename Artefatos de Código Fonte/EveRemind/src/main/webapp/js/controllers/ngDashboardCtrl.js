@@ -53,7 +53,16 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             date: "",
             time: "",
             priority: "0",
-            notification: false
+            notification: true
+        },
+        updateActivity: {
+            name: "",
+            description: "",
+            date: "",
+            time: "",
+            priority: "0",
+            notification: true,
+            disabled: true
         },
         categories: []
     };
@@ -288,6 +297,26 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         cleanModalActivity();
         $scope.data.modalData = {category: $scope.data.categories[index].name};
     };
+    
+    $scope.showActivity = function(categoryIndex, activityIndex){
+        var category = $scope.data.categories[categoryIndex];
+        var activity = category.activities[activityIndex];
+        $scope.data.modalData = {
+            category: category.name,
+            activity: activity.name
+        };
+        $scope.data.updateActivity.disabled = true;
+        $scope.data.updateActivity.name = activity.name;
+        $scope.data.updateActivity.description = activity.description;
+        $scope.data.updateActivity.date = activity.date;
+        $scope.data.updateActivity.time = activity.time;
+        $scope.data.updateActivity.priority = activity.priority;
+        $(".selectpicker.update-activity").selectpicker('val', activity.priority);
+        $(".edit-switch").bootstrapSwitch('disabled', false);
+        $scope.data.updateActivity.notification = activity.notification;
+        $(".edit-switch").bootstrapSwitch('state', activity.notification);
+        $(".edit-switch").bootstrapSwitch('disabled', true);
+    };
 
     $scope.addCategory = function () {
         $scope.data.adding = true;
@@ -322,6 +351,11 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         return styles[$scope.data.newActivity.priority];
     };
     
+    $scope.getEditSelectStyle = function(){
+        
+        return styles[$scope.data.updateActivity.priority];
+    };
+    
     $scope.$watch(
             function (scope) {
                 return scope.data.newActivity.priority;
@@ -329,20 +363,36 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             function (newValue, oldValue) {
                 if (oldValue != newValue){
                     for (var i = 0; i <= parseInt(oldValue); i++){
-                        $('.selectpicker').selectpicker('setStyle', styles[i], 'remove');
+                        $('.selectpicker.new-activity').selectpicker('setStyle', styles[i], 'remove');
                     }
-                    $('.selectpicker').selectpicker('setStyle', $scope.getSelectStyle(), 'add');
+                    $('.selectpicker.new-activity').selectpicker('setStyle', $scope.getSelectStyle(), 'add');
                 }
             }
     );
     
+    $scope.$watch(
+        function (scope) {
+            return scope.data.updateActivity.priority;
+        },
+        function (newValue, oldValue) {
+            if (oldValue != newValue){
+                for (var i = 0; i <= parseInt(oldValue); i++){
+                    $('.selectpicker.update-activity').selectpicker('setStyle', styles[i], 'remove');
+                }
+                $('.selectpicker.update-activity').selectpicker('setStyle', $scope.getEditSelectStyle(), 'add');
+            }
+        }
+    );
     
     var cleanModalActivity = function(){
         $scope.data.newActivity.name = "";
         $scope.data.newActivity.description = "";
         $scope.data.newActivity.date = "";
         $scope.data.newActivity.time = "";
-        $scope.data.newActivity.notification = false;
+        $scope.data.newActivity.priority = "0";
+        $(".selectpicker.new-activity").selectpicker('val', "0");
+        $scope.data.newActivity.notification = true;
+        $(".create-switch").bootstrapSwitch('state', true);
     };
 
     var updateCategories = function (data) {

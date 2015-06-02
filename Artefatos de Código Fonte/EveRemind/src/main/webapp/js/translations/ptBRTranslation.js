@@ -55,7 +55,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             confirmEmail: "A confirmação dos e-mails é necessária para aproveitar integralmente as funcionalidades do nosso sistema.",
             errors: {
                 required: "Preencha todos os campos.",
-                notMatch: "A duplicação de senhas não corresponde.",
+                notMatch: "As senhas informadas devem ser iguais.",
                 registered: "O e-mail informado já foi registrado.",
                 sameEmail: "O e-mail principal e secundário devem ser diferentes.",
                 passwordLength: "A senha deve possuir entre 6 e 20 caracteres.",
@@ -122,6 +122,12 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 off: "Desligado",
                 cancel: "Cancelar",
                 create: "Criar"
+            },
+            showActivity: {
+                modalTitle: "<strong>{{category}}</strong> | {{activity}}",
+                cancel: "Cancelar",
+                delete: "Excluir",
+                edit: "Editar"
             },
             tooltips: {
                 addCategory: "Adicionar categoria de atividades",
