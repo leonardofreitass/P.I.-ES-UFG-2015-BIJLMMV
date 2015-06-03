@@ -109,6 +109,11 @@ public class ActivityDAO {
         }
         return activityList;
     }
+    
+    public void deleteAllFromCategory(String _idCategory) {
+        Document query = new Document("_idCategory", _idCategory);
+        collection.deleteMany(query);
+    }
 
     public void delete(String _id) {
         Document query = new Document("_id",  new ObjectId(_id));

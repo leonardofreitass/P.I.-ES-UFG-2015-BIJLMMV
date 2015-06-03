@@ -23,6 +23,7 @@
  */
 package br.ufg.inf.everemind.servlets;
 
+import br.ufg.inf.everemind.db.ActivityDAO;
 import br.ufg.inf.everemind.db.CategoryDAO;
 import br.ufg.inf.everemind.entity.Category;
 import java.io.IOException;
@@ -53,9 +54,12 @@ public class ServletDeleteCategory extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             CategoryDAO categoryDao = CategoryDAO.getInstance();
+            ActivityDAO activityDao = ActivityDAO.getInstance();
             String name = request.getParameter("name");
             String idUser = request.getParameter("idUser");
-            categoryDao.delete(name, idUser);
+            Category cat = categoryDao.getOne(idUser, name);
+            activityDao.deleteAllFromCategory(cat.getId());
+            categoryDao.delete(name, idUser);   
         }
     }
 

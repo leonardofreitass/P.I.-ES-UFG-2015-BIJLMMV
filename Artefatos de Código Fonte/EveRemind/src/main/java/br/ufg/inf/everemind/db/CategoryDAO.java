@@ -62,7 +62,7 @@ public class CategoryDAO {
     }
 
     public Category getOne(String _idUser, String name) {
-        Document query = new Document("idUser", _idUser).append("name", name);
+        Document query = new Document("_idUser", _idUser).append("name", name);
         Document search = collection.find(query).first();
         if (search == null) {
             return null;
