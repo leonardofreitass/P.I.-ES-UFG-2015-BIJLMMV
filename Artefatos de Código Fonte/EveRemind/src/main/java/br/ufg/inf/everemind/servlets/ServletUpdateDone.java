@@ -24,24 +24,18 @@
 package br.ufg.inf.everemind.servlets;
 
 import br.ufg.inf.everemind.db.ActivityDAO;
-import br.ufg.inf.everemind.db.CategoryDAO;
-import br.ufg.inf.everemind.entity.Activity;
-import br.ufg.inf.everemind.entity.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  *
  * @author Leonardo
  */
-public class ServletGetUserCategories extends HttpServlet {
+public class ServletUpdateDone extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,39 +48,11 @@ public class ServletGetUserCategories extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            String idUser = request.getParameter("idUser");
-            CategoryDAO categoryDao = CategoryDAO.getInstance();
             ActivityDAO activityDao = ActivityDAO.getInstance();
-            ArrayList<Category> list = categoryDao.getAll(idUser);
-            JSONArray array = new JSONArray();
-            for (Category category : list) {
-                ArrayList<Activity> listActivities = activityDao.getAllFromCategory(category.getId(), true);
-                JSONArray arrayActivities = new JSONArray();
-                for (Activity activity : listActivities) {
-                    JSONObject activityJSON = new JSONObject();
-                    activityJSON.put("id", activity.getId());
-                    activityJSON.put("name", activity.getName());
-                    activityJSON.put("description", activity.getNotes());
-                    activityJSON.put("date", activity.getDate());
-                    activityJSON.put("time", activity.getHour());
-                    activityJSON.put("priority", activity.getPriority());
-                    activityJSON.put("notification", activity.getNotificationBehaviour());
-                    arrayActivities.put(activityJSON);
-                }
-                JSONObject categoryJSON = new JSONObject();
-                categoryJSON.put("id", category.getId());
-                categoryJSON.put("name", category.getName());
-                categoryJSON.put("color", category.getColor());
-                categoryJSON.put("minimized", true);
-                categoryJSON.put("hovering", false);
-                categoryJSON.put("activities", arrayActivities);
-                array.put(categoryJSON);
-            }
-            out.print(array);
+            String id = request.getParameter("id");
+            activityDao.setDone(id);
             out.flush();
         }
     }

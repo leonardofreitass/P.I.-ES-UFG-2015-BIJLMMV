@@ -128,9 +128,11 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 cancel: "Cancelar",
                 delete: "Excluir",
                 edit: "Editar",
-                update: "Salvar Alterações"
+                update: "Salvar Alterações",
+                setDone: "Marcar como Feito"
             },
             tooltips: {
+                markDone: "Marcar como Feito é irreversível, irá desativar as notificações desta atividade e ela não estará mais disponível na Dashboard.",
                 addCategory: "Adicionar categoria de atividades",
                 editCategory: "Editar categoria",
                 deleteCategory: "Excluir categoria",
@@ -156,7 +158,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             deleteCategoryMsg: "Categoria excluída.",
             createdActivity: "Atividade criada.",
             updatedActivity: "Atividade modificada.",
-            deleteActivityMsg: "Atividade excluída."
+            deleteActivityMsg: "Atividade excluída.",
+            markDoneActivityMsg: "Atividade marcada como feita."
         },
         verifyEmail: {
             primary: {

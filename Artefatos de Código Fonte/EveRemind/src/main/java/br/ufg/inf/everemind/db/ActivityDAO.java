@@ -62,7 +62,8 @@ public class ActivityDAO {
                 .append("notes", activity.getNotes())
                 .append("notificationBehaviour", activity.getNotificationBehaviour())
                 .append("lastNotificationTime", activity.getLastNotificationTime())
-                .append("nextNotificationTime", activity.getNextNotificationTime());
+                .append("nextNotificationTime", activity.getNextNotificationTime())
+                .append("done", false);
         this.collection.insertOne(activityDB);
     }
 
@@ -83,13 +84,16 @@ public class ActivityDAO {
                 search.getString("lastNotificationTime"),
                 search.getString("nextNotificationTime"));
         activity.setId(search.getObjectId("_id").toString());
+        activity.setDone(search.getBoolean("done", false));
 
         return activity;
     }
 
-    public ArrayList<Activity> getAllFromCategory(String _idCategory) {
+    public ArrayList<Activity> getAllFromCategory(String _idCategory, boolean onlyUndone) {
         ArrayList<Activity> activityList = new ArrayList<>();
         Document query = new Document("_idCategory", _idCategory);
+        if (onlyUndone)
+            query.append("done", false);
         FindIterable<Document> search = collection.find(query);
         if (search == null) {
             return null;
@@ -105,6 +109,7 @@ public class ActivityDAO {
                     current.getString("lastNotificationTime"),
                     current.getString("nextNotificationTime"));
             activity.setId(current.getObjectId("_id").toString());
+            activity.setDone(current.getBoolean("done", false));
             activityList.add(activity);
         }
         return activityList;
@@ -131,6 +136,12 @@ public class ActivityDAO {
                 .append("notificationBehaviour", activity.getNotificationBehaviour())
                 .append("lastNotificationTime", activity.getLastNotificationTime())
                 .append("nextNotificationTime", activity.getNextNotificationTime());
+        collection.updateOne(query, new Document("$set", activityDB));
+    }
+    
+    public void setDone(String _id){
+        Document query = new Document("_id", new ObjectId(_id));
+        Document activityDB = new Document("done", true);
         collection.updateOne(query, new Document("$set", activityDB));
     }
 }

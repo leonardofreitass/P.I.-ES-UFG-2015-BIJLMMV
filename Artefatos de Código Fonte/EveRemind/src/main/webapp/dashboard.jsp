@@ -194,10 +194,13 @@
                 </div>
                 <div class="modal-footer">
                     <div class="row">
-                        <div class="col-md-6 left">
+                        <div class="col-md-4 left">
                             <button type="button" class="btn btn-danger" ng-click="deleteActivity()">{{'dashboard.showActivity.delete' | translate}}</button>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4 center">
+                            <button type="button" class="btn btn-warning" bs-dynamic-tooltip="{title: 'dashboard.tooltips.markDone'}" ng-click="markDoneActivity()">{{'dashboard.showActivity.setDone' | translate}}</button>
+                        </div>
+                        <div class="col-md-4">
                             <button type="button" class="btn btn-default" data-dismiss="modal">{{'dashboard.showActivity.cancel' | translate}}</button>
                             <button ng-if="data.updateActivity.disabled" type="button" class="btn btn-dark" ng-click="updateActivity()">{{'dashboard.showActivity.edit' | translate}}</button>
                             <button ng-if="!data.updateActivity.disabled" type="button" class="btn btn-dark" ng-click="saveActivity()">{{'dashboard.showActivity.update' | translate}}</button>

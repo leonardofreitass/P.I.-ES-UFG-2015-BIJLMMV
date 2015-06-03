@@ -38,6 +38,7 @@ public class Activity {
     private String hour;
     private String notes;
     private boolean notificationBehaviour;
+    private boolean done;
     private String lastNotificationTime;
     private String nextNotificationTime;
     
@@ -140,4 +141,14 @@ public class Activity {
     public void setNextNotificationTime(String nextNotificationTime) {
         this.nextNotificationTime = nextNotificationTime;
     }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+    
+    
 }

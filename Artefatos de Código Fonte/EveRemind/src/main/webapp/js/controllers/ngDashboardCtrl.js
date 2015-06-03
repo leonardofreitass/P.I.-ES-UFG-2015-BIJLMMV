@@ -418,6 +418,22 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             }
         });
     };
+    
+    $scope.markDoneActivity = function () {
+        var id = $scope.data.categories[$scope.data.editActivityC].activities[$scope.data.editActivityA].id;
+        $.ajax({
+            dataType: "text",
+            url: "ServletUpdateDone?id=" + id,
+            success: function () {
+                $scope.$storage.refreshCategories = true;
+                $scope.$storage.$save();
+                $scope.$apply();
+                $('#modalDeleteActivity').modal('hide');
+                $('#modalShowActivity').modal('hide');
+                ngNotifier.notify("dashboard.markDoneActivityMsg");
+            }
+        });
+    };
 
     $scope.addCategory = function () {
         $scope.data.adding = true;
