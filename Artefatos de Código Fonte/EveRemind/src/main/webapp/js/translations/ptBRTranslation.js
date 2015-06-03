@@ -127,7 +127,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 modalTitle: "<strong>{{category}}</strong> | {{activity}}",
                 cancel: "Cancelar",
                 delete: "Excluir",
-                edit: "Editar"
+                edit: "Editar",
+                update: "Salvar Alterações"
             },
             tooltips: {
                 addCategory: "Adicionar categoria de atividades",
@@ -141,16 +142,20 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                               "<strong class='span-danger'>Crítico:</strong> E-mail enviado a cada 12 horas, a 6, 3 e 1 hora da data/hora."
             },
             errors: {
+                change: "Nenhuma alteração foi realizada.",
                 addCategoryName: "Insira o nome da categoria.",
                 alreadyRegistered: "Uma categoria com este nome já foi cadastrada!",
                 editingCategory: "Termine de editar uma categoria antes de começar a editar outra.",
                 addActivityInput: "Preencha todos os campos.",
-                addActivityLength: "O nome da atividade é limitado em 80 caracteres."
+                addActivityLength: "O nome da atividade é limitado em 80 caracteres.",
+                addCategoryLength: "O nome da categoria é limitado em 20 caracteres."
             },
             addCategory: "Categoria criada.",
             editCategoryMsg: "Categoria editada.",
             deleteCategoryMsg: "Categoria excluída.",
-            createdActivity: "Atividade criada."
+            createdActivity: "Atividade criada.",
+            updatedActivity: "Atividade modificada.",
+            deleteActivityMsg: "Atividade excluída."
         },
         verifyEmail: {
             primary: {
@@ -197,6 +202,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             },
             errors: {
                 required: "Preencha todos os campos.",
+                change: "Nenhuma alteração foi realizada.",
                 auth: "A senha atual está incorreta!",
                 authDelete: "O email e a senha não correspondem!",
                 notUser: "Este não é o seu endereço de email!",

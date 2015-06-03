@@ -46,6 +46,7 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
         }
     };
     
+    
     $scope.forms = {
         
     };
@@ -54,6 +55,10 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
         newEmail = $scope.data.email;
         if ($scope.data.email === "" || $scope.data.secondaryEmail === "" || $scope.data.fullName === "") {
             ngNotifier.error("account.errors.required");
+            return;
+        }
+        if ($scope.data.email === $scope.$storage.sessionUser.email && $scope.data.secondaryEmail === $scope.$storage.sessionUser.secondaryEmail && $scope.data.fullName === $scope.$storage.sessionUser.fullName) {
+            ngNotifier.error("account.errors.change");
             return;
         }
         if ($scope.forms.accountForm.inputEmail.$error.email){
@@ -79,6 +84,10 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
     };
     
     $scope.deleteUser = function(){
+        if ($scope.data.delete.email === "" || $scope.data.delete.password === ""){
+            ngNotifier.error("account.errors.required");
+            return;
+        }
         if ($scope.data.delete.email !== email){
             ngNotifier.error("account.errors.notUser");
             return;
@@ -94,6 +103,10 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
 
 
     $scope.updatePassword = function () {
+        if ($scope.data.newPassword === "" || $scope.data.repeatNewPassword === "" || $scope.data.currentPassword === ""){
+            ngNotifier.error("account.errors.required");
+            return;
+        }
         if ($scope.data.newPassword !== $scope.data.repeatNewPassword) {
             ngNotifier.error("signup.errors.notMatch");
             return;

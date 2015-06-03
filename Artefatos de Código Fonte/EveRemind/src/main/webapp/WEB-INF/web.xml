@@ -64,6 +64,14 @@
         <servlet-name>ServletCreateActivity</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletCreateActivity</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletUpdateActivity</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletUpdateActivity</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletDeleteActivity</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletDeleteActivity</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>ServletCreateActivity</servlet-name>
         <url-pattern>/ServletCreateActivity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletUpdateActivity</servlet-name>
+        <url-pattern>/ServletUpdateActivity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletDeleteActivity</servlet-name>
+        <url-pattern>/ServletDeleteActivity</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

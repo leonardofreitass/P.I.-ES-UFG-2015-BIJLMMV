@@ -29,6 +29,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -66,7 +67,7 @@ public class ActivityDAO {
     }
 
     public Activity getOne(String _id) {
-        Document query = new Document("_id", _id);
+        Document query = new Document("_id",  new ObjectId(_id));
         Document search = collection.find(query).first();
         if (search == null) {
             return null;
@@ -110,12 +111,12 @@ public class ActivityDAO {
     }
 
     public void delete(String _id) {
-        Document query = new Document("_id", _id);
+        Document query = new Document("_id",  new ObjectId(_id));
         collection.deleteOne(query);
     }
 
     public void updateInfo(String _id, Activity activity) {
-        Document query = new Document("_id", _id);
+        Document query = new Document("_id", new ObjectId(_id));
         Document activityDB = new Document("_idCategory", activity.getIdCategory())
                 .append("name", activity.getName())
                 .append("priority", activity.getPriority())

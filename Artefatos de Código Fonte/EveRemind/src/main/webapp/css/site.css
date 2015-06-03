@@ -535,3 +535,10 @@ td > span > .bootstrap-timepicker-minute{
 .option-danger:hover, .option-danger:focus{
     background-color: #C9302C !important;
 }
+
+.loading {
+    background: #fff url('../img/loading.gif') no-repeat 50% 50%;
+    height: 100%;
+    -webkit-transition: background-color 0;
+    transition: background-color 0;
+}

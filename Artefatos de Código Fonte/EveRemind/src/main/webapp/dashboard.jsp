@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:layout pageID="dashboard">
-    <div class="dashboard" ng-init='getUserCategories()'>
+    <div class="dashboard" ng-init='getUserCategories()' ng-hide="data.hideDash">
         <div class="table-row">
             <div ng-repeat="category in data.categories" ng-click="clickCategory($index)" ng-mouseenter="enterCategory($index)" ng-mouseleave="leaveCategory($index)" class="dashboard-column category-column cursor-pointer" ng-class="{'minimized-column': !isMaximized($index), 'maximized-column': isMaximized($index)}">
                 <div class="category-title" ng-class="{'minimized-column': !isMaximized($index), 'maximized-column': isMaximized($index)}">
@@ -67,12 +67,14 @@
                 <div class="form-group">
                     <label>{{'dashboard.newCategory.color' | translate }}</label>
                     <br>
-                    <input sp-palette class="spectrum-palette" ng-model="data.add.color" type="text" class="form-control">
+                    <input sp-palette class="spectrum-palette add-palette" ng-model="data.add.color" type="text" class="form-control">
                 </div>
                 <button type="button" class="btn btn-default" ng-click="cancelAddCategory()">{{'dashboard.newCategory.cancel' | translate }}</button>
                 <button type="button" class="btn btn-dark float-right" ng-click="saveAddCategory()">{{'dashboard.newCategory.save' | translate }}</button>
             </div>
         </div>
+    </div>
+    <div class="loading" ng-if="data.hideDash">
     </div>
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -115,7 +117,7 @@
                             </div>
                             <div class="col-md-2">
                                 <label>{{'dashboard.addActivity.time' | translate }}</label>
-                                <input bs-timepicker class='form-control' type='text'ng-model="data.newActivity.time">
+                                <input bs-timepicker="'#modalAddActivity'" class='form-control' type='text'ng-model="data.newActivity.time">
                             </div>
                             <div class="col-md-3">
                                 <label class="inline-blocker">{{'dashboard.addActivity.priority' | translate }}</label>
@@ -168,14 +170,14 @@
                             </div>
                             <div class="col-md-2">
                                 <label>{{'dashboard.addActivity.time' | translate }}</label>
-                                <input ng-disabled="data.updateActivity.disabled" bs-timepicker class='form-control' type='text'ng-model="data.updateActivity.time">
+                                <input ng-disabled="data.updateActivity.disabled" bs-timepicker="'#modalShowActivity'" class='form-control' type='text'ng-model="data.updateActivity.time">
                             </div>
                             <div class="col-md-3">
                                 <label class="inline-blocker">{{'dashboard.addActivity.priority' | translate }}</label>
                                 <div class="close float-none close-color-override inline-blocker priority-help" ng-click="popover($event)" bs-dynamic-popover="{title: 'dashboard.tooltips.priorityHelpTitle', content: 'dashboard.tooltips.priorityHelp', placement: 'right'}">
                                     <span class="glyphicon glyphicon-question-sign"></span>
                                 </div>
-                                <select ng-disabled="data.updateActivity.disabled" class='form-control selectpicker update-activity' ng-model="data.updateActivity.priority" data-style="{{getEditSelectStyle()}}">
+                                <select disabled="false" class='form-control selectpicker update-activity' ng-model="data.updateActivity.priority" data-style="{{getEditSelectStyle()}}">
                                     <option class="option-primary" value="0">{{'dashboard.addActivity.priorities.low' | translate }}</option>
                                     <option class="option-success" value="1">{{'dashboard.addActivity.priorities.mid' | translate }}</option>
                                     <option class="option-warning" value="2">{{'dashboard.addActivity.priorities.high' | translate }}</option>
@@ -193,11 +195,12 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-6 left">
-                            <button type="button" class="btn btn-danger" ng-click="deleteCategory()" disabled>{{'dashboard.showActivity.delete' | translate}}</button>
+                            <button type="button" class="btn btn-danger" ng-click="deleteActivity()">{{'dashboard.showActivity.delete' | translate}}</button>
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-default" data-dismiss="modal">{{'dashboard.showActivity.cancel' | translate}}</button>
-                            <button type="button" class="btn btn-dark" ng-click="updateCategory()" disabled>{{'dashboard.showActivity.edit' | translate}}</button>
+                            <button ng-if="data.updateActivity.disabled" type="button" class="btn btn-dark" ng-click="updateActivity()">{{'dashboard.showActivity.edit' | translate}}</button>
+                            <button ng-if="!data.updateActivity.disabled" type="button" class="btn btn-dark" ng-click="saveActivity()">{{'dashboard.showActivity.update' | translate}}</button>
                         </div>
                     </div>
                 </div>

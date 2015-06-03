@@ -28,10 +28,13 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
     $scope.$storage = $localStorage;
 
     $scope.data = {
+        hideDash: true,
         adding: false,
         editing: -1,
         deleting: -1,
         creating: -1,
+        editActivityA: -1,
+        editActivityC: -1,
         modalData: {},
         add: {
             name: "",
@@ -108,6 +111,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
                 'background-color': 'rgb(255, 255, 255)'
             }
         };
+        $(".spectrum-palette.add-palette").spectrum("set", "rgb(255, 255, 255)");
         $scope.data.adding = false;
     };
 
@@ -124,6 +128,8 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             },
             function () {
                 if ($scope.$storage.refreshCategories) {
+                    $scope.data.hideDash = true;
+                    $scope.$apply();
                     $scope.$storage.refreshCategories = null;
                     $scope.$storage.$save();
                     $scope.getUserCategories();
@@ -137,6 +143,10 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         var name = $scope.data.add.name, color = $scope.data.add.color, id = $scope.$storage.sessionUser._id;
         if ($scope.data.add.name === "") {
             ngNotifier.warning("dashboard.errors.addCategoryName");
+            return;
+        }
+        if ($scope.data.add.name.length > 20) {
+            ngNotifier.warning("dashboard.errors.addCategoryLength");
             return;
         }
         $.getJSON("ServletCheckCategory?name=" + name + "&idUser=" + id, {}, function (data) {
@@ -166,6 +176,14 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         var name = $scope.data.edit.name, color = $scope.data.edit.color, id = $scope.$storage.sessionUser._id;
         if ($scope.data.edit.name === "") {
             ngNotifier.warning("dashboard.errors.addCategoryName");
+            return;
+        }
+        if ($scope.data.edit.name.length > 20) {
+            ngNotifier.warning("dashboard.errors.addCategoryLength");
+            return;
+        }
+        if ($scope.data.edit.name === $scope.data.categories[index].name && $scope.data.edit.color === $scope.data.categories[index].color){
+            ngNotifier.warning("dashboard.errors.change");
             return;
         }
         if ($scope.data.categories[index].name !== name) {
@@ -229,7 +247,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         }
         $.ajax({
             dataType: "text",
-            url: "ServletCreateActivity?&name=" + name +
+            url: "ServletCreateActivity?name=" + name +
                     "&description=" + description +
                     "&date=" + date +
                     "&time=" + time +
@@ -316,6 +334,79 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         $scope.data.updateActivity.notification = activity.notification;
         $(".edit-switch").bootstrapSwitch('state', activity.notification);
         $(".edit-switch").bootstrapSwitch('disabled', true);
+        $scope.data.editActivityA = activityIndex;
+        $scope.data.editActivityC = categoryIndex;
+        $(".selectpicker.update-activity").attr("disabled", true);
+    };
+    
+    $scope.updateActivity = function () {
+        $scope.data.updateActivity.disabled = false;
+        $(".edit-switch").bootstrapSwitch('disabled', false);
+        $(".selectpicker.update-activity").attr("disabled", false);
+    };
+    
+    $scope.saveActivity = function () {
+        var name = $scope.data.updateActivity.name;
+        var description = $scope.data.updateActivity.description;
+        var date = $scope.data.updateActivity.date;
+        var time = $scope.data.updateActivity.time;
+        var priority = $scope.data.updateActivity.priority;
+        var notification = $scope.data.updateActivity.notification;
+        var idCategory = $scope.data.categories[$scope.data.editActivityC].id;
+        var oriActivity = $scope.data.categories[$scope.data.editActivityC].activities[$scope.data.editActivityA];
+        var id = $scope.data.categories[$scope.data.editActivityC].activities[$scope.data.editActivityA].id;
+        if (name === "" || description === "" || date === "" || time === "" || priority === "" || notification === "") {
+            ngNotifier.warning("dashboard.errors.addActivityInput");
+            return;
+        }
+        if (
+            name === oriActivity.name && 
+            description === oriActivity.description && 
+            date === oriActivity.date && 
+            time === oriActivity.time &&
+            priority === oriActivity.priority
+            ){
+            ngNotifier.warning("dashboard.errors.change");
+            return;      
+        }
+        if (name.length > 80) {
+            ngNotifier.warning("dashboard.errors.addActivityLength");
+            return;
+        }
+        $.ajax({
+            dataType: "text",
+            url: "ServletUpdateActivity?name=" + name +
+                    "&description=" + description +
+                    "&date=" + date +
+                    "&time=" + time +
+                    "&priority=" + priority + 
+                    "&notification=" + notification +
+                    "&idCategory=" + idCategory +
+                    "&id=" + id,
+            success: function () {
+                $scope.$storage.refreshCategories = true;
+                $scope.$storage.$save();
+                $scope.$apply();
+                $('#modalShowActivity').modal('hide');
+                ngNotifier.notify("dashboard.updatedActivity");
+            }
+        });
+    };
+    
+    $scope.deleteActivity = function () {
+        var id = $scope.data.categories[$scope.data.editActivityC].activities[$scope.data.editActivityA].id;
+        $.ajax({
+            dataType: "text",
+            url: "ServletDeleteActivity?id=" + id,
+            success: function () {
+                $scope.$storage.refreshCategories = true;
+                $scope.$storage.$save();
+                $scope.$apply();
+                $('#modalDeleteActivity').modal('hide');
+                $('#modalShowActivity').modal('hide');
+                ngNotifier.notify("dashboard.deleteActivityMsg");
+            }
+        });
     };
 
     $scope.addCategory = function () {
@@ -398,6 +489,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
     var updateCategories = function (data) {
         $scope.data.categories = data;
         $scope.data.editing = -1;
+        $scope.data.hideDash = false;
         $scope.$apply();
     };
 });

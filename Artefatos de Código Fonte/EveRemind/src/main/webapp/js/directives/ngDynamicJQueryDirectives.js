@@ -54,16 +54,20 @@ directive('bsDynamicTooltip', function (translateFilter) {
 }).
 directive('spPalette', function () {
     return {
-        link: function (scope, elem) {
+        require: "ngModel",
+        link: function (scope, elem, attrs, ngModel) {
             elem.spectrum({
                 showPaletteOnly: true,
-                showPalette:true,
+                showPalette: true,
                 color: 'rgb(255, 255, 255)',
                 palette: [
                     ["#f4cccc", "#fce5cd", "#fff2cc", "#d9ead3", "#d0e0e3", "#cfe2f3", "#d9d2e9", "#ead1dc", "#fff"],
                     ["#ea9999", "#f9cb9c", "#ffe599", "#b6d7a8", "#a2c4c9", "#9fc5e8", "#b4a7d6", "#d5a6bd", "#eee"],
                     ["#e06666", "#f6b26b", "#ffd966", "#93c47d", "#76a5af", "#6fa8dc", "#8e7cc3", "#c27ba0", "#ccc"]
-                ]
+                ],
+                move: function(color){
+                    ngModel.$setViewValue("" + color);
+                }
             });
         }
     };
@@ -82,10 +86,13 @@ directive('bsDatepicker', function () {
 }).
 directive('bsTimepicker', function () {
     return {
+        scope: {
+            appendTo: "=bsTimepicker"
+        },
         link: function (scope, elem) {
             elem.timepicker({
                 minuteStep: 1,
-                appendWidgetTo: '#modalAddActivity',
+                appendWidgetTo: scope.appendTo,
                 showMeridian: false,
                 defaultTime: false,
                 modalBackdrop: true
