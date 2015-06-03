@@ -241,6 +241,10 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             ngNotifier.warning("dashboard.errors.addActivityInput");
             return;
         }
+        if (time.indexOf(":") === 0 || time.indexOf(":") === time.length -1 || time.indexOf(":") === -1){
+            ngNotifier.warning("dashboard.errors.invalidTime");
+            return;
+        }
         if (name.length > 80) {
             ngNotifier.warning("dashboard.errors.addActivityLength");
             return;
@@ -337,12 +341,14 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         $scope.data.editActivityA = activityIndex;
         $scope.data.editActivityC = categoryIndex;
         $(".selectpicker.update-activity").attr("disabled", true);
+        $('.selectpicker.update-activity').selectpicker('refresh');
     };
     
     $scope.updateActivity = function () {
         $scope.data.updateActivity.disabled = false;
         $(".edit-switch").bootstrapSwitch('disabled', false);
         $(".selectpicker.update-activity").attr("disabled", false);
+        $('.selectpicker.update-activity').selectpicker('refresh');
     };
     
     $scope.saveActivity = function () {
@@ -368,6 +374,10 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             ){
             ngNotifier.warning("dashboard.errors.change");
             return;      
+        }
+        if (time.indexOf(":") === 0 || time.indexOf(":") === time.length -1 || time.indexOf(":") === -1){
+            ngNotifier.warning("dashboard.errors.invalidTime");
+            return;
         }
         if (name.length > 80) {
             ngNotifier.warning("dashboard.errors.addActivityLength");
