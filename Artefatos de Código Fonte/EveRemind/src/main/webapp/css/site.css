@@ -419,6 +419,10 @@ fieldset[disabled] .btn-dark.active {
     text-align: center;
 }
 
+.right{
+    text-align: right;
+}
+
 td > span > .bootstrap-timepicker-hour{
     margin-left: auto !important;
     margin-right: auto !important;

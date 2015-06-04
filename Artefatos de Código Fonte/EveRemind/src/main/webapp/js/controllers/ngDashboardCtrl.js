@@ -370,7 +370,8 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             description === oriActivity.description && 
             date === oriActivity.date && 
             time === oriActivity.time &&
-            priority === oriActivity.priority
+            priority === oriActivity.priority &&
+            notification === oriActivity.notification
             ){
             ngNotifier.warning("dashboard.errors.change");
             return;      
