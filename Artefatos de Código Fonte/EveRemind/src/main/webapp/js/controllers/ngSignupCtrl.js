@@ -56,12 +56,15 @@ angular.module('everemindApp').controller('ngSignupCtrl', function ($scope, ngNo
             ngNotifier.error("signup.errors.sameEmail");
             return;
         }
+        var onlyLN = /^([a-zA-Z0-9]+)$/;
+        var hasL = /[A-Z]/i;
+        var hasN = /\d/;
+        if ($scope.forms.signupForm.$error.minlength || !onlyLN.test($scope.data.password) || !hasL.test($scope.data.password) || !hasN.test($scope.data.password)){
+            ngNotifier.error("signup.errors.passwordRegex");
+            return; 
+        }
         if ($scope.data.password !== $scope.data.passwordAgain) {
             ngNotifier.error("signup.errors.notMatch");
-            return;
-        }
-        if ($scope.forms.signupForm.$error.minlength || $scope.forms.signupForm.$error.maxlength){
-            ngNotifier.error("signup.errors.passwordLength");
             return;
         }
         $.getJSON("ServletCheckEmail?email=" + $scope.data.email, {}, function (data) {

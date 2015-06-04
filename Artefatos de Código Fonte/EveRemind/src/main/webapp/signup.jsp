@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <label>{{'signup.repeatPassword' | translate}}</label>
-                            <input name="inputRepeatPassword" ng-minlength="6" ng-maxlength="20" ng-model="data.passwordAgain" type="password" class="form-control" required>
+                            <input name="inputRepeatPassword" ng-minlength="8" ng-model="data.passwordAgain" type="password" class="form-control" required>
                         </div>
                         <small><sup>*</sup>{{'signup.confirmEmail' | translate}}</small>
                         </br></br>

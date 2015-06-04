@@ -58,7 +58,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 notMatch: "As senhas informadas devem ser iguais.",
                 registered: "O e-mail informado já foi registrado.",
                 sameEmail: "O e-mail principal e secundário devem ser diferentes.",
-                passwordLength: "A senha deve possuir entre 6 e 20 caracteres.",
+                passwordRegex: "A senha deve possuir no mínimo 8 caracteres com pelo menos uma letra e um dígito, e deve possuír apenas letras e números.",
                 notAnEmail: "O e-mail informado náo é válido.",
                 notASecondaryEmail: "O e-mail secundário informado náo é válido."
             },
