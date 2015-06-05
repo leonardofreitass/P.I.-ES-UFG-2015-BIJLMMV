@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="EveRemind:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="EveRemind-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="EveRemind:war exploded" />
+    </root>
+  </artifact>
+</component>

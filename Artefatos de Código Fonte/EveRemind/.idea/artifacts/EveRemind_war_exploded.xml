@@ -1,0 +1,29 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="EveRemind:war exploded">
+    <output-path>$PROJECT_DIR$/target/EveRemind-1.0-SNAPSHOT</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="EveRemind" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.mongodb:mongo-java-driver:3.0.0-beta2" />
+          <element id="library" level="project" name="Maven: io.netty:netty-buffer:4.0.24.Final" />
+          <element id="library" level="project" name="Maven: io.netty:netty-common:4.0.24.Final" />
+          <element id="library" level="project" name="Maven: io.netty:netty-handler:4.0.24.Final" />
+          <element id="library" level="project" name="Maven: io.netty:netty-transport:4.0.24.Final" />
+          <element id="library" level="project" name="Maven: io.netty:netty-codec:4.0.24.Final" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.6" />
+          <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.json:json:20141113" />
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.4.5" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/EveRemind-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="EveRemind/web/Web" />
+    </root>
+  </artifact>
+</component>
