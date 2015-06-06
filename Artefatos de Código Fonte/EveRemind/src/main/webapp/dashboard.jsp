@@ -10,47 +10,53 @@
     <div class="dashboard" ng-init='getUserCategories()' ng-hide="data.hideDash">
         <div class="table-row">
             <div ng-repeat="category in data.categories" ng-click="clickCategory($index)" ng-mouseenter="enterCategory($index)" ng-mouseleave="leaveCategory($index)" class="dashboard-column category-column cursor-pointer" ng-class="{'minimized-column': !isMaximized($index), 'maximized-column': isMaximized($index)}">
-                <div class="category-title" ng-class="{'minimized-column': !isMaximized($index), 'maximized-column': isMaximized($index)}">
-                    <label class="cursor-pointer">{{category.name}}</label>
-                </div>
-                <div class="full-height" ng-style="getCategoryColor($index)">
-                    <div ng-show="isMaximized($index)">
-                        <div ng-show="data.editing !== $index" class="row">
-                            <div class="col-md-4">
-                                <button bs-dynamic-tooltip="{title: 'dashboard.tooltips.editCategory'}" type="button" class="btn btn-dark full-button" ng-click="openEditing($index)">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="close float-none close-color-override add-activity" ng-click="openAddActivity($index)" bs-dynamic-tooltip="{title: 'dashboard.tooltips.addActivity'}" data-toggle="modal" data-target="#modalAddActivity">
-                                    <span class="add-activity-button glyphicon glyphicon-plus"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <button bs-dynamic-tooltip="{title: 'dashboard.tooltips.deleteCategory'}" type="button" class="btn btn-dark full-button" ng-click="openDeleting($index)" data-toggle="modal" data-target="#modalDelete">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>
-                            </div>
+                <div class="table-div">    
+                    <div class="category-title-row">
+                        <div class="category-title" ng-class="{'minimized-column': !isMaximized($index), 'maximized-column': isMaximized($index)}">
+                            <label class="cursor-pointer">{{category.name}}</label>
                         </div>
-                        <div ng-show="data.editing === $index">
-                            <div class="form-group">
-                                <label class="bordered-text">{{'dashboard.editCategory.name' | translate }}</label>
-                                <input ng-model="data.edit.name" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label class="bordered-text">{{'dashboard.editCategory.color' | translate }}</label>
-                                <br>
-                                <input sp-palette ng-attr-id="{{'editColor' + $index}}" class="spectrum-palette" ng-model="data.edit.color" type="text" class="form-control">
-                            </div>
-                            <button type="button" class="btn btn-default" ng-click="openEditing($index)">{{'dashboard.editCategory.cancel' | translate }}</button>
-                            <button type="button" class="btn btn-dark float-right" ng-click="editCategory($index)">{{'dashboard.editCategory.save' | translate }}</button>
-                        </div>
-                        <br> 
                     </div>
-                    <div class="activity-box" ng-repeat="activity in category.activities" ng-click="showActivity($parent.$index, $index)" ng-style="getPriorityColor(activity.priority)" role="button" data-toggle="modal" data-target="#modalShowActivity">
-                        <span class="activity-name">{{activity.name}}</span>
-                        <div ng-if="isMaximized($parent.$index)" class="activity-date-time"><span class="activity-date">{{activity.date}}</span> <span class="activity-time">{{activity.time}}</span></div>
-                        <br>
+                    <div class="full-height-row">
+                        <div class="full-height" ng-style="getCategoryColor($index)">
+                            <div ng-show="isMaximized($index)">
+                                <div ng-show="data.editing !== $index" class="row">
+                                    <div class="col-md-4">
+                                        <button bs-dynamic-tooltip="{title: 'dashboard.tooltips.editCategory'}" type="button" class="btn btn-dark full-button" ng-click="openEditing($index)">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="close float-none close-color-override add-activity" ng-click="openAddActivity($index)" bs-dynamic-tooltip="{title: 'dashboard.tooltips.addActivity'}" data-toggle="modal" data-target="#modalAddActivity">
+                                            <span class="add-activity-button glyphicon glyphicon-plus"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button bs-dynamic-tooltip="{title: 'dashboard.tooltips.deleteCategory'}" type="button" class="btn btn-dark full-button" ng-click="openDeleting($index)" data-toggle="modal" data-target="#modalDelete">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div ng-show="data.editing === $index">
+                                    <div class="form-group">
+                                        <label class="bordered-text">{{'dashboard.editCategory.name' | translate }}</label>
+                                        <input ng-model="data.edit.name" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="bordered-text">{{'dashboard.editCategory.color' | translate }}</label>
+                                        <br>
+                                        <input sp-palette ng-attr-id="{{'editColor' + $index}}" class="spectrum-palette" ng-model="data.edit.color" type="text" class="form-control">
+                                    </div>
+                                    <button type="button" class="btn btn-default" ng-click="openEditing($index)">{{'dashboard.editCategory.cancel' | translate }}</button>
+                                    <button type="button" class="btn btn-dark float-right" ng-click="editCategory($index)">{{'dashboard.editCategory.save' | translate }}</button>
+                                </div>
+                                <br> 
+                            </div>
+                            <div class="activity-box" ng-repeat="activity in category.activities" ng-click="showActivity($parent.$index, $index)" ng-style="getPriorityColor(activity.priority)" role="button" data-toggle="modal" data-target="#modalShowActivity">
+                                <span class="activity-name">{{activity.name}}</span>
+                                <div ng-if="isMaximized($parent.$index)" class="activity-date-time"><span class="activity-date">{{activity.date}}</span> <span class="activity-time">{{activity.time}}</span></div>
+                                <br>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,17 +66,19 @@
                 </div>
             </div>
             <div ng-show="data.adding" class="dashboard-column new-category-column" ng-style="data.add.style">
-                <div class="form-group">
-                    <label>{{'dashboard.newCategory.name' | translate }}</label>
-                    <input ng-model="data.add.name" type="text" class="form-control">
+                <div class="padding-box">
+                    <div class="form-group">
+                        <label>{{'dashboard.newCategory.name' | translate }}</label>
+                        <input ng-model="data.add.name" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>{{'dashboard.newCategory.color' | translate }}</label>
+                        <br>
+                        <input sp-palette class="spectrum-palette add-palette" ng-model="data.add.color" type="text" class="form-control">
+                    </div>
+                    <button type="button" class="btn btn-default" ng-click="cancelAddCategory()">{{'dashboard.newCategory.cancel' | translate }}</button>
+                    <button type="button" class="btn btn-dark float-right" ng-click="saveAddCategory()">{{'dashboard.newCategory.save' | translate }}</button>
                 </div>
-                <div class="form-group">
-                    <label>{{'dashboard.newCategory.color' | translate }}</label>
-                    <br>
-                    <input sp-palette class="spectrum-palette add-palette" ng-model="data.add.color" type="text" class="form-control">
-                </div>
-                <button type="button" class="btn btn-default" ng-click="cancelAddCategory()">{{'dashboard.newCategory.cancel' | translate }}</button>
-                <button type="button" class="btn btn-dark float-right" ng-click="saveAddCategory()">{{'dashboard.newCategory.save' | translate }}</button>
             </div>
         </div>
     </div>

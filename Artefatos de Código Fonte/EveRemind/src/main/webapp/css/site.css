@@ -266,6 +266,12 @@ fieldset[disabled] .btn-dark.active {
     display: table;
 }
 
+.table-div{
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+
 .table-row{
     display: table-row;
 }
@@ -274,6 +280,7 @@ fieldset[disabled] .btn-dark.active {
     display: table-cell;
     height: 100%;
     border-right: solid 1px #4E4E4E;
+    padding: 0px;
 }
 
 .not-first-column{
@@ -286,13 +293,23 @@ fieldset[disabled] .btn-dark.active {
     border-top: solid 1px #4E4E4E;
 }
 
-.category-title{
+.category-title-row{
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     padding: 5px;
     white-space: nowrap;
     overflow-x: hidden;
-    height: 5%;
+    height: 31px;
+    display: table-row;
+}
+
+.category-title{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 31px;
 }
 
 .category-column:hover .category-title.minimized-column{
@@ -311,13 +328,16 @@ fieldset[disabled] .btn-dark.active {
 }
 
 .new-category-column{
-    padding: 5px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     min-width: 200px !important;
     border-top: solid 1px #4E4E4E;
     overflow-x: hidden;
+}
+
+.padding-box{
+    padding: 5px;
 }
 
 .minimized-column{
@@ -330,7 +350,6 @@ fieldset[disabled] .btn-dark.active {
 
 .add-category-column{
     display: table-cell;
-    padding: 5px;
     width: 50px !important;
     vertical-align: middle;
 }
@@ -365,9 +384,14 @@ fieldset[disabled] .btn-dark.active {
     cursor: pointer;
 }
 
+.full-height-row{
+    height: 100%;
+    display: table-row; 
+}
+
 .full-height{
     border-top: solid 1px #4E4E4E;
-    height: 95%;
+    height: 100%;
 }
 
 .close-color-override{
