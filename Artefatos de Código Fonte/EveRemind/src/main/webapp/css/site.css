@@ -478,11 +478,15 @@ td > span > .bootstrap-timepicker-minute{
     border-radius: 3px;
     padding: 2px;
     position: relative;
+    word-break: break-all !important;
+    overflow-wrap: break-word;
+    overflow: hidden;
 }
 
 .activity-box:hover{
     color: white;
     background-color: #E67D23;
+    word-break: break-all;
 }
 
 .activity-box:before {
@@ -497,9 +501,16 @@ td > span > .bootstrap-timepicker-minute{
   border-radius: 3px;
 }
 
+.modal-header{
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
 
 .activity-name{
     font-weight: bold;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
 }
 
 .activity-date-time{
