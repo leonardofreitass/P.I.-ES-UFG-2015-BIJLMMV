@@ -392,6 +392,14 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             ngNotifier.warning("dashboard.errors.addActivityLength");
             return;
         }
+        var dateTime = inputToDate(date, time);
+        var now = new Date();
+        var minSpace = 1000 * 60 * 60; // One hour
+        var minDateTime = (new Date(now.getTime() + minSpace).toLocaleString()).substring(0, (new Date(now.getTime() + minSpace).toLocaleString()).lastIndexOf(":"));
+        if ((dateTime.getTime() - now.getTime()) < minSpace) {
+            ngNotifier.warning("dashboard.errors.minSpace", {minDateTime: minDateTime});
+            return;
+        }
         $.ajax({
             dataType: "text",
             url: "ServletUpdateActivity?name=" + name +

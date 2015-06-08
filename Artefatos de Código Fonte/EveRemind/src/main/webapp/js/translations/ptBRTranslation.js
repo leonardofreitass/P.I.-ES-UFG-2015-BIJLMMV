@@ -146,7 +146,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             errors: {
                 change: "Nenhuma alteração foi realizada.",
                 invalidTime: "Hora inválida.",
-                minSpace: "A ocorrência de uma atividade deve ser a pelo menos 1 hora do instante atual, ou seja, {{minDateTime}}",
+                minSpace: "A ocorrência de uma atividade deve ser a pelo menos 1 hora do instante atual, ou seja, {{minDateTime}}.",
                 addCategoryName: "Insira o nome da categoria.",
                 alreadyRegistered: "Uma categoria com este nome já foi cadastrada!",
                 editingCategory: "Termine de editar uma categoria antes de começar a editar outra.",
