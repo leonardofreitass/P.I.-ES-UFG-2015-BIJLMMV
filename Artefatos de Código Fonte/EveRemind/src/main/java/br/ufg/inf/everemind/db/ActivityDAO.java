@@ -28,6 +28,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
+import java.util.Calendar;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -89,7 +90,7 @@ public class ActivityDAO {
         return activity;
     }
 
-    public ArrayList<Activity> getAllFromCategory(String _idCategory, boolean onlyUndone) {
+    public ArrayList<Activity> getAllFromCategory(String _idCategory, boolean onlyUndone, boolean onlyInTime) {
         ArrayList<Activity> activityList = new ArrayList<>();
         Document query = new Document("_idCategory", _idCategory);
         if (onlyUndone)
@@ -110,7 +111,8 @@ public class ActivityDAO {
                     current.getString("nextNotificationTime"));
             activity.setId(current.getObjectId("_id").toString());
             activity.setDone(current.getBoolean("done", false));
-            activityList.add(activity);
+            if (activity.getDateTime().after(Calendar.getInstance()) || !onlyInTime)
+                activityList.add(activity);
         }
         return activityList;
     }

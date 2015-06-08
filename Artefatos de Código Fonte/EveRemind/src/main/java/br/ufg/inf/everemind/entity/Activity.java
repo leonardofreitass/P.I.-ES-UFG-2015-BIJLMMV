@@ -23,6 +23,9 @@
  */
 package br.ufg.inf.everemind.entity;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author Igor
@@ -109,6 +112,17 @@ public class Activity {
     public void setHour(String hour) {
         this.hour = hour;
     }
+    
+    public Calendar getDateTime(){
+        int d = Integer.parseInt(this.date.substring(0, 2));
+        int m = Integer.parseInt(this.date.substring(3, 5)) - 1;
+        int y = Integer.parseInt(this.date.substring(6, 10));
+        int h = Integer.parseInt(this.hour.substring(0, this.hour.indexOf(":")));
+        int min = Integer.parseInt(this.hour.substring(this.hour.indexOf(":") + 1, this.hour.indexOf(":") + 3));
+        Calendar cal = new GregorianCalendar();
+        cal.set(y, m, d, h, min);
+        return cal;
+    }
 
     public String getNotes() {
         return this.notes;
@@ -149,6 +163,4 @@ public class Activity {
     public void setDone(boolean done) {
         this.done = done;
     }
-    
-    
 }

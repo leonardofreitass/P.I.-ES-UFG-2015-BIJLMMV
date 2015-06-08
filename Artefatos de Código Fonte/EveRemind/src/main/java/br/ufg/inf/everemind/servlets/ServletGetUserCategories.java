@@ -27,9 +27,13 @@ import br.ufg.inf.everemind.db.ActivityDAO;
 import br.ufg.inf.everemind.db.CategoryDAO;
 import br.ufg.inf.everemind.entity.Activity;
 import br.ufg.inf.everemind.entity.Category;
+import br.ufg.inf.everemind.util.ComparatorsModels;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -57,14 +61,13 @@ public class ServletGetUserCategories extends HttpServlet {
         response.setContentType("application/json");
 
         try (PrintWriter out = response.getWriter()) {
-
             String idUser = request.getParameter("idUser");
             CategoryDAO categoryDao = CategoryDAO.getInstance();
             ActivityDAO activityDao = ActivityDAO.getInstance();
             ArrayList<Category> list = categoryDao.getAll(idUser);
             JSONArray array = new JSONArray();
             for (Category category : list) {
-                ArrayList<Activity> listActivities = activityDao.getAllFromCategory(category.getId(), true);
+                ArrayList<Activity> listActivities = activityDao.getAllFromCategory(category.getId(), true, true);
                 JSONArray arrayActivities = new JSONArray();
                 for (Activity activity : listActivities) {
                     JSONObject activityJSON = new JSONObject();
