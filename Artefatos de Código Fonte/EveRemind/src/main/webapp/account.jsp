@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label>{{'account.modalPassword.repeatNewPassword' | translate}}</label>
-                        <input ng-model="data.repeatNewPassword" type="password" class="form-control">
+                        <input  ng-model="data.repeatNewPassword" type="password" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">

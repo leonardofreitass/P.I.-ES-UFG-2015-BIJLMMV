@@ -115,6 +115,13 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
             ngNotifier.error("account.errors.samePassword");
             return;
         }
+        var onlyLN = /^([a-zA-Z0-9]+)$/;
+        var hasL = /[A-Z]/i;
+        var hasN = /\d/;
+        if ($scope.data.newPassword.length < 8 || !onlyLN.test($scope.data.newPassword) || !hasL.test($scope.data.newPassword) || !hasN.test($scope.data.newPassword)){
+            ngNotifier.error("signup.errors.passwordRegex");
+            return; 
+        }
         $.getJSON("ServletAuthenticate?email=" + email + "&password=" + $scope.data.currentPassword, {}, function (data) {
             if (!data.auth) {
                 ngNotifier.error("account.errors.auth");
