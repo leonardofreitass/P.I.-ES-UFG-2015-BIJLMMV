@@ -27,20 +27,20 @@
 
 angular.module('everemindApp').factory('ngNotifier', function (translateFilter) {
     return {
-        notify: function (msg) {
-            toastr.success(translateFilter(msg));
+        notify: function (msg, param) {
+            toastr.success(translateFilter(msg, param));
         },
 
-        error: function (msg) {
-            toastr.error(translateFilter(msg));
+        error: function (msg, param) {
+            toastr.error(translateFilter(msg, param));
         },
         
-        warning: function (msg) {
-            toastr.warning(translateFilter(msg));
+        warning: function (msg, param) {
+            toastr.warning(translateFilter(msg, param));
         },
         
-        info: function (msg) {
-            toastr.info(translateFilter(msg));
+        info: function (msg, param) {
+            toastr.info(translateFilter(msg, param));
         }
     };
 });

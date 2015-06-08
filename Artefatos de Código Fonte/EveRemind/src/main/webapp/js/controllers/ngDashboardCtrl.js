@@ -249,6 +249,14 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
             ngNotifier.warning("dashboard.errors.addActivityLength");
             return;
         }
+        var dateTime = inputToDate(date, time);
+        var now = new Date();
+        var minSpace = 1000 * 60 * 60; // One hour
+        var minDateTime = (new Date(now.getTime() + minSpace).toLocaleString()).substring(0, (new Date(now.getTime() + minSpace).toLocaleString()).lastIndexOf(":"));
+        if ((dateTime.getTime() - now.getTime()) < minSpace) {
+            ngNotifier.warning("dashboard.errors.minSpace", {minDateTime: minDateTime});
+            return;
+        }
         $.ajax({
             dataType: "text",
             url: "ServletCreateActivity?name=" + name +
@@ -518,5 +526,14 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         $scope.data.editing = -1;
         $scope.data.hideDash = false;
         $scope.$apply();
+    };
+    
+    var inputToDate = function(date, time){
+        var d = parseInt(date.substr(0, 2));
+        var m = parseInt(date.substr(3, 2));
+        var y = parseInt(date.substr(6, 4));
+        var h = parseInt(time.substr(0, 2));
+        var min = parseInt(time.substr(3, 2));
+        return new Date(y, m - 1, d, h, min);
     };
 });
