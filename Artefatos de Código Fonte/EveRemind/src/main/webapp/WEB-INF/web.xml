@@ -76,6 +76,10 @@
         <servlet-name>ServletUpdateDone</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletUpdateDone</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletGetUserActivities</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletGetUserActivities</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>ServletUpdateDone</servlet-name>
         <url-pattern>/ServletUpdateDone</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletGetUserActivities</servlet-name>
+        <url-pattern>/ServletGetUserActivities</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

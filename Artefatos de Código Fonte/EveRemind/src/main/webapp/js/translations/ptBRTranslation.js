@@ -167,7 +167,13 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             markDoneActivityMsg: "Atividade marcada como feita."
         },
         listView: {
-            categories: "Categorias"
+            categories: "Categorias",
+            allCategory: "Todas as categorias",
+            sortBy: {
+                label: "Ordernar por",
+                date: "Data",
+                priority: "Prioridade"
+            }
         },
         verifyEmail: {
             primary: {

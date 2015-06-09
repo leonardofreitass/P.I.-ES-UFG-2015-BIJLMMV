@@ -32,7 +32,10 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
         showOneActivity: false,
         loadingCategories: true,
         loadingActivities: false,
-        categories: []
+        sortBy: "date",
+        categories: [],
+        activities: [],
+        loadCat: ""
     };
     
     $scope.$watch(
@@ -51,10 +54,38 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
             }
     );
     
+    $scope.$watch(
+            function (scope) {
+                return scope.data.loadCat;
+            },
+            function () {
+                $scope.loadActivities();
+                $scope.$apply();
+            }
+    );
+    
+    $scope.$watch(
+            function (scope) {
+                return scope.data.sortBy;
+            },
+            function () {
+                $scope.loadActivities();
+                $scope.$apply();
+            }
+    );
+    
     
     $scope.refreshCategories = function () {
         $.getJSON("ServletGetUserCategories?idUser=" + $scope.$storage.sessionUser._id + "&activities=false", {}, function (data) {
             updateCategories(data);
+        });
+    };
+    
+    $scope.loadActivities = function(){
+        $scope.data.showActivities = true;
+        $scope.data.loadingActivities = true;
+        $.getJSON("ServletGetUserActivities?idUser=" + $scope.$storage.sessionUser._id + "&category=" + $scope.data.loadCat + "&sortBy=" + $scope.data.sortBy, {}, function (data) {
+            updateActivities(data);
         });
     };
     
@@ -65,9 +96,35 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
         };
     };
     
+    $scope.getPriorityColor = function(priority, idCategory){
+        var color = "white";
+        for (var i = 0; i < $scope.data.categories.length; i++){
+            if ($scope.data.categories[i].id === idCategory){
+                color = $scope.data.categories[i].color;
+                break;
+            }
+        }
+        var priorities = {
+            "0": {border: '1px solid #337AB7', 'border-top': '5px solid #337AB7', 'background-color': color},
+            "1": {border: '1px solid #5CB85C', 'border-top': '5px solid #5CB85C', 'background-color': color},
+            "2": {border: '1px solid #F0AD4E', 'border-top': '5px solid #F0AD4E', 'background-color': color},
+            "3": {border: '1px solid #D9534F', 'border-top': '5px solid #D9534F', 'background-color': color}
+        };
+        if (!priorities[priority])
+            return {border: '1px solid black'};
+        
+        return priorities[priority];
+    };
+    
     var updateCategories = function(data){
         $scope.data.categories = data;
         $scope.data.loadingCategories = false;
+        $scope.$apply();
+    };
+    
+    var updateActivities = function(data){
+        $scope.data.activities = data;
+        $scope.data.loadingActivities = false;
         $scope.$apply();
     };
 });

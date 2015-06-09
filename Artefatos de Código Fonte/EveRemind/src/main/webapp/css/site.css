@@ -244,11 +244,10 @@ fieldset[disabled] .btn-dark.active {
 
 .btn-colored { 
     color: rgba(0, 0, 0, 0.8); 
-    background-color: #FFFFFF; 
-    border-color: #FFFFFF; 
     width: 100%;
     text-align: left;
     opacity: 1;
+    overflow: hidden;
 } 
 
 .colored-btn-box{
@@ -257,7 +256,7 @@ fieldset[disabled] .btn-dark.active {
 }
 
 .btn-colored:hover { 
-    color: #FFFFFF;
+    color: rgba(0, 0, 0, 0.8); 
     opacity: 0.8;
 } 
 
@@ -615,6 +614,7 @@ td > span > .bootstrap-timepicker-minute{
 
 .list-column{
     padding: 15px;
+    padding-top: 5px;
     width: 25%;
     height: 100%;
     display: table-cell;
@@ -630,4 +630,8 @@ td > span > .bootstrap-timepicker-minute{
 
 .hidden-element{
     visibility: hidden;
+}
+
+.bold{
+    font-weight: bold !important;
 }
