@@ -30,7 +30,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             titles: {
                 index: "Index",
                 signup: "Cadastro",
-                dashboard: "Dashboard",
+                dashboard: "Início",
+                listView: "Lista",
                 account: "Conta",
                 primaryEmailVerification: "Verificação de Email",
                 secondaryEmailVerification: "Verificação de Email"
@@ -73,7 +74,10 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             },
             menu: {
                 colapsedMenu: "Abrir Navegação",
-                dashboard: "Dashboard",
+                dashboard: "Início",
+                view: "Visualizar",
+                listView: "Lista",
+                calendarView: "Calendario",
                 account: "Conta",
                 exit: "Sair",
                 email: "E-mail",
@@ -161,6 +165,9 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             updatedActivity: "Atividade modificada.",
             deleteActivityMsg: "Atividade excluída.",
             markDoneActivityMsg: "Atividade marcada como feita."
+        },
+        listView: {
+            categories: "Categorias"
         },
         verifyEmail: {
             primary: {

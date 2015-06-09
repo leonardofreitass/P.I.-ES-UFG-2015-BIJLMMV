@@ -59,6 +59,10 @@ var pagesConfig = {
         ctrl: "ngDashboardCtrl",
         access: "auth"
     },
+    listView: {
+        ctrl: "ngListViewCtrl",
+        access: "auth"
+    },
     account: {
         ctrl: "ngAccountCtrl",
         access: "auth"

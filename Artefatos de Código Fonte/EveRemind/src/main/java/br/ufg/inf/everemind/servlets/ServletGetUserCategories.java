@@ -62,31 +62,35 @@ public class ServletGetUserCategories extends HttpServlet {
 
         try (PrintWriter out = response.getWriter()) {
             String idUser = request.getParameter("idUser");
+            boolean activities = Boolean.valueOf(request.getParameter("activities"));
             CategoryDAO categoryDao = CategoryDAO.getInstance();
             ActivityDAO activityDao = ActivityDAO.getInstance();
             ArrayList<Category> list = categoryDao.getAll(idUser);
             JSONArray array = new JSONArray();
             for (Category category : list) {
-                ArrayList<Activity> listActivities = activityDao.getAllFromCategory(category.getId(), true, true);
-                JSONArray arrayActivities = new JSONArray();
-                for (Activity activity : listActivities) {
-                    JSONObject activityJSON = new JSONObject();
-                    activityJSON.put("id", activity.getId());
-                    activityJSON.put("name", activity.getName());
-                    activityJSON.put("description", activity.getNotes());
-                    activityJSON.put("date", activity.getDate());
-                    activityJSON.put("time", activity.getHour());
-                    activityJSON.put("priority", activity.getPriority());
-                    activityJSON.put("notification", activity.getNotificationBehaviour());
-                    arrayActivities.put(activityJSON);
-                }
                 JSONObject categoryJSON = new JSONObject();
+                if (activities){
+                    ArrayList<Activity> listActivities = activityDao.getAllFromCategory(category.getId(), true, true);
+                    JSONArray arrayActivities = new JSONArray();
+                    for (Activity activity : listActivities) {
+                        JSONObject activityJSON = new JSONObject();
+                        activityJSON.put("id", activity.getId());
+                        activityJSON.put("name", activity.getName());
+                        activityJSON.put("description", activity.getNotes());
+                        activityJSON.put("date", activity.getDate());
+                        activityJSON.put("time", activity.getHour());
+                        activityJSON.put("priority", activity.getPriority());
+                        activityJSON.put("notification", activity.getNotificationBehaviour());
+                        arrayActivities.put(activityJSON);
+                    }
+                    categoryJSON.put("activities", arrayActivities);
+                }
                 categoryJSON.put("id", category.getId());
                 categoryJSON.put("name", category.getName());
                 categoryJSON.put("color", category.getColor());
                 categoryJSON.put("minimized", true);
                 categoryJSON.put("hovering", false);
-                categoryJSON.put("activities", arrayActivities);
+                
                 array.put(categoryJSON);
             }
             out.print(array);

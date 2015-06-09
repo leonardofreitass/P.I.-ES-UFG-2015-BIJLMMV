@@ -25,6 +25,14 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" ng-if="isLogged()">
                 <li ng-class="{'active' : pageID == 'dashboard'}"><a href="dashboard.jsp">{{'navbar.menu.dashboard' | translate}} <span class="sr-only">(current)</span></a></li>
+                <li ng-class="{'active' : pageID == 'listView' || pageID == 'calendarView'}" class="dropdown" ng-if="isLogged()">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{'navbar.menu.view' | translate}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="listView.jsp">{{'navbar.menu.listView' | translate}}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="calendarView.jsp">{{'navbar.menu.calendarView' | translate}}</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown" ng-if="isLogged()">

@@ -116,7 +116,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
     };
 
     $scope.getUserCategories = function () {
-        $.getJSON("ServletGetUserCategories?idUser=" + $scope.$storage.sessionUser._id, {}, function (data) {
+        $.getJSON("ServletGetUserCategories?idUser=" + $scope.$storage.sessionUser._id + "&activities=true", {}, function (data) {
             updateCategories(data);
         });
     };
@@ -251,7 +251,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         }
         var dateTime = inputToDate(date, time);
         var now = new Date();
-        var minSpace = 1000 * 60 * 61; // One hour
+        var minSpace = 1000 * 60 * 65; // One hour
         var minDateTime = (new Date(now.getTime() + minSpace).toLocaleString()).substring(0, (new Date(now.getTime() + minSpace).toLocaleString()).lastIndexOf(":"));
         if ((dateTime.getTime() - now.getTime()) < minSpace) {
             ngNotifier.warning("dashboard.errors.minSpace", {minDateTime: minDateTime});
@@ -394,7 +394,7 @@ angular.module('everemindApp').controller('ngDashboardCtrl', function ($scope, n
         }
         var dateTime = inputToDate(date, time);
         var now = new Date();
-        var minSpace = 1000 * 60 * 61; // One hour
+        var minSpace = 1000 * 60 * 65; // One hour
         var minDateTime = (new Date(now.getTime() + minSpace).toLocaleString()).substring(0, (new Date(now.getTime() + minSpace).toLocaleString()).lastIndexOf(":"));
         if ((dateTime.getTime() - now.getTime()) < minSpace) {
             ngNotifier.warning("dashboard.errors.minSpace", {minDateTime: minDateTime});
