@@ -42,6 +42,7 @@ public class Activity {
     private String notes;
     private boolean notificationBehaviour;
     private boolean done;
+    private boolean expired;
     private String lastNotificationTime;
     private String nextNotificationTime;
     
@@ -163,4 +164,14 @@ public class Activity {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+    
+    
 }

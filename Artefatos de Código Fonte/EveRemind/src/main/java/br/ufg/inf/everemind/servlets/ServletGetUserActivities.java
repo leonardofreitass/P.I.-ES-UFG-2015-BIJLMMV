@@ -62,6 +62,9 @@ public class ServletGetUserActivities extends HttpServlet {
             String idUser = request.getParameter("idUser");
             String categoryName = request.getParameter("category");
             String sortBy = request.getParameter("sortBy");
+            boolean onlyInTime = !Boolean.valueOf(request.getParameter("showOutOfDate"));
+            boolean onlyUndone = !Boolean.valueOf(request.getParameter("showDone"));
+            System.out.println("onlyInTime: " + onlyInTime + " / onlyUndone: " + onlyUndone);
             CategoryDAO categoryDao = CategoryDAO.getInstance();
             ActivityDAO activityDao = ActivityDAO.getInstance();
             ArrayList<Category> list = new ArrayList<>();
@@ -75,7 +78,7 @@ public class ServletGetUserActivities extends HttpServlet {
             JSONArray array = new JSONArray();
             ArrayList<Activity> listActivities = new ArrayList<>();
             for (Category category : list) {
-                listActivities.addAll(activityDao.getAllFromCategory(category.getId(), true, true));
+                listActivities.addAll(activityDao.getAllFromCategory(category.getId(), onlyUndone, onlyInTime));
             }
 
             Comparator comp;
@@ -96,6 +99,8 @@ public class ServletGetUserActivities extends HttpServlet {
                 activityJSON.put("time", activity.getHour());
                 activityJSON.put("priority", activity.getPriority());
                 activityJSON.put("notification", activity.getNotificationBehaviour());
+                activityJSON.put("done", activity.isDone());
+                activityJSON.put("expired", activity.isExpired());
                 array.put(activityJSON);
             }
             out.print(array);

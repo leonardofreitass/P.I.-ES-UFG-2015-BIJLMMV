@@ -168,12 +168,24 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
         },
         listView: {
             categories: "Categorias",
+            activities: "Atividades",
             allCategory: "Todas as categorias",
+            actions: "Ações",
+            orderingBy: "Ordenando por ",
             sortBy: {
                 label: "Ordernar por",
                 date: "Data",
                 priority: "Prioridade"
-            }
+            },
+            status: {
+                done: "Atividade concluida",
+                expired: "Atividade expirada",
+                inTime: "Atividade em andamento"
+            },
+            showDone: "Mostrar atividades concluidas",
+            notShowDone: "Esconder atividades concluidas",
+            showExpired: "Mostrar atividades expiradas",
+            notShowExpired: "Esconder atividades expiradas"
         },
         verifyEmail: {
             primary: {

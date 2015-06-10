@@ -10,7 +10,8 @@
     <div ng-init="refreshCategories()" ng-hide="data.loadingCategories" class="list-table">
         <div class="list-row">
             <div class="list-column">
-                <h3>{{'listView.categories'| translate}}</h3>
+                <h3 class='no-margin-bottom'>{{'listView.categories'| translate}}</h3>
+                <hr>
                 <br>
                 <div class="colored-btn-box">
                     <button class="btn btn-lg btn-colored btn-default" ng-click="data.loadCat = 'all'">{{'listView.allCategory'| translate}}</button>
@@ -20,19 +21,42 @@
                 </div>
             </div>
             <div ng-class="{'hidden-element': !data.showActivities}" class="list-column">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-sort dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                        {{'listView.sortBy.label' | translate }}
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-sort" role="menu" aria-labelledby="dropdownMenu1">
-                        <li ng-click="data.sortBy = 'date'" role="presentation"><a ng-class="{'bold': data.sortBy === 'date'}" role="menuitem" tabindex="-1" href="#">{{'listView.sortBy.date'| translate }}</a></li>
-                        <li ng-click="data.sortBy = 'priority'" role="presentation"><a ng-class="{'bold': data.sortBy === 'priority'}" role="menuitem" tabindex="-1" href="#">{{'listView.sortBy.priority'| translate }}</a></li>
-                    </ul>
+                <div class="activity-label-action">
+                    <span class="activity-label">
+                       {{'listView.activities'| translate}}
+                    </span>
+                    <span class="activity-action">
+                        <div class="dropdown inline-blocker">
+                            <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-default" data-target="#" href="/page.html">
+                                {{'listView.actions'| translate }} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">{{'listView.sortBy.label'| translate }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li ng-click="data.sortBy = 'date'" role="presentation"><a role="menuitem" tabindex="-1" href="#">{{'listView.sortBy.date'| translate }}</a></li>
+                                        <li ng-click="data.sortBy = 'priority'" role="presentation"><a role="menuitem" tabindex="-1" href="#">{{'listView.sortBy.priority'| translate }}</a></li>
+                                    </ul>
+                                </li>
+                                <li ng-if="!data.showDone" ng-click="data.showDone = true" role="presentation"><a role="menuitem" tabindex="-1" href="#">{{'listView.showDone'| translate }}</a></li>
+                                <li ng-if="data.showDone" ng-click="data.showDone = false" role="presentation"><a role="menuitem" tabindex="-1" href="#">{{'listView.notShowDone'| translate }}</a></li>
+                                <li ng-if="!data.showOutOfDate" ng-click="data.showOutOfDate = true" role="presentation"><a role="menuitem" tabindex="-1" href="#">{{'listView.showExpired'| translate }}</a></li>
+                                <li ng-if="data.showOutOfDate" ng-click="data.showOutOfDate = false" role="presentation"><a role="menuitem" tabindex="-1" href="#">{{'listView.notShowExpired'| translate }}</a></li>
+                            </ul>
+                        </div>
+                    </span> 
                 </div>
-                <br><br>
-                <div class="activity-box" ng-repeat="activity in data.activities" ng-style="getPriorityColor(activity.priority, activity.idCategory)" role="button" data-toggle="modal" data-target="#modalShowActivity">
-                    <span class="activity-name">{{activity.name}}</span>
+                <br>
+                <hr>
+                <div class="activity-date-time"><strong class="activity-time">{{'listView.orderingBy' | translate}}{{('listView.sortBy.' + data.sortBy) | translate}}</strong></div>
+                <br>
+                <div class="activity-box" ng-repeat="activity in data.activities"  ng-style="getPriorityColor(activity.priority, activity.idCategory, activity.done || activity.expired)" bs-dynamic-tooltip="getActivityTooltip(activity.done, activity.expired)" role="button">
+                    <div class="activity-date-time">
+                        <span class="activity-name">{{activity.name}}</span> 
+                        <span ng-if="activity.done" class="activity-time glyphicon glyphicon-ok"></span>
+                        <span ng-if="activity.expired && !activity.done" class="activity-time glyphicon glyphicon-warning-sign"></span>
+                        <span ng-if="!activity.done && !activity.expired" class="activity-time glyphicon glyphicon-time"></span>
+                    </div>
                     <div class="activity-date-time"><span class="activity-date">{{activity.date}}</span> <span class="activity-time">{{activity.time}}</span></div>
                     <br>
                 </div>

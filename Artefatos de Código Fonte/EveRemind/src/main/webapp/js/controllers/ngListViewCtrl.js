@@ -33,6 +33,8 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
         loadingCategories: true,
         loadingActivities: false,
         sortBy: "date",
+        showOutOfDate: false,
+        showDone: false,
         categories: [],
         activities: [],
         loadCat: ""
@@ -54,25 +56,10 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
             }
     );
     
-    $scope.$watch(
-            function (scope) {
-                return scope.data.loadCat;
-            },
-            function () {
-                $scope.loadActivities();
-                $scope.$apply();
-            }
-    );
-    
-    $scope.$watch(
-            function (scope) {
-                return scope.data.sortBy;
-            },
-            function () {
-                $scope.loadActivities();
-                $scope.$apply();
-            }
-    );
+    $scope.$watchGroup(['data.loadCat', 'data.sortBy', 'data.showOutOfDate', 'data.showDone'], function(newValues, oldValues, scope) {
+        $scope.loadActivities();
+        $scope.$apply();
+    });
     
     
     $scope.refreshCategories = function () {
@@ -82,11 +69,19 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
     };
     
     $scope.loadActivities = function(){
-        $scope.data.showActivities = true;
-        $scope.data.loadingActivities = true;
-        $.getJSON("ServletGetUserActivities?idUser=" + $scope.$storage.sessionUser._id + "&category=" + $scope.data.loadCat + "&sortBy=" + $scope.data.sortBy, {}, function (data) {
-            updateActivities(data);
-        });
+        if ($scope.data.loadCat !== ""){
+            $scope.data.showActivities = true;
+            $scope.data.loadingActivities = true;
+            $.getJSON(
+                    "ServletGetUserActivities?idUser=" + $scope.$storage.sessionUser._id + 
+                    "&category=" + $scope.data.loadCat + 
+                    "&sortBy=" + $scope.data.sortBy + 
+                    "&showOutOfDate=" + $scope.data.showOutOfDate + 
+                    "&showDone=" + $scope.data.showDone, 
+            {}, function (data) {
+                updateActivities(data);
+            });
+        }
     };
     
     $scope.makeBtnStyle = function(color){
@@ -96,7 +91,10 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
         };
     };
     
-    $scope.getPriorityColor = function(priority, idCategory){
+    $scope.getPriorityColor = function(priority, idCategory, transparent){
+        var opacity = "1";
+        if (transparent)
+            opacity = "0.5";
         var color = "white";
         for (var i = 0; i < $scope.data.categories.length; i++){
             if ($scope.data.categories[i].id === idCategory){
@@ -105,16 +103,25 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
             }
         }
         var priorities = {
-            "0": {border: '1px solid #337AB7', 'border-top': '5px solid #337AB7', 'background-color': color},
-            "1": {border: '1px solid #5CB85C', 'border-top': '5px solid #5CB85C', 'background-color': color},
-            "2": {border: '1px solid #F0AD4E', 'border-top': '5px solid #F0AD4E', 'background-color': color},
-            "3": {border: '1px solid #D9534F', 'border-top': '5px solid #D9534F', 'background-color': color}
+            "0": {border: '1px solid #337AB7', 'border-top': '5px solid #337AB7', 'background-color': color, opacity: opacity},
+            "1": {border: '1px solid #5CB85C', 'border-top': '5px solid #5CB85C', 'background-color': color, opacity: opacity},
+            "2": {border: '1px solid #F0AD4E', 'border-top': '5px solid #F0AD4E', 'background-color': color, opacity: opacity},
+            "3": {border: '1px solid #D9534F', 'border-top': '5px solid #D9534F', 'background-color': color, opacity: opacity}
         };
         if (!priorities[priority])
             return {border: '1px solid black'};
         
         return priorities[priority];
     };
+    
+    $scope.getActivityTooltip = function(done, expired){
+        if (done)
+            return {title: 'listView.status.done', placement: 'right'}
+        else if (expired && !done)
+            return {title: 'listView.status.expired', placement: 'right'}
+        else if (!done && !expired)
+            return {title: 'listView.status.inTime', placement: 'right'}
+    }
     
     var updateCategories = function(data){
         $scope.data.categories = data;

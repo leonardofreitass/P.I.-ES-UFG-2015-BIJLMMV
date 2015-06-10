@@ -111,6 +111,7 @@ public class ActivityDAO {
                     current.getString("nextNotificationTime"));
             activity.setId(current.getObjectId("_id").toString());
             activity.setDone(current.getBoolean("done", false));
+            activity.setExpired(activity.getDateTime().before(Calendar.getInstance()));
             if (activity.getDateTime().after(Calendar.getInstance()) || !onlyInTime)
                 activityList.add(activity);
         }
