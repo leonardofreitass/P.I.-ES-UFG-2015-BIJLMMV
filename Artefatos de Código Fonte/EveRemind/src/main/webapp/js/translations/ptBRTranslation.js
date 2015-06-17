@@ -172,6 +172,9 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             allCategory: "Todas as categorias",
             actions: "Ações",
             orderingBy: "Ordenando por ",
+            dateTime: "Data/Hora",
+            at: "as",
+            stat: "Status",
             sortBy: {
                 label: "Ordernar por",
                 date: "Data",

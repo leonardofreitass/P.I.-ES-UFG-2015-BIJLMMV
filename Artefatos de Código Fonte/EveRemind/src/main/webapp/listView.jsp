@@ -11,7 +11,7 @@
         <div class="list-row">
             <div class="list-column">
                 <h3 class='no-margin-bottom'>{{'listView.categories'| translate}}</h3>
-                <hr>
+                <hr class="custom-primary-hr">
                 <br>
                 <div class="colored-btn-box">
                     <button class="btn btn-lg btn-colored btn-default" ng-click="data.loadCat = 'all'">{{'listView.allCategory'| translate}}</button>
@@ -47,10 +47,10 @@
                     </span> 
                 </div>
                 <br>
-                <hr>
+                <hr class="custom-primary-hr">
                 <div class="activity-date-time"><strong class="activity-time">{{'listView.orderingBy' | translate}}{{('listView.sortBy.' + data.sortBy) | translate}}</strong></div>
                 <br>
-                <div class="activity-box" ng-repeat="activity in data.activities"  ng-style="getPriorityColor(activity.priority, activity.idCategory, activity.done || activity.expired)" bs-dynamic-tooltip="getActivityTooltip(activity.done, activity.expired)" role="button">
+                <div class="activity-box" ng-repeat="activity in data.activities" ng-click="setActivity($index)"  ng-style="getPriorityColor(activity.priority, activity.idCategory, activity.done || activity.expired)" bs-dynamic-tooltip="getActivityTooltip(activity.done, activity.expired)" role="button">
                     <div class="activity-date-time">
                         <span class="activity-name">{{activity.name}}</span> 
                         <span ng-if="activity.done" class="activity-time glyphicon glyphicon-ok"></span>
@@ -61,8 +61,25 @@
                     <br>
                 </div>
             </div>
-            <div ng-class="{'hidden-element': !data.showOneActivity}" class="list-activity">
-                AAAAA
+            <div class="list-activity hidden-element">
+                <h3 class='no-margin-bottom'><strong>{{getCategoryName(data.activity.idCategory)}}</strong> | {{data.activity.name}}</h3>
+                <hr class="custom-primary-hr">
+                <br>
+                <p><strong>{{'dashboard.addActivity.description' | translate }}:</strong> {{data.activity.description}}</p>
+                <div><strong>{{'listView.dateTime' | translate }}:</strong> {{data.activity.date}}, {{'listView.at' | translate }} {{data.activity.time}}</div>
+                <br>
+                <div><strong>{{'dashboard.addActivity.priority' | translate }}:</strong> <span ng-bind-html="getActivityPriority(data.activity.priority) | html"></span></div>
+                <br>
+                <div><strong>{{'dashboard.addActivity.notify' | translate }}:</strong> <span ng-if="data.activity.notification">{{'dashboard.addActivity.on' | translate }}</span><span ng-if="!data.activity.notification">{{'dashboard.addActivity.off' | translate }}</span></div>
+                <br>
+                <div>
+                    <strong>{{'listView.stat' | translate }}:</strong> 
+                    <span ng-if="data.activity.done">{{'listView.status.done' | translate}}</span>
+                    <span ng-if="data.activity.expired && !data.activity.done">{{'listView.status.expired' | translate}}</span>
+                    <span ng-if="!data.activity.done && !data.activity.expired">{{'listView.status.inTime' | translate}}</span>
+                </div>
+                <br>
+                <button type="button" ng-if="!data.activity.done" class="btn btn-warning" bs-dynamic-tooltip="{title: 'dashboard.tooltips.markDone'}" ng-click="markDoneActivity(data.activity.id)">{{'dashboard.showActivity.setDone' | translate}}</button>
             </div>
         </div>
     </div>

@@ -507,7 +507,7 @@ td > span > .bootstrap-timepicker-minute{
 
 .activity-box:hover{
     color: white;
-    background-color: #E67D23;
+    background-color: #E67D23 !important;
     word-break: break-all;
 }
 
@@ -644,6 +644,8 @@ td > span > .bootstrap-timepicker-minute{
 }
 
 .list-activity{
+    padding: 15px;
+    padding-top: 5px;
     width: 50%;
     height: 100%;
     display: table-cell;

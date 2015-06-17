@@ -24,12 +24,11 @@
 
 /* global angular */
 
-angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $location, $localStorage) {
+angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, ngNotifier, translateFilter, $localStorage) {
     $scope.$storage = $localStorage;
     
     $scope.data = {
         showActivities: false,
-        showOneActivity: false,
         loadingCategories: true,
         loadingActivities: false,
         sortBy: "date",
@@ -37,6 +36,7 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
         showDone: false,
         categories: [],
         activities: [],
+        activity: null,
         loadCat: ""
     };
     
@@ -56,11 +56,10 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
             }
     );
     
-    $scope.$watchGroup(['data.loadCat', 'data.sortBy', 'data.showOutOfDate', 'data.showDone'], function(newValues, oldValues, scope) {
+    $scope.$watchGroup(['data.loadCat', 'data.sortBy', 'data.showOutOfDate', 'data.showDone', 'data.activity'], function(newValues, oldValues, scope) {
         $scope.loadActivities();
         $scope.$apply();
     });
-    
     
     $scope.refreshCategories = function () {
         $.getJSON("ServletGetUserCategories?idUser=" + $scope.$storage.sessionUser._id + "&activities=false", {}, function (data) {
@@ -84,11 +83,49 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
         }
     };
     
+    $scope.setActivity = function(index){
+        $scope.data.activity = $scope.data.activities[index];
+        $(".list-activity").removeClass("hidden-element");
+    };
+    
     $scope.makeBtnStyle = function(color){
         return {
             'background-color': color, 
             'border-color': color
         };
+    };
+    
+    $scope.getCategoryName = function(id){
+        for (var i = 0; i < $scope.data.categories.length; i++){
+            if ($scope.data.categories[i].id === id){
+                return $scope.data.categories[i].name;
+            }
+        }
+    };
+    
+    $scope.getActivityPriority = function(priority){
+        var priorities = {
+            "0": ["primary", "low"],
+            "1": ["success", "mid"],
+            "2": ["warning", "high"],
+            "3": ["danger", "critical"]
+        };
+        
+        return "<span class='span-" + priorities[priority][0] + "'>" + translateFilter("dashboard.addActivity.priorities." + priorities[priority][1]) + "</span>";
+    };
+    
+    $scope.markDoneActivity = function(id){
+        $.ajax({
+            dataType: "text",
+            url: "ServletUpdateDone?id=" + id,
+            success: function () {
+                $scope.data.activity.done = true;
+                $scope.loadActivities();
+                $scope.$storage.$save();
+                $scope.$apply();
+                ngNotifier.notify("dashboard.markDoneActivityMsg");
+            }
+        });
     };
     
     $scope.getPriorityColor = function(priority, idCategory, transparent){
@@ -116,12 +153,12 @@ angular.module('everemindApp').controller('ngListViewCtrl', function ($scope, $l
     
     $scope.getActivityTooltip = function(done, expired){
         if (done)
-            return {title: 'listView.status.done', placement: 'right'}
+            return {title: 'listView.status.done', placement: 'right'};
         else if (expired && !done)
-            return {title: 'listView.status.expired', placement: 'right'}
+            return {title: 'listView.status.expired', placement: 'right'};
         else if (!done && !expired)
-            return {title: 'listView.status.inTime', placement: 'right'}
-    }
+            return {title: 'listView.status.inTime', placement: 'right'};
+    };
     
     var updateCategories = function(data){
         $scope.data.categories = data;
