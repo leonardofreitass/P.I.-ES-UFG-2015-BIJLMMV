@@ -74,9 +74,9 @@ public class ServletCreateUser extends HttpServlet {
             String secondaryToken = token.generate();
             tokenDao.bindToken(email, primaryToken);
             tokenDao.bindToken(secondaryEmail, secondaryToken);
-            ea.sendWelcome(email, fullName);
+            ea.sendWelcome(email, fullName, path);
             ea.sendToken(email, fullName, primaryToken, path + "primaryEmailVerification.jsp");
-            ea.sendWelcome(secondaryEmail, fullName);
+            ea.sendWelcome(secondaryEmail, fullName, path);
             ea.sendToken(secondaryEmail, fullName, secondaryToken, path + "secondaryEmailVerification.jsp");
             out.flush();
             

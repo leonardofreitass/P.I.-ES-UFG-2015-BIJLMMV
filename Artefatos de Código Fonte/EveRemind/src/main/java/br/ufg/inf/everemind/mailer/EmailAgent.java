@@ -36,46 +36,163 @@ public class EmailAgent {
         Mailer mailer = new Mailer(
                 receiver, 
                 systemName + " - " + subject, 
-                content + "</br></br>" + emailSignature);
+                content);
         new Thread(mailer).start();
     }
     
-    public void sendWelcome(String receiver, String name){
+    public void sendWelcome(String receiver, String name, String path){
+        String messageScope = "<table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:10px 10px 0;background:#FCD68A;\">\n" +
+"            <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td id=\"ecxmain\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;background-color:#ffffff;border-radius:5px;\">\n" +
+"    <div style=\"border:1px solid #cccccc;border-radius:5px;padding:20px;\">\n" +
+"      <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"              <p style=\"\">\n" +
+"                \n" +
+"                  Seja bem vindo ao eveRemind, " + name + "!\n" +
+"                \n" +
+"              </p>\n" +
+"              <p style=\"\">\n" +
+"                \n" +
+"                  Para utilizar todas nossas funcionalidades integralmente, verifique o seu email principal e secundário.\n" +
+"                \n" +
+"              </p>\n" +
+"            </td>\n" +
+"          </tr><tr><td class=\"ecxcall-to-action\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:15px 0 0;\">\n" +
+"  <table style=\"width:auto;border-collapse:collapse;\"><tbody><tr><td class=\"ecxcall-to-action-inner\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"          <div style=\"border:1px solid #EEA236;border-radius:3px;\">\n" +
+"            </div>\n" +
+"        </td>\n" +
+"      </tr></tbody></table></td>\n" +
+"\n" +
+"          </tr></tbody></table></div>\n" +
+"  </td>\n" +
+"</tr><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:20px 0;color:#707070;\">\n" +
+"  <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"          \n" +
+"          \n" +
+"        </td>\n" +
+"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"          \n" +
+"        </td>\n" +
+"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;text-align:right;width:100px;\">\n" +
+"          <a href=\"" + path + "\" style=\"color:#3572b0;text-decoration:none;\" target=\"_blank\">\n" +
+"            <img src=\"http://i12.photobucket.com/albums/a246/undeaddragslayer/eveRemind-navbar_zpsgdfog0mh.png\" alt=\"EveRemind\" width=\"100\" height=\"23\"></a>\n" +
+"        </td>\n" +
+"      </tr></tbody></table></td>\n" +
+"\n" +
+"                </tr></tbody></table></td>\n" +
+"        </tr></tbody></table>";
         this.sendMessage(
                 receiver, 
                 "Bem Vindo!", 
-                "Seja bem vindo ao eveRemind, " + name + "!</br></br>" +
-                "Para utilizar todas nossas funcionalidades integralmente, verifique o seu email principal e secundário."
+                messageScope
         );
     }
     
     public void sendToken(String receiver, String name, String token, String path){
+        String messageScope = "<table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:10px 10px 0;background:#FCD68A;\">\n" +
+"            <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td id=\"ecxmain\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;background-color:#ffffff;border-radius:5px;\">\n" +
+"    <div style=\"border:1px solid #cccccc;border-radius:5px;padding:20px;\">\n" +
+"      <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"              <p style=\"\">\n" +
+"                \n" +
+"                  Seu cadastro no <i>EveRemind</i> para o usuário <b>" + name + "</b> foi efetuado com sucesso, mas para utilizar o serviço de notificação e alteração de senha é preciso confirmar os e-mails fornecidos.\n" +
+"                \n" +
+"              </p>\n" +
+"              <p style=\"\">\n" +
+"                \n" +
+"                  Para confirmar este e-mail, clique no botão abaixo.\n" +
+"                \n" +
+"              </p>\n" +
+"            </td>\n" +
+"          </tr><tr><td class=\"ecxcall-to-action\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:15px 0 0;\">\n" +
+"  <table style=\"width:auto;border-collapse:collapse;\"><tbody><tr><td class=\"ecxcall-to-action-inner\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"          <div style=\"border:1px solid #EEA236;border-radius:3px;\">\n" +
+"            <table style=\"width:auto;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:4px 10px;background-color:#F0AD4E;\">\n" +
+"                  \n" +
+"              <a href=\"" + path + "#/verification?email=" + receiver + "&token=" + token + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Confirmar email</a>\n" +
+"            \n" +
+"                </td>\n" +
+"              </tr></tbody></table></div>\n" +
+"        </td>\n" +
+"      </tr></tbody></table></td>\n" +
+"\n" +
+"          </tr></tbody></table></div>\n" +
+"  </td>\n" +
+"</tr><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:20px 0;color:#707070;\">\n" +
+"  <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"          \n" +
+"          \n" +
+"        </td>\n" +
+"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"          \n" +
+"        </td>\n" +
+"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;text-align:right;width:100px;\">\n" +
+"          <a href=\"" + path.substring(0, path.lastIndexOf("/") + 1) + "\" style=\"color:#3572b0;text-decoration:none;\" target=\"_blank\">\n" +
+"            <img src=\"http://i12.photobucket.com/albums/a246/undeaddragslayer/eveRemind-navbar_zpsgdfog0mh.png\" alt=\"EveRemind\" width=\"100\" height=\"23\"></a>\n" +
+"        </td>\n" +
+"      </tr></tbody></table></td>\n" +
+"\n" +
+"                </tr></tbody></table></td>\n" +
+"        </tr></tbody></table>";
+        
         this.sendMessage(
                 receiver, 
                 "Confirmação de e-mail", 
-                "Caro " + name + ",</br>" +
-                "Seu cadastro no " + systemName + " foi efetuado com sucesso, porém, para desfrutar completamente de nossos serviços é preciso confirmar os e-mails fornecidos.</br>" +
-                "Para confirmar este e-mail, clique no link abaixo:</br>" +
-                "<a href='" + path + "#/verification?email=" + receiver + "&token=" + token + "'>Link de Confirmação</a></br></br>" +
-                "Caso não esteja conseguindo acessar o link, faça os seguintes passos:<br><ol>" +
-                "<li>Acesse esta página: <a href='" + path + "'>Link</a></li>" +
-                "<li>Entre com os seguintes dados:</br><ul><li>Email: " + receiver + "</li><li>Código de Verificação: " + token + "</li></ul></li>" + 
-                "</ol>"
+                messageScope
         );
     }
     
     public void resendToken(String receiver, String name, String token, String path){
+        String messageScope = "<table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:10px 10px 0;background:#FCD68A;\">\n" +
+"            <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td id=\"ecxmain\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;background-color:#ffffff;border-radius:5px;\">\n" +
+"    <div style=\"border:1px solid #cccccc;border-radius:5px;padding:20px;\">\n" +
+"      <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"              <p style=\"\">\n" +
+"                \n" +
+"                  Você modificou seu email no EveRemind e é preciso refazer a confirmação.\n" +
+"                \n" +
+"              </p>\n" +
+"              <p style=\"\">\n" +
+"                \n" +
+"                  Para confirmar este e-mail, clique no botão abaixo.\n" +
+"                \n" +
+"              </p>\n" +
+"            </td>\n" +
+"          </tr><tr><td class=\"ecxcall-to-action\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:15px 0 0;\">\n" +
+"  <table style=\"width:auto;border-collapse:collapse;\"><tbody><tr><td class=\"ecxcall-to-action-inner\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"          <div style=\"border:1px solid #EEA236;border-radius:3px;\">\n" +
+"            <table style=\"width:auto;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:4px 10px;background-color:#F0AD4E;\">\n" +
+"                  \n" +
+"              <a href=\"" + path + "#/verification?email=" + receiver + "&token=" + token + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Confirmar email</a>\n" +
+"            \n" +
+"                </td>\n" +
+"              </tr></tbody></table></div>\n" +
+"        </td>\n" +
+"      </tr></tbody></table></td>\n" +
+"\n" +
+"          </tr></tbody></table></div>\n" +
+"  </td>\n" +
+"</tr><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:20px 0;color:#707070;\">\n" +
+"  <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"          \n" +
+"          \n" +
+"        </td>\n" +
+"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
+"          \n" +
+"        </td>\n" +
+"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;text-align:right;width:100px;\">\n" +
+"          <a href=\"" + path.substring(0, path.lastIndexOf("/") + 1) + "\" style=\"color:#3572b0;text-decoration:none;\" target=\"_blank\">\n" +
+"            <img src=\"http://i12.photobucket.com/albums/a246/undeaddragslayer/eveRemind-navbar_zpsgdfog0mh.png\" alt=\"EveRemind\" width=\"100\" height=\"23\"></a>\n" +
+"        </td>\n" +
+"      </tr></tbody></table></td>\n" +
+"\n" +
+"                </tr></tbody></table></td>\n" +
+"        </tr></tbody></table>";
+        
         this.sendMessage(
                 receiver, 
                 "Confirmação de e-mail", 
-                "Caro " + name + ",</br>" +
-                "Você modificou seu email no " + systemName + " e é preciso refazer a confirmação.</br>" +
-                "Para confirmar este e-mail, clique no link abaixo:</br>" +
-                "<a href='" + path + "#/verification?email=" + receiver + "&token=" + token + "'>Link de Confirmação</a></br></br>" +
-                "Caso não esteja conseguindo acessar o link, faça os seguintes passos:<br><ol>" +
-                "<li>Acesse esta página: <a href='" + path + "'>Link</a></li>" +
-                "<li>Entre com os seguintes dados:</br><ul><li>Email: " + receiver + "</li><li>Código de Verificação: " + token + "</li></ul></li>" + 
-                "</ol>"
+                messageScope
         );
     }
 }

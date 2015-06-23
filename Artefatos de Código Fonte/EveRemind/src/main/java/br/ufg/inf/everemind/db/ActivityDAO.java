@@ -28,6 +28,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -95,6 +96,36 @@ public class ActivityDAO {
         Document query = new Document("_idCategory", _idCategory);
         if (onlyUndone)
             query.append("done", false);
+        FindIterable<Document> search = collection.find(query);
+        if (search == null) {
+            return null;
+        }
+        for (Document current : search) {
+            Activity activity = new Activity(current.getString("_idCategory"),
+                    current.getString("name"),
+                    current.getInteger("priority", -1),
+                    current.getString("date"),
+                    current.getString("hour"),
+                    current.getString("notes"),
+                    current.getBoolean("notificationBehaviour", false),
+                    current.getString("lastNotificationTime"),
+                    current.getString("nextNotificationTime"));
+            activity.setId(current.getObjectId("_id").toString());
+            activity.setDone(current.getBoolean("done", false));
+            activity.setExpired(activity.getDateTime().before(Calendar.getInstance()));
+            if (activity.getDateTime().after(Calendar.getInstance()) || !onlyInTime)
+                activityList.add(activity);
+        }
+        return activityList;
+    }
+    
+    public ArrayList<Activity> getFromDay(String day, boolean onlyUndone, boolean onlyInTime){
+        Document query = new Document();
+        query.append("date", day);
+        ArrayList<Activity> activityList = new ArrayList<>();
+        if (onlyUndone)
+            query.append("done", false);
+        
         FindIterable<Document> search = collection.find(query);
         if (search == null) {
             return null;

@@ -80,6 +80,10 @@
         <servlet-name>ServletGetUserActivities</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletGetUserActivities</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletGetWeeklyActivities</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletGetWeeklyActivities</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>ServletGetUserActivities</servlet-name>
         <url-pattern>/ServletGetUserActivities</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletGetWeeklyActivities</servlet-name>
+        <url-pattern>/ServletGetWeeklyActivities</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

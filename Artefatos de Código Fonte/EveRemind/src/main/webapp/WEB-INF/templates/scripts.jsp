@@ -24,6 +24,7 @@
 
 <!-- Angular Services -->
 <script src="${pageContext.request.contextPath}/js/services/ngNotifier.js"></script>
+<script src="${pageContext.request.contextPath}/js/services/ngDateUtils.js"></script>
 
 <!-- Angular Translate -->
 <script src="${pageContext.request.contextPath}/js/translations/ptBRTranslation.js"></script>
@@ -44,5 +45,6 @@
 <script src="${pageContext.request.contextPath}/js/controllers/ngAccountCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/controllers/ngDashboardCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/controllers/ngListViewCtrl.js"></script>
+<script src="${pageContext.request.contextPath}/js/controllers/ngCalendarViewCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/controllers/ngPrimaryEmailVerificationCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/controllers/ngSecondaryEmailVerificationCtrl.js"></script>

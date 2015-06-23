@@ -63,6 +63,10 @@ var pagesConfig = {
         ctrl: "ngListViewCtrl",
         access: "auth"
     },
+    calendarView: {
+        ctrl: "ngCalendarViewCtrl",
+        access: "auth"
+    },
     account: {
         ctrl: "ngAccountCtrl",
         access: "auth"

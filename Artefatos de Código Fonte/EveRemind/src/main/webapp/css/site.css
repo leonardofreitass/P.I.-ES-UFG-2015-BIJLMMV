@@ -621,15 +621,96 @@ td > span > .bootstrap-timepicker-minute{
     transition: background-color 0;
 }
 
+.navigation-button{
+    font-size: 28px;
+}
+
+.small-square{
+    height: 8px;
+    width: 8px !important;
+    border: 1px solid black;
+    padding: 0px;
+    font-size: 6px;
+    border-radius: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    cursor: pointer;
+}
+
 .list-table{
     width: 100%;
     height: 100%;
     display: table;
 }
 
+.list-table-calendar{
+    width: 100%;
+    height: 100%;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+
 .list-row{
     width: 100%;
     height: 100%;
+    display: table-row;
+}
+
+.placeholder-row{
+    width: 100%;
+    height: 15%;
+    display: table-row; 
+}
+
+.placeholder-cell{
+    visibility: hidden;
+    display: table-cell;
+    width: 100%;
+    padding-bottom: 5%;
+}
+
+.calendar-header-row{
+    width: 100%;
+    height: 12%;
+    display: table-row;
+}
+
+.calendar-weeks-row{
+    width: 100%;
+    height: 88%;
+    display: table-row;
+}
+
+.buttons-row{
+    width: 85%;
+    display: table-row;
+}
+
+.buttons-cell{
+    width: 100%;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.previous-week-button{
+    margin-bottom: 100%;
+}
+
+.next-week-button{
+    margin-top: 100%;
+}
+
+.calendar-name-week-row{
+    width: 100%;
+    height: 12%;
+    display: table-row;
+}
+
+.calendar-week-row{
+    width: 100%;
+    height: 22%;
     display: table-row;
 }
 
@@ -640,7 +721,6 @@ td > span > .bootstrap-timepicker-minute{
     height: 100%;
     display: table-cell;
     border-right: 1px solid #E67D23;
-    
 }
 
 .list-activity{
@@ -649,6 +729,59 @@ td > span > .bootstrap-timepicker-minute{
     width: 50%;
     height: 100%;
     display: table-cell;
+}
+
+.list-column-thin{
+    padding: 15px;
+    padding-top: 5px;
+    width: 20%;
+    height: 100%;
+    display: table-cell;
+    border-right: 1px solid #E67D23;
+    vertical-align: top;
+}
+
+.list-calendar{
+    padding-left: 5%;
+    width: 70%;
+    height: 100%;
+    display: table-cell;
+    padding-bottom: 5px;
+    vertical-align: top;
+}
+
+.list-navigation{
+    width: 5%;
+    height: 100%;
+    display: table-cell;
+}
+
+.full-cell{
+    width: 100%;
+    display: table-cell;
+    text-align: center;
+}
+
+.padding-bot{
+    padding-bottom: 5%;
+}
+
+.day-cell{
+    padding: 15px;
+    padding-top: 5px;
+    width: 14%;
+    display: table-cell;
+    text-align: center;
+    border: 2px solid #dddddd;
+    margin: 5px;
+    border-radius: 3px;
+}
+
+.day-name-cell{
+    padding-top: 5px;
+    width: 14%;
+    display: table-cell;
+    text-align: center;
 }
 
 .hidden-element{
@@ -713,4 +846,16 @@ td > span > .bootstrap-timepicker-minute{
 
 .no-margin-bottom{
     margin-bottom: 0px;
+}
+
+.no-padding{
+    padding: 0px;
+}
+
+.no-margin{
+    margin: 0px;
+}
+
+.overflow-hidden{
+    overflow: hidden;
 }

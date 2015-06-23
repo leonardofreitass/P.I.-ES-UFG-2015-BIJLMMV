@@ -32,6 +32,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 signup: "Cadastro",
                 dashboard: "Início",
                 listView: "Lista",
+                calendarView: "Calendario",
                 account: "Conta",
                 primaryEmailVerification: "Verificação de Email",
                 secondaryEmailVerification: "Verificação de Email"
@@ -189,6 +190,34 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             notShowDone: "Esconder atividades concluidas",
             showExpired: "Mostrar atividades expiradas",
             notShowExpired: "Esconder atividades expiradas"
+        },
+        calendarView: {
+            months: {
+                jan: "Janeiro",
+                feb: "Fevereiro",
+                mar: "Março",
+                apr: "Abril",
+                may: "Maio",
+                jun: "Junho",
+                jul: "Julho",
+                aug: "Agosto",
+                sep: "Setembro",
+                oct: "Outubro",
+                nov: "Novembro",
+                dec: "Dezembro"
+            },
+            days: {
+                sun: "Domingo",
+                mon: "Segunda",
+                tue: "Terça",
+                wed: "Quarta",
+                thu: "Quinta",
+                fri: "Sexta",
+                sat: "Sábado"
+            },
+            previous: "Semana Anterior",
+            today: "Visualizar Hoje",
+            next: "Próxima Semana"
         },
         verifyEmail: {
             primary: {
