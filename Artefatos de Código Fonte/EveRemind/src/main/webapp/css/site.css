@@ -465,6 +465,10 @@ fieldset[disabled] .btn-dark.active {
     text-align: right;
 }
 
+.full-row{
+    width: 100%;
+}
+
 td > span > .bootstrap-timepicker-hour{
     margin-left: auto !important;
     margin-right: auto !important;
@@ -625,16 +629,27 @@ td > span > .bootstrap-timepicker-minute{
     font-size: 28px;
 }
 
-.small-square{
-    height: 8px;
-    width: 8px !important;
-    border: 1px solid black;
-    padding: 0px;
-    font-size: 6px;
-    border-radius: 2px;
+.activity-in-calendar{
+    border-radius: 4px;
+    width: 12px;
+    height: 12px;
     margin-left: 2px;
     margin-right: 2px;
+    display: inline-block;
     cursor: pointer;
+}
+
+.glyph-calendar{
+    top: -3px !important;
+}
+
+.activity-in-calendar:hover{
+    color: #FCD68A;
+}
+
+.only-view{
+    position: static;
+    width: 15px !important;
 }
 
 .list-table{
@@ -649,6 +664,12 @@ td > span > .bootstrap-timepicker-minute{
     display: table;
     border-collapse: separate;
     border-spacing: 2px;
+}
+
+.list-table-cal-overview{
+    width: 100%;
+    height: 95%;
+    display: table;
 }
 
 .list-row{
@@ -710,8 +731,14 @@ td > span > .bootstrap-timepicker-minute{
 
 .calendar-week-row{
     width: 100%;
-    height: 22%;
+    height: 21%;
     display: table-row;
+}
+
+.calendar-subtitle-row{
+    width: 100%;
+    height: 4%;
+    display: table-row; 
 }
 
 .list-column{
