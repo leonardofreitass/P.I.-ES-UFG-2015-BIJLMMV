@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>[REQ-001] Análise de Impacto</title>
+<title>[REQ-002] Análise de Impacto</title>
 </head>
 <body>
-<h1>[REQ-001] Análise de Impacto</h1>
+<h1>[REQ-002] Análise de Impacto</h1>
 
 <h7>
 	Breno Fernandes Daniel de Carvalho
@@ -26,7 +26,7 @@
 
 <h2>Referência à RM/RP</h2>
 <p>
-[REQ-001] Requisição de Mudança.
+[REQ-002] Requisição de Mudança.
 <p>
 
 <h2>Tipo da Modificação</h2>
@@ -36,16 +36,15 @@ Perfectiva.
 
 <h2>Análise de Impacto</h2>
 <p>
-Esta requisição de mudança prevê a criação de um requisito que afeta o requisito RINF1. O novo requisito
-proposto é um requisito funcional ligado ao caso de uso “Criar Conta”. Se aprovado, um atributo
-de nome “e-mail verificado” deverá ser adicionado ao RINF1.
+Esta requisição de mudança prevê uma alteração ao requisito já existente RFUN2.1.
 <p>
 
 <h3>Impacto ao Sistema e Usuários</h3>
 <p>
-Mais notificações via e-mail deverão ser enviadas nas ocasiões explicitadas. As funções de
-notificação e recuperação de senha não funcionarão até que os endereços primário e secundário
-sejam verificados, respectivamente.
+Sempre que o endereço de e-mail primário e/ou secundário for modificado, o sistema enviará uma nova
+mensagem com uma ligação (link) de verificação para o (s) novo (s) endereço (s) eletrônico (s).
+Somente quando o (s) link (s) for (em) visitado (s), a (s) funcionalidade (s) associada (s) com a
+verificação deste (s) poderá (ão) ser utilizada (s).
 <p>
 
 <h3>Estimativa de Esforço para Implementação</h3>
@@ -70,15 +69,15 @@ sejam verificados, respectivamente.
 
 <h3>Estimativa de Benefícios</h3>
 <p>
-Validar os emails do usuário garante que as mensagens enviadas alcançam seu (s) destinatário (s),
-que os mesmos terão conhecimento do seu conteúdo e usufruirão das funcionalidades do sistema.
+O Usuário deve ter liberdade para alterar todos os seus dados cadastrais em vez de apenas
+um subconjunto destes. Esta característica melhora a usabilidade do sistema para eventuais
+necessidades do cliente.
 <p>
 
 <h2>Opções de Implementação</h2>
 <p>
-1- Enviar uma mensagem com um link contendo um token de confirmação para ambos emails do usuário.
-A validação do email pode ser feita de forma automática (visitando o link) ou manual (inserção dos
-caracteres do token na página de validação de email.)
+1- Possibilitar a modificação das informações de email, implementando mecanismos para garantir
+a unicidade de novos endereços eletrônicos perante a base de dados do sistema.
 <p>
 
 <h2>Plano de Prevenção e Mitigação dos Riscos</h2>
