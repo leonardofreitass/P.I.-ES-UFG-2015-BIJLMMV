@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>[REQ-001] Análise de Impacto</title>
+<title>[REQ-003] Análise de Impacto</title>
 </head>
 <body>
-<h1>[REQ-001] Análise de Impacto</h1>
+<h1>[REQ-003] Análise de Impacto</h1>
 
 <h7>
 	Breno Fernandes Daniel de Carvalho
@@ -26,7 +26,7 @@
 
 <h2>Referência à RM/RP</h2>
 <p>
-[REQ-001] Requisição de Mudança/Relato de Problema.
+[REQ-003] Requisição de Mudança/Relato de Problema.
 <p>
 
 <h2>Tipo da Modificação</h2>
@@ -36,16 +36,13 @@ Evolutiva.
 
 <h2>Análise de Impacto</h2>
 <p>
-Esta requisição de mudança prevê a criação de um requisito que afeta o requisito RINF1. O novo requisito
-proposto é um requisito funcional ligado ao caso de uso “Criar Conta”. Se aprovado, um atributo
-de nome “e-mail verificado” deverá ser adicionado ao RINF1.
+Esta requisição de mudança prevê uma alteração ao requisito já existente RINF3.
 <p>
 
 <h3>Impacto ao Sistema e Usuários</h3>
 <p>
-Mais notificações via e-mail deverão ser enviadas nas ocasiões explicitadas. As funções de
-notificação e recuperação de senha não funcionarão até que os endereços primário e secundário
-sejam verificados, respectivamente.
+Remover este atributo eliminaria uma redundância de informação evidente.
+Não há impacto negativo para esta alteração.
 <p>
 
 <h3>Estimativa de Esforço para Implementação</h3>
@@ -64,21 +61,22 @@ sejam verificados, respectivamente.
 <tr>
 <td>Equipe de Desenvolvimento</td>
 <td>Código Fonte</td>
-<td>2</td>
+<td>1</td>
 </tr>
 </table>
 
 <h3>Estimativa de Benefícios</h3>
 <p>
-Validar os emails do usuário garante que as mensagens enviadas alcançam seu (s) destinatário (s),
-que os mesmos terão conhecimento do seu conteúdo e usufruirão das funcionalidades do sistema.
+Como uma categoria contém a referência para diversas atividades e contém o identificador para
+qual usuário ela pertence, não é necessário inserir este identificador de posse em nível de
+atividade, já que ele pode ser recuperado do objeto de mais alto nível. Esta remoção proporciona
+um pequeno ganho de performance na aplicação, visto que cada instância de atividade terá um atributo
+a menos.
 <p>
 
 <h2>Opções de Implementação</h2>
 <p>
-1- Enviar uma mensagem com um link contendo um token de confirmação para ambos emails do usuário.
-A validação do email pode ser feita de forma automática (visitando o link) ou manual (inserção dos
-caracteres do token na página de validação de email.)
+1- Remover declaração e todos os usos computacionais e predicativos do atributo "id_Conta".
 <p>
 
 <h2>Plano de Prevenção e Mitigação dos Riscos</h2>
