@@ -215,6 +215,10 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 fri: "Sexta",
                 sat: "Sábado"
             },
+            colorBy: "Mostrar cor da atividade por",
+            showingBy: "Mostrando atividades por cor da",
+            category: "Categoria",
+            priority: "Prioridade",
             previous: "Semana Anterior",
             today: "Visualizar Hoje",
             next: "Próxima Semana"

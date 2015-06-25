@@ -41,7 +41,8 @@ angular.module('everemindApp').controller('ngCalendarViewCtrl', function ($scope
         showDone: true,
         showExpired: true,
         colorMode: "category",
-        categories: []
+        categories: [],
+        hovering: false
         
     };
     
@@ -95,23 +96,41 @@ angular.module('everemindApp').controller('ngCalendarViewCtrl', function ($scope
         return returnJson;
     };
     
-    $scope.makeBtnStyle = function(color){
+    $scope.makeBtnStyle = function(category){
+        if (category.blocked)
+            return {
+                'background-color': "#DDDDDD",
+                'border-color': "#AAAAAA"
+            };
         return {
-            'background-color': color, 
-            'border-color': color
+            'background-color': category.color, 
+            'border-color': category.color
         };
     };
     
     $scope.makeSquareColor = function(activity){
-        var color = "red";
+        var styleJson = {};
         for (var i = 0; i < $scope.data.categories.length; i++){
             if ($scope.data.categories[i].id === activity.idCategory){
-                color = $scope.data.categories[i].color;
+                if ($scope.data.hovering && !$scope.data.categories[i].hovering){
+                    styleJson.opacity = "0.175";
+                }
+                if ($scope.data.colorMode === "category")
+                    styleJson['background-color'] = $scope.data.categories[i].color;
+                else if ($scope.data.colorMode === "priority"){
+                    var priorities = {
+                        "0": '#337AB7',
+                        "1": '#5CB85C',
+                        "2": '#F0AD4E',
+                        "3": '#D9534F'
+                    };
+                    styleJson['background-color'] = priorities[activity.priority];
+                }
                 break;
             }
         }
         
-        return {'background-color': color};
+        return styleJson;
     };
     
     $scope.categoryName = function(id){
@@ -131,11 +150,36 @@ angular.module('everemindApp').controller('ngCalendarViewCtrl', function ($scope
             return false;
         
         for (var i = 0; i < $scope.data.categories.length; i++){
-            if (activity.idCategory === $scope.data.categories.id && $scope.data.categories.blocked)
+            if (activity.idCategory === $scope.data.categories[i].id && $scope.data.categories[i].blocked)
                 return false;
         }
         
         return true;
+    };
+    
+    $scope.hover = function(index){
+        if (!$scope.data.categories[index].blocked){
+            $scope.data.categories[index].hovering = true;
+            $scope.data.hovering = true;
+        }
+    };
+    
+    $scope.deHover = function(index){
+        $scope.data.categories[index].hovering = false;
+        $scope.data.hovering = false;
+    };
+    
+    $scope.toggleBlock = function(index){
+        $scope.data.categories[index].blocked = !$scope.data.categories[index].blocked;
+        if ($scope.data.categories[index].blocked){
+            $scope.data.categories[index].hovering = false;
+            $scope.data.hovering = false;
+        }
+        else{
+            $scope.data.categories[index].hovering = true;
+            $scope.data.hovering = true;
+        }
+            
     };
     
     var updateCategories = function(data){
@@ -143,6 +187,7 @@ angular.module('everemindApp').controller('ngCalendarViewCtrl', function ($scope
         for (var i = 0; i < $scope.data.categories.length; i++){
             $scope.data.categories[i].badge = 0;
             $scope.data.blocked = false;
+            $scope.data.hovering = false;
         }
         
         $scope.$apply();
