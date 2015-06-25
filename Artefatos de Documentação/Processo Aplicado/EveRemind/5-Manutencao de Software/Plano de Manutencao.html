@@ -1,124 +1,232 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Plano de Manutenção</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Plano de Manutenção</title>
 </head>
+
 <body>
 <h1>Plano de Manutenção de Software - Byte INC.</h1>
 <h7>
-Breno Fernandes Daniel de Carvalho<br />
-Igor Moura Brandão<br />
-Johnnathan Gomes Lima<br />
-Leonardo Freitas dos Santos<br />
-Matheus Henrique Lima<br />
-Moisés Hilário Rodrigues<br />
-Vinicius Carvalho Machado<br />
+	Breno Fernandes Daniel de Carvalho
+	<br/>
+	Igor Moura Brandão
+	<br/>
+	Johnnathan Gomes Lima
+	<br/>
+	Leonardo Freitas dos Santos
+	<br/>
+	Matheus Henrique Lima
+	<br/>
+	Moisés Hilário Rodrigues
+	<br/>
+	Vinicius Carvalho Machado
+<br/>
 </h7>
 
 <h2>Introdução ao Documento</h2>
 <p>
-Este documento é o principal documento da Manutenção. Por ele a empresa irá seguir para executar uma manutenção no software,
-juntamente com cronograma, EAP, atividades, papéis entre outras coisas.
+O plano de manutenção é o guia para a execução do processo de manutenção. Ele prevê papéis,
+cronograma, o ciclo de vida de uma RM/RP, a EAP e a aprovação/comprometimento formal dos
+envolvidos para com a aderência da condução do processo para com o conteúdo do planejamento.
  
 <h2>Papéis Envolvidos</h2>
+
+<table border="1">
+	<tr>
+		<td><strong>Papel</strong></td>
+		<td><strong>Integrante(s)</strong></td>
+		<td><strong>Responsabilidade(s)</strong></td>
+	</tr>
+	<tr>
+		<td>Gerente de Manutenção</td>
+		<td>- Igor Moura Brandão</td>
+		<td>
+		- Planejar o processo de manutenção
+		<br/>
+		- Planejar o controle da configuração
+		<br/>
+		- Realizar análise de impacto de RM/RP
+		<br/>
+		- Monitorar, medir e aprovar as atividades do processo
+		<br/>
+		- Encaminhar modificação para verificação e validação
+		</td>
+	</tr>
+	<tr>
+		<td>Equipe de Manutenção</td>
+		<td>
+		- Breno Fernandes Daniel de Carvalho
+		<br/>
+		- Johnnathan Gomes Lima
+		<br/>
+		- Leonardo Freitas dos Santos
+		<br/>
+		- Matheus Henrique Lima
+		<br/>
+		- Moisés Hilário Rodrigues
+		<br/>
+		- Vinicius Carvalho Machado
+		</td>
+		<td>
+		- Implementar e ajustar mudanças aprovadas
+		<br/>
+		- Atualizar documentação de registro e suporte
+		<br/>
+		- Conduzir a migração e a aposentação do software
+		</td>
+	</tr>
+</table>
+
+<h2>Procedimentos para Resolução de Problemas</h2>
 <p>
-<strong>Gerente de Manutenção: </strong>Igor Moura Brandão.<br/> Responsabilidades: Planejar o Processo de Manutenção, fazer análise de impacto,
-monitorar, medir e aprovar todas as atividades do processo.<br/><br/>
-<strong>Equipe de Manutenção: </strong>Restante dos Integrantes.<br/> Responsabilidades: Planejar o Processo de Manutenção, classificar defeitos, implementar mudanças, revisar e testar a mudança,
-e são os responsáveis por conduzir a migração e a aposentação do software. 
+Os procedimentos de resolução de problemas determinam o ciclo de vida de uma requisição de mudança.
+<br/>
+
+1. Receber uma Requisição de Mudança / Relato de Problema.
+<br />
+2. Atualizar o registro de pedidos de modificação.
+<br />
+3. Realizar análise de impacto.
+<br />
+4. Atualizar o registro de pedidos de modificação.
+<br />
+5a. Análise de impacto aprovou a RM/RP.
+<br />
+5b. Análise de impacto rejeitou a RM/RP.
+<br />
+6. [Procedimento 5a foi realizado] Realizar a manutenção.
+<br />
+7. [Procedimento 5a foi realizado] Atualizar o registro de pedidos de modificação.
+<br />
+8. [Procedimento 5a foi realizado] Encaminhar a manutenção para verificação e validação.
+<br />
+9a. [Procedimento 5a foi realizado] A verificação e validação aprovou a manutenção.
+<br />
+9b. [Procedimento 5a foi realizado] A verificação e validação rejeitou a manutenção.
+<br />
+10. [Procedimentos 5a e 9a foram realizados] Ajustar as não conformidades e repetir o procedimento 8.
+<br />
+11. Encerrar o ciclo de vida da RM/RP
+<br />
+12. Atualizar o Registro de Pedidos de Modificação.
+
 <h2>Cronograma de Atividades</h2>
 <p>
-O cronograma a seguir detalha as atividades da manutenção, bem como quem irá realizar cada uma, datas quando possível de se
-estabelecer e esforço estimado medido em horas.<br />
+O cronograma detalha cada atividade da manutenção em termos de quem irá realizar,
+datas de início e conclusão (absolutas ou relativas) e a estimativa de esforço em horas.
+<br />
 
 <table border="1">
 <tr>
-<td>Atividade</td>
-<td>Data de Início</td>
-<td>Data de Término</td>
-<td>Papéis Envolvidos</td>
-<td>Esforço(horas)</td>
+<td><strong>Atividade</strong></td>
+<td><strong>Data de Início</strong></td>
+<td><strong>Data de Término</strong></td>
+<td><strong>Papéis Envolvidos</strong></td>
+<td><strong>Esforço(Horas)</strong></td>
 </tr>
 <tr>
 <td>Planejar o Processo de Manutenção</td>
 <td>04/05/2015</td>
 <td>18/05/2015</td>
-<td>Gerente e Equipe de Manutenção</td>
-<td>20hrs</td>
+<td>Gerente de Manutenção</td>
+<td>20</td>
 </tr>
 <tr>
 <td>Planejar o Controle de Configuração</td>
 <td>04/05/2015</td>
 <td>18/05/2015</td>
-<td>Gerente e Equipe de Manutenção</td>
-<td>10hrs</td>
+<td>Gerente de Manutenção</td>
+<td>10</td>
 </tr>
 <tr>
-<td>Analisar o Pedido de Mudança</td>
+<td>Analisar o Impacto de um Pedido de Manutenção</td>
 <td>Data do recebimento do pedido</td>
 <td>1 dia útil</td>
 <td>Gerente de Manutenção</td>
-<td>2hrs</td>
+<td>3</td>
 </tr>
-<tr>
-<td>Análise de Impacto</td>
-<td>Data do recebimento do pedido</td>
-<td>1 dia útil</td>
-<td>Gerente de Manutenção</td>
-<td>5hrs</td>
-</tr>
-<tr>
-<td>Classificar o Defeito</td>
-<td>Data do recebimento do pedido</td>
-<td>1 dia útil</td>
-<td>Equipe de Manutenção</td>
-<td>1hr</td>
-</tr>
-<tr>
-<td>Implementação da Mudança</td>
+<td>Implementar Mudança</td>
 <td>Data da aprovação da mudança</td>
 <td>1 dia útil</td>
 <td>Equipe de Manutenção</td>
-<td>10hrs</td>
+<td>10</td>
 </tr>
 <tr>
-<td>Atualizar Documentação</td>
+<td>Atualizar Documentação de Registro e Suporte</td>
 <td>Após Implementação</td>
 <td>1 dia útil</td>
 <td>Equipe de Manutenção</td>
-<td>3hrs</td>
+<td>2</td>
 </tr>
 <tr>
-<td>Revisar/Aprovar Manutenção</td>
+<td>Encaminhar Manutenção para Verificação e Validação</td>
 <td>Após Implementação</td>
 <td>1 dia útil</td>
 <td>Gerente de Manutenção</td>
-<td>1hr</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Ajustar Não Conformidades de Manutenção</td>
+<td>Após Implementação</td>
+<td>1 dia útil</td>
+<td>Equipe de Manutenção</td>
+<td>6</td>
 </tr>
 <tr>
 <td>Medir o Processo de Manutenção</td>
-<td>04/05/2015</td>
-<td>Não definido</td>
+<td>18/05/2015</td>
+<td>26/06/2015</td>
 <td>Gerente de Manutenção</td>
-<td>Não definido</td>
+<td>40</td>
 </tr>
 <tr>
 <td>Monitoramento da Manutenção</td>
-<td>04/05/2015</td>
-<td>Não definido</td>
+<td>18/05/2015</td>
+<td>26/06/2015</td>
 <td>Gerente de Manutenção</td>
-<td>Não definido</td>
+<td>100</td>
 </tr>
 </table>
 
-<h2>EAP da Manutenção</h2>
+<h2>EAP (Estrutura Analítica de Projeto) da Manutenção</h2>
 <p>
-O EAP do processo e manutenção indicará atividades, tarefas e produtos de trabalho a serem gerados no processo.<br/>
-<div><img src="EAPManutencao.jpg"></div><br/>
-Todos os produtos indicados no EAP constam no repositório ou em links no <a href="../Processo de Manutenção (PMAN).html">Processo Genérico de Manutenção.</a>
-<h2>Aprovação</h2>
-Aval de toda a equipe e do Gerente de Manutenção.<br />
-Aval do Gerente de Manutenção a cada modificação do plano.
+A EAP do processo e manutenção indica atividades, tarefas e produtos de trabalho a serem
+gerados no processo. Todos os produtos indicados na EAP constam no repositório ou em links no
+<a href="..\..\..\Processo Genérico\5-Manutencao de Software\Processo de Manutencao (PMAN).html">Processo de Manutenção.</a>
+<br/>
+<div><img src="Estrutura Analitica de Projeto de Manutencao.png" alt="EAP do Projeto"></div>
+<br/>
+
+<h2>Atestado Formal de Aprovação e Comprometimento</h2>
+<p>
+"Eu afirmo que tenho conhecimento sobre a constituição e conteúdo deste plano de manutenção e que
+minhas ações durante a execução do processo serão direcionadas pelos parâmetros planejados."
+
+<div>
+	<strong>Gerente de Manutenção</strong>
+	<br/>
+	<br/>
+	<img src="https://www.dropbox.com/s/i8bfc98pndv4qej/Igor.png?dl=1" alt="Igor Moura Brandão">
+	<br/>
+</div>
+
+<div>
+	<strong>Equipe de Manutenção</strong>
+	<br/>
+	<br/>
+	<img src="https://www.dropbox.com/s/dpb1cd1rlimf64o/Breno.png?dl=1" alt="Breno Fernandes Daniel de Carvalho">
+	<br/>
+	<img src="https://www.dropbox.com/s/zj78teea6nk204g/John.png?dl=1" alt="Johnathan Gomes Lima">
+	<br/>
+	<img src="https://www.dropbox.com/s/m2gk7hoo257qbdx/Leo.png?dl=1" alt="Leonardo Freitas dos Santos">
+	<br/>
+	<img src="https://www.dropbox.com/s/lpo78bew02r0oyc/Matheus.png?dl=1" alt="Matheus Henrique Lima">
+	<br/>
+	<img src="https://www.dropbox.com/s/1yt80ieaeinjw4h/Moises.png?dl=1" alt="Moises Hilário Rodrigues">
+	<br/>
+	<img src="https://www.dropbox.com/s/y04v2vnao4i3732/Vinicius.png?dl=1" alt="Vinicius Carvalho Machado">
+	<br/>
+</div>
 </body>
 </html>
