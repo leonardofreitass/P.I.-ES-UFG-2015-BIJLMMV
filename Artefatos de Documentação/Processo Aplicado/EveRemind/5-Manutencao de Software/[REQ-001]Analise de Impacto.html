@@ -1,0 +1,98 @@
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>[REQ-001] Análise de Impacto</title>
+</head>
+<body>
+<h1>[REQ-001] Análise de Impacto</h1>
+<h7>
+Breno Fernandes Daniel de Carvalho<br />
+Igor Moura Brandão<br />
+Johnnathan Gomes Lima<br />
+Leonardo Freitas dos Santos<br />
+Matheus Henrique Lima<br />
+Moisés Hilário Rodrigues<br />
+Vinicius Carvalho Machado<br />
+</h7>
+
+<h2>Referência à RM/RP</h2>
+<p>
+[REQ-001] Requisição de Mudança.
+<p>
+
+<h2>Tipo da Modificação</h2>
+<p>
+Perfectiva.
+<p>
+
+<h2>Análise de Impacto</h2>
+<p>
+Esta requisição de mudança prevê a criação de um requisito que afeta o requisito RINF1. O novo requisito
+proposto é um requisito funcional ligado ao caso de uso “Criar Conta”. Se aprovado, um atributo
+de nome “e-mail verificado” deverá ser adicionado ao RINF1.
+<p>
+
+<h3>Impacto ao Sistema e Usuários</h3>
+<p>
+Mais notificações via e-mail deverão ser enviadas nas ocasiões explicitadas. As funções de
+notificação e recuperação de senha não funcionarão até que os endereços primário e secundário
+sejam verificados, respectivamente.
+<p>
+
+<h3>Estimativa de Esforço para Implementação</h3>
+
+<table border="1">
+<tr>
+<td><strong>Entidade Envolvida na Modificação</strong></td>
+<td><strong>Produto de Trabalho Afetado</strong></td>
+<td><strong>Horas</strong></td>
+</tr>
+<tr>
+<td>Equipe de Requisitos</td>
+<td>EOR</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Equipe de Desenvolvimento</td>
+<td>Código Fonte</td>
+<td>2</td>
+</tr>
+</table>
+
+<h3>Estimativa de Benefícios</h3>
+<p>
+Validar os emails do usuário garante que as mensagens enviadas alcançam seu (s) destinatário (s),
+que os mesmos terão conhecimento do seu conteúdo e usufruirão das funcionalidades do sistema.
+<p>
+
+<h2>Opções de Implementação</h2>
+<p>
+1- Enviar uma mensagem com um link contendo um token de confirmação para ambos emails do usuário.
+A validação do email pode ser feita de forma automática (visitando o link) ou manual (inserção dos
+caracteres do token na página de validação de email.)
+<p>
+
+<h2>Plano de Prevenção e Mitigação dos Riscos</h2>
+<p>
+Nenhum risco foi levantado durante a análise de impacto.
+<p>
+
+<h2>Análise Racional e Conclusão</h2>
+
+<table border="1">
+<tr>
+<td><strong>Resultado da Análise</strong></td>
+<td><strong>Justificativa</strong></td>
+<td><strong>Autorização</strong></td>
+</tr>
+<tr>
+<td>APROVADA</td>
+<td>Segundo o impacto e os benefícios elicitados, o custo/benefício da requisição de mudança
+é viável e favorável para a execução</td>
+<td><img src="https://www.dropbox.com/s/i8bfc98pndv4qej/Igor.png?dl=1" alt="Igor Moura Brandão"></td>
+</tr>
+</table>
+
+</body>
+</html>
