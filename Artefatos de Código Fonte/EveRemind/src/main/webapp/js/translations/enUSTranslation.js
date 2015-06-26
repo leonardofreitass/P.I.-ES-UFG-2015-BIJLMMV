@@ -41,7 +41,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
         home: {
             mainTitle: "Organize your everyday.",
             mainText: "With EveRemind, your tasks and assignments are always tracked" +
-            " so you never miss them, relieving concerns of forget and increasing your productivity.",
+            " so you never miss them, relieving you from concerns of forgeting and" +
+            "increasing your productivity.",
             createAccount: "Start remembering by creating your account",
             register: "Sign Up"
         },
@@ -55,7 +56,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             password: "Password",
             repeatPassword: "Repeat Password",
             finish: "Get My Account",
-            confirmEmail: "Messages of confirmation were sent to both emails. Verifying them" +
+            confirmEmail: "Messages of confirmation will be sent to both emails. Verifying them" +
             " grants access to task notification and recover password features.",
             errors: {
                 required: "Fill in all the information fields.",
@@ -92,12 +93,12 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             " to make use of task notification service.",
             verifySecondary: "Your secondary email is unverified. Verify it by following the message instructions" +
             " to make use of password recovery service.",
-            logout1: "Bye, {{getUserName()}}",
-            logout2: "See you, {{getUserName()}}",
-            logout3: "Take care, {{getUserName()}}",
-            login1: "Hi, {{getUserName()}}",
-            login2: "Hello, {{getUserName()}}",
-            login3: "Greetings, {{getUserName()}}"
+            logout1: "Bye, {{name}}",
+            logout2: "See you, {{name}}",
+            logout3: "Take care, {{name}}",
+            login1: "Hi, {{name}}",
+            login2: "Hello, {{name}}",
+            login3: "Greetings, {{name}}"
         },
         dashboard: {
             newCategory: {
@@ -132,7 +133,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 },
                 date: "Date",
                 time: "Time",
-                notify: "Notification by e-mail",
+                notify: "Email Notification",
                 on: "ON",
                 off: "OFF",
                 cancel: "Cancel",
@@ -153,11 +154,11 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 editCategory: "Edit category",
                 deleteCategory: "Erase category",
                 addActivity: "Add new activity",
-                priorityHelpTitle: "Prioridade choice afects notification behavior in the following manner:",
-                priorityHelp: "<strong class='span-primary'>Low:</strong> Sends emails weekly, 1 day and 1 hour from deadline date/time<br>" +
-                              "<strong class='span-success'>Moderate:</strong> Sends emails in 3 days interval, 1 day, 6 and 1 hour from deadline date/time<br>"+
-                              "<strong class='span-warning'>High:</strong> Sends emails daily, 6, 3 and 1 hour from deadline date/time<br>" +
-                              "<strong class='span-danger'>Crtical:</strong> Sends emails in 12 hours interval, 6, 3 and 1 hour from deadline date/time."
+                priorityHelpTitle: "<p align='justify'>Priority choice affects notification behavior in the following manner:</p>",
+                priorityHelp: "<p align='left'><strong class='span-primary'>Low:</strong> Sends emails weekly, 1 day and 1 hour from deadline date/time.<br>" +
+                              "<strong class='span-success'>Moderate:</strong> Sends emails in 3 days interval, 1 day, 6 and 1 hour from deadline date/time.<br>" +
+                              "<strong class='span-warning'>High:</strong> Sends emails daily, 6, 3 and 1 hour from deadline date/time.<br>" +
+                              "<strong class='span-danger'>Critical:</strong> Sends emails in 12 hours interval, 6, 3 and 1 hour from deadline date/time.</p>"
             },
             errors: {
                 change: "There are no changes to update.",
@@ -184,12 +185,12 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             activities: "Activities",
             allCategory: "All categories",
             actions: "Actions",
-            orderingBy: "Order by",
+            orderingBy: "Ordering by ",
             dateTime: "Date/Time",
             at: "at",
             stat: "Status",
             sortBy: {
-                label: "Order by",
+                label: "Order by ",
                 date: "Date",
                 priority: "Priority"
             },
@@ -227,8 +228,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 fri: "Friday",
                 sat: "Saturday"
             },
-            colorBy: "Show activity color by",
-            showingBy: "Showing activities by color of",
+            colorBy: "Show activity color by ",
+            showingBy: "Showing activities by color of ",
             category: "Category",
             priority: "Priority",
             previous: "Last Week",
@@ -280,11 +281,11 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 exclude: "Delete Account"
             },
             errors: {
-                required: "Fill in all data fields.",
+                required: "Pease fill in all data fields.",
                 change: "No changes were made.",
                 auth: "Given current password is not correct.",
                 authDelete: "Email and password do not match.",
-                notUser: "This email is not yours.",
+                notUser: "This email is not currently logged in.",
                 samePassword: "The current and new passwords are the same.",
                 sameEmail: "The primary and secondary emails are the same.",
                 notAnEmail: "Given e-mail is not valid.",
@@ -297,5 +298,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             }
         }
     });
+    //*
     $translateProvider.preferredLanguage('en-US');
+    //*/
 }]);

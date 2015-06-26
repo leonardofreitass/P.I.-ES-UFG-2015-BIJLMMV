@@ -151,11 +151,11 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 editCategory: "Editar categoria",
                 deleteCategory: "Excluir categoria",
                 addActivity: "Adicionar uma nova atividade",
-                priorityHelpTitle: "A escolha de prioridade afeta o comportamento da notificação da seguinte forma:",
-                priorityHelp: "<strong class='span-primary'>Baixa:</strong> Emails enviados semanalmente, a 1 dia e a 1 hora da data/hora<br>" +
-                              "<strong class='span-success'>Média:</strong> Emails enviados a cada 3 dias, 1 dia, a 6 e a 1 da data/hora.<br>"+
+                priorityHelpTitle: "<p align='justify'>A escolha de prioridade afeta o comportamento da notificação da seguinte forma:</p>",
+                priorityHelp: "<p align='left'><strong class='span-primary'>Baixa:</strong> Emails enviados semanalmente, a 1 dia e a 1 hora da data/hora.<br>" +
+                              "<strong class='span-success'>Média:</strong> Emails enviados a cada 3 dias, 1 dia, a 6 e a 1 da data/hora.<br>" +
                               "<strong class='span-warning'>Alta:</strong> Emails enviados diariamente, a 6, a 3 e a 1 hora da data/hora.<br>" +
-                              "<strong class='span-danger'>Crítico:</strong> Emails enviados a cada 12 horas, a 6, a 3 e a 1 hora da data/hora."
+                              "<strong class='span-danger'>Crítico:</strong> Emails enviados a cada 12 horas, a 6, a 3 e a 1 hora da data/hora.</p>"
             },
             errors: {
                 change: "Nenhuma alteração foi realizada.",
@@ -182,12 +182,12 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             activities: "Atividades",
             allCategory: "Todas as categorias",
             actions: "Ações",
-            orderingBy: "Ordenando por",
+            orderingBy: "Ordenando por ",
             dateTime: "Data/Hora",
             at: "as",
             stat: "Status",
             sortBy: {
-                label: "Ordernar por",
+                label: "Ordernar por ",
                 date: "Data",
                 priority: "Prioridade"
             },
@@ -295,5 +295,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             }
         }
     });
-    //$translateProvider.preferredLanguage('pt-BR');
+    /*
+    $translateProvider.preferredLanguage('pt-BR');
+    //*/
 }]);

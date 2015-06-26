@@ -32,7 +32,7 @@ angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNo
     var pendingMessages = function(){
         if ($scope.$storage.pendingMessage){
             var msg = $scope.$storage.pendingMessage;
-            ngNotifier[msg.msgType](msg.msg);
+            ngNotifier[msg.msgType](msg.msg, msg.param);
             $scope.$storage.pendingMessage = null;
         }
     };

@@ -78,9 +78,13 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
     
     $scope.logout = function(){
         $scope.$storage.exiting = true;
-        $scope.$storage.pendingMessage = {msg: "navbar.logout", msgType: "notify"};
+        $scope.$storage.pendingMessage = {msg: "navbar.logout" + randomMsg(3), msgType: "notify", param: {name:$scope.getUserName()}};
         $scope.$storage.$save();
         window.location.href = "index.jsp";
+    };
+    
+    var randomMsg = function (max) {
+        return Math.floor((Math.random() * max) + 1).toString();
     };
     
     var startUserSession = function(){
@@ -96,7 +100,7 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
         else if (!json.verifiedSecondaryEmail)
             $scope.$storage.pendingMessage = {msg: "navbar.verifySecondary", msgType: "warning"};
         else
-            $scope.$storage.pendingMessage = {msg: "navbar.login", msgType: "notify"};
+            $scope.$storage.pendingMessage = {msg: "navbar.login" + randomMsg(3), msgType: "notify", param: {name:$scope.getUserName()}};
         $scope.$storage.$save();
         window.location.href = "dashboard.jsp";
     };
