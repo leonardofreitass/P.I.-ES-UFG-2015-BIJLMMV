@@ -59,7 +59,11 @@ A anomalia foi encontrada testando as funcionalidades do sistema.
 
 <h2>Descrição da Requisição</h2>
 <p>
-Foi encontrada, durante as atividades de verificação, uma anomalia na aplicação em relação a nova senha. A nova senha do usuário aceita qualquer entrada.
+A anomalia é gerada quando o usuário deseja alterar sua senha. Ele entra na página de alterar a conta, logo em seguida clica em “Mudar Senha”. Ele digita a senha atual e uma nova senha. A aplicação aceita qualquer nova senha, não seguindo o estabelecido pelo requisito RSEG2. 
+Para reproduzir a anomalia, preencher os campos conforme abaixo (considerar senha atual como 1234567a):
+Senha atual: 1234567ª
+Nova Senha: a
+Repita a senha: a
 <p>
 
 <h2>Justificativa(s) da Requisição</h2>

@@ -1,0 +1,72 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>[AIM-002]RM/RP</title>
+</head>
+<body>
+<h1>[AIM-002] Requisição de Mudança/Relato de Problema</h1>
+
+<h7>
+	Breno Fernandes Daniel de Carvalho
+	<br/>
+	Igor Moura Brandão
+	<br/>
+	Johnnathan Gomes Lima
+	<br/>
+	Leonardo Freitas dos Santos
+	<br/>
+	Matheus Henrique Lima
+	<br/>
+	Moisés Hilário Rodrigues
+	<br/>
+	Vinicius Carvalho Machado
+	<br/>
+</h7>
+
+<h2>Solicitante</h2>
+<p>
+Moisés Hilario Rodrigues - Analista de Teste
+<p>
+
+<h2>Data de Abertura</h2>
+<p>
+08/06/2015.
+<p>
+
+<h2>Área de Processo a ser Notificada</h2>
+<p>
+- Gerência de Projetos.
+<br/>
+- Codificação.
+<p>
+
+<h2>Avaliação de Urgência</h2>
+<p>
+MÉDIA.
+<p>
+
+<h2>Atividade de Descoberta</h2> 
+<p>
+V&V de Implementação.
+<p>
+
+<h2>Contexto da Descoberta</h2> 
+<p>
+A anomalia foi encontrada testando as funcionalidades do sistema. 
+<p>
+
+<h2>Descrição da Requisição</h2>
+<p>
+Foi encontrada, durante as atividades de verificação, uma anomalia em relação à apresentação das informações na interface gráfica da aplicação. A anomalia é gerada quando o usuário cria ou altera uma atividade com um nome acima de 67 caracteres (quando a tela estiver no tamanho máximo) ou acima de 23 caracteres (quando a tela estiver no tamanho mímino). O nome da atividade altera o tamanho da coluna da categoria e ultrapassa o limite da tela da atividade o que não deveria acontecer.
+Para reproduzir a anomalia deve inserir no nome da atividade uma string com mais de 67 caracteres (tela máxima) ou de 23 caracteres (tela mínima).
+<p>
+
+<h2>Justificativa(s) da Requisição</h2>
+<p>
+É necessária a mudança no código fonte para que corrija a apresentação de um nome muito extenso de uma atividade, pois esse deforma a interface da aplicação.
+<p>
+</body>
+</html>
