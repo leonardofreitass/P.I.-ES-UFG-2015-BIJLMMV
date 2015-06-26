@@ -34,41 +34,44 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 listView: "Lista",
                 calendarView: "Calendario",
                 account: "Conta",
-                primaryEmailVerification: "Verificação de Email",
-                secondaryEmailVerification: "Verificação de Email"
+                primaryEmailVerification: "Verificação de Email Primário",
+                secondaryEmailVerification: "Verificação de Email Secundário"
             }
         },
         home: {
-            mainTitle: "Organize seu dia!",
-            mainText: "Com o EveRemind, você nunca mais irá esquecer de suas tarefas, diminuindo sua preocupação e aumentando sua produtividade!",
-            createAccount: "Crie sua conta agora!",
+            mainTitle: "Organize sua rotina.",
+            mainText: "Com o EveRemind, suas tarefas e responsabilidades são sempre rastreadas, " +
+            " eliminando suas preocupações de esquecê-las e aumentando sua produtividade.",
+            createAccount: "Comece a lembrar criando sua conta abaixo.",
             register: "Registre-se"
         },
         signup: {
-            title: "Cadastrar-se",
-            textA: "Preencha o formulário abaixo e crie imediatamente uma conta no nosso sistema.",
+            title: "Nova Conta",
+            textA: "Preencha o formulário abaixo para registrar uma nova conta para usar o EveRemind.",
             textB: "É fácil, prático e rápido!",
             fullName: "Nome Completo",
             email: "Email",
             secondaryEmail: "Email Secundário",
             password: "Senha",
             repeatPassword: "Repita a Senha",
-            finish: "Finalizar Cadastro",
-            confirmEmail: "A confirmação dos e-mails é necessária para aproveitar integralmente as funcionalidades do nosso sistema.",
+            finish: "Obter Minha Conta",
+            confirmEmail: "Mensagens de confirmação foram enviadas para ambos emails. Verificá-las" +
+            " habilita as funcionalidades de notificação de tarefa e recuperação de senha.",
             errors: {
                 required: "Preencha todos os campos.",
-                notMatch: "As senhas informadas devem ser iguais.",
-                registered: "O e-mail informado já foi registrado.",
-                sameEmail: "O e-mail principal e secundário devem ser diferentes.",
-                passwordRegex: "A senha deve possuir no mínimo 8 caracteres com pelo menos uma letra e um dígito, e deve possuír apenas letras e números.",
+                notMatch: "As senhas informadas não são iguais.",
+                registered: "O e-mail informado já foi registrado em outra conta.",
+                sameEmail: "Os e-mails principal e secundário devem ser diferentes.",
+                passwordRegex: "Uma senha válida possui um mínimo de 8 caracteres entre" +
+                " letras e números com pelo menos uma letra e um número.",
                 notAnEmail: "O e-mail informado náo é válido.",
                 notASecondaryEmail: "O e-mail secundário informado náo é válido."
             },
-            success: "Usuario cadastrado com sucesso!"
+            success: "Sua nova conta está pronta para uso."
         },
         navbar: {
             errors: {
-                auth: "E-mail e senha informados não correspondem!",
+                auth: "E-mail e senha informados não são correspondentes ou não são registrados.",
                 requiredEmail: "Informe seu e-mail.",
                 requiredPassword: "Informe sua senha.",
                 notAnEmail: "O e-mail informado náo é válido."
@@ -87,8 +90,12 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             },
             verifyPrimary: "Você ainda não fez a confirmação de seu e-mail principal. Faça-a para desfruir totalmente de nossos serviços.",
             verifySecondary: "Você ainda não fez a confirmação de seu e-mail secundario. Faça-a para desfruir totalmente de nossos serviços.",
-            logout: "Logout realizado!",
-            login: "Login realizado!"
+            logout1: "Tchau, {{getUserName()}}",
+            logout2: "Até breve, {{getUserName()}}",
+            logout3: "Tenha um bom dia, {{getUserName()}}",
+            login1: "Olá, {{getUserName()}}",
+            login2: "Como vai, {{getUserName()}}?",
+            login3: "Bem vindo, {{getUserName()}}"
         },
         dashboard: {
             newCategory: {
@@ -107,7 +114,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 cancel: "Cancelar",
                 doDelete: "Excluir",
                 modalTitle: "Excluindo a categoria <strong>{{category}}</strong>",
-                modalText: "Ao excluir a categoria <strong>{{category}}</strong> você excluirá tambem todas as atividades cadastradas nesta categoria, deseja mesmo excluir?"
+                modalText: "Excluir a categoria <strong>{{category}}</strong> também exclui" +
+                " todas as atividades relacionadas. Deseja prosseguir?"
             },
             addActivity: {
                 modalTitle: "Nova atividade na categoria <strong>{{category}}</strong>",
@@ -137,42 +145,44 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 setDone: "Marcar como Feito"
             },
             tooltips: {
-                markDone: "Marcar como Feito é irreversível, irá desativar as notificações desta atividade e ela não estará mais disponível na Dashboard.",
+                markDone: "Marcar como feito é irreversível. Isto irá desativar as" +
+                " notificações por email desta atividade e ela não estará mais disponível na dashboard.",
                 addCategory: "Adicionar categoria de atividades",
                 editCategory: "Editar categoria",
                 deleteCategory: "Excluir categoria",
                 addActivity: "Adicionar uma nova atividade",
                 priorityHelpTitle: "A escolha de prioridade afeta o comportamento da notificação da seguinte forma:",
-                priorityHelp: "<strong class='span-primary'>Baixa:</strong> E-mail enviado semanalmente, a 1 dia e 1 hora da data/hora<br>" +
-                              "<strong class='span-success'>Média:</strong> E-mail enviado a cada 3 dias, 1 dia, 6 horas e 1 da data/hora.<br>"+
-                              "<strong class='span-warning'>Alta:</strong> E-mail enviado diariamente, a 6 horas, a 3 horas e a 1 hora da data/hora.<br>" +
-                              "<strong class='span-danger'>Crítico:</strong> E-mail enviado a cada 12 horas, a 6, 3 e 1 hora da data/hora."
+                priorityHelp: "<strong class='span-primary'>Baixa:</strong> Emails enviados semanalmente, a 1 dia e a 1 hora da data/hora<br>" +
+                              "<strong class='span-success'>Média:</strong> Emails enviados a cada 3 dias, 1 dia, a 6 e a 1 da data/hora.<br>"+
+                              "<strong class='span-warning'>Alta:</strong> Emails enviados diariamente, a 6, a 3 e a 1 hora da data/hora.<br>" +
+                              "<strong class='span-danger'>Crítico:</strong> Emails enviados a cada 12 horas, a 6, a 3 e a 1 hora da data/hora."
             },
             errors: {
                 change: "Nenhuma alteração foi realizada.",
                 invalidTime: "Hora inválida.",
-                minSpace: "A ocorrência de uma atividade deve ser a pelo menos 1 hora do instante atual, ou seja, {{minDateTime}}.",
-                addCategoryName: "Insira o nome da categoria.",
-                alreadyRegistered: "Uma categoria com este nome já foi cadastrada!",
+                minSpace: "A ocorrência de uma atividade deve ser a pelo menos 1 hora do instante atual," +
+                " ou seja, {{minDateTime}}.",
+                addCategoryName: "O nome da categoria está vazio.",
+                alreadyRegistered: "Este nome esté em uso por outra categoria.",
                 editingCategory: "Termine de editar uma categoria antes de começar a editar outra.",
                 addActivityInput: "Preencha todos os campos.",
                 addActivityLength: "O nome da atividade é limitado em 80 caracteres.",
                 addCategoryLength: "O nome da categoria é limitado em 20 caracteres."
             },
             addCategory: "Categoria criada.",
-            editCategoryMsg: "Categoria editada.",
+            editCategoryMsg: "Categoria modificada.",
             deleteCategoryMsg: "Categoria excluída.",
             createdActivity: "Atividade criada.",
             updatedActivity: "Atividade modificada.",
             deleteActivityMsg: "Atividade excluída.",
-            markDoneActivityMsg: "Atividade marcada como feita."
+            markDoneActivityMsg: "Atividade foi marcada como feita."
         },
         listView: {
             categories: "Categorias",
             activities: "Atividades",
             allCategory: "Todas as categorias",
             actions: "Ações",
-            orderingBy: "Ordenando por ",
+            orderingBy: "Ordenando por",
             dateTime: "Data/Hora",
             at: "as",
             stat: "Status",
@@ -234,18 +244,18 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             },
             token: "Código de Verificação",
             verify: "Verificar",
-            empty: "Preencha todos os campos",
+            empty: "Preencha todos os campos.",
             checkError: "O email/token não existe ou o email já foi verificado.",
-            finishedVerify: "Email verificado com sucesso!"
+            finishedVerify: "Email verificado com sucesso."
         },
         account: {
-            success: "Usuario modificado!",
-            passwordSuccess: "Senha modificada!",
-            delete: "Sua conta foi excluida.",
+            success: "Os dados da conta foram atualizados.",
+            passwordSuccess: "A senha foi atualizada.",
+            delete: "Sua conta foi excluida. Espero que volte algum dia, amigo.",
             title: "Editar informações da conta",
             fullName: "Nome Completo",
             email: "Email",
-            secondaryEmail: "E-mail Secundario",
+            secondaryEmail: "Email Secundario",
             password: "Senha",
             save: "Salvar Modificações",
             changePassword: "Mudar Senha",
@@ -261,7 +271,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             },
             modalDelete: {
                 title: "Excluir Conta",
-                text: "Ao excluir sua conta, todas as informações vinculadas à ela serão excluidas também. Se deseja continuar, informe seu email e sua senha abaixo.",
+                text: "Ao excluir sua conta, todas as informações vinculadas à ela" +
+                " serão excluidas também. Se deseja continuar, informe seu email e sua senha abaixo.",
                 email: "Email",
                 password: "Senha",
                 exclude: "Excluir Conta"
@@ -269,9 +280,9 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             errors: {
                 required: "Preencha todos os campos.",
                 change: "Nenhuma alteração foi realizada.",
-                auth: "A senha atual está incorreta!",
-                authDelete: "O email e a senha não correspondem!",
-                notUser: "Este não é o seu endereço de email!",
+                auth: "A senha atual está incorreta.",
+                authDelete: "O email e a senha não correspondem.",
+                notUser: "Este não é o seu endereço de email.",
                 samePassword: "A nova senha informada é a mesma que a senha atual.",
                 sameEmail: "O e-mail principal e secundário devem ser diferentes.",
                 notAnEmail: "O e-mail informado náo é válido.",
@@ -280,10 +291,9 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
         },
         general: {
             notifications: {
-                notAuthorized: "Você não pode acessar esta página!"
+                notAuthorized: "Você precisa entrar em uma conta para acessar essa página."
             }
         }
     });
-
-    $translateProvider.preferredLanguage('pt-BR');
+    //$translateProvider.preferredLanguage('pt-BR');
 }]);
