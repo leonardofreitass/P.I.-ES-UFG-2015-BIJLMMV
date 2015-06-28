@@ -87,7 +87,11 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 exit: "Sign Out",
                 email: "E-mail",
                 password: "Password",
-                login: "Sign In"
+                login: "Sign In",
+                language: { 
+                    english: "English",
+                    portuguese: "Portuguese"
+                }
             },
             verifyPrimary: "Your primary email is unverified. Verify it by following the message instructions" +
             " to make use of task notification service.",
@@ -281,7 +285,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 exclude: "Delete Account"
             },
             errors: {
-                required: "Pease fill in all data fields.",
+                required: "Please fill in all data fields.",
                 change: "No changes were made.",
                 auth: "Given current password is not correct.",
                 authDelete: "Email and password do not match.",

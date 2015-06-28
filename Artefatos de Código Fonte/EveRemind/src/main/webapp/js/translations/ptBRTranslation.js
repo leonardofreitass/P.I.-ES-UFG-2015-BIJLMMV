@@ -86,7 +86,11 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 exit: "Sair",
                 email: "E-mail",
                 password: "Senha",
-                login: "Entrar"
+                login: "Entrar",
+                language: { 
+                    english: "Inglês",
+                    portuguese: "Português"
+                }
             },
             verifyPrimary: "Você ainda não fez a confirmação de seu e-mail principal. Faça-a para desfruir totalmente de nossos serviços.",
             verifySecondary: "Você ainda não fez a confirmação de seu e-mail secundario. Faça-a para desfruir totalmente de nossos serviços.",

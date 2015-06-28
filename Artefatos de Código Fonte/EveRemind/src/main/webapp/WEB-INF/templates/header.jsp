@@ -20,12 +20,11 @@
             </button>
             <a class="navbar-brand brand-top" ng-href="{{home}}"><img class="navbar-logo" src="img/eveRemind-navbar.png"/></a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" ng-if="isLogged()">
-                <li ng-class="{'active' : pageID == 'dashboard'}"><a href="dashboard.jsp">{{'navbar.menu.dashboard' | translate}} <span class="sr-only">(current)</span></a></li>
-                <li ng-class="{'active' : pageID == 'listView' || pageID == 'calendarView'}" class="dropdown" ng-if="isLogged()">
+                <li ng-class="{'active' : pageID === 'dashboard'}"><a href="dashboard.jsp">{{'navbar.menu.dashboard' | translate}} <span class="sr-only">(current)</span></a></li>
+                <li ng-class="{'active' : pageID === 'listView' || pageID === 'calendarView'}" class="dropdown" ng-if="isLogged()">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{'navbar.menu.view' | translate}} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="listView.jsp">{{'navbar.menu.listView' | translate}}</a></li>
@@ -55,6 +54,18 @@
                     <button type="submit" class="btn btn-dark" ng-click="login()">{{'navbar.menu.login' | translate}}</button>
                 </form>
             </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Atual<!--<img src="atual"/> {{'atual' | translate}}--><span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a ng-click="changeLanguage()" href=""><img src="img/brazil.png"/> {{'navbar.menu.language.portuguese' | translate}} </a></li>
+                        <li class="divider"></li>
+                        <li><a ng-click="changeLanguage()" href=""><img src="img/united-states.png"/> {{'navbar.menu.language.english' | translate}} </a></li>
+                    </ul>
+                </li>
+            </ul>
+            
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
