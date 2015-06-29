@@ -59,7 +59,7 @@ public class ServletRecoverPassword extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             userDao.updateHash(email, hash.getHash(password));
-            tokenDao.removeRecoverBind(email);
+            tokenDao.removeRecoveryBind(email);
             out.flush();
             
         }

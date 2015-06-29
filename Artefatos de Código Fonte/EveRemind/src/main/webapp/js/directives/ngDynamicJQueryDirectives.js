@@ -35,7 +35,6 @@ angular.module('everemindApp').directive('bsDynamicPopover', function(translateF
             if(!placement)
                 placement = "bottom";
             elem.popover({title: translateFilter(scope.config.title), content: translateFilter(scope.config.content), placement: placement, html: true, trigger: "hover"});
-            $compile(elem)(scope);
         }
     };
 }).

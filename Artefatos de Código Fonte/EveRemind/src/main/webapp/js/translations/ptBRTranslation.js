@@ -44,7 +44,12 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             mainText: "Com o EveRemind, suas tarefas e responsabilidades são sempre rastreadas, " +
             " eliminando suas preocupações em esquecê-las e aumentando sua produtividade.",
             createAccount: "Comece a lembrar criando sua conta abaixo.",
-            register: "Registre-se"
+            register: "Registre-se",
+            forgot: "Esqueceu sua senha?",
+            send: "Enviar",
+            modalTitle: "Solicitar Recuperação de Senha",
+            secondaryEmail: "Email Secundario",
+            obs: "*Seu email secundário deve estar verificado para poder recuperar sua senha."
         },
         signup: {
             title: "Nova Conta",
@@ -94,12 +99,12 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             " na mensagem enviada para ele para utilizar o serviço de notificação de atividade.",
             verifySecondary: "Seu email secundário não foi verificado. Verifique-o seguindo as instruções contidas" +
             " na mensagem enviada para ele para utilizar o serviço de recuperação de senha.",
-            logout1: "Tchau, {{getUserName()}}",
-            logout2: "Até breve, {{getUserName()}}",
-            logout3: "Tenha um bom dia, {{getUserName()}}",
-            login1: "Olá, {{getUserName()}}",
-            login2: "Como vai, {{getUserName()}}?",
-            login3: "Bem vindo, {{getUserName()}}"
+            logout1: "Tchau, {{name}}",
+            logout2: "Até breve, {{name}}",
+            logout3: "Tenha um bom dia, {{name}}",
+            login1: "Olá, {{name}}",
+            login2: "Como vai, {{name}}?",
+            login3: "Bem vindo, {{name}}"
         },
         dashboard: {
             newCategory: {
@@ -235,7 +240,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             priority: "Prioridade",
             previous: "Semana Anterior",
             today: "Visualizar Hoje",
-            next: "Próxima Semana"
+            next: "Próxima Semana",
+            activity: "<p align='left'><b>Hora:</b> {{hour}}<br><b>Prioridade:</b> {{priority}}<br><b>Descrição:</b> {{description}}</p>"
         },
         verifyEmail: {
             primary: {

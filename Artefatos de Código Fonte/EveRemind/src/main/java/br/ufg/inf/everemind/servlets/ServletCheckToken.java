@@ -70,7 +70,7 @@ public class ServletCheckToken extends HttpServlet {
                     }
                     break;
                 case "Recover":
-                    JSON.put("binded", tokenDao.hasPasswordReveryBind(email, token) && userDao.getBySecondaryEmail(email).isSecondaryEmailVerified());
+                    JSON.put("binded", tokenDao.hasPasswordRecoveryBind(email, token) && userDao.getBySecondaryEmail(email).isSecondaryEmailVerified());
                     break;
             }
             out.print(JSON);

@@ -70,7 +70,7 @@ angular.module('everemindApp').controller('ngPrimaryEmailVerificationCtrl', func
         if (urlParam.token !== null)
             $scope.data.token = urlParam.token;
         
-        $scope.$apply();
+
         if (urlParam.email !== null && urlParam.token !== null){
             $scope.verify();
         }

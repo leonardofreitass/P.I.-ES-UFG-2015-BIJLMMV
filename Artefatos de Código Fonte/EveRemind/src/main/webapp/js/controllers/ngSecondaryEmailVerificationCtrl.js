@@ -72,7 +72,6 @@ angular.module('everemindApp').controller('ngSecondaryEmailVerificationCtrl', fu
         if (urlParam.token !== null)
             $scope.data.token = urlParam.token;
         
-        $scope.$apply();
         if (urlParam.email !== null && urlParam.token !== null){
             $scope.verify();
         }

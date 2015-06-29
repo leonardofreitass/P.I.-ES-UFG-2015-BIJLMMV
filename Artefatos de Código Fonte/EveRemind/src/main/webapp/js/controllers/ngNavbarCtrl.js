@@ -80,7 +80,7 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
     
     $scope.logout = function(){
         $scope.$storage.exiting = true;
-        $scope.$storage.pendingMessage = {msg: "navbar.logout" + randomMsg(3), msgType: "notify", param: {name:$scope.getUserName()}};
+        $scope.$storage.pendingMessage = {msg: "navbar.logout" + randomMsg(3), msgType: "notify", param: {name: $scope.getUserName()}};
         $scope.$storage.$save();
         window.location.href = "index.jsp";
     };
@@ -96,19 +96,25 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
     };
     
     var setUserSession = function(json, refresh){
-        $scope.$storage.sessionUser = json;
-        $scope.$storage.$save();
         if(refresh){
             if (!json.verifiedPrimaryEmail)
                 $scope.$storage.pendingMessage = {msg: "navbar.verifyPrimary", msgType: "warning"};
             else if (!json.verifiedSecondaryEmail)
                 $scope.$storage.pendingMessage = {msg: "navbar.verifySecondary", msgType: "warning"};
             else
-                $scope.$storage.pendingMessage = {msg: "navbar.login" + randomMsg(3), msgType: "notify", param: {name:$scope.getUserName()}};
+                $scope.$storage.pendingMessage = {msg: "navbar.login" + randomMsg(3), msgType: "notify", param: {name: json.fullName}};
             
-            $location.path("dashboard.jsp");
+            $scope.$storage.login = true;
+            $scope.$storage.futureSessionUser = json;
+            $scope.$storage.$save();
+            $scope.$apply();
+            window.location.href = "dashboard.jsp";
         }
-            
+        else{
+            $scope.$storage.sessionUser = json;
+            $scope.$storage.$save();
+            $scope.$apply();
+        }
     };
     
     if (!!$scope.$storage.sessionUser){

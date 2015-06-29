@@ -24,7 +24,7 @@
 
 /* global angular */
 
-angular.module('everemindApp').controller('ngCalendarViewCtrl', function ($scope, ngDateUtils, $localStorage) {
+angular.module('everemindApp').controller('ngCalendarViewCtrl', function ($scope, ngDateUtils, $localStorage, translateFilter) {
     
     $scope.monthsTranslations = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
     $scope.weeksLoad = 4;
@@ -180,6 +180,21 @@ angular.module('everemindApp').controller('ngCalendarViewCtrl', function ($scope
             $scope.data.hovering = true;
         }
             
+    };
+    
+    $scope.getActivityPriority = function(priority){
+        var priorities = {
+            "0": ["primary", "low"],
+            "1": ["success", "mid"],
+            "2": ["warning", "high"],
+            "3": ["danger", "critical"]
+        };
+        
+        return "<span class='span-" + priorities[priority][0] + "'>" + translateFilter("dashboard.addActivity.priorities." + priorities[priority][1]) + "</span>";
+    };
+    
+    $scope.makeModalContent = function(activity){
+        return translateFilter('calendarView.activity', {hour: activity.time, description: activity.description, priority: $scope.getActivityPriority(activity.priority)});
     };
     
     var updateCategories = function(data){

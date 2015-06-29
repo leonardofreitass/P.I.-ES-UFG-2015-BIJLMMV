@@ -70,7 +70,7 @@ public class ServletDeleteUser extends HttpServlet {
             userDao.delete(email);
             tokenDao.removeVerifyBind(email);
             tokenDao.removeVerifyBind(user.getSecondaryEmail());
-            tokenDao.removeRecoverBind(user.getSecondaryEmail());
+            tokenDao.removeRecoveryBind(user.getSecondaryEmail());
             ArrayList<Category> list = categoryDao.getAll(user.getId());
             for (Category cat : list){
                 activityDao.deleteAllFromCategory(cat.getId());

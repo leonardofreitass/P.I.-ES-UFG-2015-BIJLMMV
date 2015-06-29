@@ -25,6 +25,12 @@
 
 /* global angular, pageID */
 
-angular.module('everemindApp').controller('ngIndexCtrl', function ($scope, $location) {
-
+angular.module('everemindApp').controller('ngIndexCtrl', function ($scope) {
+    $scope.data = {
+        secondaryEmail: ""
+    };
+    
+    $scope.recover = function(){
+        
+    };
 });

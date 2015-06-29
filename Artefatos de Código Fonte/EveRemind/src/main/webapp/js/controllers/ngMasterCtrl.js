@@ -45,7 +45,7 @@ angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNo
     };
     
     var checkAuth = function(){
-        if (pagesConfig[pageID].access === "auth" && !$scope.$storage.sessionUser){
+        if (pagesConfig[pageID].access === "auth" && !$scope.$storage.sessionUser && !$scope.$storage.futureSessionUser){
             $scope.$storage.pendingMessage = {msg: "general.notifications.notAuthorized", msgType: "error"};
             $scope.$storage.$save();
             display = false;
@@ -54,6 +54,10 @@ angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNo
         if ($scope.$storage.exiting){
             $scope.$storage.exiting = null;
             $scope.$storage.sessionUser = null;
+        }
+        if ($scope.$storage.login){
+            $scope.$storage.login = null;
+            $scope.$storage.sessionUser = $scope.$storage.futureSessionUser;
         }
     };
     

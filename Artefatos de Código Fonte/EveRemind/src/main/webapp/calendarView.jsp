@@ -99,7 +99,7 @@
                                 <div ng-repeat="week in data.weeks" class="calendar-week-row">
                                     <div ng-repeat="day in week" ng-style="getDayStyle(day.day)" class="day-cell">
                                         <h4>{{dateUtils.onlyDay(day.day)}}</h4>
-                                        <span ng-repeat="activity in day.activities" ng-style="makeSquareColor(activity)" ng-show="canShow(activity)" bs-dynamic-tooltip="{title: activity.name, placement: 'top'}" class="activity-in-calendar">
+                                        <span ng-repeat="activity in day.activities" ng-style="makeSquareColor(activity)" ng-show="canShow(activity)" bs-dynamic-popover="{title: '<b>' + activity.name + '</b>', content: makeModalContent(activity), placement: 'top'}" class="activity-in-calendar">
                                             <span class="glyph-calendar" ng-class="{'glyphicon glyphicon-unchecked': !activity.done, 'glyphicon glyphicon-check': activity.done}"></span>
                                         </span>
                                     </div>
