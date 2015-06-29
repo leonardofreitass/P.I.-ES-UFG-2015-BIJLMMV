@@ -23,16 +23,11 @@
  */
 package br.ufg.inf.everemind.servlets;
 
-import br.ufg.inf.everemind.db.ActivityDAO;
-import br.ufg.inf.everemind.db.CategoryDAO;
 import br.ufg.inf.everemind.db.TokenDAO;
 import br.ufg.inf.everemind.db.UserDAO;
-import br.ufg.inf.everemind.entity.Category;
-import br.ufg.inf.everemind.entity.User;
 import br.ufg.inf.everemind.util.Hash;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +37,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Igor
  */
-public class ServletDeleteUser extends HttpServlet {
+public class ServletRecoverPassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,27 +50,16 @@ public class ServletDeleteUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
-        
         try (PrintWriter out = response.getWriter()) {
-            
-            UserDAO userDao = UserDAO.getInstance();
-            CategoryDAO categoryDao = CategoryDAO.getInstance();
-            ActivityDAO activityDao = ActivityDAO.getInstance();
-            TokenDAO tokenDao = TokenDAO.getInstance();
+                
             Hash hash = new Hash();
+            UserDAO userDao = UserDAO.getInstance();
+            TokenDAO tokenDao = TokenDAO.getInstance();
             String email = request.getParameter("email");
-            User user = userDao.getByEmail(email);
-            userDao.delete(email);
-            tokenDao.removeVerifyBind(email);
-            tokenDao.removeVerifyBind(user.getSecondaryEmail());
-            tokenDao.removeRecoverBind(user.getSecondaryEmail());
-            ArrayList<Category> list = categoryDao.getAll(user.getId());
-            for (Category cat : list){
-                activityDao.deleteAllFromCategory(cat.getId());
-                categoryDao.delete(cat.getName(), user.getId());
-            }
+            String password = request.getParameter("password");
+            userDao.updateHash(email, hash.getHash(password));
+            tokenDao.removeRecoverBind(email);
             out.flush();
             
         }

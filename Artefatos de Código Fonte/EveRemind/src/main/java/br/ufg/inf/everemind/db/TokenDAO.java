@@ -48,20 +48,43 @@ public class TokenDAO {
         return instance;
     }
     
-    public void bindToken(String email, String token){
+    public void bindVerifyToken(String email, String token){
         Document tokenDB = new Document("email", email)
-                .append("token", token);
+                .append("token", token)
+                .append("type", "Verify");
         this.collection.insertOne(tokenDB);
     }
     
-    public boolean hasBind(String email, String token){
-        Document query = new Document("email", email).append("token", token);
+    public void bindRecoverToken(String email, String token){
+        Document tokenDB = new Document("email", email)
+                .append("token", token)
+                .append("type", "Recover");
+        this.collection.insertOne(tokenDB);
+    }
+    
+    public boolean hasEmailVerificationBind(String email, String token){
+        Document query = new Document("email", email)
+                .append("token", token)
+                .append("type", "Verify");
         Document search = collection.find(query).first();
         return search != null;
     }
     
-    public void removeBind(String email){
-        Document query = new Document("email", email);
+    public boolean hasPasswordReveryBind(String email, String token){
+        Document query = new Document("email", email)
+                .append("token", token)
+                .append("type", "Rocover");
+        Document search = collection.find(query).first();
+        return search != null;
+    }
+    
+    public void removeVerifyBind(String email){
+        Document query = new Document("email", email).append("type", "Verify");
+        collection.deleteOne(query);
+    }
+    
+    public void removeRecoverBind(String secondaryEmail){
+        Document query = new Document("email", secondaryEmail).append("type", "Verify");
         collection.deleteOne(query);
     }
 }

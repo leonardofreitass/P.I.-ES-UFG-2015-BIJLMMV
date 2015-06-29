@@ -25,9 +25,6 @@ package br.ufg.inf.everemind.servlets;
 
 import br.ufg.inf.everemind.db.TokenDAO;
 import br.ufg.inf.everemind.db.UserDAO;
-import br.ufg.inf.everemind.entity.User;
-import br.ufg.inf.everemind.util.Hash;
-import br.ufg.inf.everemind.util.Token;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -60,8 +57,9 @@ public class ServletVerifyPrimaryEmail extends HttpServlet {
             TokenDAO tokenDao = TokenDAO.getInstance();
             String email = request.getParameter("email");
             userDao.setPrimaryVerified(email);
-            tokenDao.removeBind(email);
+            tokenDao.removeVerifyBind(email);
             out.flush();
+            
         }
     }
 

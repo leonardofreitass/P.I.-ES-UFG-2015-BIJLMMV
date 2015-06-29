@@ -51,21 +51,31 @@ public class ServletCheckToken extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        
+
         try (PrintWriter out = response.getWriter()) {
             String email = request.getParameter("email");
             String token = request.getParameter("token");
+            String type = request.getParameter("type");
             String emailType = request.getParameter("emailType");
             TokenDAO tokenDao = TokenDAO.getInstance();
             UserDAO userDao = UserDAO.getInstance();
-            JSONObject JSON = new JSONObject(); 
-            if (emailType.equals("primary"))
-                JSON.put("binded", tokenDao.hasBind(email, token) && userDao.hasEmailRegistered(email)); 
-            else
-                JSON.put("binded", tokenDao.hasBind(email, token) && userDao.hasSecondaryEmailRegistered(email));
+            JSONObject JSON = new JSONObject();
+            switch (type) {
+                case "Verify":
+                    if (emailType.equals("Primary")) {
+                        JSON.put("binded", tokenDao.hasEmailVerificationBind(email, token) && userDao.hasEmailRegistered(email));
+                    }
+                    else {
+                        JSON.put("binded", tokenDao.hasEmailVerificationBind(email, token) && userDao.hasSecondaryEmailRegistered(email));
+                    }
+                    break;
+                case "Recover":
+                    JSON.put("binded", tokenDao.hasPasswordReveryBind(email, token) && userDao.getBySecondaryEmail(email).isSecondaryEmailVerified());
+                    break;
+            }
             out.print(JSON);
             out.flush();
-            
+
         }
     }
 

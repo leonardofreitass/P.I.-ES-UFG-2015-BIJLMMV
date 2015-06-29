@@ -56,7 +56,7 @@ public class ServletVerifySecondaryEmail extends HttpServlet {
             TokenDAO tokenDao = TokenDAO.getInstance();
             String email = request.getParameter("email");
             userDao.setSecondaryVerified(email);
-            tokenDao.removeBind(email);
+            tokenDao.removeVerifyBind(email);
             out.flush();
         }
     }

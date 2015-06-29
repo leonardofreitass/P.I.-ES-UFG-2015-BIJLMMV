@@ -71,14 +71,14 @@ public class ServletUpdateUser extends HttpServlet {
             boolean changedEmail = !email.equals(originalEmail), changedSecondaryEmail = !secondaryEmail.equals(originalSecondaryEmail);
             if (changedEmail){
                 String tokenPrimary = token.generate();
-                tokenDao.bindToken(email, tokenPrimary);
-                tokenDao.removeBind(originalEmail);
+                tokenDao.bindVerifyToken(email, tokenPrimary);
+                tokenDao.removeVerifyBind(originalEmail);
                 ea.resendToken(email, fullName, tokenPrimary, path + "primaryEmailVerification.jsp");
             }
             if (changedSecondaryEmail){
                 String tokenSecondary = token.generate();
-                tokenDao.bindToken(secondaryEmail, tokenSecondary);
-                tokenDao.removeBind(originalSecondaryEmail);
+                tokenDao.bindVerifyToken(secondaryEmail, tokenSecondary);
+                tokenDao.removeVerifyBind(originalSecondaryEmail);
                 ea.resendToken(secondaryEmail, fullName, tokenSecondary, path + "secondaryEmailVerification.jsp");
             }
             userDao.updateInfo(originalEmail, new User(fullName, email, secondaryEmail), changedEmail, changedSecondaryEmail);

@@ -84,6 +84,10 @@
         <servlet-name>ServletGetWeeklyActivities</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletGetWeeklyActivities</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletRecoverPassword</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletRecoverPassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>ServletGetWeeklyActivities</servlet-name>
         <url-pattern>/ServletGetWeeklyActivities</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletRecoverPassword</servlet-name>
+        <url-pattern>/ServletRecoverPassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
