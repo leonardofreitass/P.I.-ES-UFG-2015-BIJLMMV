@@ -27,6 +27,7 @@ import br.ufg.inf.everemind.entity.User;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -72,6 +73,23 @@ public class UserDAO {
 
     public User getByEmail(String email) {
         Document query = new Document("email", email);
+        Document search = collection.find(query).first();
+        if (search == null) {
+            return null;
+        }
+        
+        User user = new User(search.getString("fullName"),
+                search.getString("email"),
+                search.getString("secondaryEmail"),
+                search.getBoolean("primaryEmailVerified"),
+                search.getBoolean("secondaryEmailVerified"));
+        user.setId(search.getObjectId("_id").toString());
+        
+        return user;
+    }
+    
+    public User getById(String id) {
+        Document query = new Document("_id", new ObjectId(id));
         Document search = collection.find(query).first();
         if (search == null) {
             return null;

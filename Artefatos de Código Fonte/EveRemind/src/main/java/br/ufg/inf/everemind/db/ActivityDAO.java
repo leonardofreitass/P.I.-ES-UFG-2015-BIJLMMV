@@ -42,6 +42,7 @@ public class ActivityDAO {
     private static ActivityDAO instance = null;
     private final MongoDatabase mongoDatabase;
     private final MongoCollection<Document> collection;
+    private Object activity;
 
     private ActivityDAO() {
         this.mongoDatabase = DatabaseConnection.create();
@@ -149,6 +150,35 @@ public class ActivityDAO {
         return activityList;
     }
     
+    public ArrayList<Activity> getNextToNotify(String nextToNotify){
+        Document query = new Document();
+        query.append("nextNotificationTime", nextToNotify);
+        ArrayList<Activity> activityList = new ArrayList<>();
+        query.append("done", false);
+        query.append("notificationBehaviour", true);
+        
+        FindIterable<Document> search = collection.find(query);
+        if (search == null) {
+            return null;
+        }
+        for (Document current : search) {
+            Activity activity = new Activity(current.getString("_idCategory"),
+                    current.getString("name"),
+                    current.getInteger("priority", -1),
+                    current.getString("date"),
+                    current.getString("hour"),
+                    current.getString("notes"),
+                    current.getBoolean("notificationBehaviour", false),
+                    current.getString("lastNotificationTime"),
+                    current.getString("nextNotificationTime"));
+            activity.setId(current.getObjectId("_id").toString());
+            activity.setDone(current.getBoolean("done", false));
+            activity.setExpired(activity.getDateTime().before(Calendar.getInstance()));
+            activityList.add(activity);
+        }
+        return activityList;
+    }
+    
     public void deleteAllFromCategory(String _idCategory) {
         Document query = new Document("_idCategory", _idCategory);
         collection.deleteMany(query);
@@ -170,6 +200,13 @@ public class ActivityDAO {
                 .append("notificationBehaviour", activity.getNotificationBehaviour())
                 .append("lastNotificationTime", activity.getLastNotificationTime())
                 .append("nextNotificationTime", activity.getNextNotificationTime());
+        collection.updateOne(query, new Document("$set", activityDB));
+    }
+    
+    public void updateNotification(String _id, String last, String next) {
+        Document query = new Document("_id", new ObjectId(_id));
+        Document activityDB = new Document("lastNotificationTime", last)
+                .append("nextNotificationTime", next);
         collection.updateOne(query, new Document("$set", activityDB));
     }
     

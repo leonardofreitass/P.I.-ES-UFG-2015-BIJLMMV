@@ -25,8 +25,12 @@ package br.ufg.inf.everemind.servlets;
 
 import br.ufg.inf.everemind.db.ActivityDAO;
 import br.ufg.inf.everemind.entity.Activity;
+import br.ufg.inf.everemind.util.CalendarManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +64,15 @@ public class ServletCreateActivity extends HttpServlet {
             int priority = Integer.parseInt(request.getParameter("priority"));
             boolean notification = Boolean.valueOf(request.getParameter("notification"));
             String idCategory = request.getParameter("idCategory");
-            activityDao.save(new Activity(idCategory, name, priority, date, time, description, notification, "", ""));
+            Activity act = new Activity(idCategory, name, priority, date, time, description, notification, "", "");
+            ArrayList<Calendar> cals = act.getLastNotifications();
+            Calendar future = Calendar.getInstance();
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+            future.add(Calendar.HOUR_OF_DAY, act.getPriorityHourInterval());
+            cals.add(future);
+            Calendar next = CalendarManager.highestCalendar(cals);
+            act.setNextNotificationTime(format.format(next.getTime()));
+            activityDao.save(act);
             out.flush();
         }
     }

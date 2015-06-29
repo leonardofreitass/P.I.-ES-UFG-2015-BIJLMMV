@@ -21,39 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package br.ufg.inf.everemind.util;
+package br.ufg.inf.everemind.servlets;
 
-import br.ufg.inf.everemind.entity.Activity;
-import java.util.Comparator;
+import br.ufg.inf.everemind.scheduler.ScheduledNotification;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
-/**
- *
- * @author Leonardo
- */
-public class ComparatorsModels {
-
-    public static Comparator<Activity> activityByDate() {
-        return new Comparator<Activity>() {
-            @Override
-            public int compare(Activity a1, Activity a2) {
-                if (a1.getDateTime().compareTo(a2.getDateTime()) != 0)
-                    return a1.getDateTime().compareTo(a2.getDateTime());
-                else
-                    return a2.getPriority() - a1.getPriority();
-                    
-            }
-        };
-    }
+public class ServletStartScheduler implements ServletContextListener {
     
-    public static Comparator<Activity> activityByPriority() {
-        return new Comparator<Activity>() {
-            @Override
-            public int compare(Activity a1, Activity a2) {
-                if (a2.getPriority() - a1.getPriority() != 0)
-                    return a2.getPriority() - a1.getPriority();
-                else
-                    return a1.getDateTime().compareTo(a2.getDateTime());
-            }
-        };
+    private final Timer timer = new Timer();
+    private final String localPath = "http://localhost:8084/EveRemind/";
+    private final String herokuPath = "https://everemind.herokuapp.com/";
+
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        TimerTask taskNew = new ScheduledNotification(this.localPath);
+        this.timer.scheduleAtFixedRate(taskNew, 0, 1000 * 60); 
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+         this.timer.cancel();
+         this.timer.purge();
     }
 }

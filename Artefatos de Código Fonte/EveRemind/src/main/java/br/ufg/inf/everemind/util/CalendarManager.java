@@ -85,4 +85,15 @@ public class CalendarManager {
         calDay.add(Calendar.DAY_OF_MONTH, -1);
         return format.format(calDay.getTime());
     }
+    
+    public static Calendar highestCalendar(ArrayList<Calendar> calendars){
+        Calendar max = null;
+        Calendar now = Calendar.getInstance();
+        for (Calendar calendar : calendars){
+            if ((max == null || calendar.compareTo(max) < 0) && calendar.compareTo(now) > 0){
+                max = calendar;
+            }
+        }
+        return max;
+    }
 }

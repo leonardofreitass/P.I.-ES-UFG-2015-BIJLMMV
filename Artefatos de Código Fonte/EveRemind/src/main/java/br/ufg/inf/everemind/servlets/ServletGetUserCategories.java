@@ -27,13 +27,12 @@ import br.ufg.inf.everemind.db.ActivityDAO;
 import br.ufg.inf.everemind.db.CategoryDAO;
 import br.ufg.inf.everemind.entity.Activity;
 import br.ufg.inf.everemind.entity.Category;
-import br.ufg.inf.everemind.util.ComparatorsModels;
+import br.ufg.inf.everemind.scheduler.ScheduledNotification;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.GregorianCalendar;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +58,12 @@ public class ServletGetUserCategories extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
+        /*
+        TimerTask tasknew = new ScheduledNotification();
+        Timer timer = new Timer();
 
+        timer.scheduleAtFixedRate(tasknew, 0, 1000 * 60); 
+        /**/
         try (PrintWriter out = response.getWriter()) {
             String idUser = request.getParameter("idUser");
             boolean activities = Boolean.valueOf(request.getParameter("activities"));

@@ -88,6 +88,10 @@
         <servlet-name>ServletRecoverPassword</servlet-name>
         <servlet-class>br.ufg.inf.everemind.servlets.ServletRecoverPassword</servlet-class>
     </servlet>
+    <listener>
+        <description>ServletContextListener</description>
+        <listener-class>br.ufg.inf.everemind.servlets.ServletStartScheduler</listener-class>
+    </listener>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>

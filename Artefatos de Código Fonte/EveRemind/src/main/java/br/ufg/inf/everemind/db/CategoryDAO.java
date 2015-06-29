@@ -29,6 +29,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -63,6 +64,21 @@ public class CategoryDAO {
 
     public Category getOne(String _idUser, String name) {
         Document query = new Document("_idUser", _idUser).append("name", name);
+        Document search = collection.find(query).first();
+        if (search == null) {
+            return null;
+        }
+
+        Category category = new Category(search.getString("name"),
+                search.getString("color"),
+                search.getString("_idUser"));
+        category.setId(search.getObjectId("_id").toString());
+                
+        return category;
+    }
+    
+    public Category getById(String id) {
+        Document query = new Document("_id", new ObjectId(id));
         Document search = collection.find(query).first();
         if (search == null) {
             return null;

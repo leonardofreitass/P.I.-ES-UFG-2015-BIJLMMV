@@ -53,6 +53,7 @@ public class ServletAuthenticate extends HttpServlet {
         
         response.setContentType("application/json");
         
+        
         try (PrintWriter out = response.getWriter()) {
             
             String email = request.getParameter("email");

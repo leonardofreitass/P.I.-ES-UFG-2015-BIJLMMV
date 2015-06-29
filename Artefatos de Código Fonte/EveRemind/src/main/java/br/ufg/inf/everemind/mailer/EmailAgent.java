@@ -23,14 +23,15 @@
  */
 package br.ufg.inf.everemind.mailer;
 
+import br.ufg.inf.everemind.entity.Activity;
+
 /**
  *
  * @author Leonardo
  */
 public class EmailAgent {
     
-    public final String systemName = "eveRemind";
-    public final String emailSignature = "Atenciosamente,</br></br>" + systemName + " Staff.";
+    public final String systemName = "EveRemind";
     
     public void sendMessage(String receiver, String subject, String content){
         Mailer mailer = new Mailer(
@@ -41,46 +42,11 @@ public class EmailAgent {
     }
     
     public void sendWelcome(String receiver, String name, String path){
-        String messageScope = "<table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:10px 10px 0;background:#FCD68A;\">\n" +
-"            <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td id=\"ecxmain\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;background-color:#ffffff;border-radius:5px;\">\n" +
-"    <div style=\"border:1px solid #cccccc;border-radius:5px;padding:20px;\">\n" +
-"      <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"              <p style=\"\">\n" +
-"                \n" +
-"                  Seja bem vindo ao eveRemind, " + name + "!\n" +
-"                \n" +
-"              </p>\n" +
-"              <p style=\"\">\n" +
-"                \n" +
-"                  Para utilizar todas nossas funcionalidades integralmente, verifique o seu email principal e secundário.\n" +
-"                \n" +
-"              </p>\n" +
-"            </td>\n" +
-"          </tr><tr><td class=\"ecxcall-to-action\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:15px 0 0;\">\n" +
-"  <table style=\"width:auto;border-collapse:collapse;\"><tbody><tr><td class=\"ecxcall-to-action-inner\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"          <div style=\"border:1px solid #EEA236;border-radius:3px;\">\n" +
-"            </div>\n" +
-"        </td>\n" +
-"      </tr></tbody></table></td>\n" +
-"\n" +
-"          </tr></tbody></table></div>\n" +
-"  </td>\n" +
-"</tr><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:20px 0;color:#707070;\">\n" +
-"  <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"          \n" +
-"          \n" +
-"        </td>\n" +
-"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"          \n" +
-"        </td>\n" +
-"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;text-align:right;width:100px;\">\n" +
-"          <a href=\"" + path + "\" style=\"color:#3572b0;text-decoration:none;\" target=\"_blank\">\n" +
-"            <img src=\"http://i12.photobucket.com/albums/a246/undeaddragslayer/eveRemind-navbar_zpsgdfog0mh.png\" alt=\"EveRemind\" width=\"100\" height=\"23\"></a>\n" +
-"        </td>\n" +
-"      </tr></tbody></table></td>\n" +
-"\n" +
-"                </tr></tbody></table></td>\n" +
-"        </tr></tbody></table>";
+        String messageScope = EmailDefaultScope.makeEmail(
+                "Seja bem vindo ao eveRemind, <b>" + name + "</b>!", 
+                "Para utilizar todas nossas funcionalidades integralmente, verifique o seu email principal e secundário.", 
+                "", 
+                path); 
         this.sendMessage(
                 receiver, 
                 "Bem Vindo!", 
@@ -89,51 +55,11 @@ public class EmailAgent {
     }
     
     public void sendToken(String receiver, String name, String token, String path){
-        String messageScope = "<table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:10px 10px 0;background:#FCD68A;\">\n" +
-"            <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td id=\"ecxmain\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;background-color:#ffffff;border-radius:5px;\">\n" +
-"    <div style=\"border:1px solid #cccccc;border-radius:5px;padding:20px;\">\n" +
-"      <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"              <p style=\"\">\n" +
-"                \n" +
-"                  Seu cadastro no <i>EveRemind</i> para o usuário <b>" + name + "</b> foi efetuado com sucesso, mas para utilizar o serviço de notificação e alteração de senha é preciso confirmar os e-mails fornecidos.\n" +
-"                \n" +
-"              </p>\n" +
-"              <p style=\"\">\n" +
-"                \n" +
-"                  Para confirmar este e-mail, clique no botão abaixo.\n" +
-"                \n" +
-"              </p>\n" +
-"            </td>\n" +
-"          </tr><tr><td class=\"ecxcall-to-action\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:15px 0 0;\">\n" +
-"  <table style=\"width:auto;border-collapse:collapse;\"><tbody><tr><td class=\"ecxcall-to-action-inner\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"          <div style=\"border:1px solid #EEA236;border-radius:3px;\">\n" +
-"            <table style=\"width:auto;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:4px 10px;background-color:#F0AD4E;\">\n" +
-"                  \n" +
-"              <a href=\"" + path + "#/verification?email=" + receiver + "&token=" + token + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Confirmar email</a>\n" +
-"            \n" +
-"                </td>\n" +
-"              </tr></tbody></table></div>\n" +
-"        </td>\n" +
-"      </tr></tbody></table></td>\n" +
-"\n" +
-"          </tr></tbody></table></div>\n" +
-"  </td>\n" +
-"</tr><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:20px 0;color:#707070;\">\n" +
-"  <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"          \n" +
-"          \n" +
-"        </td>\n" +
-"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"          \n" +
-"        </td>\n" +
-"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;text-align:right;width:100px;\">\n" +
-"          <a href=\"" + path.substring(0, path.lastIndexOf("/") + 1) + "\" style=\"color:#3572b0;text-decoration:none;\" target=\"_blank\">\n" +
-"            <img src=\"http://i12.photobucket.com/albums/a246/undeaddragslayer/eveRemind-navbar_zpsgdfog0mh.png\" alt=\"EveRemind\" width=\"100\" height=\"23\"></a>\n" +
-"        </td>\n" +
-"      </tr></tbody></table></td>\n" +
-"\n" +
-"                </tr></tbody></table></td>\n" +
-"        </tr></tbody></table>";
+        String messageScope = EmailDefaultScope.makeEmail(
+                "Seu cadastro no <i>EveRemind</i> para o usuário <b>" + name + "</b> foi efetuado com sucesso, mas para utilizar o serviço de notificação e alteração de senha é preciso confirmar os e-mails fornecidos.", 
+                "Para confirmar este e-mail, clique no botão abaixo.", 
+                "<a href=\"" + path + "#/verification?email=" + receiver + "&token=" + token + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Confirmar email</a>", 
+                path + "#/verification?email=" + receiver + "&token=" + token);
         
         this.sendMessage(
                 receiver, 
@@ -143,51 +69,11 @@ public class EmailAgent {
     }
     
     public void resendToken(String receiver, String name, String token, String path){
-        String messageScope = "<table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:10px 10px 0;background:#FCD68A;\">\n" +
-"            <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td id=\"ecxmain\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;background-color:#ffffff;border-radius:5px;\">\n" +
-"    <div style=\"border:1px solid #cccccc;border-radius:5px;padding:20px;\">\n" +
-"      <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"              <p style=\"\">\n" +
-"                \n" +
-"                  Você modificou seu email no EveRemind e é preciso refazer a confirmação.\n" +
-"                \n" +
-"              </p>\n" +
-"              <p style=\"\">\n" +
-"                \n" +
-"                  Para confirmar este e-mail, clique no botão abaixo.\n" +
-"                \n" +
-"              </p>\n" +
-"            </td>\n" +
-"          </tr><tr><td class=\"ecxcall-to-action\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:15px 0 0;\">\n" +
-"  <table style=\"width:auto;border-collapse:collapse;\"><tbody><tr><td class=\"ecxcall-to-action-inner\" style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"          <div style=\"border:1px solid #EEA236;border-radius:3px;\">\n" +
-"            <table style=\"width:auto;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:4px 10px;background-color:#F0AD4E;\">\n" +
-"                  \n" +
-"              <a href=\"" + path + "#/verification?email=" + receiver + "&token=" + token + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Confirmar email</a>\n" +
-"            \n" +
-"                </td>\n" +
-"              </tr></tbody></table></div>\n" +
-"        </td>\n" +
-"      </tr></tbody></table></td>\n" +
-"\n" +
-"          </tr></tbody></table></div>\n" +
-"  </td>\n" +
-"</tr><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:20px 0;color:#707070;\">\n" +
-"  <table style=\"width:100%;border-collapse:collapse;\"><tbody><tr><td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"          \n" +
-"          \n" +
-"        </td>\n" +
-"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;\">\n" +
-"          \n" +
-"        </td>\n" +
-"        <td style=\"font:14px/1.4285714 Arial, sans-serif;padding:0;text-align:right;width:100px;\">\n" +
-"          <a href=\"" + path.substring(0, path.lastIndexOf("/") + 1) + "\" style=\"color:#3572b0;text-decoration:none;\" target=\"_blank\">\n" +
-"            <img src=\"http://i12.photobucket.com/albums/a246/undeaddragslayer/eveRemind-navbar_zpsgdfog0mh.png\" alt=\"EveRemind\" width=\"100\" height=\"23\"></a>\n" +
-"        </td>\n" +
-"      </tr></tbody></table></td>\n" +
-"\n" +
-"                </tr></tbody></table></td>\n" +
-"        </tr></tbody></table>";
+        String messageScope = EmailDefaultScope.makeEmail(
+                "Você modificou seu email no EveRemind e é preciso refazer a confirmação.", 
+                "Para confirmar este e-mail, clique no botão abaixo.", 
+                "<a href=\"" + path + "#/verification?email=" + receiver + "&token=" + token + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Confirmar email</a>", 
+                path.substring(0, path.lastIndexOf("/") + 1));
         
         this.sendMessage(
                 receiver, 
@@ -195,4 +81,37 @@ public class EmailAgent {
                 messageScope
         );
     }
+    
+    public void sendNotification(String receiver, String categoryName, Activity activity, String path){
+        String messageScope = EmailDefaultScope.makeEmail(
+                "A sua atividade <b>" + activity.getName() + "</b> de prioridade <span style='color: " + activity.getPriorityColor() + "'>" + activity.getPriorityName() + "</span>" +
+                        " está marcada para <b>" + activity.getDate() + "</b>, às <b>" + activity.getHour() + 
+                        "</b>.<br><br><b>Descrição da atividade:</b> " + activity.getNotes() + ".", 
+                "Se esta atividade já foi concluida, sinalize-a como feita para não receber mais notificações sobre ela.", 
+                "", 
+                path);
+        
+        this.sendMessage(
+                receiver, 
+                categoryName + " | " + activity.getName(), 
+                messageScope
+        );
+    }
+    
+    public void sendDeadline(String receiver, String categoryName, Activity activity, String path){
+        String messageScope = EmailDefaultScope.makeEmail(
+                "O prazo para sua atividade <b>" + activity.getName() + "</b> de prioridade <span style='color: " + activity.getPriorityColor() + "'>" + activity.getPriorityName() + "</span>" +
+                        " acabou de se esgotar. Ela estava prevista para <b>" + activity.getDate() + "</b>, às <b>" + activity.getHour() + 
+                        "</b>.<br><br><b>Descrição da atividade:</b> " + activity.getNotes() + ".", 
+                "Se ela foi concluída, você ainda pode marcar essa atividade como feita no sistema.", 
+                "", 
+                path);
+        
+        this.sendMessage(
+                receiver, 
+                categoryName + " | " + activity.getName(), 
+                messageScope
+        );
+    }
+
 }

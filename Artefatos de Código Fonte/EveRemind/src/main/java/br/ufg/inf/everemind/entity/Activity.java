@@ -23,6 +23,7 @@
  */
 package br.ufg.inf.everemind.entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -93,6 +94,39 @@ public class Activity {
     public int getPriority() {
         return this.priority;
     }
+    
+    public String getPriorityColor(){
+        if (this.getPriority() == 3)
+            return "#D9534F";
+        else if (this.getPriority() == 2)
+            return "#F0AD4E";
+        else if (this.getPriority() == 1)
+            return "#5CB85C";
+        else
+            return "#337AB7"; 
+    }
+    
+    public String getPriorityName(){
+        if (this.getPriority() == 3)
+            return "Crítica";
+        else if (this.getPriority() == 2)
+            return "Alta";
+        else if (this.getPriority() == 1)
+            return "Média";
+        else
+            return "Baixa";
+    }
+    
+    public int getPriorityHourInterval(){
+        if (this.getPriority() == 3)
+            return 12;
+        else if (this.getPriority() == 2)
+            return 24;
+        else if (this.getPriority() == 1)
+            return 24 * 3;
+        else
+            return 24 * 7;
+    };
 
     public void setPriority(int priority) {
         this.priority = priority;
@@ -123,6 +157,30 @@ public class Activity {
         Calendar cal = new GregorianCalendar();
         cal.set(y, m, d, h, min);
         return cal;
+    }
+    
+    public ArrayList<Calendar> getLastNotifications(){
+        ArrayList<Calendar> cals = new ArrayList<>();
+        cals.add(this.getDateTime());
+        cals.add(this.getDateTime());
+        cals.add(this.getDateTime());
+        if (this.getPriority() == 3 || this.getPriority() == 2){
+            cals.add(this.getDateTime());
+            cals.get(0).add(Calendar.HOUR_OF_DAY, -6);
+            cals.get(1).add(Calendar.HOUR_OF_DAY, -3);
+            cals.get(2).add(Calendar.HOUR_OF_DAY, -1);
+        }
+        else if (this.getPriority() == 1){
+            cals.add(this.getDateTime());
+            cals.get(0).add(Calendar.HOUR_OF_DAY, -24);
+            cals.get(1).add(Calendar.HOUR_OF_DAY, -6);
+            cals.get(2).add(Calendar.HOUR_OF_DAY, -1);
+        }
+        else{
+            cals.get(0).add(Calendar.HOUR_OF_DAY, -24);
+            cals.get(1).add(Calendar.HOUR_OF_DAY, -1);
+        }
+        return cals;
     }
 
     public String getNotes() {
