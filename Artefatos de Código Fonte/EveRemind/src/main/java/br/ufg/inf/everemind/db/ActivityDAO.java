@@ -155,7 +155,6 @@ public class ActivityDAO {
         query.append("nextNotificationTime", nextToNotify);
         ArrayList<Activity> activityList = new ArrayList<>();
         query.append("done", false);
-        query.append("notificationBehaviour", true);
         
         FindIterable<Document> search = collection.find(query);
         if (search == null) {

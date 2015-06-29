@@ -59,11 +59,13 @@ public class ScheduledNotification extends TimerTask {
             Category cat = categoryDao.getById(activity.getIdCategory());
             String userEmail = userDao.getById(cat.getIdUser()).getEmail();
             if (notificationQuery.equals(format.format(activity.getDateTime().getTime()))){
-                ea.sendDeadline(userEmail, cat.getName(), activity, this.path);
+                if(activity.getNotificationBehaviour())
+                    ea.sendDeadline(userEmail, cat.getName(), activity, this.path);
                 activityDao.updateNotification(activity.getId(), notificationQuery, "");
             }
             else{
-                ea.sendNotification(userEmail, cat.getName(), activity, this.path);
+                if(activity.getNotificationBehaviour())
+                    ea.sendNotification(userEmail, cat.getName(), activity, this.path);
                 Calendar future = Calendar.getInstance();
                 future.setTime(now.getTime());
                 future.add(Calendar.HOUR_OF_DAY, activity.getPriorityHourInterval());
