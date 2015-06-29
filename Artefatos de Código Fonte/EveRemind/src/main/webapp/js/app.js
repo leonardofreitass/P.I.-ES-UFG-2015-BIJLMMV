@@ -71,6 +71,10 @@ var pagesConfig = {
         ctrl: "ngAccountCtrl",
         access: "auth"
     },
+    passwordRecovery: {
+        ctrl: "ngPasswordRecoveryCtrl",
+        access: "both"
+    },
     primaryEmailVerification: {
         ctrl: "ngPrimaryEmailVerificationCtrl",
         access: "both"

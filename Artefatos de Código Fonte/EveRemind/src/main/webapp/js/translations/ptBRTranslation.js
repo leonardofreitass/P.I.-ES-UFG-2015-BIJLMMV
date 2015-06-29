@@ -34,6 +34,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 listView: "Lista",
                 calendarView: "Calendario",
                 account: "Conta",
+                passwordRecovery: "Recuperação de Senha",
                 primaryEmailVerification: "Verificação de Email Primário",
                 secondaryEmailVerification: "Verificação de Email Secundário"
             }
@@ -41,13 +42,13 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
         home: {
             mainTitle: "Organize sua rotina.",
             mainText: "Com o EveRemind, suas tarefas e responsabilidades são sempre rastreadas, " +
-            " eliminando suas preocupações de esquecê-las e aumentando sua produtividade.",
+            " eliminando suas preocupações em esquecê-las e aumentando sua produtividade.",
             createAccount: "Comece a lembrar criando sua conta abaixo.",
             register: "Registre-se"
         },
         signup: {
             title: "Nova Conta",
-            textA: "Preencha o formulário abaixo para registrar uma nova conta para usar o EveRemind.",
+            textA: "Por favor preencha o formulário abaixo para registrar uma nova conta para usar o EveRemind.",
             textB: "É fácil, prático e rápido!",
             fullName: "Nome Completo",
             email: "Email",
@@ -55,19 +56,20 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             password: "Senha",
             repeatPassword: "Repita a Senha",
             finish: "Obter Minha Conta",
-            confirmEmail: "Mensagens de confirmação foram enviadas para ambos emails. Verificá-las" +
-            " habilita as funcionalidades de notificação de tarefa e recuperação de senha.",
+            confirmEmail: "Mensagens de verificação serão enviadas para ambos emails. Verificar seus emails" +
+            " habilita as funcionalidades de notificação de tarefa (para o email primário) e recuperação de senha" +
+            "(para o email secundário).",
             errors: {
-                required: "Preencha todos os campos.",
+                required: "Por favor preencha todos os campos.",
                 notMatch: "As senhas informadas não são iguais.",
-                registered: "O e-mail informado já foi registrado em outra conta.",
+                registered: "Um dos e-mails informados (ou ambos) já foi/foram registrado(s) em outra conta.",
                 sameEmail: "Os e-mails principal e secundário devem ser diferentes.",
                 passwordRegex: "Uma senha válida possui um mínimo de 8 caracteres entre" +
                 " letras e números com pelo menos uma letra e um número.",
                 notAnEmail: "O e-mail informado náo é válido.",
                 notASecondaryEmail: "O e-mail secundário informado náo é válido."
             },
-            success: "Sua nova conta está pronta para uso."
+            success: "Ótimo! Sua nova conta está pronta para uso."
         },
         navbar: {
             errors: {
@@ -88,8 +90,10 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 password: "Senha",
                 login: "Entrar"
             },
-            verifyPrimary: "Você ainda não fez a confirmação de seu e-mail principal. Faça-a para desfruir totalmente de nossos serviços.",
-            verifySecondary: "Você ainda não fez a confirmação de seu e-mail secundario. Faça-a para desfruir totalmente de nossos serviços.",
+             verifyPrimary: "Seu email primário não foi verificado. Verifique-o seguindo as instruções contidas" +
+            " na mensagem enviada para ele para utilizar o serviço de notificação de atividade.",
+            verifySecondary: "Seu email secundário não foi verificado. Verifique-o seguindo as instruções contidas" +
+            " na mensagem enviada para ele para utilizar o serviço de recuperação de senha.",
             logout1: "Tchau, {{getUserName()}}",
             logout2: "Até breve, {{getUserName()}}",
             logout3: "Tenha um bom dia, {{getUserName()}}",
@@ -164,8 +168,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 " ou seja, {{minDateTime}}.",
                 addCategoryName: "O nome da categoria está vazio.",
                 alreadyRegistered: "Este nome esté em uso por outra categoria.",
-                editingCategory: "Termine de editar uma categoria antes de começar a editar outra.",
-                addActivityInput: "Preencha todos os campos.",
+                editingCategory: "Por favor termine de editar uma categoria antes de começar a editar outra.",
+                addActivityInput: "Por favor preencha todos os campos.",
                 addActivityLength: "O nome da atividade é limitado em 80 caracteres.",
                 addCategoryLength: "O nome da categoria é limitado em 20 caracteres."
             },
@@ -244,9 +248,21 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             },
             token: "Código de Verificação",
             verify: "Verificar",
-            empty: "Preencha todos os campos.",
+            empty: "Por favor preencha todos os campos.",
             checkError: "O email/token não existe ou o email já foi verificado.",
             finishedVerify: "Email verificado com sucesso."
+        },
+        recoverPassword: {
+            title: "Recuperar Senha",
+            secondaryEmail: "Email Secundário",
+            token: "Código de Recuperação",
+            proceed: "Prosseguir",
+            empty: "Por favor preencha todos os campos.",
+            checkError: "Email/código não existente ou já foi usado.",
+            newPassword: "Nova Senha",
+            repeatNewPassword: "Repita a Nova Senha",
+            reset: "Redefinir Senha",
+            finishedVerify: "Senha atualizada com sucesso."
         },
         account: {
             success: "Os dados da conta foram atualizados.",
@@ -280,7 +296,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 exclude: "Excluir Conta"
             },
             errors: {
-                required: "Preencha todos os campos.",
+                required: "Por favor preencha todos os campos.",
                 change: "Nenhuma alteração foi realizada.",
                 auth: "A senha atual está incorreta.",
                 authDelete: "O email e a senha não correspondem.",

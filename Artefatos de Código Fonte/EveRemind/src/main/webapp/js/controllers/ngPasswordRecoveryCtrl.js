@@ -1,7 +1,7 @@
 /* 
  * The MIT License
  *
- * Copyright 2015 Leonardo.
+ * Copyright 2015 Igor.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,57 +24,57 @@
 
 /* global angular */
 
-angular.module('everemindApp').controller('ngPrimaryEmailVerificationCtrl', function ($scope, ngNotifier, $location) {
+angular.module('everemindApp').controller('ngPasswordRecoveryCtrl', function ($scope, ngNotifier, $location) {
     $scope.data = {
         email: "",
         token: "",
         verified: false
     };
-    
-    $scope.verify = function(){
-        if ($scope.data.email === "" || $scope.data.token === ""){
-            ngNotifier.error("verifyEmail.empty");
+
+    $scope.recover = function () {
+        if ($scope.data.email === "" || $scope.data.token === "") {
+            ngNotifier.error("passwordRecover.empty");
             return;
         }
         $.getJSON("ServletCheckToken?email=" + $scope.data.email +
                 "&token=" + $scope.data.token +
-                "&type=Verify" +
-                "&emailType=Primary", {}, function (data) {
+                "&type=Recover" +
+                "&emailType=Secondary", {}, function (data) {
             if (!data.binded) {
-                ngNotifier.error("verifyEmail.checkError");
+                ngNotifier.error("passwordRecover.checkError");
                 return;
             }
-            proceedVerify();
+            proceedRecover();
         });
     };
-    
-    var proceedVerify = function(){
+
+    var proceedRecover = function () {
         $.ajax({
             dataType: "text",
-            url: "ServletVerifyPrimaryEmail?email=" + $scope.data.email,
-            success: function(){
+            url: "ServletRecoverPassword?email=" + $scope.data.email,
+            success: function () {
                 finishVerify();
             }
         });
     };
-    
-    var finishVerify = function(){
+
+    var finishVerify = function () {
         $scope.data.verified = true;
         $scope.$apply();
     };
-    
-    var checkUrl = function(){
+
+    var checkUrl = function () {
         var urlParam = $location.search();
         if (urlParam.email !== null)
             $scope.data.email = urlParam.email;
         if (urlParam.token !== null)
             $scope.data.token = urlParam.token;
-        
+
         $scope.$apply();
-        if (urlParam.email !== null && urlParam.token !== null){
-            $scope.verify();
+        if (urlParam.email !== null && urlParam.token !== null) {
+            $scope.recover();
         }
     };
-    
+
     checkUrl();
 });

@@ -34,6 +34,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 listView: "List",
                 calendarView: "Calendar",
                 account: "Account",
+                passwordRecovery: "Password Recovery",
                 primaryEmailVerification: "Primary Email Verification",
                 secondaryEmailVerification: "Secondary Email Verification"
             }
@@ -41,14 +42,14 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
         home: {
             mainTitle: "Organize your everyday.",
             mainText: "With EveRemind, your tasks and assignments are always tracked" +
-            " so you never miss them, relieving you from concerns of forgeting and" +
+            " so you never miss them, eliminating concerns of oblivion and" +
             "increasing your productivity.",
-            createAccount: "Start remembering by creating your account",
+            createAccount: "Start to remind by creating your account",
             register: "Sign Up"
         },
         signup: {
             title: "New Account",
-            textA: "Fill in the requested information below to register a new account to use EveRemind.",
+            textA: "Please fill in the requested information below to register a new account to use EveRemind.",
             textB: "It takes no time at all!",
             fullName: "Full Name",
             email: "Email",
@@ -56,25 +57,25 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             password: "Password",
             repeatPassword: "Repeat Password",
             finish: "Get My Account",
-            confirmEmail: "Messages of confirmation will be sent to both emails. Verifying them" +
-            " grants access to task notification and recover password features.",
+            confirmEmail: "Verification messages will be sent to both emails. Verifying your emails" +
+            " grants access to task notification (on primary email) and recover password (on secondary email) features.",
             errors: {
-                required: "Fill in all the information fields.",
+                required: "Please fill in all the information fields.",
                 notMatch: "The given passwords do not match.",
-                registered: "The given e-mail is already registered to another account.",
+                registered: "One of the given e-mails (or both) is/are already registered to another account.",
                 sameEmail: "Primary and secondary e-mails must be different.",
                 passwordRegex: "A valid password has a minimum of 8 characters between" +
                 " letters and numbers with at least one letter and one number.",
                 notAnEmail: "The given e-mail is not valid.",
                 notASecondaryEmail: "The given secondary e-mail is not valid."
             },
-            success: "Your new account is ready for use."
+            success: "Nice! Your new account is ready for use."
         },
         navbar: {
             errors: {
                 auth: "Given e-mail and password are not relative or registered",
-                requiredEmail: "Inform your e-mail.",
-                requiredPassword: "Inform your password.",
+                requiredEmail: "Please inform your e-mail.",
+                requiredPassword: "Please inform your password.",
                 notAnEmail: "Given e-mail is not valid."
             },
             menu: {
@@ -89,10 +90,10 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 password: "Password",
                 login: "Sign In"
             },
-            verifyPrimary: "Your primary email is unverified. Verify it by following the message instructions" +
-            " to make use of task notification service.",
-            verifySecondary: "Your secondary email is unverified. Verify it by following the message instructions" +
-            " to make use of password recovery service.",
+            verifyPrimary: "Your primary email is unverified. Verify it by following the email message instructions" +
+            " to make use of the task notification service.",
+            verifySecondary: "Your secondary email is unverified. Verify it by following the email message instructions" +
+            " to make use of the password recovery service.",
             logout1: "Bye, {{name}}",
             logout2: "See you, {{name}}",
             logout3: "Take care, {{name}}",
@@ -247,9 +248,21 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             },
             token: "Verification Code",
             verify: "Verify",
-            empty: "Fill in all data fields.",
+            empty: "Please fill in all data fields.",
             checkError: "Email/token not existent or already verified.",
             finishedVerify: "Email verified sucessfully."
+        },
+        recoverPassword: {
+            title: "Recover Password",
+            secondaryEmail: "Secondary Email",
+            token: "Recovery Code",
+            proceed: "Proceed",
+            empty: "Please fill in all data fields.",
+            checkError: "Email/token not existent or already used.",
+            newPassword: "New Password",
+            repeatNewPassword: "Repeat New Password",
+            reset: "Reset Password",
+            finishedVerify: "Password updated sucessfully."
         },
         account: {
             success: "Your account data was updated.",

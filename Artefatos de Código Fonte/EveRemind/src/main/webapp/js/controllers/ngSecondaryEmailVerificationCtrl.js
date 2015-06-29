@@ -37,7 +37,11 @@ angular.module('everemindApp').controller('ngSecondaryEmailVerificationCtrl', fu
             ngNotifier.error("verifyEmail.empty");
             return;
         }
-        $.getJSON("ServletCheckToken?email=" + $scope.data.email + "&token=" + $scope.data.token + "&emailType=secondary", {}, function (data) {
+        $.getJSON("ServletCheckToken?email=" +
+                $scope.data.email + "&token=" +
+                $scope.data.token +
+                "&type=Verify" +
+                "&emailType=Secondary", {}, function (data) {
             if (!data.binded) {
                 ngNotifier.error("verifyEmail.checkError");
                 return;
@@ -63,13 +67,13 @@ angular.module('everemindApp').controller('ngSecondaryEmailVerificationCtrl', fu
     
     var checkUrl = function(){
         var urlParam = $location.search();
-        if (urlParam.email != null)
+        if (urlParam.email !== null)
             $scope.data.email = urlParam.email;
-        if (urlParam.token != null)
+        if (urlParam.token !== null)
             $scope.data.token = urlParam.token;
         
         $scope.$apply();
-        if (urlParam.email != null && urlParam.token != null){
+        if (urlParam.email !== null && urlParam.token !== null){
             $scope.verify();
         }
     };
