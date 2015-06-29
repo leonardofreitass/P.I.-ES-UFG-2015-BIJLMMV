@@ -86,11 +86,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 exit: "Sair",
                 email: "E-mail",
                 password: "Senha",
-                login: "Entrar",
-                language: { 
-                    english: "Inglês",
-                    portuguese: "Português"
-                }
+                login: "Entrar"
             },
             verifyPrimary: "Você ainda não fez a confirmação de seu e-mail principal. Faça-a para desfruir totalmente de nossos serviços.",
             verifySecondary: "Você ainda não fez a confirmação de seu e-mail secundario. Faça-a para desfruir totalmente de nossos serviços.",
@@ -266,6 +262,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             deleteAccount: "Deletar Conta",
             cancel: "Cancelar",
             confirmEmail: "Modificar o e-mail implica em refazer a verificação.",
+            confirmed: "E-mail verificado.",
+            notConfirmed: "Verificação pendente.",
             modalPassword: {
                 title: "Modificar Senha",
                 currentPassword: "Senha Atual",
@@ -299,7 +297,4 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
             }
         }
     });
-    /*
-    $translateProvider.preferredLanguage('pt-BR');
-    //*/
 }]);

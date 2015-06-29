@@ -24,8 +24,15 @@
 
 /* global angular, pagesConfig, pageID */
 
-angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNotifier, $localStorage) {
+angular.module('everemindApp').controller('ngMasterCtrl', function ($scope, ngNotifier, ngLanguage, $localStorage, $translate) {
     $scope.$storage = $localStorage;
+    
+    if (!$scope.$storage.activeLanguage){
+        $scope.$storage.activeLanguage = ngLanguage.defaultLanguage;
+        ngLanguage.active = ngLanguage.defaultLanguage;
+        $scope.$storage.$save();
+    }
+    $translate.use($localStorage.activeLanguage);
     
     var display = true;
     

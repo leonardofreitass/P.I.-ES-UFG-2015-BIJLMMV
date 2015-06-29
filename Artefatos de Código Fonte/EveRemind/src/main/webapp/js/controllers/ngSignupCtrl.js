@@ -67,7 +67,7 @@ angular.module('everemindApp').controller('ngSignupCtrl', function ($scope, ngNo
             ngNotifier.error("signup.errors.notMatch");
             return;
         }
-        $.getJSON("ServletCheckEmail?email=" + $scope.data.email, {}, function (data) {
+        $.getJSON("ServletCheckEmail?email=" + $scope.data.email + "&secondaryEmail=" + $scope.data.secondaryEmail, {}, function (data) {
             if (data.registered) {
                 ngNotifier.error("signup.errors.registered");
                 return;

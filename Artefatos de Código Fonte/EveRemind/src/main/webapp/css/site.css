@@ -402,6 +402,10 @@ fieldset[disabled] .btn-dark.active {
     cursor: pointer;
 }
 
+.normal-pointer{
+    cursor: default;
+}
+
 .full-height-row{
     height: 100%;
     display: table-row; 

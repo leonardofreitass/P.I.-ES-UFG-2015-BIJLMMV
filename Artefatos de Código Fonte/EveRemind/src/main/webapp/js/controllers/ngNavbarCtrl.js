@@ -24,12 +24,14 @@
 
 /* global angular, pageID */
 
-angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNotifier, $localStorage) {
+angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNotifier, $location, $localStorage, ngLanguage) {
     $scope.$storage = $localStorage;
     
     $scope.pageID = pageID;
     
     $scope.home = "index.jsp";
+    
+    $scope.lang = ngLanguage;
     
     $scope.data = {
         email: "",
@@ -72,7 +74,7 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
                 ngNotifier.error("navbar.errors.auth");
                 return;
             }
-            startUserSession(data);
+            startUserSession(true);
         });
     };
     
@@ -87,21 +89,30 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
         return Math.floor((Math.random() * max) + 1).toString();
     };
     
-    var startUserSession = function(){
+    var startUserSession = function(refresh){
         $.getJSON("ServletGetUserJSON?email=" + email, {}, function (data) {
-            setUserSession(data);
+            setUserSession(data, refresh);
         });
     };
     
-    var setUserSession = function(json){
+    var setUserSession = function(json, refresh){
         $scope.$storage.sessionUser = json;
-        if (!json.verifiedPrimaryEmail)
-            $scope.$storage.pendingMessage = {msg: "navbar.verifyPrimary", msgType: "warning"};
-        else if (!json.verifiedSecondaryEmail)
-            $scope.$storage.pendingMessage = {msg: "navbar.verifySecondary", msgType: "warning"};
-        else
-            $scope.$storage.pendingMessage = {msg: "navbar.login" + randomMsg(3), msgType: "notify", param: {name:$scope.getUserName()}};
         $scope.$storage.$save();
-        window.location.href = "dashboard.jsp";
+        if(refresh){
+            if (!json.verifiedPrimaryEmail)
+                $scope.$storage.pendingMessage = {msg: "navbar.verifyPrimary", msgType: "warning"};
+            else if (!json.verifiedSecondaryEmail)
+                $scope.$storage.pendingMessage = {msg: "navbar.verifySecondary", msgType: "warning"};
+            else
+                $scope.$storage.pendingMessage = {msg: "navbar.login" + randomMsg(3), msgType: "notify", param: {name:$scope.getUserName()}};
+            
+            $location.path("dashboard.jsp");
+        }
+            
     };
+    
+    if (!!$scope.$storage.sessionUser){
+        email = $scope.$storage.sessionUser.email;
+        startUserSession(false);
+    }
 });

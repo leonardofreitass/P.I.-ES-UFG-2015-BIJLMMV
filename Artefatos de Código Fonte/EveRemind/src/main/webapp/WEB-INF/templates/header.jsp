@@ -57,11 +57,10 @@
             
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Atual<!--<img src="atual"/> {{'atual' | translate}}--><span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img ng-src="{{lang.getActive().img}}"/> {{lang.getActive().name}}<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a ng-click="changeLanguage()" href=""><img src="img/brazil.png"/> {{'navbar.menu.language.portuguese' | translate}} </a></li>
-                        <li class="divider"></li>
-                        <li><a ng-click="changeLanguage()" href=""><img src="img/united-states.png"/> {{'navbar.menu.language.english' | translate}} </a></li>
+                        <li ng-repeat-start="language in lang.getNonActives()"><a ng-click="lang.setLanguage(language.lang)" href=""><img ng-src="{{language.img}}"/> {{language.name}} </a></li>
+                        <li ng-repeat-end ng-show="!$last" class="divider"></li>
                     </ul>
                 </li>
             </ul>

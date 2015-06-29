@@ -25,6 +25,7 @@
 <!-- Angular Services -->
 <script src="${pageContext.request.contextPath}/js/services/ngNotifier.js"></script>
 <script src="${pageContext.request.contextPath}/js/services/ngDateUtils.js"></script>
+<script src="${pageContext.request.contextPath}/js/services/ngLanguage.js"></script>
 
 <!-- Angular Translate -->
 <script src="${pageContext.request.contextPath}/js/translations/ptBRTranslation.js"></script>

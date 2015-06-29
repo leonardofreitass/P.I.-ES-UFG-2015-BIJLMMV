@@ -24,7 +24,7 @@
 
 /* global angular */
 
-angular.module('everemindApp').controller('ngCalendarViewCtrl', function ($scope, ngNotifier, translateFilter, ngDateUtils, $localStorage) {
+angular.module('everemindApp').controller('ngCalendarViewCtrl', function ($scope, ngDateUtils, $localStorage) {
     
     $scope.monthsTranslations = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
     $scope.weeksLoad = 4;

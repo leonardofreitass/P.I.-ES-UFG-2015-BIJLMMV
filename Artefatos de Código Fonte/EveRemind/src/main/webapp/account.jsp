@@ -21,11 +21,23 @@
                         </div>
                         <div class="form-group">
                             <label>{{'account.email' | translate}}<sup>*</sup></label>
-                            <input name="inputEmail" ng-model="data.email" type="email" class="form-control">
+                            <div class="input-group">
+                                <input name="inputEmail" ng-model="data.email" type="email" class="form-control inline-blocker">
+                                <span class="input-group-addon">
+                                    <span ng-if="!$storage.sessionUser.verifiedPrimaryEmail" bs-dynamic-tooltip="{title: 'account.notConfirmed', placement: 'down'}" class="glyphicon glyphicon-warning-sign cursor-pointer span-warning"></span>
+                                    <span ng-if="$storage.sessionUser.verifiedPrimaryEmail" bs-dynamic-tooltip="{title: 'account.confirmed', placement: 'down'}" class="glyphicon glyphicon-ok normal-pointer span-success"></span>
+                                </span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>{{'account.secondaryEmail' | translate}}<sup>*</sup></label>
-                            <input name="inputSecondaryEmail" ng-model="data.secondaryEmail" type="email" class="form-control">
+                            <div class="input-group">
+                                <input name="inputSecondaryEmail" ng-model="data.secondaryEmail" type="email" class="form-control inline-blocker">
+                                <span class="input-group-addon">
+                                    <span ng-if="!$storage.sessionUser.verifiedSecondaryEmail" bs-dynamic-tooltip="{title: 'account.notConfirmed', placement: 'down'}" class="glyphicon glyphicon-warning-sign cursor-pointer span-warning"></span>
+                                    <span ng-if="$storage.sessionUser.verifiedSecondaryEmail" bs-dynamic-tooltip="{title: 'account.confirmed', placement: 'down'}" class="glyphicon glyphicon-ok normal-pointer span-success"></span>
+                                </span>
+                            </div>
                         </div>
                         <small><sup>*</sup>{{'account.confirmEmail' | translate}}</small>
                         </br></br>
