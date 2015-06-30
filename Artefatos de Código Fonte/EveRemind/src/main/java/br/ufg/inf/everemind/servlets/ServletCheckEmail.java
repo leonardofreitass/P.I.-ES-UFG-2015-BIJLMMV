@@ -56,11 +56,10 @@ public class ServletCheckEmail extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             String email = request.getParameter("email");
-            String secondaryEmail = request.getParameter("secondaryEmail");
             UserDAO userDao = UserDAO.getInstance();
             JSONObject JSON = new JSONObject(); 
-            boolean registered = userDao.hasEmailRegistered(email) || userDao.hasEmailRegistered(secondaryEmail) || userDao.hasSecondaryEmailRegistered(email) || userDao.hasSecondaryEmailRegistered(secondaryEmail);
-            JSON.put("registered", registered); 
+            boolean alreadyRegistered = userDao.hasEmailRegistered(email);
+            JSON.put("registered", alreadyRegistered); 
             out.print(JSON);
             out.flush();
             

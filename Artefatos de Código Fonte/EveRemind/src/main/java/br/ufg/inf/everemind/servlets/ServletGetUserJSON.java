@@ -60,11 +60,9 @@ public class ServletGetUserJSON extends HttpServlet {
             User user = userDao.getByEmail(email);
             JSONObject JSON = new JSONObject(); 
             JSON.put("_id", user.getId()); 
-            JSON.put("fullName", user.getFullName()); 
+            JSON.put("name", user.getName()); 
             JSON.put("email", user.getEmail()); 
-            JSON.put("secondaryEmail", user.getSecondaryEmail()); 
-            JSON.put("verifiedPrimaryEmail", user.isPrimaryEmailVerified()); 
-            JSON.put("verifiedSecondaryEmail", user.isSecondaryEmailVerified()); 
+            JSON.put("emailVerified", user.isEmailVerified()); 
             out.print(JSON);
             out.flush();
             

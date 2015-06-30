@@ -64,13 +64,11 @@ public class ServletDeleteUser extends HttpServlet {
             CategoryDAO categoryDao = CategoryDAO.getInstance();
             ActivityDAO activityDao = ActivityDAO.getInstance();
             TokenDAO tokenDao = TokenDAO.getInstance();
-            Hash hash = new Hash();
             String email = request.getParameter("email");
             User user = userDao.getByEmail(email);
             userDao.delete(email);
             tokenDao.removeVerifyBind(email);
-            tokenDao.removeVerifyBind(user.getSecondaryEmail());
-            tokenDao.removeRecoveryBind(user.getSecondaryEmail());
+            tokenDao.removeRecoveryBind(email);
             ArrayList<Category> list = categoryDao.getAll(user.getId());
             for (Category cat : list){
                 activityDao.deleteAllFromCategory(cat.getId());

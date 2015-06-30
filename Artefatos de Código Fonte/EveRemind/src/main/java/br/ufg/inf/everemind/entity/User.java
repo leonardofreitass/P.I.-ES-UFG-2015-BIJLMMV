@@ -27,35 +27,28 @@ package br.ufg.inf.everemind.entity;
  *
  * @author Leonardo
  */
-
 public class User {
 
     private String _id;
-    private String fullName;
+    private String name;
     private String email;
-    private String secondaryEmail;
     private String hash;
-    private boolean primaryEmailVerified;
-    private boolean secondaryEmailVerified;
+    private boolean emailVerified;
 
-    public User(String fullName, String email, String secondaryEmail) {
-        this.fullName = fullName;
+    public User(String name, String email) {
+        this.name = name;
         this.email = email;
-        this.secondaryEmail = secondaryEmail;
-    }
-    
-    public User(String fullName, String email, String secondaryEmail, boolean primaryVerified, boolean secondaryVerified) {
-        this.fullName = fullName;
-        this.email = email;
-        this.secondaryEmail = secondaryEmail;
-        this.primaryEmailVerified = primaryVerified;
-        this.secondaryEmailVerified = secondaryVerified;
     }
 
-    public User(String fullName, String email, String secondaryEmail, String hash) {
-        this.fullName = fullName;
+    public User(String name, String email, boolean emailVerified) {
+        this.name = name;
         this.email = email;
-        this.secondaryEmail = secondaryEmail;
+        this.emailVerified = emailVerified;
+    }
+
+    public User(String name, String email, String hash) {
+        this.name = name;
+        this.email = email;
         this.hash = hash;
     }
 
@@ -67,12 +60,12 @@ public class User {
         this._id = _id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -83,14 +76,6 @@ public class User {
         this.email = email;
     }
 
-    public String getSecondaryEmail() {
-        return secondaryEmail;
-    }
-
-    public void setSecondaryEmail(String secondaryEmail) {
-        this.secondaryEmail = secondaryEmail;
-    }
-
     public String getHash() {
         return hash;
     }
@@ -99,21 +84,12 @@ public class User {
         this.hash = hash;
     }
 
-    public boolean isPrimaryEmailVerified() {
-        return primaryEmailVerified;
+    public boolean isEmailVerified() {
+        return emailVerified;
     }
 
-    public void setPrimaryEmailVerified(boolean primaryEmailVerified) {
-        this.primaryEmailVerified = primaryEmailVerified;
+    public void setEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
     }
 
-    public boolean isSecondaryEmailVerified() {
-        return secondaryEmailVerified;
-    }
-
-    public void setSecondaryEmailVerified(boolean secondaryEmailVerified) {
-        this.secondaryEmailVerified = secondaryEmailVerified;
-    }
-    
-    
 }

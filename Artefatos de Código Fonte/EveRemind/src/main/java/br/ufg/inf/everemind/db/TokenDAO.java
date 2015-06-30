@@ -73,7 +73,7 @@ public class TokenDAO {
     public boolean hasPasswordRecoveryBind(String email, String token){
         Document query = new Document("email", email)
                 .append("token", token)
-                .append("type", "Rocover");
+                .append("type", "Recover");
         Document search = collection.find(query).first();
         return search != null;
     }
@@ -83,8 +83,8 @@ public class TokenDAO {
         collection.deleteOne(query);
     }
     
-    public void removeRecoveryBind(String secondaryEmail){
-        Document query = new Document("email", secondaryEmail).append("type", "Verify");
+    public void removeRecoveryBind(String email){
+        Document query = new Document("email", email).append("type", "Verify");
         collection.deleteOne(query);
     }
 }

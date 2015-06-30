@@ -45,12 +45,8 @@
         <servlet-class>br.ufg.inf.everemind.servlets.ServletCheckToken</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletVerifyPrimaryEmail</servlet-name>
-        <servlet-class>br.ufg.inf.everemind.servlets.ServletVerifyPrimaryEmail</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ServletVerifySecondaryEmail</servlet-name>
-        <servlet-class>br.ufg.inf.everemind.servlets.ServletVerifySecondaryEmail</servlet-class>
+        <servlet-name>ServletVerifyEmail</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletVerifyEmail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServletUpdateCategory</servlet-name>
@@ -137,12 +133,8 @@
         <url-pattern>/ServletCheckToken</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletVerifyPrimaryEmail</servlet-name>
-        <url-pattern>/ServletVerifyPrimaryEmail</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletVerifySecondaryEmail</servlet-name>
-        <url-pattern>/ServletVerifySecondaryEmail</url-pattern>
+        <servlet-name>ServletVerifyEmail</servlet-name>
+        <url-pattern>/ServletVerifyEmail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletUpdateCategory</servlet-name>

@@ -65,19 +65,14 @@ public class ServletCreateUser extends HttpServlet {
             EmailAgent ea = new EmailAgent();
             String url = request.getRequestURL().toString();
             String path = url.substring(0, url.lastIndexOf("/") + 1);
-            String fullName = request.getParameter("fullName");
+            String name = request.getParameter("name");
             String email = request.getParameter("email");
-            String secondaryEmail = request.getParameter("secondaryEmail");
             String password = request.getParameter("password");
-            userDao.save(new User(fullName, email, secondaryEmail, hash.getHash(password)));
-            String primaryToken = token.generate();
-            String secondaryToken = token.generate();
-            tokenDao.bindVerifyToken(email, primaryToken);
-            tokenDao.bindVerifyToken(secondaryEmail, secondaryToken);
-            ea.sendWelcome(email, fullName, path);
-            ea.sendToken(email, fullName, primaryToken, path + "primaryEmailVerification.jsp");
-            ea.sendWelcome(secondaryEmail, fullName, path);
-            ea.sendToken(secondaryEmail, fullName, secondaryToken, path + "secondaryEmailVerification.jsp");
+            userDao.save(new User(name, email, hash.getHash(password)));
+            String tokenCode = token.generate();
+            tokenDao.bindVerifyToken(email, tokenCode);
+            ea.sendWelcome(email, name, path);
+            ea.sendToken(email, name, tokenCode, path + "emailVerification.jsp");
             out.flush();
             
         }

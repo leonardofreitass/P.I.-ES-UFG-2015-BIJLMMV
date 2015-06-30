@@ -52,11 +52,11 @@ public class ServletUpdateUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try (PrintWriter out = response.getWriter()) {
-            
+
             UserDAO userDao = UserDAO.getInstance();
             TokenDAO tokenDao = TokenDAO.getInstance();
             EmailAgent ea = new EmailAgent();
@@ -64,26 +64,16 @@ public class ServletUpdateUser extends HttpServlet {
             String url = request.getRequestURL().toString();
             String path = url.substring(0, url.lastIndexOf("/") + 1);
             String originalEmail = request.getParameter("originalEmail");
-            String originalSecondaryEmail = request.getParameter("originalSecondaryEmail");
-            String fullName = request.getParameter("fullName");
-            String email = request.getParameter("email");
-            String secondaryEmail = request.getParameter("secondaryEmail");
-            boolean changedEmail = !email.equals(originalEmail), changedSecondaryEmail = !secondaryEmail.equals(originalSecondaryEmail);
-            if (changedEmail){
-                String tokenPrimary = token.generate();
-                tokenDao.bindVerifyToken(email, tokenPrimary);
-                tokenDao.removeVerifyBind(originalEmail);
-                ea.resendToken(email, fullName, tokenPrimary, path + "primaryEmailVerification.jsp");
-            }
-            if (changedSecondaryEmail){
-                String tokenSecondary = token.generate();
-                tokenDao.bindVerifyToken(secondaryEmail, tokenSecondary);
-                tokenDao.removeVerifyBind(originalSecondaryEmail);
-                ea.resendToken(secondaryEmail, fullName, tokenSecondary, path + "secondaryEmailVerification.jsp");
-            }
-            userDao.updateInfo(originalEmail, new User(fullName, email, secondaryEmail), changedEmail, changedSecondaryEmail);
+            String newName = request.getParameter("name");
+            String newEmail = request.getParameter("email");
+            boolean changedEmail = !newEmail.equals(originalEmail);
+            String tokenCode=  token.generate();
+            tokenDao.bindVerifyToken(newEmail, tokenCode);
+            tokenDao.removeVerifyBind(originalEmail);
+            ea.resendToken(newEmail, newName, tokenCode, path + "emailVerification.jsp");
+            userDao.updateInfo(originalEmail, new User(newName, newEmail), changedEmail);
             out.flush();
-            
+
         }
     }
 

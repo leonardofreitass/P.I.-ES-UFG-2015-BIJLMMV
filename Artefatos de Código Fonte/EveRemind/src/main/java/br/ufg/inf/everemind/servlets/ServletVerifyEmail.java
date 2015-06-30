@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Leonardo
  */
-public class ServletVerifySecondaryEmail extends HttpServlet {
+public class ServletVerifyEmail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,14 +50,16 @@ public class ServletVerifySecondaryEmail extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
             
             UserDAO userDao = UserDAO.getInstance();
             TokenDAO tokenDao = TokenDAO.getInstance();
             String email = request.getParameter("email");
-            userDao.setSecondaryVerified(email);
+            userDao.setEmailVerified(email);
             tokenDao.removeVerifyBind(email);
             out.flush();
+            
         }
     }
 
