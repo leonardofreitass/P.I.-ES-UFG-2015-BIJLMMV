@@ -32,6 +32,7 @@ import br.ufg.inf.everemind.db.CategoryDAO;
 import br.ufg.inf.everemind.db.UserDAO;
 import br.ufg.inf.everemind.entity.Activity;
 import br.ufg.inf.everemind.entity.Category;
+import br.ufg.inf.everemind.entity.User;
 import br.ufg.inf.everemind.mailer.EmailAgent;
 import br.ufg.inf.everemind.util.CalendarManager;
 import java.text.SimpleDateFormat;
@@ -57,14 +58,15 @@ public class ScheduledNotification extends TimerTask {
         System.out.println(notificationQuery + " - Enviando notificações para " + activities.size() + " atividades.");
         for (Activity activity : activities){
             Category cat = categoryDao.getById(activity.getIdCategory());
-            String userEmail = userDao.getById(cat.getIdUser()).getEmail();
+            User user = userDao.getById(cat.getIdUser());
+            String userEmail = user.getEmail();
             if (notificationQuery.equals(format.format(activity.getDateTime().getTime()))){
-                if(activity.getNotificationBehaviour())
+                if(activity.getNotificationBehaviour() && user.isEmailVerified())
                     ea.sendDeadline(userEmail, cat.getName(), activity, this.path);
                 activityDao.updateNotification(activity.getId(), notificationQuery, "");
             }
             else{
-                if(activity.getNotificationBehaviour())
+                if(activity.getNotificationBehaviour() && user.isEmailVerified())
                     ea.sendNotification(userEmail, cat.getName(), activity, this.path);
                 Calendar future = Calendar.getInstance();
                 future.setTime(now.getTime());
