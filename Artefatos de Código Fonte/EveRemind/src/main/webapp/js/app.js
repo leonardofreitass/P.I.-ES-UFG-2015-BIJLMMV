@@ -73,14 +73,10 @@ var pagesConfig = {
     },
     passwordRecovery: {
         ctrl: "ngPasswordRecoveryCtrl",
+        access: "public"
+    },
+    emailVerification: {
+        ctrl: "ngEmailVerificationCtrl",
         access: "both"
     },
-    primaryEmailVerification: {
-        ctrl: "ngPrimaryEmailVerificationCtrl",
-        access: "both"
-    },
-    secondaryEmailVerification: {
-        ctrl: "ngSecondaryEmailVerificationCtrl",
-        access: "both"
-    }
 };

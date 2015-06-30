@@ -26,17 +26,15 @@
 
 angular.module('everemindApp').controller('ngSignupCtrl', function ($scope, ngNotifier, $localStorage) {
     $scope.$storage = $localStorage;
-    
+
     $scope.data = {
         email: "",
-        secondaryEmail: "",
         password: "",
         passwordAgain: "",
-        fullName: ""
+        name: ""
     };
-    
+
     $scope.forms = {
-        
     };
 
     $scope.signup = function () {
@@ -44,30 +42,22 @@ angular.module('everemindApp').controller('ngSignupCtrl', function ($scope, ngNo
             ngNotifier.error("signup.errors.required");
             return;
         }
-        if ($scope.forms.signupForm.inputEmail.$error.email){
+        if ($scope.forms.signupForm.inputEmail.$error.email) {
             ngNotifier.error("signup.errors.notAnEmail");
-            return;
-        }
-        if ($scope.forms.signupForm.inputSecondaryEmail.$error.email){
-            ngNotifier.error("signup.errors.notASecondaryEmail");
-            return;
-        }
-        if ($scope.data.email === $scope.data.secondaryEmail){
-            ngNotifier.error("signup.errors.sameEmail");
             return;
         }
         var onlyLN = /^([a-zA-Z0-9]+)$/;
         var hasL = /[A-Z]/i;
         var hasN = /\d/;
-        if ($scope.forms.signupForm.$error.minlength || !onlyLN.test($scope.data.password) || !hasL.test($scope.data.password) || !hasN.test($scope.data.password)){
+        if ($scope.forms.signupForm.$error.minlength || !onlyLN.test($scope.data.password) || !hasL.test($scope.data.password) || !hasN.test($scope.data.password)) {
             ngNotifier.error("signup.errors.passwordRegex");
-            return; 
+            return;
         }
         if ($scope.data.password !== $scope.data.passwordAgain) {
             ngNotifier.error("signup.errors.notMatch");
             return;
         }
-        $.getJSON("ServletCheckEmail?email=" + $scope.data.email + "&secondaryEmail=" + $scope.data.secondaryEmail, {}, function (data) {
+        $.getJSON("ServletCheckEmail?email=" + $scope.data.email, {}, function (data) {
             if (data.registered) {
                 ngNotifier.error("signup.errors.registered");
                 return;
@@ -79,14 +69,14 @@ angular.module('everemindApp').controller('ngSignupCtrl', function ($scope, ngNo
     var createUser = function () {
         $.ajax({
             dataType: "text",
-            url: "ServletCreateUser?email=" + $scope.data.email + "&fullName=" + $scope.data.fullName + "&secondaryEmail=" + $scope.data.secondaryEmail + "&password=" + $scope.data.password,
-            success: function(){
+            url: "ServletCreateUser?email=" + $scope.data.email + "&name=" + $scope.data.name + "&password=" + $scope.data.password,
+            success: function () {
                 finishSignup();
             }
         });
     };
-    
-    var finishSignup = function(){
+
+    var finishSignup = function () {
         $scope.$storage.pendingMessage = {msg: "signup.success", msgType: "notify"};
         $scope.$storage.$save();
         window.location.href = "index.jsp";

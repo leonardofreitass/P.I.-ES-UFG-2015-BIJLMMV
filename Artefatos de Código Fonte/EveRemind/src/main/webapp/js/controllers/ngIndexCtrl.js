@@ -27,7 +27,7 @@
 
 angular.module('everemindApp').controller('ngIndexCtrl', function ($scope) {
     $scope.data = {
-        secondaryEmail: ""
+        email: ""
     };
     
     $scope.recover = function(){

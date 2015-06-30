@@ -12,44 +12,34 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="jumbotron custom-secondary-background-color">
                     <div class="page-header">
-                        <h3>{{'account.title' | translate}}</h3>
+                        <h3>{{'account.title'| translate}}</h3>
                     </div>
                     <form name="forms.accountForm" novalidate>
                         <div class="form-group">
-                            <label>{{'account.fullName' | translate}}</label>
-                            <input ng-model="data.fullName" type="text" class="form-control">
+                            <label>{{'account.name'| translate}}</label>
+                            <input ng-model="data.name" type="text" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>{{'account.email' | translate}}<sup>*</sup></label>
+                            <label>{{'account.email'| translate}}<sup>*</sup></label>
                             <div class="input-group">
                                 <input name="inputEmail" ng-model="data.email" type="email" class="form-control inline-blocker">
                                 <span class="input-group-addon">
-                                    <span ng-if="!$storage.sessionUser.verifiedPrimaryEmail" bs-dynamic-tooltip="{title: 'account.notConfirmed', placement: 'down'}" class="glyphicon glyphicon-warning-sign cursor-pointer span-warning"></span>
-                                    <span ng-if="$storage.sessionUser.verifiedPrimaryEmail" bs-dynamic-tooltip="{title: 'account.confirmed', placement: 'down'}" class="glyphicon glyphicon-ok normal-pointer span-success"></span>
+                                    <span ng-if="!$storage.sessionUser.verifiedEmail" bs-dynamic-tooltip="{title: 'account.notConfirmed', placement: 'down'}" class="glyphicon glyphicon-warning-sign cursor-pointer span-warning"></span>
+                                    <span ng-if="$storage.sessionUser.verifiedEmail" bs-dynamic-tooltip="{title: 'account.confirmed', placement: 'down'}" class="glyphicon glyphicon-ok normal-pointer span-success"></span>
                                 </span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>{{'account.secondaryEmail' | translate}}<sup>*</sup></label>
-                            <div class="input-group">
-                                <input name="inputSecondaryEmail" ng-model="data.secondaryEmail" type="email" class="form-control inline-blocker">
-                                <span class="input-group-addon">
-                                    <span ng-if="!$storage.sessionUser.verifiedSecondaryEmail" bs-dynamic-tooltip="{title: 'account.notConfirmed', placement: 'down'}" class="glyphicon glyphicon-warning-sign cursor-pointer span-warning"></span>
-                                    <span ng-if="$storage.sessionUser.verifiedSecondaryEmail" bs-dynamic-tooltip="{title: 'account.confirmed', placement: 'down'}" class="glyphicon glyphicon-ok normal-pointer span-success"></span>
-                                </span>
-                            </div>
-                        </div>
-                        <small><sup>*</sup>{{'account.confirmEmail' | translate}}</small>
+                        <small><sup>*</sup>{{'account.confirmEmail'| translate}}</small>
                         </br></br>
-                        <button class="btn btn-warning" ng-click="update()">{{'account.save' | translate}}</button>
+                        <button class="btn btn-warning" ng-click="update()">{{'account.save'| translate}}</button>
                         <hr class="custom-primary-hr">
                         <div class="form-group">
-                            <label>{{'account.password' | translate}}</label>
+                            <label>{{'account.password'| translate}}</label>
                             <input ng-model="data.password" type="password" class="form-control" disabled>
                         </div>
-                        <button class="btn btn-dark" data-toggle="modal" data-target="#modalPassword">{{'account.changePassword' | translate}}</button>
+                        <button class="btn btn-dark" data-toggle="modal" data-target="#modalPassword">{{'account.changePassword'| translate}}</button>
                         <hr class="custom-primary-hr">
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">{{'account.deleteAccount' | translate}}</button>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">{{'account.deleteAccount'| translate}}</button>
                     </form>
                 </div>
             </div>
@@ -62,25 +52,25 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{'account.modalPassword.title' | translate}}</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{'account.modalPassword.title'| translate}}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>{{'account.modalPassword.currentPassword' | translate}}</label>
+                        <label>{{'account.modalPassword.currentPassword'| translate}}</label>
                         <input ng-model="data.currentPassword" type="password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>{{'account.modalPassword.newPassword' | translate}}</label>
+                        <label>{{'account.modalPassword.newPassword'| translate}}</label>
                         <input ng-model="data.newPassword" type="password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>{{'account.modalPassword.repeatNewPassword' | translate}}</label>
+                        <label>{{'account.modalPassword.repeatNewPassword'| translate}}</label>
                         <input  ng-model="data.repeatNewPassword" type="password" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'account.cancel' | translate}}</button>
-                    <button type="button" class="btn btn-dark" ng-click="updatePassword()">{{'account.modalPassword.save' | translate}}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'account.cancel'| translate}}</button>
+                    <button type="button" class="btn btn-dark" ng-click="updatePassword()">{{'account.modalPassword.save'| translate}}</button>
                 </div>
             </div>
         </div>
@@ -90,23 +80,23 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{'account.modalDelete.title' | translate}}</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{'account.modalDelete.title'| translate}}</h4>
                 </div>
                 <div class="modal-body">
-                    <h4>{{'account.modalDelete.text' | translate}}</h4>
+                    <h4>{{'account.modalDelete.text'| translate}}</h4>
                     <br>
                     <div class="form-group">
-                        <label>{{'account.modalDelete.email' | translate}}</label>
+                        <label>{{'account.modalDelete.email'| translate}}</label>
                         <input ng-model="data.delete.email" type="email" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>{{'account.modalDelete.password' | translate}}</label>
+                        <label>{{'account.modalDelete.password'| translate}}</label>
                         <input ng-model="data.delete.password" type="password" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'account.cancel' | translate}}</button>
-                    <button type="button" class="btn btn-danger" ng-click="deleteUser()">{{'account.modalDelete.exclude' | translate}}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'account.cancel'| translate}}</button>
+                    <button type="button" class="btn btn-danger" ng-click="deleteUser()">{{'account.modalDelete.exclude'| translate}}</button>
                 </div>
             </div>
         </div>

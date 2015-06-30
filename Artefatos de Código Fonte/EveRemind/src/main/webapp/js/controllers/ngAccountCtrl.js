@@ -29,66 +29,53 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
     $scope.$storage = $localStorage;
 
     var email = $scope.$storage.sessionUser.email;
-    var secondaryEmail = $scope.$storage.sessionUser.secondaryEmail;
     var newEmail = "";
 
     $scope.data = {
         email: $scope.$storage.sessionUser.email,
-        secondaryEmail: $scope.$storage.sessionUser.secondaryEmail,
         password: "password",
         currentPassword: "",
         newPassword: "",
         repeatNewPassword: "",
-        fullName: $scope.$storage.sessionUser.fullName,
+        name: $scope.$storage.sessionUser.name,
         delete: {
             email: "",
             password: ""
         }
     };
-    
-    
+
     $scope.forms = {
-        
     };
 
     $scope.update = function () {
         newEmail = $scope.data.email;
-        if ($scope.data.email === "" || $scope.data.secondaryEmail === "" || $scope.data.fullName === "") {
+        if ($scope.data.email === "" || $scope.data.name === "") {
             ngNotifier.error("account.errors.required");
             return;
         }
-        if ($scope.data.email === $scope.$storage.sessionUser.email && $scope.data.secondaryEmail === $scope.$storage.sessionUser.secondaryEmail && $scope.data.fullName === $scope.$storage.sessionUser.fullName) {
+        if ($scope.data.email === $scope.$storage.sessionUser.email && $scope.data.name === $scope.$storage.sessionUser.name) {
             ngNotifier.error("account.errors.change");
             return;
         }
-        if ($scope.forms.accountForm.inputEmail.$error.email){
+        if ($scope.forms.accountForm.inputEmail.$error.email) {
             ngNotifier.error("account.errors.notAnEmail");
-            return;
-        }
-        if ($scope.forms.accountForm.inputSecondaryEmail.$error.email){
-            ngNotifier.error("account.errors.notASecondaryEmail");
-            return;
-        }
-        if ($scope.data.email === $scope.data.secondaryEmail){
-            ngNotifier.error("account.errors.sameEmail");
             return;
         }
         $.ajax({
             dataType: "text",
-            url: "ServletUpdateUser?originalEmail=" + email + "&originalSecondaryEmail=" + secondaryEmail + "&email=" + $scope.data.email + "&fullName=" + $scope.data.fullName + "&secondaryEmail=" + $scope.data.secondaryEmail,
+            url: "ServletUpdateUser?originalEmail=" + email + "&email=" + $scope.data.email + "&name=" + $scope.data.name,
             success: function () {
                 modifyUserSession();
-
             }
         });
     };
-    
-    $scope.deleteUser = function(){
-        if ($scope.data.delete.email === "" || $scope.data.delete.password === ""){
+
+    $scope.deleteUser = function () {
+        if ($scope.data.delete.email === "" || $scope.data.delete.password === "") {
             ngNotifier.error("account.errors.required");
             return;
         }
-        if ($scope.data.delete.email !== email){
+        if ($scope.data.delete.email !== email) {
             ngNotifier.error("account.errors.notUser");
             return;
         }
@@ -103,7 +90,7 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
 
 
     $scope.updatePassword = function () {
-        if ($scope.data.newPassword === "" || $scope.data.repeatNewPassword === "" || $scope.data.currentPassword === ""){
+        if ($scope.data.newPassword === "" || $scope.data.repeatNewPassword === "" || $scope.data.currentPassword === "") {
             ngNotifier.error("account.errors.required");
             return;
         }
@@ -118,9 +105,9 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
         var onlyLN = /^([a-zA-Z0-9]+)$/;
         var hasL = /[A-Z]/i;
         var hasN = /\d/;
-        if ($scope.data.newPassword.length < 8 || !onlyLN.test($scope.data.newPassword) || !hasL.test($scope.data.newPassword) || !hasN.test($scope.data.newPassword)){
+        if ($scope.data.newPassword.length < 8 || !onlyLN.test($scope.data.newPassword) || !hasL.test($scope.data.newPassword) || !hasN.test($scope.data.newPassword)) {
             ngNotifier.error("signup.errors.passwordRegex");
-            return; 
+            return;
         }
         $.getJSON("ServletAuthenticate?email=" + email + "&password=" + $scope.data.currentPassword, {}, function (data) {
             if (!data.auth) {
@@ -130,8 +117,8 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
             setNewPassword();
         });
     };
-    
-    var excludeAccount = function(){
+
+    var excludeAccount = function () {
         $.ajax({
             dataType: "text",
             url: "ServletDeleteUser?email=" + email,
@@ -144,8 +131,8 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
             }
         });
     };
-    
-    var setNewPassword = function(){
+
+    var setNewPassword = function () {
         $.ajax({
             dataType: "text",
             url: "ServletUpdatePassword?email=" + email + "&password=" + $scope.data.newPassword,

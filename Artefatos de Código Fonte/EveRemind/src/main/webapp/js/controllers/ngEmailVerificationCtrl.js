@@ -24,7 +24,7 @@
 
 /* global angular */
 
-angular.module('everemindApp').controller('ngPrimaryEmailVerificationCtrl', function ($scope, ngNotifier, $location) {
+angular.module('everemindApp').controller('ngEmailVerificationCtrl', function ($scope, ngNotifier, $location) {
     $scope.data = {
         email: "",
         token: "",
@@ -38,8 +38,7 @@ angular.module('everemindApp').controller('ngPrimaryEmailVerificationCtrl', func
         }
         $.getJSON("ServletCheckToken?email=" + $scope.data.email +
                 "&token=" + $scope.data.token +
-                "&type=Verify" +
-                "&emailType=Primary", {}, function (data) {
+                "&type=Verify", {}, function (data) {
             if (!data.binded) {
                 ngNotifier.error("verifyEmail.checkError");
                 return;
@@ -51,7 +50,7 @@ angular.module('everemindApp').controller('ngPrimaryEmailVerificationCtrl', func
     var proceedVerify = function(){
         $.ajax({
             dataType: "text",
-            url: "ServletVerifyPrimaryEmail?email=" + $scope.data.email,
+            url: "ServletVerifyEmail?email=" + $scope.data.email,
             success: function(){
                 finishVerify();
             }
