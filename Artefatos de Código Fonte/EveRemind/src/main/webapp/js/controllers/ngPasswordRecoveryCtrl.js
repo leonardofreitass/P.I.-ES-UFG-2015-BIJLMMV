@@ -38,8 +38,7 @@ angular.module('everemindApp').controller('ngPasswordRecoveryCtrl', function ($s
         }
         $.getJSON("ServletCheckToken?email=" + $scope.data.email +
                 "&token=" + $scope.data.token +
-                "&type=Recover" +
-                "&emailType=Secondary", {}, function (data) {
+                "&type=Recover", {}, function (data) {
             if (!data.binded) {
                 ngNotifier.error("passwordRecover.checkError");
                 return;
@@ -63,18 +62,4 @@ angular.module('everemindApp').controller('ngPasswordRecoveryCtrl', function ($s
         $scope.$apply();
     };
 
-    var checkUrl = function () {
-        var urlParam = $location.search();
-        if (urlParam.email !== null)
-            $scope.data.email = urlParam.email;
-        if (urlParam.token !== null)
-            $scope.data.token = urlParam.token;
-
-        $scope.$apply();
-        if (urlParam.email !== null && urlParam.token !== null) {
-            $scope.recover();
-        }
-    };
-
-    checkUrl();
 });

@@ -24,48 +24,47 @@
 
 /* global angular, pageID */
 
-angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNotifier, $location, $localStorage, ngLanguage) {
+angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNotifier, $localStorage, ngLanguage) {
     $scope.$storage = $localStorage;
-    
+
     $scope.pageID = pageID;
-    
+
     $scope.home = "index.jsp";
-    
+
     $scope.lang = ngLanguage;
-    
+
     $scope.data = {
         email: "",
         password: ""
     };
-    
+
     $scope.forms = {
-        
     };
-    
+
     var email = "";
-    
-    $scope.isLogged = function(){
+
+    $scope.isLogged = function () {
         return $scope.$storage.sessionUser;
     };
-    
+
     if ($scope.isLogged())
         $scope.home = "dashboard.jsp";
-    
-    $scope.getUserName = function(){
-        return $scope.$storage.sessionUser.fullName;
+
+    $scope.getUserName = function () {
+        return $scope.$storage.sessionUser.name;
     };
-    
-    $scope.login = function(){
+
+    $scope.login = function () {
         email = $scope.data.email;
-        if ($scope.forms.loginForm.inputLogin.$error.required){
+        if ($scope.forms.loginForm.inputLogin.$error.required) {
             ngNotifier.error("navbar.errors.requiredEmail");
             return;
         }
-        if ($scope.forms.loginForm.inputLogin.$error.email){
+        if ($scope.forms.loginForm.inputLogin.$error.email) {
             ngNotifier.error("navbar.errors.notAnEmail");
             return;
         }
-        if ($scope.forms.loginForm.inputPassword.$error.required){
+        if ($scope.forms.loginForm.inputPassword.$error.required) {
             ngNotifier.error("navbar.errors.requiredPassword");
             return;
         }
@@ -77,47 +76,45 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
             startUserSession(true);
         });
     };
-    
-    $scope.logout = function(){
+
+    $scope.logout = function () {
         $scope.$storage.exiting = true;
         $scope.$storage.pendingMessage = {msg: "navbar.logout" + randomMsg(3), msgType: "notify", param: {name: $scope.getUserName()}};
         $scope.$storage.$save();
         window.location.href = "index.jsp";
     };
-    
+
     var randomMsg = function (max) {
         return Math.floor((Math.random() * max) + 1).toString();
     };
-    
-    var startUserSession = function(refresh){
+
+    var startUserSession = function (refresh) {
         $.getJSON("ServletGetUserJSON?email=" + email, {}, function (data) {
             setUserSession(data, refresh);
         });
     };
-    
-    var setUserSession = function(json, refresh){
-        if(refresh){
-            if (!json.verifiedPrimaryEmail)
-                $scope.$storage.pendingMessage = {msg: "navbar.verifyPrimary", msgType: "warning"};
-            else if (!json.verifiedSecondaryEmail)
-                $scope.$storage.pendingMessage = {msg: "navbar.verifySecondary", msgType: "warning"};
+
+    var setUserSession = function (json, refresh) {
+        if (refresh) {
+            if (!json.emailVerified)
+                $scope.$storage.pendingMessage = {msg: "navbar.verifyEmail", msgType: "warning"};
             else
-                $scope.$storage.pendingMessage = {msg: "navbar.login" + randomMsg(3), msgType: "notify", param: {name: json.fullName}};
-            
+                $scope.$storage.pendingMessage = {msg: "navbar.login" + randomMsg(3), msgType: "notify", param: {name: json.name}};
+
             $scope.$storage.login = true;
             $scope.$storage.futureSessionUser = json;
             $scope.$storage.$save();
             $scope.$apply();
             window.location.href = "dashboard.jsp";
         }
-        else{
+        else {
             $scope.$storage.sessionUser = json;
             $scope.$storage.$save();
             $scope.$apply();
         }
     };
-    
-    if (!!$scope.$storage.sessionUser){
+
+    if (!!$scope.$storage.sessionUser) {
         email = $scope.$storage.sessionUser.email;
         startUserSession(false);
     }

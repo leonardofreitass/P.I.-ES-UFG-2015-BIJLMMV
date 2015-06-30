@@ -48,5 +48,4 @@
 <script src="${pageContext.request.contextPath}/js/controllers/ngListViewCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/controllers/ngCalendarViewCtrl.js"></script>
 <script src="${pageContext.request.contextPath}/js/controllers/ngPasswordRecoveryCtrl.js"></script>
-<script src="${pageContext.request.contextPath}/js/controllers/ngPrimaryEmailVerificationCtrl.js"></script>
-<script src="${pageContext.request.contextPath}/js/controllers/ngSecondaryEmailVerificationCtrl.js"></script>
+<script src="${pageContext.request.contextPath}/js/controllers/ngEmailVerificationCtrl.js"></script>

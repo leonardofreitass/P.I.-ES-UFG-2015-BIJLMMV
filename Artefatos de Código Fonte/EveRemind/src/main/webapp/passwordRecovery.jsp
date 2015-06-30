@@ -14,18 +14,18 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="jumbotron custom-secondary-background-color" ng-if="!data.verified">
                     <div class="page-header">
-                        <h3>{{'passwordRecover.title' | translate}}<br></h3>
+                        <h3>{{'passwordRecover.title'| translate}}<br></h3>
                     </div>
                     <form>
                         <div class="form-group">
-                            <label>{{'passwordRecover.secondaryEmail' | translate}}</label>
+                            <label>{{'passwordRecover.email'| translate}}</label>
                             <input ng-model="data.email" type="email" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>{{'passwordRecover.token' | translate}}</label>
+                            <label>{{'passwordRecover.token'| translate}}</label>
                             <input ng-model="data.token" type="text" class="form-control">
                         </div>
-                        <button class="btn btn-warning" ng-click="recover()">{{'passwordRecover.proceed' | translate}}</button>
+                        <button class="btn btn-warning" ng-click="recover()">{{'passwordRecover.proceed'| translate}}</button>
                     </form>
                 </div>
                 <div class="jumbotron custom-secondary-background-color" ng-if="data.verified">

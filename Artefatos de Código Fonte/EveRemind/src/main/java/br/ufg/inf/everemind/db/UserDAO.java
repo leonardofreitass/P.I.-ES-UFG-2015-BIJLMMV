@@ -33,19 +33,18 @@ import org.bson.types.ObjectId;
  *
  * @author Leonardo
  */
-
 public class UserDAO {
 
     private static UserDAO instance = null;
     private final MongoDatabase mongoDatabase;
     private final MongoCollection<Document> collection;
 
-    private UserDAO(){
+    private UserDAO() {
         this.mongoDatabase = DatabaseConnection.create();
         this.collection = this.mongoDatabase.getCollection("users");
     }
 
-    public static synchronized UserDAO getInstance(){
+    public static synchronized UserDAO getInstance() {
         if (instance == null) {
             instance = new UserDAO();
         }
@@ -53,12 +52,10 @@ public class UserDAO {
     }
 
     public void save(User user) {
-        if (!this.hasEmailRegistered(user.getEmail())){
-            Document userDB = new Document("fullName", user.getFullName())
+        if (!this.hasEmailRegistered(user.getEmail())) {
+            Document userDB = new Document("name", user.getName())
                     .append("email", user.getEmail())
-                    .append("secondaryEmail", user.getSecondaryEmail())
-                    .append("primaryEmailVerified", false)
-                    .append("secondaryEmailVerified", false)
+                    .append("emailVerified", false)
                     .append("hash", user.getHash());
             this.collection.insertOne(userDB);
         }
@@ -77,64 +74,27 @@ public class UserDAO {
         if (search == null) {
             return null;
         }
-        
-        User user = new User(search.getString("fullName"),
+
+        User user = new User(search.getString("name"),
                 search.getString("email"),
-                search.getString("secondaryEmail"),
-                search.getBoolean("primaryEmailVerified"),
-                search.getBoolean("secondaryEmailVerified"));
+                search.getBoolean("emailVerified"));
         user.setId(search.getObjectId("_id").toString());
-        
+
         return user;
     }
-    
+
     public User getById(String id) {
         Document query = new Document("_id", new ObjectId(id));
         Document search = collection.find(query).first();
         if (search == null) {
             return null;
         }
-        
-        User user = new User(search.getString("fullName"),
+
+        User user = new User(search.getString("name"),
                 search.getString("email"),
-                search.getString("secondaryEmail"),
-                search.getBoolean("primaryEmailVerified"),
-                search.getBoolean("secondaryEmailVerified"));
+                search.getBoolean("emailVerified"));
         user.setId(search.getObjectId("_id").toString());
-        
-        return user;
-    }
 
-    public User getBySecondaryEmail(String secondaryEmail) {
-        Document query = new Document("secondaryEmail", secondaryEmail);
-        Document search = collection.find(query).first();
-        if (search == null) {
-            return null;
-        }
-
-        User user = new User(search.getString("fullName"),
-                search.getString("email"),
-                search.getString("secondaryEmail"),
-                search.getBoolean("primaryEmailVerified"),
-                search.getBoolean("secondaryEmailVerified"));
-        user.setId(search.getObjectId("_id").toString());
-        
-        return user;
-    }
-
-    public User getByFullName(String fullName) {
-        Document query = new Document("fullName", fullName);
-        Document search = collection.find(query).first();
-        if (search == null) {
-            return null;
-        }
-
-        User user = new User(search.getString("fullName"), 
-                search.getString("email"), 
-                search.getString("secondaryEmail"),
-                search.getBoolean("primaryEmailVerified"),
-                search.getBoolean("secondaryEmailVerified"));
-        user.setId(search.getObjectId("_id").toString());
         return user;
     }
 
@@ -143,16 +103,13 @@ public class UserDAO {
         collection.deleteOne(query);
     }
 
-    public void updateInfo(String email, User user, boolean changedEmail, boolean changedSecondaryEmail) {
+    public void updateInfo(String email, User user, boolean changedEmail) {
         Document query = new Document("email", email);
-        Document userDB = new Document("fullName", user.getFullName())
-                .append("email", user.getEmail())
-                .append("secondaryEmail", user.getSecondaryEmail());
-        if (changedEmail)
-            userDB.append("primaryEmailVerified", false);
-        
-        if (changedSecondaryEmail)
-            userDB.append("secondaryEmailVerified", false);
+        Document userDB = new Document("name", user.getName()).append("email", user.getEmail());
+        userDB.append("emailVerified", false);
+        if (changedEmail) {
+            userDB.append("emailVerified", false);
+        }
         collection.updateOne(query, new Document("$set", userDB));
     }
 
@@ -161,27 +118,15 @@ public class UserDAO {
         Document hashDB = new Document("hash", hash);
         collection.updateOne(query, new Document("$set", hashDB));
     }
-    
-    public void setPrimaryVerified(String email){
+
+    public void setEmailVerified(String email) {
         Document query = new Document("email", email);
-        Document primaryVerifiedDB = new Document("primaryEmailVerified", true);
-        collection.updateOne(query, new Document("$set", primaryVerifiedDB));
+        Document emailVerifiedDB = new Document("emailVerified", true);
+        collection.updateOne(query, new Document("$set", emailVerifiedDB));
     }
-    
-    public void setSecondaryVerified(String email){
-        Document query = new Document("secondaryEmail", email);
-        Document primaryVerifiedDB = new Document("secondaryEmailVerified", true);
-        collection.updateOne(query, new Document("$set", primaryVerifiedDB));
-    }
-    
-    public boolean hasEmailRegistered(String email){
+
+    public boolean hasEmailRegistered(String email) {
         Document query = new Document("email", email);
-        Document search = collection.find(query).first();
-        return search != null;
-    }
-    
-    public boolean hasSecondaryEmailRegistered(String email){
-        Document query = new Document("secondaryEmail", email);
         Document search = collection.find(query).first();
         return search != null;
     }

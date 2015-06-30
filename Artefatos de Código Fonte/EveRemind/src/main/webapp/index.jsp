@@ -30,8 +30,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>{{'home.secondaryEmail' | translate}}<sup>*</sup>:</label>
-                        <input name="inputSecondaryEmail" ng-model="data.secondaryEmail" type="email" class="form-control" required>
+                        <label>{{'home.email' | translate}}<sup>*</sup>:</label>
+                        <input name="inputEmail" ng-model="data.secondaryEmail" type="email" class="form-control" required>
                     </div>
                     <label ng-bind-html="'home.obs' | translate | html"></label>
                 </div>

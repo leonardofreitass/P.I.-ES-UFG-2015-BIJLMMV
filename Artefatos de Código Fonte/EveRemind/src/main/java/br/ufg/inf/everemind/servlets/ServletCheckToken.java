@@ -56,21 +56,15 @@ public class ServletCheckToken extends HttpServlet {
             String email = request.getParameter("email");
             String token = request.getParameter("token");
             String type = request.getParameter("type");
-            String emailType = request.getParameter("emailType");
             TokenDAO tokenDao = TokenDAO.getInstance();
             UserDAO userDao = UserDAO.getInstance();
             JSONObject JSON = new JSONObject();
             switch (type) {
                 case "Verify":
-                    if (emailType.equals("Primary")) {
-                        JSON.put("binded", tokenDao.hasEmailVerificationBind(email, token) && userDao.hasEmailRegistered(email));
-                    }
-                    else {
-                        JSON.put("binded", tokenDao.hasEmailVerificationBind(email, token) && userDao.hasSecondaryEmailRegistered(email));
-                    }
+                    JSON.put("binded", tokenDao.hasEmailVerificationBind(email, token) && userDao.hasEmailRegistered(email));
                     break;
                 case "Recover":
-                    JSON.put("binded", tokenDao.hasPasswordRecoveryBind(email, token) && userDao.getBySecondaryEmail(email).isSecondaryEmailVerified());
+                    JSON.put("binded", tokenDao.hasPasswordRecoveryBind(email, token) && userDao.getByEmail(email).isEmailVerified());
                     break;
             }
             out.print(JSON);
