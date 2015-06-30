@@ -30,86 +30,105 @@ import br.ufg.inf.everemind.entity.Activity;
  * @author Leonardo
  */
 public class EmailAgent {
-    
+
     public final String systemName = "EveRemind";
-    
-    public void sendMessage(String receiver, String subject, String content){
+
+    public void sendMessage(String receiver, String subject, String content) {
         Mailer mailer = new Mailer(
-                receiver, 
-                systemName + " - " + subject, 
+                receiver,
+                systemName + " - " + subject,
                 content);
         new Thread(mailer).start();
     }
-    
-    public void sendWelcome(String receiver, String name, String path){
+
+    public void sendWelcome(String receiver, String name, String path) {
         String messageScope = EmailDefaultScope.makeEmail(
-                "Seja bem vindo ao eveRemind, <b>" + name + "</b>!", 
-                "Para utilizar todas nossas funcionalidades integralmente, verifique o seu email principal e secundário.", 
-                "", 
-                path); 
+                "Seja bem vindo ao eveRemind, <b>" + name + "</b>!",
+                "Para utilizar nossas funcionalidades integralmente, verifique o seu email.",
+                "",
+                path);
         this.sendMessage(
-                receiver, 
-                "Bem Vindo!", 
+                receiver,
+                "Bem Vindo!",
                 messageScope
         );
     }
-    
-    public void sendToken(String receiver, String name, String token, String path){
+
+    public void sendToken(String receiver, String name, String token, String path) {
         String messageScope = EmailDefaultScope.makeEmail(
-                "Seu cadastro no <i>EveRemind</i> para o usuário <b>" + name + "</b> foi efetuado com sucesso, mas para utilizar o serviço de notificação e alteração de senha é preciso confirmar os e-mails fornecidos.", 
-                "Para confirmar este e-mail, clique no botão abaixo.", 
-                "<a href=\"" + path + "#/verification?email=" + receiver + "&token=" + token + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Confirmar email</a>", 
+                "Seu cadastro no <i>EveRemind</i> com o usuário <b>" + name + "</b> foi"
+                        + " efetuado com sucesso, mas para utilizar os serviços de notificação "
+                        + "de atividade e recuperação de senha é preciso confirmar seu e-mail.",
+                "Para verificar este e-mail, clique no botão abaixo.",
+                "<a href=\"" + path + "#/verification?email=" + receiver + "&token=" + token + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Confirmar Email</a>",
                 path + "#/verification?email=" + receiver + "&token=" + token);
-        
+
         this.sendMessage(
-                receiver, 
-                "Confirmação de e-mail", 
+                receiver,
+                "Confirmação de e-mail",
                 messageScope
         );
     }
-    
-    public void resendToken(String receiver, String name, String token, String path){
+
+    public void resendToken(String receiver, String name, String token, String path) {
         String messageScope = EmailDefaultScope.makeEmail(
-                "Você modificou seu email no EveRemind e é preciso refazer a confirmação.", 
-                "Para confirmar este e-mail, clique no botão abaixo.", 
-                "<a href=\"" + path + "#/verification?email=" + receiver + "&token=" + token + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Confirmar email</a>", 
+                "Você modificou seu email no eveRemind e é preciso refazer a confirmação"
+                + " para continuar a usar os serviços de email.",
+                "Para confirmar este novo e-mail, clique no botão abaixo.",
+                "<a href=\"" + path + "#/verification?email=" + receiver + "&token=" + token + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Confirmar Email</a>",
                 path.substring(0, path.lastIndexOf("/") + 1));
-        
+
         this.sendMessage(
-                receiver, 
-                "Confirmação de e-mail", 
+                receiver,
+                "Confirmação de e-mail",
                 messageScope
         );
     }
-    
-    public void sendNotification(String receiver, String categoryName, Activity activity, String path){
+
+    public void sendPasswordRecover(String receiver, String name, String token, String path) {
         String messageScope = EmailDefaultScope.makeEmail(
-                "A sua atividade <b>" + activity.getName() + "</b> de prioridade <span style='color: " + activity.getPriorityColor() + "'>" + activity.getPriorityName() + "</span>" +
-                        " está marcada para <b>" + activity.getDate() + "</b>, às <b>" + activity.getHour() + 
-                        "</b>.<br><br><b>Descrição da atividade:</b> " + activity.getNotes() + ".", 
-                "Se esta atividade já foi concluida, sinalize-a como feita para não receber mais notificações sobre ela.", 
-                "", 
+                "Olá, <b>" + name + "</b>",
+                "Uma solicitação para redefinir sua senha no eveRemind foi iniciada recentemente. <br/>"
+                + "Caso esta solicitação não tenha sido feita por você, desconsidere este email. <br/>"
+                + "Se deseja redefinir sua senha, visite o link no botão abaixo e informe este endereço"
+                        + " de email e o seguinte código: " + token,
+                "<a href=\"" + path + "\" style=\"color:white;text-decoration:none;font-weight:bold;\" target=\"_blank\">Redefinir Senha</a>",
                 path);
-        
         this.sendMessage(
-                receiver, 
-                categoryName + " | " + activity.getName(), 
+                receiver,
+                "Redefinir Senha",
                 messageScope
         );
     }
-    
-    public void sendDeadline(String receiver, String categoryName, Activity activity, String path){
+
+    public void sendNotification(String receiver, String categoryName, Activity activity, String path) {
         String messageScope = EmailDefaultScope.makeEmail(
-                "O prazo para sua atividade <b>" + activity.getName() + "</b> de prioridade <span style='color: " + activity.getPriorityColor() + "'>" + activity.getPriorityName() + "</span>" +
-                        " acabou de se esgotar. Ela estava prevista para <b>" + activity.getDate() + "</b>, às <b>" + activity.getHour() + 
-                        "</b>.<br><br><b>Descrição da atividade:</b> " + activity.getNotes() + ".", 
-                "Se ela foi concluída, você ainda pode marcar essa atividade como feita no sistema.", 
-                "", 
+                "A sua atividade <b>" + activity.getName() + "</b> de prioridade <span style='color: " + activity.getPriorityColor() + "'>" + activity.getPriorityName() + "</span>"
+                + " está marcada para <b>" + activity.getDate() + "</b>, às <b>" + activity.getHour()
+                + "</b>.<br><br><b>Descrição da atividade:</b> " + activity.getNotes() + ".",
+                "Se esta atividade já foi concluida, sinalize-a como feita para desativar estas notificações sobre ela.",
+                "",
                 path);
-        
+
         this.sendMessage(
-                receiver, 
-                categoryName + " | " + activity.getName(), 
+                receiver,
+                categoryName + " | " + activity.getName(),
+                messageScope
+        );
+    }
+
+    public void sendDeadline(String receiver, String categoryName, Activity activity, String path) {
+        String messageScope = EmailDefaultScope.makeEmail(
+                "O prazo para sua atividade <b>" + activity.getName() + "</b> de prioridade <span style='color: " + activity.getPriorityColor() + "'>" + activity.getPriorityName() + "</span>"
+                + " acabou de se esgotar. Ela estava prevista para <b>" + activity.getDate() + "</b>, às <b>" + activity.getHour()
+                + "</b>.<br><br><b>Descrição da atividade:</b> " + activity.getNotes() + ".",
+                "Se ela foi concluída, você ainda pode marcar essa atividade como feita no sistema.",
+                "",
+                path);
+
+        this.sendMessage(
+                receiver,
+                categoryName + " | " + activity.getName(),
                 messageScope
         );
     }
