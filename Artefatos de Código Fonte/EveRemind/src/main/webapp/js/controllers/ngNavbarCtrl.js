@@ -96,10 +96,10 @@ angular.module('everemindApp').controller('ngNavbarCtrl', function ($scope, ngNo
 
     var setUserSession = function (json, refresh) {
         if (refresh) {
-            if (!json.verifiedEmail)
+            if (!json.emailVerified)
                 $scope.$storage.pendingMessage = {msg: "navbar.verifyEmail", msgType: "warning"};
             else
-                $scope.$storage.pendingMessage = {msg: "navbar.login" + randomMsg(3), msgType: "notify", param: {name: json.fullName}};
+                $scope.$storage.pendingMessage = {msg: "navbar.login" + randomMsg(3), msgType: "notify", param: {name: json.name}};
 
             $scope.$storage.login = true;
             $scope.$storage.futureSessionUser = json;

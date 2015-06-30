@@ -24,8 +24,8 @@
                             <div class="input-group">
                                 <input name="inputEmail" ng-model="data.email" type="email" class="form-control inline-blocker">
                                 <span class="input-group-addon">
-                                    <span ng-if="!$storage.sessionUser.verifiedEmail" bs-dynamic-tooltip="{title: 'account.notConfirmed', placement: 'down'}" class="glyphicon glyphicon-warning-sign cursor-pointer span-warning"></span>
-                                    <span ng-if="$storage.sessionUser.verifiedEmail" bs-dynamic-tooltip="{title: 'account.confirmed', placement: 'down'}" class="glyphicon glyphicon-ok normal-pointer span-success"></span>
+                                    <span ng-if="!$storage.sessionUser.emailVerified" bs-dynamic-tooltip="{title: 'account.notConfirmed', placement: 'down'}" class="glyphicon glyphicon-warning-sign cursor-pointer span-warning"></span>
+                                    <span ng-if="$storage.sessionUser.emailVerified" bs-dynamic-tooltip="{title: 'account.confirmed', placement: 'down'}" class="glyphicon glyphicon-ok normal-pointer span-success"></span>
                                 </span>
                             </div>
                         </div>
