@@ -46,7 +46,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 register: "Registre-se",
                 forgot: "Esqueceu sua senha?",
                 modalTitle: "Solicitar Recuperação de Senha",
-                email: "Email*",
+                email: "Email",
                 obs: "*Seu email deve estar verificado para que você possa recuperar sua senha.",
                 send: "Recuperar",
                 sucessfulSend: "Uma mensagem com instruções para a redefinição de sua senha foi enviada para email informado.",
@@ -266,13 +266,15 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 title: "Editar informações da conta",
                 name: "Nome",
                 email: "Email",
+                password: "Senha",
                 save: "Salvar Modificações",
                 changePassword: "Mudar Senha",
                 deleteAccount: "Deletar Conta",
                 cancel: "Cancelar",
                 confirmEmail: "Modificar o e-mail implica em refazer a verificação.",
                 confirmed: "E-mail verificado.",
-                notConfirmed: "Verificação pendente.",
+                notConfirmed: "Verificação pendente. Clique para reenviar o email de verificação.",
+                resentToken: "O código foi reenviado para o seu email.",
                 modalPassword: {
                     title: "Modificar Senha",
                     currentPassword: "Senha Atual",
@@ -295,7 +297,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                     authDelete: "O email e a senha não correspondem.",
                     notUser: "Este não é o seu endereço de email.",
                     samePassword: "A nova senha informada é a mesma que a senha atual.",
-                    notAnEmail: "O e-mail informado náo é válido."
+                    notAnEmail: "O e-mail informado náo é válido.",
+                    resendToken: "Não foi possível reenviar o código de verificação pois o email já foi verificado."
                 }
             },
             general: {

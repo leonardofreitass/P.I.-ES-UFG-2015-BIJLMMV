@@ -41,6 +41,11 @@ html{
     height: 100%;
 }
 
+.tooltip-inner {
+    white-space:pre-wrap;
+    text-align: left;
+}
+
 padding-top-right{
     padding-top: 5px !important;
     padding-right: 5px !important;
@@ -391,15 +396,19 @@ fieldset[disabled] .btn-dark.active {
 }
 
 .bordered-text{
-  text-shadow:
-   -1px -1px 0 #ddd,  
-    1px -1px 0 #ddd,
-   -1px  1px 0 #ddd,
-    1px  1px 0 #ddd;
+    text-shadow:
+        -1px -1px 0 #ddd,  
+        1px -1px 0 #ddd,
+        -1px  1px 0 #ddd,
+        1px  1px 0 #ddd;
 }
 
 .cursor-pointer{
     cursor: pointer;
+}
+
+.cursor-not-allowed{
+    cursor: not-allowed;
 }
 
 .normal-pointer{
@@ -520,15 +529,15 @@ td > span > .bootstrap-timepicker-minute{
 }
 
 .activity-box:before {
-  content: " ";
-  position: absolute;
-  opacity: 0.2;
-  top: -6px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border: 1px solid #FFFFFF;
-  border-radius: 3px;
+    content: " ";
+    position: absolute;
+    opacity: 0.2;
+    top: -6px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1px solid #FFFFFF;
+    border-radius: 3px;
 }
 
 .modal-header{

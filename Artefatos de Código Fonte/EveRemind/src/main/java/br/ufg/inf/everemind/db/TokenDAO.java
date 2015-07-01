@@ -62,6 +62,17 @@ public class TokenDAO {
         this.collection.insertOne(tokenDB);
     }
     
+    public String getEmailVerificationBind(String email){
+        Document query = new Document("email", email)
+                .append("type", "Verify");
+        Document search = collection.find(query).first();
+        
+        if (search == null)
+            return null;
+        
+        return search.getString("token");
+    }
+    
     public boolean hasEmailVerificationBind(String email, String token){
         Document query = new Document("email", email)
                 .append("token", token)
@@ -84,7 +95,7 @@ public class TokenDAO {
     }
     
     public void removeRecoveryBind(String email){
-        Document query = new Document("email", email).append("type", "Verify");
+        Document query = new Document("email", email).append("type", "Recover");
         collection.deleteOne(query);
     }
 }

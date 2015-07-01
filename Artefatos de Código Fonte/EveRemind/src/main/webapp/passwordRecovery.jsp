@@ -29,7 +29,20 @@
                     </form>
                 </div>
                 <div class="jumbotron custom-secondary-background-color" ng-if="data.verified">
-                    MODAL PARA INSERIR NOVA SENHA.
+                    <div class="page-header">
+                        <h3>{{'passwordRecover.title'| translate}}<br></h3>
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label>{{'account.modalPassword.newPassword'| translate}}</label>
+                            <input ng-model="data.newPassword" type="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>{{'account.modalPassword.repeatNewPassword'| translate}}</label>
+                            <input  ng-model="data.repeatNewPassword" type="password" class="form-control">
+                        </div>
+                        <button type="button" class="btn btn-dark" ng-click="updatePassword()">{{'account.modalPassword.save'| translate}}</button>
+                    </form>
                 </div>
             </div>
         </div>

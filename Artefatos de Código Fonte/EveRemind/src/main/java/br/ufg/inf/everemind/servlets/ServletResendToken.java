@@ -24,22 +24,20 @@
 package br.ufg.inf.everemind.servlets;
 
 import br.ufg.inf.everemind.db.TokenDAO;
-import br.ufg.inf.everemind.db.UserDAO;
-import br.ufg.inf.everemind.entity.User;
 import br.ufg.inf.everemind.mailer.EmailAgent;
-import br.ufg.inf.everemind.util.Token;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 /**
  *
  * @author Leonardo
  */
-public class ServletUpdateUser extends HttpServlet {
+public class ServletResendToken extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,28 +50,25 @@ public class ServletUpdateUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        response.setContentType("text/html;charset=UTF-8");
-
+        response.setContentType("application/json");
         try (PrintWriter out = response.getWriter()) {
-
-            UserDAO userDao = UserDAO.getInstance();
+            /* TODO output your page here. You may use following sample code. */
             TokenDAO tokenDao = TokenDAO.getInstance();
             EmailAgent ea = new EmailAgent();
-            Token token = new Token();
             String url = request.getRequestURL().toString();
             String path = url.substring(0, url.lastIndexOf("/") + 1);
-            String originalEmail = request.getParameter("originalEmail");
-            String newName = request.getParameter("name");
-            String newEmail = request.getParameter("email");
-            boolean changedEmail = !newEmail.equals(originalEmail);
-            String tokenCode=  token.generate();
-            tokenDao.bindVerifyToken(newEmail, tokenCode);
-            tokenDao.removeVerifyBind(originalEmail);
-            ea.sendNewToken(newEmail, newName, tokenCode, path + "emailVerification.jsp");
-            userDao.updateInfo(originalEmail, new User(newName, newEmail), changedEmail);
+            String email = request.getParameter("email");
+            String tokenCode = tokenDao.getEmailVerificationBind(email);
+            boolean sent = false;
+            if (tokenCode != null){
+                sent = true;
+                ea.resendToken(email, tokenCode, path + "emailVerification.jsp");
+            }
+            
+            JSONObject JSON = new JSONObject(); 
+            JSON.put("sent", sent); 
+            out.print(JSON);
             out.flush();
-
         }
     }
 

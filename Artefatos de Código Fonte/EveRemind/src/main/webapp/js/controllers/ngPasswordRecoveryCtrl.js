@@ -24,10 +24,14 @@
 
 /* global angular */
 
-angular.module('everemindApp').controller('ngPasswordRecoveryCtrl', function ($scope, ngNotifier, $location) {
+angular.module('everemindApp').controller('ngPasswordRecoveryCtrl', function ($scope, ngNotifier, $localStorage) {
+    $scope.$storage = $localStorage;
+    
     $scope.data = {
         email: "",
         token: "",
+        newPassword: "",
+        repeatNewPassword: "",
         verified: false
     };
 
@@ -46,6 +50,29 @@ angular.module('everemindApp').controller('ngPasswordRecoveryCtrl', function ($s
             proceedRecover();
         });
     };
+    
+    $scope.updatePassword = function () {
+        if ($scope.data.newPassword !== $scope.data.repeatNewPassword) {
+            ngNotifier.error("signup.errors.notMatch");
+            return;
+        }
+        var onlyLN = /^([a-zA-Z0-9]+)$/;
+        var hasL = /[A-Z]/i;
+        var hasN = /\d/;
+        if ($scope.data.newPassword.length < 8 || !onlyLN.test($scope.data.newPassword) || !hasL.test($scope.data.newPassword) || !hasN.test($scope.data.newPassword)) {
+            ngNotifier.error("signup.errors.passwordRegex");
+            return;
+        }
+        $.ajax({
+            dataType: "text",
+            url: "ServletRecoverPassword?email=" + $scope.data.email + "&password=" + $scope.data.newPassword,
+            success: function () {
+                $scope.$storage.pendingMessage = {msg: "account.passwordSuccess", msgType: "notify"};
+                $scope.$storage.$save();
+                window.location.href = "index.jsp";
+            }
+        });
+    };
 
     var proceedRecover = function () {
         $.ajax({
@@ -61,5 +88,4 @@ angular.module('everemindApp').controller('ngPasswordRecoveryCtrl', function ($s
         $scope.data.verified = true;
         $scope.$apply();
     };
-
 });

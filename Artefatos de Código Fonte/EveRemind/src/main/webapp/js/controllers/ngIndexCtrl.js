@@ -25,12 +25,19 @@
 
 /* global angular, pageID */
 
-angular.module('everemindApp').controller('ngIndexCtrl', function ($scope) {
+angular.module('everemindApp').controller('ngIndexCtrl', function ($scope, ngNotifier) {
     $scope.data = {
         email: ""
     };
     
     $scope.recover = function(){
-        
+        $.getJSON("ServletSendPasswordRecover?email=" + $scope.data.email, {}, function (data) {
+            if (!data.sent) {
+                ngNotifier.error("home.errorSend");
+                return;
+            }
+            $('#modalRecovery').modal('hide');
+            ngNotifier.notify("home.sucessfulSend");
+        });
     };
 });

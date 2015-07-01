@@ -88,6 +88,14 @@
         <description>ServletContextListener</description>
         <listener-class>br.ufg.inf.everemind.servlets.ServletStartScheduler</listener-class>
     </listener>
+    <servlet>
+        <servlet-name>ServletResendToken</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletResendToken</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletSendPasswordRecover</servlet-name>
+        <servlet-class>br.ufg.inf.everemind.servlets.ServletSendPasswordRecover</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreateUser</servlet-name>
         <url-pattern>/ServletCreateUser</url-pattern>
@@ -171,6 +179,14 @@
     <servlet-mapping>
         <servlet-name>ServletRecoverPassword</servlet-name>
         <url-pattern>/ServletRecoverPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletResendToken</servlet-name>
+        <url-pattern>/ServletResendToken</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletSendPasswordRecover</servlet-name>
+        <url-pattern>/ServletSendPasswordRecover</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

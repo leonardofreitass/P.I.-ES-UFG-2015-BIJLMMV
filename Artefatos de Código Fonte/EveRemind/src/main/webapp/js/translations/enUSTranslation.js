@@ -47,7 +47,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 register: "Sign Up",
                 forgot: "Forgot your password?",
                 modalTitle: "Request Password Recover",
-                email: "Email*",
+                email: "Email",
                 obs: "*Your email must be verified in order to recover your password.",
                 send: "Recover",
                 sucessfulSend: "A message with instructions to redefine your password was sent to the given email.",
@@ -274,6 +274,7 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                 confirmEmail: "Updating email adress requires a new verification process.",
                 confirmed: "E-mail verified.",
                 notConfirmed: "Pending verification.",
+                resentToken: "The verification code was resent to your email.",
                 modalPassword: {
                     title: "Update Password",
                     currentPassword: "Current Password",
@@ -296,7 +297,8 @@ angular.module('everemindApp').config(['$translateProvider', function ($translat
                     authDelete: "Email and password do not match.",
                     notUser: "This email is not currently logged in.",
                     samePassword: "The current and new passwords are the same.",
-                    notAnEmail: "Given e-mail is not valid."
+                    notAnEmail: "Given e-mail is not valid.",
+                    resendToken: "There was an error in resending the verification code because it's already verified."
                 }
             },
             general: {

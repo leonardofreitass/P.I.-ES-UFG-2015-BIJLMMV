@@ -32,6 +32,7 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
     var newEmail = "";
 
     $scope.data = {
+        disabledResend: false,
         email: $scope.$storage.sessionUser.email,
         password: "password",
         currentPassword: "",
@@ -88,6 +89,18 @@ angular.module('everemindApp').controller('ngAccountCtrl', function ($scope, ngN
         });
     };
 
+    $scope.resendToken = function(){
+        if (!$scope.data.disabledResend){
+            $scope.data.disabledResend = true;
+            $.getJSON("ServletResendToken?email=" + email, {}, function (data) {
+                if (!data.sent) {
+                    ngNotifier.error("account.errors.resendToken");
+                    return;
+                }
+                ngNotifier.notify("account.resentToken");
+            });
+        }
+    };
 
     $scope.updatePassword = function () {
         if ($scope.data.newPassword === "" || $scope.data.repeatNewPassword === "" || $scope.data.currentPassword === "") {
